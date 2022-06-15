@@ -1,0 +1,25 @@
+name: 'Internet-Draft CI'
+description: 'Tool for building Internet-Drafts as GitHub Actions'
+author: 'Martin Thomson <mt@lowentropy.net>'
+
+inputs:
+  make:
+    description: 'The make target to build'
+    required: false
+    default: 'all'
+
+  token:
+    description: 'Set this to secrets.GITHUB_TOKEN'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/martinthomson/i-d-template-action:latest'
+  args:
+    - ${{ inputs.make }}
+  env:
+    GITHUB_TOKEN: ${{ inputs.token }}
+
+branding:
+  icon: 'check-square'
+  color: 'green'
