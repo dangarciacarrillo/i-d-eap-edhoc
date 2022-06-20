@@ -4,7 +4,7 @@ docname: draft-ingles-eap-edhoc-latest
 abbrev: EAP-EDHOC
 
 ipr: trust200902
-area: SEC 
+area: SEC
 workgroup: EMU Working Group
 cat: std
 consensus: true
@@ -72,7 +72,7 @@ informative:
   RFC8742:
   RFC8949:
   RFC8152:
-  
+
 
 
 --- abstract
@@ -110,7 +110,7 @@ After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in th
 
 ### Authentication
 
-EAP-EDHOC authentication credentials can be of any type supported by COSE and be transported or referenced by EDHOC. 
+EAP-EDHOC authentication credentials can be of any type supported by COSE and be transported or referenced by EDHOC.
 
 EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman public keys in message_1 and message_2.
 
@@ -163,7 +163,7 @@ EDHOC is not bound to a particular transport layer and can even be used in envir
 
 The EAP protocol manages the exchange of messages guaranteeing the order of transmission. In the same way, it manages retransmissions and the detection of duplicate messages. Therefore, EAP ensures the message correlation mechanism in the different EAP layers so there is no need to use connection identifiers for EDHOC message correlation, as described in Section 3.4.1 of {{I-D.ietf-lake-edhoc}}. [Editor's note: I'd add some more details per each of the requirements. E.g. Impliclity you mention handling message loss this is solved with retransmissions I would make it explicit. Which are the correlation mechanism and where it happens and how. How about, demultiplex EDHOC message or fragmentation]
 
-There are other requisites that are fulfilled by the EAP lower layers, as specified in {RFC3748}. These include ordering guarantees and error detection. 
+There are other requisites that are fulfilled by the EAP lower layers, as specified in {RFC3748}. These include ordering guarantees and error detection.
 
 
 
@@ -173,14 +173,14 @@ There are other requisites that are fulfilled by the EAP lower layers, as specif
 Editor's note: Fix text and figures below.
 
 If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing EDHOC messages. [Editor's note: I agree this text is weird. I'd say this is to refer when the EAP-EDHOC is processed correctly. I think it is referring if the EDHOC message is also authenticated properly]
-The message flow ends with a protected success indication from the EAP-EDHOC server, followed by an EAP-Response packet of EAP-Type=EAP-EDHOC and no data from the EAP-EDHOC peer, followed by EAP-Success from the server. 
+The message flow ends with a protected success indication from the EAP-EDHOC server, followed by an EAP-Response packet of EAP-Type=EAP-EDHOC and no data from the EAP-EDHOC peer, followed by EAP-Success from the server.
 
 If the EAP-EDHOC server authenticates successfully, the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing EDHOC messages conforming to the EDHOC document {{I-D.ietf-lake-edhoc}}.
 
 
-{{message1-reject}}, {{message2-reject}} and {{message3-reject}} illustrate message flows in several cases where the EAP-EDHOC peer or EAP-EDHOC server sends a EDHOC error message. 
+{{message1-reject}}, {{message2-reject}} and {{message3-reject}} illustrate message flows in several cases where the EAP-EDHOC peer or EAP-EDHOC server sends a EDHOC error message.
 
-{{message1-reject}} shows an example message flow where the EAP-EDHOC server rejects message_1 with an EDHOC error message. 
+{{message1-reject}} shows an example message flow where the EAP-EDHOC server rejects message_1 with an EDHOC error message.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -207,12 +207,12 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | ----------------------------------------------------> |
     |                                                       |
     |                                        EAP-Failure    |
-    | <---------------------------------------------------- |     
+    | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #message1-reject title="TBD: EAP-EDHOC Server Rejection of message_1" artwork-align="center"}
 
-{{message2-reject}} shows an example message flow where the EAP-EDHOC server authentication is unsuccessful and the EAP-EDHOC peer sends an EDHOC error message. 
+{{message2-reject}} shows an example message flow where the EAP-EDHOC server authentication is unsuccessful and the EAP-EDHOC peer sends an EDHOC error message.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -280,13 +280,13 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 It is RECOMMENDED to use anonymous NAIs RFC7542 in the Identity Response as such identities are routable and privacy-friendly.
 
-While opaque blobs are allowed by [RFC3748], such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network. 
+While opaque blobs are allowed by [RFC3748], such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
 
 Many client certificates contain an identity such as an email address, which is already in NAI format. When the client certificate contains a NAI as subject name or alternative subject name, an anonymous NAI SHOULD be derived from the NAI in the certificate; See section {{privacy}}.
 
 
 
-### Privacy 
+### Privacy
 
 EAP-EDHOC peer and server implementations supporting EAP-EDHOC MUST support anonymous Network Access Identifiers (NAIs) (Section 2.4 of RFC7542). [Editor's note this reference should be included]
 A client supporting EAP-EDHOC MUST NOT send its username (or any other permanent identifiers) in cleartext in the Identity Response (or any message used instead of the Identity Response). Following [RFC7542], it is RECOMMENDED to omit the username (i.e., the NAI is @realm), but other constructions such as a fixed username (e.g., anonymous@realm) or an encrypted username (e.g., xCZINCPTK5+7y81CrSYbPg+RKPE3OTrYLn4AQc4AC2U=@realm) are allowed. Note that the NAI MUST be a UTF-8 string as defined by the grammar in Section 2.2 of [RFC7542].
@@ -307,14 +307,14 @@ To avoid fragmentation, it is RECOMMENDED to keep the sizes of EAP-EDHOC peer, E
 In addition, it is RECOMMENDED to use mechanisms that reduce the sizes of Certificate messages.
 
 
-EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. However, except for message_2, which by construction has an upper bound limited by a multiple of the hash function output there are no specific message size limitations. With SHA-256 as hash function, message_2 cannot be longer than 8160 octets. The other three EAP-EDHOC messages do not have an upper bound. Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB. 
+EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. However, except for message_2, which by construction has an upper bound limited by a multiple of the hash function output there are no specific message size limitations. With SHA-256 as hash function, message_2 cannot be longer than 8160 octets. The other three EAP-EDHOC messages do not have an upper bound. Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
 Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dail-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
 
 Since EAP is a simple ACK-NAK protocol, fragmentation support can be
    added in a simple manner. In EAP, fragments that are lost or damaged
    in transit will be retransmitted, and since sequencing information is
    provided by the Identifier field in EAP, there is no need for a
-   fragment offset field as is provided in IPv4 
+   fragment offset field as is provided in IPv4
    EAP-EDHOC fragmentation support is provided through addition of a flags
    octet within the EAP-Response and EAP-Request packets, as well as a
    EDHOC Message Length field of four octets.  Flags include the Length
@@ -337,7 +337,7 @@ Since EAP is a simple ACK-NAK protocol, fragmentation support can be
    within an EAP-Request, and the peer MUST include this Identifier
    value in the fragment ACK contained within the EAP-Response.
    Retransmitted fragments will contain the same Identifier value.
-   
+
 Similarly, when the EAP server receives an EAP-Response with the M
    bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC
    and no data.  This serves as a fragment ACK.  The EAP peer MUST wait
@@ -457,7 +457,7 @@ EAP-EDHOC exports the MSK and does not specify how it is used by lower layers.
 
 ## Parameter Negotiation and Compliance Requirements
 
-The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requirements (mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, extensions, etc.) defined in Section 7  of {{I-D.ietf-lake-edhoc}}. 
+The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requirements (mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, extensions, etc.) defined in Section 7  of {{I-D.ietf-lake-edhoc}}.
 
 
 
@@ -546,7 +546,7 @@ Code
 
    EDHOC data
 
-      The EDHOC data consists of the encapsulated EDHOC packet in EDHOC       
+      The EDHOC data consists of the encapsulated EDHOC packet in EDHOC
       message format.
 
 ## EAP-EDHOC Response Packet
@@ -628,12 +628,12 @@ IANA has registered the following new labels in the "EDHOC Exporter Label" regis
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD2
-Description: MSK of EAP method EAP-EDHOC 
+Description: MSK of EAP method EAP-EDHOC
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD3
-Description: EMSK of EAP method EAP-EDHOC 
+Description: EMSK of EAP method EAP-EDHOC
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~
