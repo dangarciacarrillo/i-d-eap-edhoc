@@ -167,17 +167,18 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation.
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {RFC3748}. Some of the requirements fulfulled by the EAP protocol may be fulfilled by the EAP lower layer.
 
-The EAP protocol manages the exchange of messages guaranteeing the order of transmission. In the same way, it manages retransmissions and the detection of duplicate messages. Therefore, EAP ensures the message correlation mechanism in the different EAP layers so there is no need to use connection identifiers for EDHOC message correlation, as described in Section 3.4.1 of {{I-D.ietf-lake-edhoc}}. 
+For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer
 
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: I'd add some more details per each of the requirements. E.g. Impliclity you mention handling message loss this is solved with retransmissions I would make it explicit. Which are the correlation mechanism and where it happens and how. How about, demultiplex EDHOC message or fragmentation]
-~~~~~~~~~~~~~~~~~~~~~~~
+For reordering, EAP is reliant on the EAP lower layer ordering guarantees for correct operation.
 
-There are other requisites that are fulfilled by the EAP lower layers, as specified in {RFC3748}. These include ordering guarantees and error detection.
+For duplication and message correlation, EAP has the Identifier field, which provides both the peer and authenticator with the ability to detect duplicates and match a request with a response.
 
+The fragmentation is supported in this case by the EAP method itself, since EAP specifies that EAP methods should support fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets. Hence, this is specified in this document in Section {{fragmentation}}
 
+To demultiplex EDHOC messages from other types of messages, EAP provides the Code field. 
+Denial-of-service protection relies on the EAP lower layer capacity of supporting lower layer failure indications.
 
 
 ### Termination
