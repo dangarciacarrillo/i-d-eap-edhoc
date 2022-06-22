@@ -510,12 +510,16 @@ EDHOC error messages SHOULD be considered failure result indication, as defined 
 After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.
 EDHOC error messages are unprotected.
 
-The keying material can be derived after message_3 has been sent or received. Implementations following {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables
+[Editor's note: I would say that message_4 would be more conviniente since it is protected success indication]
+
+The EAP peer can derive the keying material after receiving message_2 has been received and before sending the message_3. However, implementations following the EAP peer state machine in {{RFC4137}} can then set the eapKeyData variable once the message_4 is received and verified. The EAP server can derive the keying material after receiving the message_3. Howeever, implementations following the EAP server state machine in {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables after receiving the EAP response that acknowledges message_4.
 ~~~~~~~~~~~~~~~~~~~~~~~
 [AP: More accurate description on when each party can derive the key material]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The keying material can be made available to lower layers and the authenticator after the authenticated success result indication has been sent or received.
+The keying material can be made available to the authenticator and the lower layers in the authenticator side when the EAP server has sent the alternate success indication. Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables in the EAP server state machine.
+
+The keying material can be made available to lower layers in the EAP peer side after the authenticated success result indication has been received. 
 Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 ~~~~~~~~~~~~~~~~~~~~~~~
 [AP: Revise text according to EAP state machine]
