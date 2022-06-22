@@ -106,7 +106,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol consists of three mandatory messages (message_1, message_2, message_3) an optional message_4, between Initiator and Responder, and an error message. 
+The EDHOC protocol consists of three mandatory messages (message_1, message_2, message_3) an optional message_4, between Initiator and Responder, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory. 
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
 
@@ -167,9 +167,9 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {RFC3748}. Some of the requirements fulfulled by the EAP protocol may be fulfilled by the EAP lower layer.
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in [RFC3748]. Some of the requirements fulfulled by the EAP protocol may be fulfilled by the EAP lower layer.
 
-For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer
+For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer. In other words, the EAP layer will do the retransmissions if the EAP lower layer cannot do it.
 
 For reordering, EAP is reliant on the EAP lower layer ordering guarantees for correct operation.
 
@@ -178,7 +178,9 @@ For duplication and message correlation, EAP has the Identifier field, which pro
 The fragmentation is supported in this case by the EAP method itself, since EAP specifies that EAP methods should support fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets. Hence, this is specified in this document in Section {{fragmentation}}
 
 To demultiplex EDHOC messages from other types of messages, EAP provides the Code field. 
-Denial-of-service protection relies on the EAP lower layer capacity of supporting lower layer failure indications.
+
+This method does not provide more protection to Denial-of-service than EAP [RFC3748]. 
+
 
 
 ### Termination
@@ -250,9 +252,9 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |                                EAP-Type=EAP-EDHOC     |
     |                                 (EDHOC message_2)     |
     | <---------------------------------------------------- |    
-    |                                      EAP-Response/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                   (EDHOC error)       |
+    |   EAP-Response/                                       |
+    |   EAP-Type=EAP-EDHOC                                  |
+    |   (EDHOC error)                                       |
     | ----------------------------------------------------> |
     |                                        EAP-Failure    |
     | <---------------------------------------------------- |
@@ -261,14 +263,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 {{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server and the server sends an EDHOC error message. 
 
-~~~~~~~~~~~~~~~~~~~~~~~
-Changing text to this. Please corroborate the text 
-is below is correct.
-{{message3-reject}} shows an example message flow where the 
-EAP-EDHOC peer authenticates the EAP-EDHOC server successfully, 
-but the EAP-EDHOC peer fails to authenticate the EAP-EDHOC peer, 
-which sends an EDHOC error message. 
-~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -307,6 +302,47 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
+
+
+{{message3-reject}} shows an example message flow where the EAP-EDHOC server sends the EDHOC message_4 to the EAP peer, but the success indication fails, and the peer sends an EDHOC error message. 
+
+~~~~~~~~~~~~~~~~~~~~~~~
+EAP-EDHOC Peer                                   EAP-EDHOC Server
+
+    |                           EAP-Request/Identity        |
+    | <---------------------------------------------------- |
+    |                                                       |
+    |   EAP-Response/Identity (Privacy-Friendly)            |
+    | ----------------------------------------------------> |
+    |                                      EAP-Request/     |
+    |                                EAP-Type=EAP-EDHOC     |
+    |                                     (EDHOC Start)     |
+    | <---------------------------------------------------- |
+    |   EAP-Response/                                       |
+    |   EAP-Type=EAP-EDHOC                                  |
+    |   (EDHOC message_1)                                   |
+    | ----------------------------------------------------> |
+    |                                      EAP-Request/     |
+    |                                EAP-Type=EAP-EDHOC     |
+    |                                 (EDHOC message_2)     |
+    | <---------------------------------------------------- |
+    |   EAP-Response/                                       |
+    |   EAP-Type=EAP-EDHOC                                  |
+    |   (EDHOC message_3)                                   |
+    | ----------------------------------------------------> |
+    |                                         EAP-Request/  |
+    |                                   EAP-Type=EAP-EDHOC  |
+    |                                    (EDHOC message_4)  |
+    | <---------------------------------------------------  |
+    |   EAP-Response/                                       |
+    |   EAP-Type=EAP-EDHOC                                  |
+    |   (EDHOC error)                                       |
+    | ----------------------------------------------------> |
+    |                                        EAP-Failure    |
+    | <---------------------------------------------------- |
+    |                                                       |
+~~~~~~~~~~~~~~~~~~~~~~~
+{: #message4-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
 
 
 ### Identity
@@ -455,7 +491,6 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 
 ## Identity Verification
-
 
 The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information MUST NOT be used for accounting purposes or to give authorization. The authenticator and the EAP-EDHOC server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers MAY reject conversations if the identity does not match their policy. Note that this also applies to resumption; see Sections 2.1.3, 5.6, and 5.7.The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a name to represent an authorized EAP server and EAP Server certificates can include this name in the list of SANs for each certificate that represents an EAP-EDHOC server. If server name matching is not used, then it degrades the confidence that the EAP server with which it is interacting is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer. While this guide to verify domain names is new and was not mentioned in [RFC5216], it has been widely implemented in EAP-EDHOC peers. As such, it is believed that this section contains minimal new interoperability or implementation requirements on EAP-EDHOC peers and can be applied to earlier versions of EDHOC. The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are RECOMMENDED. For example, the eduroam federation [RFC7593] provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers MAY implement a trust on first use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.
 
