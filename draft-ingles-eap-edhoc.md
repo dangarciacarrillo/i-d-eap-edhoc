@@ -182,9 +182,7 @@ Denial-of-service protection relies on the EAP lower layer capacity of supportin
 
 
 ### Termination
-~~~~~~~~~~~~~~~~~~~~~~~
-Editor's note: Fix the text and figures below.
-~~~~~~~~~~~~~~~~~~~~~~~
+
 
 If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing EDHOC messages. 
 
@@ -252,14 +250,14 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |                                EAP-Type=EAP-EDHOC     |
     |                                 (EDHOC message_2)     |
     | <---------------------------------------------------- |    
-    |                                      EAP-Request/     |
+    |                                      EAP-Response/     |
     |                                EAP-Type=EAP-EDHOC     |
     |                                   (EDHOC error)       |
     | ----------------------------------------------------> |
     |                                        EAP-Failure    |
     | <---------------------------------------------------- |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message2-reject title="Unsuccessful EAP-EDHOC Server Authentication" artwork-align="center"}
+{: #message2-reject title="EAP-EDHOC Peer rejection of message_2" artwork-align="center"}
 
 {{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server and the server sends an EDHOC error message. 
 
@@ -296,12 +294,19 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |   EAP-Type=EAP-EDHOC                                  |
     |   (EDHOC message_3)                                   |
     | ----------------------------------------------------> |
+    |                                      EAP-Request/     |
+    |                                EAP-Type=EAP-EDHOC     |
+    |                                     (EDHOC error)     |
+    | <---------------------------------------------------- |
+    |   EAP-Response/                                       |
+    |   EAP-Type=EAP-EDHOC                                  |
+    | ----------------------------------------------------> |
     |                                                       |
     |                                        EAP-Failure    |
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message3-reject title="Unsuccessful EAP-EDHOC Client Authentication" artwork-align="center"}
+{: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
 
 
 ### Identity
@@ -325,18 +330,9 @@ EAP-EDHOC  is always used with privacy. This does not add any extra round trips 
 
 ### Fragmentation
 
-~~~~~~~~~~~~~~~~~~~~~~~
-Editor's note: fill in this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
 EAP-EDHOC fragmentation support is provided through addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field of four octets.
  To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See section {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bit is set, we are specifying that the next message will be fragmented and that in such a message we can also find the length of the message.
 
-
-
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: At this point, flags have not been explained]
-~~~~~~~~~~~~~~~~~~~~~~~
 
 Implementations MUST NOT set the L bit in unfragmented messages, but they MUST accept unfragmented messages with and without the L bit set.
 Some EAP implementations and access networks may limit the number of EAP packet exchanges that can be handled.
@@ -460,15 +456,6 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ## Identity Verification
 
-~~~~~~~~~~~~~~~~~~~~~~~
-Editor's note: fill in this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC.
-Unauthenticated information MUST NOT be used for authorization.
-The authenticator and the EAP-EDHOC server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection.
-EAP-EDHOC servers MAY reject conversations if the identity does not match their policy.
-
 
 The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information MUST NOT be used for accounting purposes or to give authorization. The authenticator and the EAP-EDHOC server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers MAY reject conversations if the identity does not match their policy. Note that this also applies to resumption; see Sections 2.1.3, 5.6, and 5.7.The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a name to represent an authorized EAP server and EAP Server certificates can include this name in the list of SANs for each certificate that represents an EAP-EDHOC server. If server name matching is not used, then it degrades the confidence that the EAP server with which it is interacting is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer. While this guide to verify domain names is new and was not mentioned in [RFC5216], it has been widely implemented in EAP-EDHOC peers. As such, it is believed that this section contains minimal new interoperability or implementation requirements on EAP-EDHOC peers and can be applied to earlier versions of EDHOC. The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are RECOMMENDED. For example, the eduroam federation [RFC7593] provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers MAY implement a trust on first use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.
 
@@ -487,9 +474,9 @@ Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Type        =  TBD1
-MSK         =  EDHOC-Exporter(TBD2 ,Type, 64)
-EMSK        =  EDHOC-Exporter(TBD3 ,Type, 64)
-Method-Id   =  EDHOC-Exporter(TBD4, Type, 64)
+MSK         =  EDHOC-Exporter(TBD2 ,<< Type >>, 64)
+EMSK        =  EDHOC-Exporter(TBD3 ,<< Type >>, 64)
+Method-Id   =  EDHOC-Exporter(TBD4, << Type >>, 64)
 Session-Id  =  Type || Method-Id
 ~~~~~~~~~~~~~~~~~~~~~~~
 
