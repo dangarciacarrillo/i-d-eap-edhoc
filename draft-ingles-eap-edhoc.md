@@ -79,7 +79,7 @@ informative:
 
 The Extensible Authentication Protocol (EAP), defined in RFC 3748, provides a standard mechanism for support of multiple authentication methods.
 This document specifies the use of EAP-EDHOC with Ephemeral Diffie-Hellman Over COSE (EDHOC).
-EDHOC provides a very compact and lightweight authenticated Diffie-Hellman key exchange with ephemeral keys, using COSE (RFC 8152) to provide security services efficiently encoded in CBOR [RFC8949].
+EDHOC provides a lightweight authenticated Diffie-Hellman key exchange with ephemeral keys, using COSE (RFC 8152) to provide security services efficiently encoded in CBOR (RFC 8949).
 This document also provides guidance on authentication and authorization for EAP-EDHOC.
 
 --- middle
@@ -88,14 +88,11 @@ This document also provides guidance on authentication and authorization for EAP
 
 The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a standard mechanism for support of multiple authentication methods.
 This document specifies the EAP authentication method EAP-EDHOC which uses COSE defined credential-based mutual authentication, utilising the EDHOC protocol cipher suite negotiation and establishment of shared secret keying material.
-Ephemeral Diffie-Hellman Over COSE (EDHOC, {{I-D.ietf-lake-edhoc}}) is a lightweight authenticated key exchange protocol designed for highly constrained settings.
-The main objective for EDHOC is to be a lightweight authenticated key exchange for OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators.
+Ephemeral Diffie-Hellman Over COSE (EDHOC, {{I-D.ietf-lake-edhoc}}) is a very compact and lightweight authenticated key exchange protocol designed for highly constrained settings.
+The main objective for EDHOC is to be a matching security handshake protocol to OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators.
  EDHOC reuses the same lightweight primitives as OSCORE, CBOR {{RFC8949}} and COSE {{RFC8152}}, and specifies the use of CoAP but is not bound to a particular transport.
 The EAP-EDHOC method will enable the integration of EDHOC in different applications and use cases making use of the EAP framework.
 
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: Though part of this abstract is coming from EAP-TLS I think we could rewrite it a little bit or add some information.]
-~~~~~~~~~~~~~~~~~~~~~~~
 
 # Conventions and Definitions
 
