@@ -91,7 +91,7 @@ This document specifies the EAP authentication method EAP-EDHOC which uses COSE 
 Ephemeral Diffie-Hellman Over COSE (EDHOC, {{I-D.ietf-lake-edhoc}}) is a lightweight authenticated key exchange protocol designed for highly constrained settings.
 The main objective for EDHOC is to be a lightweight authenticated key exchange for OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators.
  EDHOC reuses the same lightweight primitives as OSCORE, CBOR {{RFC8949}} and COSE {{RFC8152}}, and specifies the use of CoAP but is not bound to a particular transport.
-The EAP-EDHOC method will enable the integration of EDHOC in different applications and use cases making use of the EAP framework. 
+The EAP-EDHOC method will enable the integration of EDHOC in different applications and use cases making use of the EAP framework.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 [Editor's note: Though part of this abstract is coming from EAP-TLS I think we could rewrite it a little bit or add some information.]
@@ -106,7 +106,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol consists of three mandatory messages (message_1, message_2, message_3) an optional message_4, between Initiator and Responder, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory. 
+The EDHOC protocol consists of three mandatory messages (message_1, message_2, message_3) an optional message_4, between Initiator and Responder, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory.
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
 
@@ -118,7 +118,7 @@ EAP-EDHOC authentication credentials can be of any type supported by COSE and be
 
 EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman public keys in message_1 and message_2.
 
-The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method. 
+The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 [Editor's note: I think this is something that could be considered in the future, making EAP-EDHOC a tunnelled EAP method]
@@ -177,16 +177,16 @@ For duplication and message correlation, EAP has the Identifier field, which pro
 
 The fragmentation is supported in this case by the EAP method itself, since EAP specifies that EAP methods should support fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets. Hence, this is specified in this document in Section {{fragmentation}}
 
-To demultiplex EDHOC messages from other types of messages, EAP provides the Code field. 
+To demultiplex EDHOC messages from other types of messages, EAP provides the Code field.
 
-This method does not provide more protection to Denial-of-service than EAP [RFC3748]. 
+This method does not provide more protection to Denial-of-service than EAP [RFC3748].
 
 
 
 ### Termination
 
 
-If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing EDHOC messages. 
+If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing EDHOC messages.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 [Editor's note: I agree this text is weird. I'd say this is to refer when the EAP-EDHOC is processed correctly. I think it is referring if the EDHOC message is also authenticated properly]
@@ -251,7 +251,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |                                      EAP-Request/     |
     |                                EAP-Type=EAP-EDHOC     |
     |                                 (EDHOC message_2)     |
-    | <---------------------------------------------------- |    
+    | <---------------------------------------------------- |
     |   EAP-Response/                                       |
     |   EAP-Type=EAP-EDHOC                                  |
     |   (EDHOC error)                                       |
@@ -261,7 +261,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #message2-reject title="EAP-EDHOC Peer rejection of message_2" artwork-align="center"}
 
-{{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server and the server sends an EDHOC error message. 
+{{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server and the server sends an EDHOC error message.
 
 
 
@@ -304,7 +304,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 {: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
 
 
-{{message3-reject}} shows an example message flow where the EAP-EDHOC server sends the EDHOC message_4 to the EAP peer, but the success indication fails, and the peer sends an EDHOC error message. 
+{{message3-reject}} shows an example message flow where the EAP-EDHOC server sends the EDHOC message_4 to the EAP peer, but the success indication fails, and the peer sends an EDHOC error message.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -536,7 +536,7 @@ EDHOC error messages are unprotected.
 
 The keying material can be derived after the EDHOC message_2 has
 been sent or received.  Implementations following {{RFC4137}} can then
-set the eapKeyData and aaaEapKeyData variables. 
+set the eapKeyData and aaaEapKeyData variables.
 
 The keying material can be made available to lower layers and the
 authenticator after the authenticated success result indication has
