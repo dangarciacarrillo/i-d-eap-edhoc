@@ -69,7 +69,6 @@ informative:
 
   RFC7252:
   RFC8613:
-  RFC8742:
   RFC8949:
   RFC8152:
 
@@ -103,7 +102,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol consists of three mandatory messages (message_1, message_2, message_3) an optional message_4, between Initiator and Responder, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory.
+The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory.
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
 
@@ -118,7 +117,7 @@ EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman publi
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: I think this is something that could be considered in the future, making EAP-EDHOC a tunnelled EAP method]
+[Editor's note: This may be considered in the future, making EAP-EDHOC a tunnelled EAP method]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Figure 1 shows an example message flow for a successful EAP-EDHOC.
@@ -164,7 +163,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in [RFC3748]. Some of the requirements fulfulled by the EAP protocol may be fulfilled by the EAP lower layer.
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {{RFC3748}}. Some of the requirements fulfulled by the EAP protocol may be fulfilled by the EAP lower layer.
 
 For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer. In other words, the EAP layer will do the retransmissions if the EAP lower layer cannot do it.
 
@@ -172,11 +171,11 @@ For reordering, EAP is reliant on the EAP lower layer ordering guarantees for co
 
 For duplication and message correlation, EAP has the Identifier field, which provides both the peer and authenticator with the ability to detect duplicates and match a request with a response.
 
-The fragmentation is supported in this case by the EAP method itself, since EAP specifies that EAP methods should support fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets. Hence, this is specified in this document in Section {{fragmentation}}
+Fragmentation is defined by this EAP method, see {{fragmentation}}. The EAP framework {{RFC3748}} specifies that EAP methods need to provide fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets.
 
 To demultiplex EDHOC messages from other types of messages, EAP provides the Code field.
 
-This method does not provide more protection to Denial-of-service than EAP [RFC3748].
+This method does not provide other mitigation against denial-of-service than the EAP framework {{RFC3748}}.
 
 
 
@@ -346,7 +345,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 It is RECOMMENDED to use anonymous NAIs RFC7542 in the Identity Response as such identities are routable and privacy-friendly.
 
-While opaque blobs are allowed by [RFC3748], such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
+While opaque blobs are allowed by {{RFC3748}}, such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
 
 Many client certificates contain an identity such as an email address, which is already in NAI format. When the client certificate contains an NAI as subject name or alternative subject name, an anonymous NAI SHOULD be derived from the NAI in the certificate; See section {{privacy}}.
 
