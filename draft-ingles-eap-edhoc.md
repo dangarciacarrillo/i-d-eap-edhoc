@@ -104,7 +104,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory.
+The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory, as alternate success indication.
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
 
@@ -119,7 +119,7 @@ EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman publi
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: This may be considered in the future, making EAP-EDHOC a tunnelled EAP method]
+[Editor's note: making EAP-EDHOC a tunnelled EAP method may be considered in the future.]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Figure 1 shows an example message flow for a successful EAP-EDHOC.
@@ -177,22 +177,16 @@ Fragmentation is defined by this EAP method, see {{fragmentation}}. The EAP fram
 
 To demultiplex EDHOC messages from other types of messages, EAP provides the Code field.
 
-This method does not provide other mitigation against denial-of-service than the EAP framework {{RFC3748}}.
+This method does not provide other mitigation against denial-of-service than EAP {{RFC3748}}.
 
 
 
 ### Termination
 
 
-If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing EDHOC messages.
+If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send an EAP-Request packet with EAP-Type=EAP-EDHOC containing message_4 as a protected success indication.
 
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: I agree this text is weird. I'd say this is to refer when the EAP-EDHOC is processed correctly. I think it is referring if the EDHOC message is also authenticated properly]
-~~~~~~~~~~~~~~~~~~~~~~~
-
-The message flow ends with a protected success indication from the EAP-EDHOC server, followed by an EAP-Response packet of EAP-Type=EAP-EDHOC and no data from the EAP-EDHOC peer, followed by EAP-Success from the server.
-
-If the EAP-EDHOC server authenticates successfully, the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing EDHOC messages conforming to the EDHOC document {{I-D.ietf-lake-edhoc}}.
+If the EAP-EDHOC server authenticates successfully, the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing no data. Finally, the EAP-EDHOC server sends an EAP-Success.
 
 {{message1-reject}}, {{message2-reject}} and {{message3-reject}} illustrate message flows in several cases where the EAP-EDHOC peer or EAP-EDHOC server sends an EDHOC error message.
 
@@ -527,18 +521,15 @@ The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requir
 The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.
 
 EDHOC error messages SHOULD be considered failure result indication, as defined in {{RFC3748}}.
-After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.
-EDHOC error messages are unprotected.
-
-[Editor's note: I would say that message_4 would be more conviniente since it is protected success indication]
+After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure. EDHOC error messages are unprotected.
 
 The keying material can be derived after the EDHOC message_2 has
-been sent or received.  Implementations following {{RFC4137}} can then
-set the eapKeyData and aaaEapKeyData variables.
+been sent or received. Implementations following {{RFC4137}} can then
+set the eapKeyData and aaaEapKeyData variables. 
 
 The keying material can be made available to lower layers and the
 authenticator after the authenticated success result indication has
-been sent or received (message_4).  Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
+been sent or received (message_4). Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 
 
 
