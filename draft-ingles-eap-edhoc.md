@@ -482,7 +482,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 {: title="Fragmentation example of EAP-EDHOC Authentication" artwork-align="center"}
 
 
-## Identity Verification
+## Identity Verification {#identity-verification}
 
 The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information MUST NOT be used for accounting purposes or to give authorization. The authenticator and the EAP-EDHOC server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers MAY reject conversations if the identity does not match their policy.
 
@@ -712,28 +712,36 @@ Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-Using EAP-TLS with TLS 1.3 does not change the security claims for EAP-TLS as given in Section 5.1 of [RFC5216]. However, it strengthens several of the claims as described in the following updates to the notes given in Section 5.1 of [RFC5216].
 
-[1] Mutual authentication:
-    By mandating revocation checking of certificates, the authentication in EAP-TLS with TLS 1.3 is stronger as authentication with revoked certificates will always fail.
+Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 
-[2] Confidentiality:
-    The TLS 1.3 handshake offers much better confidentiality than earlier versions of TLS. EAP-TLS with TLS 1.3 mandates use of cipher suites that ensure confidentiality. TLS 1.3 also encrypts certificates and some of the extensions. When using EAP-TLS with TLS 1.3, the use of privacy is mandatory and does not cause any additional round trips.
-[3] Cryptographic strength:
-    TLS 1.3 only defines strong algorithms without major weaknesses and EAP-TLS with TLS 1.3 always provides forward secrecy; see [RFC8446]. Weak algorithms such as 3DES, CBC mode, RC4, SHA-1, MD5, P-192, and RSA-1024 have not been registered for use in TLS 1.3.
-[4] Cryptographic negotiation:
-    The TLS layer handles the negotiation of cryptographic parameters. When EAP-TLS is used with TLS 1.3, EAP-TLS inherits the cryptographic negotiation of the AEAD algorithm, HKDF hash algorithm, key exchange groups, and signature algorithm; see Section 4.1.1 of [RFC8446].
+  [1] Mutual authentication:
+    The initiator and responder authenticate each other through the EDHOC exchage.    
 
-## Peer and Server Identities
+  [2] Forward secrecy:
+    Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of one session key does not also compromise earlier sessions' keys.
+
+  [3] Identity protection:
+    EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. By listening in on the destination address used to transfer message_1, an active attacker can obtain the Responder's credential identification and send its own message_1 to the same address. 
+
+  [4] Cryptographic negotiation:
+    The list of supported cipher suites by the initiator must be in the order of preference. The cipher suites that the Responder supports must be on the list.
+
+  [5] Integrity protection:
+    EDHOC extends the message authentication coverage to new elements including algorithms, external authorization data, and earlier messages in addition to adding an explicit method type. This safeguards against a hacker inserting or repeating messages from another session. EDHOC also adds selection of connection identifiers and downgrade protected negotiation of cryptographic parameters
+
+
+
+## Peer and Server Identities {#peer-identities}
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-  The EAP-TLS peer name (Peer-Id) represents the identity to be used
+  The EAP-EDHOC peer name (Peer-Id) represents the identity to be used
    for access control and accounting purposes.  The Server-Id represents
    the identity of the EAP server.  Together the Peer-Id and Server-Id
    name the entities involved in deriving the MSK/EMSK.
 
-   In EAP-TLS, the Peer-Id and Server-Id are determined from the subject
+   In EAP-EDHOC, the Peer-Id and Server-Id are determined from the subject
    or subjectAltName fields in the peer and server certificates.  For
    details, see Section 4.1.2.6 of [RFC3280].  Where the subjectAltName
    field is present in the peer or server certificate, the Peer-Id or
@@ -777,14 +785,14 @@ Editors Note: Fill this section
 
    It is possible for more than one subjectAltName field to be present
    in a peer or server certificate in addition to an empty or non-empty
-   subject distinguished name.  EAP-TLS implementations supporting
+   subject distinguished name.  EAP-EDHOC implementations supporting
    export of the Peer-Id and Server-Id SHOULD export all the
    subjectAltName fields within Peer-Ids or Server-Ids, and SHOULD also
    export a non-empty subject distinguished name field within the Peer-
    Ids or Server-Ids.  All of the exported Peer-Ids and Server-Ids are
    considered valid.
 
-   EAP-TLS implementations supporting export of the Peer-Id and Server-
+   EAP-EDHOC implementations supporting export of the Peer-Id and Server-
    Id SHOULD export Peer-Ids and Server-Ids in the same order in which
    they appear within the certificate.  Such canonical ordering would
    aid in comparison operations and would enable using those identifiers
@@ -796,36 +804,36 @@ Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
- Since the EAP-TLS server is typically connected to the Internet, it
+ Since the EAP-EDHOC server is typically connected to the Internet, it
    SHOULD support validating the peer certificate using RFC 3280
    [RFC3280] compliant path validation, including the ability to
    retrieve intermediate certificates that may be necessary to validate
    the peer certificate.  For details, see Section 4.2.2.1 of [RFC3280].
 
-   Where the EAP-TLS server is unable to retrieve intermediate
+   Where the EAP-EDHOC server is unable to retrieve intermediate
    certificates, either it will need to be pre-configured with the
    necessary intermediate certificates to complete path validation or it
-   will rely on the EAP-TLS peer to provide this information as part of
-   the TLS handshake (see Section 7.4.6 of [RFC4346]).
+   will rely on the EAP-EDHOC peer to provide this information as part of
+   the EDHOC exchange.
 
-   In contrast to the EAP-TLS server, the EAP-TLS peer may not have
-   Internet connectivity.  Therefore, the EAP-TLS server SHOULD provide
+   In contrast to the EAP-EDHOC server, the EAP-EDHOC peer may not have
+   Internet connectivity.  Therefore, the EAP-EDHOC server SHOULD provide
    its entire certificate chain minus the root to facilitate certificate
-   validation by the peer.  The EAP-TLS peer SHOULD support validating
+   validation by the peer.  The EAP-EDHOC peer SHOULD support validating
    the server certificate using RFC 3280 [RFC3280] compliant path
    validation.
 
-   Once a TLS session is established, EAP-TLS peer and server
+   Once a EDHOC session is established, EAP-EDHOC peer and server
    implementations MUST validate that the identities represented in the
-   certificate are appropriate and authorized for use with EAP-TLS.  The
+   certificate are appropriate and authorized for use with EAP-EDHOC.  The
    authorization process makes use of the contents of the certificates
    as well as other contextual information.  While authorization
    requirements will vary from deployment to deployment, it is
    RECOMMENDED that implementations be able to authorize based on the
-   EAP-TLS Peer-Id and Server-Id determined as described in Section 5.2.
+   EAP-EDHOC Peer-Id and Server-Id determined as described in Section {{peer-identities}}.
 
-   In the case of the EAP-TLS peer, this involves ensuring that the
-   certificate presented by the EAP-TLS server was intended to be used
+   In the case of the EAP-EDHOC peer, this involves ensuring that the
+   certificate presented by the EAP-EDHOC server was intended to be used
    as a server certificate.  Implementations SHOULD use the Extended Key
    Usage (see Section 4.2.1.13 of [RFC3280]) extension and ensure that
    at least one of the following is true:
@@ -837,10 +845,11 @@ Editors Note: Fill this section
    3) The issuer included the id-kp-serverAuth identifier in the
       certificate (see Section 4.2.1.13 [RFC3280]).
 
-   When performing this comparison, implementations MUST follow the
-   validation rules specified in Section 3.1 of [RFC2818].  In the case
-   of the server, this involves ensuring the certificate presented by
-   the EAP-TLS peer was intended to be used as a client certificate.
+[//]: # ( When performing this comparison, implementations MUST follow the validation rules specified in Section 3.1 of [RFC2818].)
+
+
+   In the case of the server, this involves ensuring the certificate presented by
+   the EAP-EDHOC peer was intended to be used as a client certificate.
    Implementations SHOULD use the Extended Key Usage (see Section
    4.2.1.13 [RFC3280]) extension and ensure that at least one of the
    following is true:
@@ -857,114 +866,80 @@ Editors Note: Fill this section
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**EAP-TLS1.2**
-
 Certificates are long-lived assertions of identity.  Therefore, it is
-   important for EAP-TLS implementations to be capable of checking
+   important for EAP-EDHOC implementations to be capable of checking
    whether these assertions have been revoked.
 
-   EAP-TLS peer and server implementations MUST support the use of
+   EAP-EDHOC peer and server implementations MUST support the use of
    Certificate Revocation Lists (CRLs); for details, see Section 3.3 of
-   [RFC3280].  EAP-TLS peer and server implementations SHOULD also
+   [RFC3280].  EAP-EDHOC peer and server implementations SHOULD also
    support the Online Certificate Status Protocol (OCSP), described in
    "X.509 Internet Public Key Infrastructure Online Certificate Status
    Protocol - OCSP" [RFC2560].  OCSP messages are typically much smaller
    than CRLs, which can shorten connection times especially in
-   bandwidth-constrained environments.  While EAP-TLS servers are
+   bandwidth-constrained environments.  While EAP-EDHOC servers are
    typically connected to the Internet during the EAP conversation, an
-   EAP-TLS peer may not have Internet connectivity until authentication
+   EAP-EDHOC peer may not have Internet connectivity until authentication
    completes.
-
 
    In the case where the peer is initiating a voluntary Layer 2 tunnel
    using PPTP [RFC2637] or L2TP [RFC2661], the peer will typically
    already have a PPP interface and Internet connectivity established at
    the time of tunnel initiation.
 
-   However, in the case where the EAP-TLS peer is attempting to obtain
-   network access, it will not have network connectivity and is
-   therefore not capable of checking for certificate revocation until
-   after authentication completes and network connectivity is available.
-   For this reason, EAP-TLS peers and servers SHOULD implement
-   Certificate Status Request messages, as described in "Transport Layer
-   Security (TLS) Extensions", Section 3.6 of [RFC4366].  To enable
-   revocation checking in situations where servers do not support
-   Certificate Status Request messages and network connectivity is not
-   available prior to authentication completion, peer implementations
-   MUST also support checking for certificate revocation after
-   authentication completes and network connectivity is available, and
-   they SHOULD utilize this capability by default.
-
-**EAP-TLS1.3**
-
-This section updates Section 5.4 of [RFC5216] by amending it in accordance with the following discussion.There are a number of reasons (e.g., key compromise, CA compromise, privilege withdrawn, etc.) why EAP-TLS peer, EAP-TLS server, or sub-CA certificates have to be revoked before their expiry date. Revocation of the EAP-TLS server's certificate is complicated by the fact that the EAP-TLS peer may not have Internet connectivity until authentication completes.When EAP-TLS is used with TLS 1.3, the revocation status of all the certificates in the certificate chains MUST be checked (except the trust anchor). An implementation may use the Certificate Revocation List (CRL), Online Certificate Status Protocol (OSCP), or other standardized/proprietary methods for revocation checking. Examples of proprietary methods are non-standard formats for distribution of revocation lists as well as certificates with very short lifetime.EAP-TLS servers supporting TLS 1.3 MUST implement Certificate Status Requests (OCSP stapling) as specified in [RFC6066] and Section 4.4.2.1 of [RFC8446]. It is RECOMMENDED that EAP-TLS peers and EAP-TLS servers use OCSP stapling for verifying the status of the EAP-TLS server's certificate chain. When an EAP-TLS peer uses Certificate Status Requests to check the revocation status of the EAP-TLS server's certificate chain, it MUST treat a CertificateEntry (but not the trust anchor) without a valid CertificateStatus extension as invalid and abort the handshake with an appropriate alert. The OCSP status handling in TLS 1.3 is different from earlier versions of TLS; see Section 4.4.2.1 of [RFC8446]. In TLS 1.3, the OCSP information is carried in the CertificateEntry containing the associated certificate instead of a separate CertificateStatus message as in [RFC6066]. This enables sending OCSP information for all certificates in the certificate chain (except the trust anchor).To enable revocation checking in situations where EAP-TLS peers do not implement or use OCSP stapling, and where network connectivity is not available prior to authentication completion, EAP-TLS peer implementations MUST also support checking for certificate revocation after authentication completes and network connectivity is available. An EAP peer implementation SHOULD NOT trust the network (and any services) until it has verified the revocation status of the server certificate after receiving network connectivity. An EAP peer MUST use a secure transport to verify the revocation status of the server certificate. An EAP peer SHOULD NOT send any other traffic before revocation checking for the server certificate is complete.
+  There are a number of reasons (e.g., key compromise, CA compromise, privilege withdrawn, etc.) why EAP-EDHOC peer, EAP-EDHOC server, or sub-CA certificates have to be revoked before their expiry date. Revocation of the EAP-EDHOC server's certificate is complicated by the fact that the EAP-EDHOC peer may not have Internet connectivity until authentication completes. When EAP-EDHOC is used, the revocation status of all the certificates in the certificate chains MUST be checked (except the trust anchor). An implementation may use the Certificate Revocation List (CRL), Online Certificate Status Protocol (OSCP), or other standardized/proprietary methods for revocation checking. Examples of proprietary methods are non-standard formats for distribution of revocation lists as well as certificates with very short lifetime. EAP-EDHOC servers  MUST implement Certificate Status Requests (OCSP stapling) as specified in [RFC6066] and Section 4.4.2.1 of [RFC8446]. It is RECOMMENDED that EAP-EDHOC peers and EAP-EDHOC servers use OCSP stapling for verifying the status of the EAP-EDHOC server's certificate chain. When an EAP-EDHOC peer uses Certificate Status Requests to check the revocation status of the EAP-EDHOC server's certificate chain, it MUST treat a CertificateEntry (but not the trust anchor) without a valid CertificateStatus extension as invalid and abort the handshake with an appropriate alert. The OCSP information is carried in the CertificateEntry containing the associated certificate instead of a separate CertificateStatus message as in [RFC6066]. This enables sending OCSP information for all certificates in the certificate chain (except the trust anchor).To enable revocation checking in situations where EAP-EDHOC peers do not implement or use OCSP stapling, and where network connectivity is not available prior to authentication completion, EAP-EDHOC peer implementations MUST also support checking for certificate revocation after authentication completes and network connectivity is available. An EAP peer implementation SHOULD NOT trust the network (and any services) until it has verified the revocation status of the server certificate after receiving network connectivity. An EAP peer MUST use a secure transport to verify the revocation status of the server certificate. An EAP peer SHOULD NOT send any other traffic before revocation checking for the server certificate is complete.
 
 
 ## Packet Modification Attacks
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-**EAP-TLS1.2**
 
-  The integrity protection of EAP-TLS packets does not extend to the
+  The integrity protection of EAP-EDHOC packets does not extend to the
    EAP header fields (Code, Identifier, Length) or the Type or Flags
    fields.  As a result, these fields can be modified by an attacker.
 
-   In most cases, modification of the Code or Identifier fields will
-   only result in a denial-of-service attack.  However, an attacker can
-   add additional data to an EAP-TLS packet so as to cause it to be
-   longer than implied by the Length field.  EAP peers, authenticators,
-   or servers that do not check for this could be vulnerable to a buffer
-   overrun.
-
-   It is also possible for an attacker to modify the Type or Flags
-   fields.  By modifying the Type field, an attacker could cause one
-   TLS-based EAP method to be negotiated instead of another.  For
-   example, the EAP-TLS Type field (13) could be changed to indicate
-   another TLS-based EAP method.  Unless the alternative TLS-based EAP
-   method utilizes a different key derivation formula, it is possible
-   that an EAP method conversation altered by a man-in-the-middle could
-   run all the way to completion without detection.  Unless the
-   ciphersuite selection policies are identical for all TLS-based EAP
-   methods utilizing the same key derivation formula, it may be possible
-   for an attacker to mount a successful downgrade attack, causing the
-   peer to utilize an inferior ciphersuite or TLS-based EAP method.
-
-**EAP-TLS1.3**
-
-This section updates Section 5.5 of [RFC5216] by amending it in accordance with the following discussion.As described in [RFC3748] and Section 5.5 of [RFC5216], the only information that is integrity and replay protected in EAP-TLS are the parts of the TLS Data that TLS protects. All other information in the EAP-TLS message exchange including EAP-Request and EAP-Response headers, the identity in the Identity Response, EAP-TLS packet header fields, Type, Flags, EAP-Success, and EAP-Failure can be modified, spoofed, or replayed.Protected TLS Error alerts are protected failure result indications and enable the EAP-TLS peer and EAP-TLS server to determine that the failure result was not spoofed by an attacker. Protected failure result indications provide integrity and replay protection but MAY be unauthenticated. Protected failure results do not significantly improve availability as TLS 1.3 treats most malformed data as a fatal error.
+  The only information that is integrity and replay protected in EAP-EDHOC are the parts of the EDHOC message that EDHOC protects. All other information in the EAP-EDHOC message exchange including EAP-Request and EAP-Response headers, the identity in the Identity Response, EAP-EDHOC packet header fields, Type, Flags, EAP-Success, and EAP-Failure can be modified, spoofed, or replayed. Protected EDHOC Error messages are protected failure result indications and enable the EAP-EDHOC peer and EAP-EDHOC server to determine that the failure result was not spoofed by an attacker. Protected failure result indications provide integrity and replay protection but MAY be unauthenticated. 
 
 
 ## Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216]. The guidance in this section is relevant for EAP-TLS in general (regardless of the underlying TLS version used).EAP servers will usually require the EAP peer to provide a valid certificate and will fail the connection if one is not provided. Some deployments may permit no peer authentication for some or all connections. When peer authentication is not used, EAP-TLS server implementations MUST take care to limit network access appropriately for unauthenticated peers, and implementations MUST use resumption with caution to ensure that a resumed session is not granted more privilege than was intended for the original session. An example of limiting network access would be to invoke a vendor's walled garden or quarantine network functionality.EAP-TLS is typically encapsulated in other protocols such as PPP [RFC1661], RADIUS [RFC2865], Diameter [RFC6733], or the Protocol for Carrying Authentication for Network Access (PANA) [RFC5191]. The encapsulating protocols can also provide additional, non-EAP information to an EAP-TLS server. This information can include, but is not limited to, information about the authenticator, information about the EAP-TLS peer, or information about the protocol layers above or below EAP (MAC addresses, IP addresses, port numbers, Wi-Fi Service Set Identifiers (SSIDs), etc.). EAP-TLS servers implementing EAP-TLS inside those protocols can make policy decisions and enforce authorization based on a combination of information from the EAP-TLS exchange and non-EAP information.As noted in Section 2.2, the identity presented in EAP-Response/Identity is not authenticated by EAP-TLS and is therefore trivial for an attacker to forge, modify, or replay. Authorization and accounting MUST be based on authenticated information such as information in the certificate or the PSK identity and cached data provisioned for resumption as described in Section 5.7. Note that the requirements for Network Access Identifiers (NAIs) specified in Section 4 of [RFC7542] still apply and MUST be followed.EAP-TLS servers MAY reject conversations based on non-EAP information provided by the encapsulating protocol, for example if the MAC address of the authenticator does not match the expected policy.In addition to allowing configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension, EAP peer implementations MAY allow binding the configured acceptable SAN to a specific CA (or CAs) that should have issued the server certificate to prevent attacks from rogue or compromised CAs.
+
+EAP servers will usually require the EAP peer to provide a valid certificate and will fail the connection if one is not provided. Some deployments may permit no peer authentication for some or all connections. When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for unauthenticated peers, and implementations MUST use resumption with caution to ensure that a resumed session is not granted more privilege than was intended for the original session. An example of limiting network access would be to invoke a vendor's walled garden or quarantine network functionality. EAP-EDHOC is typically encapsulated in other protocols such as PPP [RFC1661], RADIUS [RFC2865], Diameter [RFC6733], or the Protocol for Carrying Authentication for Network Access (PANA) [RFC5191]. The encapsulating protocols can also provide additional, non-EAP information to an EAP-EDHOC server. This information can include, but is not limited to, information about the authenticator, information about the EAP-EDHOC peer, or information about the protocol layers above or below EAP (MAC addresses, IP addresses, port numbers, Wi-Fi Service Set Identifiers (SSIDs), etc.). EAP-EDHOC servers implementing EAP-EDHOC inside those protocols can make policy decisions and enforce authorization based on a combination of information from the EAP-EDHOC exchange and non-EAP information. The identity presented in EAP-Response/Identity is not authenticated by EAP-EDHOC and is therefore trivial for an attacker to forge, modify, or replay. Authorization and accounting MUST be based on authenticated information such as information in the certificate. Note that the requirements for Network Access Identifiers (NAIs) specified in Section 4 of [RFC7542] still apply and MUST be followed. EAP-EDHOC servers MAY reject conversations based on non-EAP information provided by the encapsulating protocol, for example if the MAC address of the authenticator does not match the expected policy.In addition to allowing configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension, EAP peer implementations MAY allow binding the configured acceptable SAN to a specific CA (or CAs) that should have issued the server certificate to prevent attacks from rogue or compromised CAs.
 
 ## Privacy Considerations
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216].TLS 1.3 offers much better privacy than earlier versions of TLS as discussed in Section 2.1.8. In this section, we only discuss the privacy properties of EAP-TLS with TLS 1.3. For privacy properties of TLS 1.3 itself, see [RFC8446].EAP-TLS sends the standard TLS 1.3 handshake messages encapsulated in EAP packets. Additionally, the EAP-TLS peer sends an identity in the first EAP-Response. The other fields in the EAP-TLS Request and the EAP-TLS Response packets do not contain any cleartext privacy-sensitive information.Tracking of users by eavesdropping on Identity Responses or certificates is a well-known problem in many EAP methods. When EAP-TLS is used with TLS 1.3, all certificates are encrypted, and the username part of the Identity Response is not revealed (e.g., using anonymous NAIs). Note that even though all certificates are encrypted, the server's identity is only protected against passive attackers while the client's identity is protected against both passive and active attackers. As with other EAP methods, even when privacy-friendly identifiers or EAP tunneling is used, the domain name (i.e., the realm) in the NAI is still typically visible. How much privacy-sensitive information the domain name leaks is highly dependent on how many other users are using the same domain name in the particular access network. If all EAP-TLS peers have the same domain, no additional information is leaked. If a domain name is used by a small subset of the EAP-TLS peers, it may aid an attacker in tracking or identifying the user.Without padding, information about the size of the client certificate is leaked from the size of the EAP-TLS packets. The EAP-TLS packets sizes may therefore leak information that can be used to track or identify the user. If all client certificates have the same length, no information is leaked. EAP-TLS peers SHOULD use record padding; see Section 5.4 of [RFC8446] to reduce information leakage of certificate sizes.If anonymous NAIs are not used, the privacy-friendly identifiers need to be generated with care. The identities MUST be generated in a cryptographically secure way so that it is computationally infeasible for an attacker to differentiate two identities belonging to the same user from two identities belonging to different users in the same realm. This can be achieved, for instance, by using random or pseudo-random usernames such as random byte strings or ciphertexts and only using the pseudo-random usernames a single time. Note that the privacy-friendly usernames also MUST NOT include substrings that can be used to relate the identity to a specific user. Similarly, privacy-friendly usernames MUST NOT be formed by a fixed mapping that stays the same across multiple different authentications.An EAP-TLS peer with a policy allowing communication with EAP-TLS servers supporting only TLS 1.2 without privacy and with a static RSA key exchange is vulnerable to disclosure of the EAP-TLS peer username. An active attacker can in this case make the EAP-TLS peer believe that an EAP-TLS server supporting TLS 1.3 only supports TLS 1.2 without privacy. The attacker can simply impersonate the EAP-TLS server and negotiate TLS 1.2 with static RSA key exchange and send a TLS alert message when the EAP-TLS peer tries to use privacy by sending an empty certificate message. Since the attacker (impersonating the EAP-TLS server) does not provide a proof-of-possession of the private key until the Finished message when a static RSA key exchange is used, an EAP-TLS peer may inadvertently disclose its identity (username) to an attacker. Therefore, it is RECOMMENDED for EAP-TLS peers to not use EAP-TLS with TLS 1.2 and static RSA-based cipher suites without privacy. This implies that an EAP-TLS peer SHOULD NOT continue the EAP authentication attempt if a TLS 1.2 EAP-TLS server sends an EAP-TLS/Request with a TLS alert message in response to an empty certificate message from the peer.
+
+In this section, we only discuss the privacy properties of EAP-EDHOC. For privacy properties of EDHOC itself, see {{I-D.ietf-lake-edhoc}}. EAP-EDHOC sends the EDHOC messages encapsulated in EAP packets. Additionally, the EAP-EDHOC peer sends an identity in the first EAP-Response. The other fields in the EAP-EDHOC Request and the EAP-EDHOC Response packets do not contain any cleartext privacy-sensitive information. Tracking of users by eavesdropping on Identity Responses or certificates is a well-known problem in many EAP methods. When EAP-EDHOC is used, all certificates are encrypted, and the username part of the Identity Response is not revealed (e.g., using anonymous NAIs). Note that even though all certificates are encrypted, the server's identity is only protected against passive attackers while the client's identity is protected against both passive and active attackers. As with other EAP methods, even when privacy-friendly identifiers or EAP tunneling is used, the domain name (i.e., the realm) in the NAI is still typically visible. 
+  How much privacy-sensitive information the domain name leaks is highly dependent on how many other users are using the same domain name in the particular access network. If all EAP-EDHOC peers have the same domain, no additional information is leaked. If a domain name is used by a small subset of the EAP-EDHOC peers, it may aid an attacker in tracking or identifying the user.Without padding, information about the size of the client certificate is leaked from the size of the EAP-EDHOC packets. The EAP-EDHOC packets sizes may therefore leak information that can be used to track or identify the user. If all client certificates have the same length, no information is leaked. 
+  EAP-EDHOC peers SHOULD use padding; see Section 8.6 of {{I-D.ietf-lake-edhoc}} to reduce information leakage of certificate sizes.
+  If anonymous NAIs are not used, the privacy-friendly identifiers need to be generated with care. The identities MUST be generated in a cryptographically secure way so that it is computationally infeasible for an attacker to differentiate two identities belonging to the same user from two identities belonging to different users in the same realm. This can be achieved, for instance, by using random or pseudo-random usernames such as random byte strings or ciphertexts and only using the pseudo-random usernames a single time. Note that the privacy-friendly usernames also MUST NOT include substrings that can be used to relate the identity to a specific user. Similarly, privacy-friendly usernames MUST NOT be formed by a fixed mapping that stays the same across multiple different authentications. 
+
 
 ## Pervasive Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216].Pervasive monitoring refers to widespread surveillance of users. In the context of EAP-TLS, pervasive monitoring attacks can target EAP-TLS peer devices for tracking them (and their users) when they join a network. By encrypting more information, mandating the use of privacy, and always providing forward secrecy, EAP-TLS with TLS 1.3 offers much better protection against pervasive monitoring. In addition to the privacy attacks discussed above, surveillance on a large scale may enable tracking of a user over a wide geographical area and across different access networks. Using information from EAP-TLS together with information gathered from other protocols increases the risk of identifying individual users. In TLS 1.3, the post-handshake key update mechanism provides forward secrecy for the traffic secrets. EAP-TLS 1.3 does not provide a similar mechanism for MSK and EMSK. Implementation using the exported MSK and EMSK can achieve forward secrecy by frequently deriving new keys in a similar way as described in Section 7.2 of [RFC8446].
 
-## Discovered Vulnerabilities
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216].Over the years, there have been several serious attacks on earlier versions of Transport Layer Security (TLS), including attacks on its most commonly used ciphers and modes of operation. [RFC7457] summarizes the attacks that were known at the time of publishing, and BCP 195 [RFC7525] [RFC8996] provides recommendations and requirements for improving the security of deployed services that use TLS. However, many of the attacks are less serious for EAP-TLS as EAP-TLS only uses the TLS handshake and does not protect any application data. EAP-TLS implementations MUST mitigate known attacks. EAP-TLS implementations need to monitor and follow new EAP- and TLS-related security guidance and requirements such as [RFC8447] and [RFC9155].
+Pervasive monitoring refers to widespread surveillance of users. In the context of EAP-EDHOC, pervasive monitoring attacks can target EAP-EDHOC peer devices for tracking them (and their users) when they join a network. By encrypting more information, mandating the use of privacy, and always providing forward secrecy, EAP-EDHOC offers much better protection against pervasive monitoring. In addition to the privacy attacks discussed above, surveillance on a large scale may enable tracking of a user over a wide geographical area and across different access networks. Using information from EAP-EDHOC together with information gathered from other protocols increases the risk of identifying individual users. In EDHOC, key derivation mechanism provides forward secrecy for the traffic secrets. EDHOC does not provide a similar mechanism for MSK and EMSK. Implementation using the exported MSK and EMSK can achieve forward secrecy by frequently deriving new keys.
+
 
 
 ## Cross-Protocol Attacks
 ~~~~~~~~~~~~~~~~~~~~~~~
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216].Allowing the same certificate to be used in multiple protocols can potentially allow an attacker to authenticate via one protocol and then "resume" that session in another protocol. Section 2.2 suggests that certificates typically have one or more FQDNs in the SAN extension. However, those fields are for EAP validation only and do not indicate that the certificates are suitable for use with HTTPS or other protocols on the named host.Section 2.1.3 suggests that authorization rules should be reapplied on resumption but does not mandate this behavior. As a result, this cross-protocol resumption could allow the attacker to bypass authorization policies and to obtain undesired access to secured systems. Along with making sure that appropriate authorization information is available and used during resumption, using different certificates and resumption caches for different protocols is RECOMMENDED to help keep different protocol usages separate.
+This is a new section when compared to [RFC5216].
+
+Allowing the same certificate to be used in multiple protocols can potentially allow an attacker to authenticate via one protocol and then "resume" that session in another protocol. 
+
+Section {{identity-verification}} suggests that certificates typically have one or more FQDNs in the SAN extension. However, those fields are for EAP validation only and do not indicate that the certificates are suitable for use with HTTPS or other protocols on the named host. 
+
+Along with making sure that appropriate authorization information is available and used during resumption, using different certificates for different protocols is RECOMMENDED to help keep different protocol usages separate.
 
 
 --- back
