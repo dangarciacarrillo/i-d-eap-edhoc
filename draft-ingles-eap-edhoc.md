@@ -130,7 +130,8 @@ EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman publi
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: making EAP-EDHOC a tunnelled EAP method may be considered in the future.]
+[Editor's note: making EAP-EDHOC a tunnelled 
+ EAP method may be considered in the future.]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Figure 1 shows an example message flow for a successful EAP-EDHOC.
