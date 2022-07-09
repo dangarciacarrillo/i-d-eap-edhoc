@@ -1,6 +1,6 @@
 ---
 title: Using the Extensible Authentication Protocol with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ingles-eap-edhoc-latest
+docname: draft-ingles-eap-edhoc-02
 abbrev: EAP-EDHOC
 
 ipr: trust200902
@@ -72,6 +72,17 @@ informative:
   RFC8613:
   RFC8949:
   RFC8152:
+  RFC5280:
+
+  RFC2637:
+  RFC2661:
+  RFC6066:
+  RFC8446:
+  RFC1661:
+  RFC2865:
+  RFC6733:
+  RFC5191:  
+  RFC6960:
   I-D.ietf-core-oscore-edhoc:
 
 
@@ -742,8 +753,7 @@ Editors Note: Fill this section
    name the entities involved in deriving the MSK/EMSK.
 
    In EAP-EDHOC, the Peer-Id and Server-Id are determined from the subject
-   or subjectAltName fields in the peer and server certificates.  For
-   details, see Section 4.1.2.6 of [RFC3280].  Where the subjectAltName
+   or subjectAltName fields in the peer and server certificates.  Where the subjectAltName
    field is present in the peer or server certificate, the Peer-Id or
    Server-Id MUST be set to the contents of the subjectAltName.  If
    subject naming information is present only in the subjectAltName
@@ -755,7 +765,7 @@ Editors Note: Fill this section
    dnsName SHOULD be present in the peer certificate.  Where the peer
    identity represents a user and not a resource, a subjectAltName of
    type rfc822Name SHOULD be used, conforming to the grammar for the
-   Network Access Identifier (NAI) defined in Section 2.1 of [RFC4282].
+   Network Access Identifier (NAI) defined in [RFC7542].
    If a dnsName or rfc822Name are not available, other field types (for
    example, a subjectAltName of type ipAddress or
    uniformResourceIdentifier) MAY be used.
@@ -805,10 +815,10 @@ Editors Note: Fill this section
 Editors Note: Fill this section
 ~~~~~~~~~~~~~~~~~~~~~~~
  Since the EAP-EDHOC server is typically connected to the Internet, it
-   SHOULD support validating the peer certificate using RFC 3280
-   [RFC3280] compliant path validation, including the ability to
+   SHOULD support validating the peer certificate using 
+   [RFC5280] compliant path validation, including the ability to
    retrieve intermediate certificates that may be necessary to validate
-   the peer certificate.  For details, see Section 4.2.2.1 of [RFC3280].
+   the peer certificate.
 
    Where the EAP-EDHOC server is unable to retrieve intermediate
    certificates, either it will need to be pre-configured with the
@@ -820,7 +830,7 @@ Editors Note: Fill this section
    Internet connectivity.  Therefore, the EAP-EDHOC server SHOULD provide
    its entire certificate chain minus the root to facilitate certificate
    validation by the peer.  The EAP-EDHOC peer SHOULD support validating
-   the server certificate using RFC 3280 [RFC3280] compliant path
+   the server certificate using [RFC5280] compliant path
    validation.
 
    Once a EDHOC session is established, EAP-EDHOC peer and server
@@ -835,31 +845,30 @@ Editors Note: Fill this section
    In the case of the EAP-EDHOC peer, this involves ensuring that the
    certificate presented by the EAP-EDHOC server was intended to be used
    as a server certificate.  Implementations SHOULD use the Extended Key
-   Usage (see Section 4.2.1.13 of [RFC3280]) extension and ensure that
+   Usage (see [RFC5280]) extension and ensure that
    at least one of the following is true:
 
    1) The certificate issuer included no Extended Key Usage identifiers
       in the certificate.
    2) The issuer included the anyExtendedKeyUsage identifier in the
-      certificate (see Section 4.2.1.13 of [RFC3280]).
+      certificate.
    3) The issuer included the id-kp-serverAuth identifier in the
-      certificate (see Section 4.2.1.13 [RFC3280]).
+      certificate.
 
 [//]: # ( When performing this comparison, implementations MUST follow the validation rules specified in Section 3.1 of [RFC2818].)
 
 
    In the case of the server, this involves ensuring the certificate presented by
    the EAP-EDHOC peer was intended to be used as a client certificate.
-   Implementations SHOULD use the Extended Key Usage (see Section
-   4.2.1.13 [RFC3280]) extension and ensure that at least one of the
+   Implementations SHOULD use the Extended Key Usage (see [RFC5280]) extension and ensure that at least one of the
    following is true:
 
    1) The certificate issuer included no Extended Key Usage identifiers
       in the certificate.
    2) The issuer included the anyExtendedKeyUsage identifier in the
-      certificate (see Section 4.2.1.13 of [RFC3280]).
+      certificate 
    3) The issuer included the id-kp-clientAuth identifier in the
-      certificate (see Section 4.2.1.13 of [RFC3280]).
+      certificate (see [RFC5280]).
 
 ## Certificate Revocation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -871,11 +880,11 @@ Certificates are long-lived assertions of identity.  Therefore, it is
    whether these assertions have been revoked.
 
    EAP-EDHOC peer and server implementations MUST support the use of
-   Certificate Revocation Lists (CRLs); for details, see Section 3.3 of
-   [RFC3280].  EAP-EDHOC peer and server implementations SHOULD also
+   Certificate Revocation Lists (CRLs); for details, see 
+   [RFC5280].  EAP-EDHOC peer and server implementations SHOULD also
    support the Online Certificate Status Protocol (OCSP), described in
    "X.509 Internet Public Key Infrastructure Online Certificate Status
-   Protocol - OCSP" [RFC2560].  OCSP messages are typically much smaller
+   Protocol - OCSP" [RFC6960].  OCSP messages are typically much smaller
    than CRLs, which can shorten connection times especially in
    bandwidth-constrained environments.  While EAP-EDHOC servers are
    typically connected to the Internet during the EAP conversation, an

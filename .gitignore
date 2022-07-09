@@ -1,0 +1,5 @@
+lib/
+*.html
+*.txt
+*.xml
+.targets.mk
