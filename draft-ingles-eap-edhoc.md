@@ -1,6 +1,6 @@
 ---
 title: Using the Extensible Authentication Protocol with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ingles-eap-edhoc-04
+docname: draft-ingles-eap-edhoc-05
 abbrev: EAP-EDHOC
 
 ipr: trust200902
@@ -363,7 +363,11 @@ To avoid fragmentation, it is RECOMMENDED to keep the sizes of EAP-EDHOC peer, E
 In addition, it is RECOMMENDED to use mechanisms that reduce the sizes of Certificate messages.
 
 
-EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. However, except for message_2, which by construction has an upper bound limited by a multiple of the hash function output, there are no specific message size limitations. With SHA-256 as a hash function, message_2 cannot be longer than 8160 octets. The other three EAP-EDHOC messages do not have an upper bound. Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
+EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons.
+In the basic message construction, the size of plaintext in message_2 is limited to the length of the output of the key derivation function which in turn is decided by the EDHOC hash function. For example, with SHA-256 as EDHOC hash algorithm the maximum size of plaintext in message_2 is 8160 bytes.
+However, EDHOC also defines an optional backwards compatible method for handling arbitrarily long message_2 plaintext sizes, see Appendix G in {{I-D.ietf-lake-edhoc}}. The other three EAP-EDHOC messages do not have an upper bound.
+
+Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
 Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dail-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
 
 Since EAP is a simple ACK-NAK protocol, fragmentation support can be
@@ -699,6 +703,12 @@ The allocations have been updated to reference this document.
 
 # Security Considerations {#security}
 
+TBD.
+
+~~~~~~~~~~~~~~~~~~~~~~~
+[Editor's note: More security considerations to be added.]
+~~~~~~~~~~~~~~~~~~~~~~~
+
 ## Security Claims 
 
 Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
@@ -717,6 +727,7 @@ Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 
   [5] Integrity protection:
     EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, ciphersuites, and external authorization data.
+
 
 --- back
 
