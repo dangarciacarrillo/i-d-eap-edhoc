@@ -1,6 +1,6 @@
 ---
 title: Using the Extensible Authentication Protocol with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ingles-eap-edhoc-02
+docname: draft-ingles-eap-edhoc-04
 abbrev: EAP-EDHOC
 
 ipr: trust200902
@@ -57,34 +57,22 @@ author:
 
 normative:
 
+   I-D.ietf-lake-edhoc:
    RFC2119:
    RFC3748:
    RFC4137:
-   RFC5216:
    RFC7542:
    RFC8174:
-   I-D.ietf-lake-edhoc:
 
 informative:
 
+  I-D.ietf-core-oscore-edhoc:
   RFC7252:
   RFC7593:
+  RFC8152:
   RFC8613:
   RFC8949:
-  RFC8152:
-  RFC5280:
-
-  RFC2637:
-  RFC2661:
-  RFC6066:
-  RFC8446:
-  RFC1661:
-  RFC2865:
-  RFC6733:
-  RFC5191:  
-  RFC6960:
-  I-D.ietf-core-oscore-edhoc:
-
+  
 
 
 --- abstract
@@ -115,7 +103,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory, as alternate success indication.
+The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory, as an alternate success indication.
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
 
@@ -128,11 +116,6 @@ EAP-EDHOC authentication credentials can be of any type supported by COSE and be
 EAP-EDHOC provides forward secrecy by exchange of ephemeral Diffie-Hellman public keys in message_1 and message_2.
 
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
-
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: making EAP-EDHOC a tunnelled 
- EAP method may be considered in the future.]
-~~~~~~~~~~~~~~~~~~~~~~~
 
 Figure 1 shows an example message flow for a successful EAP-EDHOC.
 
@@ -370,7 +353,7 @@ EAP-EDHOC  is always used with privacy. This does not add any extra round trips 
 
 ### Fragmentation
 
-EAP-EDHOC fragmentation support is provided through addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field of four octets.
+EAP-EDHOC fragmentation support is provided through the addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field of four octets.
  To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See section {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bit is set, we are specifying that the next message will be fragmented and that in such a message we can also find the length of the message.
 
 
@@ -380,7 +363,7 @@ To avoid fragmentation, it is RECOMMENDED to keep the sizes of EAP-EDHOC peer, E
 In addition, it is RECOMMENDED to use mechanisms that reduce the sizes of Certificate messages.
 
 
-EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. However, except for message_2, which by construction has an upper bound limited by a multiple of the hash function output, there are no specific message size limitations. With SHA-256 as hash function, message_2 cannot be longer than 8160 octets. The other three EAP-EDHOC messages do not have an upper bound. Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
+EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. However, except for message_2, which by construction has an upper bound limited by a multiple of the hash function output, there are no specific message size limitations. With SHA-256 as a hash function, message_2 cannot be longer than 8160 octets. The other three EAP-EDHOC messages do not have an upper bound. Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
 Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dail-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
 
 Since EAP is a simple ACK-NAK protocol, fragmentation support can be
@@ -428,7 +411,7 @@ Similarly, when the EAP server receives an EAP-Response with the M
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                               EAP-Request/Identity    |
     | <---------------------------------------------------- |
     |   EAP-Response/Identity (Privacy-Friendly)            |
     | ----------------------------------------------------> |
@@ -464,16 +447,16 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     |   (EDHOC message_3,                                   |
     |    Fragment 1: L,M bits set)                          |
     | ----------------------------------------------------> |
-    |   EAP-Request/                                        |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                         EAP-Request/  |
+    |                                   EAP-Type=EAP-EDHOC  |
     | <---------------------------------------------------  |
     |   EAP-Response/                                       |
     |   EAP-Type=EAP-EDHOC                                  |
     |   (EDHOC message_3,                                   |
     |    Fragment 2: M bits set)                            |
     | ----------------------------------------------------> |
-    |   EAP-Request/                                        |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                         EAP-Request/  |
+    |                                   EAP-Type=EAP-EDHOC  |
     | <---------------------------------------------------  |
     |   EAP-Response/                                       |
     |   EAP-Type=EAP-EDHOC                                  |
@@ -715,242 +698,25 @@ The allocations have been updated to reference this document.
 
 
 # Security Considerations {#security}
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
 
 ## Security Claims 
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
 
 Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 
   [1] Mutual authentication:
-    The initiator and responder authenticate each other through the EDHOC exchage.    
+    The initiator and responder authenticate each other through the EDHOC exchange.    
 
   [2] Forward secrecy:
     Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of one session key does not also compromise earlier sessions' keys.
 
   [3] Identity protection:
-    EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. By listening in on the destination address used to transfer message_1, an active attacker can obtain the Responder's credential identification and send its own message_1 to the same address. 
-
-  [4] Cryptographic negotiation:
-    The list of supported cipher suites by the initiator must be in the order of preference. The cipher suites that the Responder supports must be on the list.
+    EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its own message_1 to the same address.
+    
+  [4] Cipher suite negotiation:
+    The Initiator's list of supported cipher suites and order of preference is fixed and the selected cipher suite is the first cipher suite that the Responder supports.
 
   [5] Integrity protection:
-    EDHOC extends the message authentication coverage to new elements including algorithms, external authorization data, and earlier messages in addition to adding an explicit method type. This safeguards against a hacker inserting or repeating messages from another session. EDHOC also adds selection of connection identifiers and downgrade protected negotiation of cryptographic parameters
-
-
-
-## Peer and Server Identities {#peer-identities}
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-  The EAP-EDHOC peer name (Peer-Id) represents the identity to be used
-   for access control and accounting purposes.  The Server-Id represents
-   the identity of the EAP server.  Together the Peer-Id and Server-Id
-   name the entities involved in deriving the MSK/EMSK.
-
-   In EAP-EDHOC, the Peer-Id and Server-Id are determined from the subject
-   or subjectAltName fields in the peer and server certificates.  Where the subjectAltName
-   field is present in the peer or server certificate, the Peer-Id or
-   Server-Id MUST be set to the contents of the subjectAltName.  If
-   subject naming information is present only in the subjectAltName
-   extension of a peer or server certificate, then the subject field
-   MUST be an empty sequence and the subjectAltName extension MUST be
-   critical.
-
-   Where the peer identity represents a host, a subjectAltName of type
-   dnsName SHOULD be present in the peer certificate.  Where the peer
-   identity represents a user and not a resource, a subjectAltName of
-   type rfc822Name SHOULD be used, conforming to the grammar for the
-   Network Access Identifier (NAI) defined in [RFC7542].
-   If a dnsName or rfc822Name are not available, other field types (for
-   example, a subjectAltName of type ipAddress or
-   uniformResourceIdentifier) MAY be used.
-
-   A server identity will typically represent a host, not a user or a
-   resource.  As a result, a subjectAltName of type dnsName SHOULD be
-   present in the server certificate.  If a dnsName is not available
-   other field types (for example, a subjectAltName of type ipAddress or
-   uniformResourceIdentifier) MAY be used.
-
-   Conforming implementations generating new certificates with Network
-   Access Identifiers (NAIs) MUST use the rfc822Name in the subject
-   alternative name field to describe such identities.  The use of the
-   subject name field to contain an emailAddress Relative Distinguished
-   Name (RDN) is deprecated, and MUST NOT be used.  The subject name
-   field MAY contain other RDNs for representing the subject's identity.
-
-   Where it is non-empty, the subject name field MUST contain an X.500
-   distinguished name (DN).  If subject naming information is present
-   only in the subject name field of a peer certificate and the peer
-   identity represents a host or device, the subject name field SHOULD
-   contain a CommonName (CN) RDN or serialNumber RDN.  If subject naming
-   information is present only in the subject name field of a server
-   certificate, then the subject name field SHOULD contain a CN RDN or
-   serialNumber RDN.
-
-
-   It is possible for more than one subjectAltName field to be present
-   in a peer or server certificate in addition to an empty or non-empty
-   subject distinguished name.  EAP-EDHOC implementations supporting
-   export of the Peer-Id and Server-Id SHOULD export all the
-   subjectAltName fields within Peer-Ids or Server-Ids, and SHOULD also
-   export a non-empty subject distinguished name field within the Peer-
-   Ids or Server-Ids.  All of the exported Peer-Ids and Server-Ids are
-   considered valid.
-
-   EAP-EDHOC implementations supporting export of the Peer-Id and Server-
-   Id SHOULD export Peer-Ids and Server-Ids in the same order in which
-   they appear within the certificate.  Such canonical ordering would
-   aid in comparison operations and would enable using those identifiers
-   for key derivation if that is deemed useful.  However, the ordering
-   of fields within the certificate SHOULD NOT be used for access
-   control.
-
-## Certificate Validation
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
- Since the EAP-EDHOC server is typically connected to the Internet, it
-   SHOULD support validating the peer certificate using 
-   [RFC5280] compliant path validation, including the ability to
-   retrieve intermediate certificates that may be necessary to validate
-   the peer certificate.
-
-   Where the EAP-EDHOC server is unable to retrieve intermediate
-   certificates, either it will need to be pre-configured with the
-   necessary intermediate certificates to complete path validation or it
-   will rely on the EAP-EDHOC peer to provide this information as part of
-   the EDHOC exchange.
-
-   In contrast to the EAP-EDHOC server, the EAP-EDHOC peer may not have
-   Internet connectivity.  Therefore, the EAP-EDHOC server SHOULD provide
-   its entire certificate chain minus the root to facilitate certificate
-   validation by the peer.  The EAP-EDHOC peer SHOULD support validating
-   the server certificate using [RFC5280] compliant path
-   validation.
-
-   Once a EDHOC session is established, EAP-EDHOC peer and server
-   implementations MUST validate that the identities represented in the
-   certificate are appropriate and authorized for use with EAP-EDHOC.  The
-   authorization process makes use of the contents of the certificates
-   as well as other contextual information.  While authorization
-   requirements will vary from deployment to deployment, it is
-   RECOMMENDED that implementations be able to authorize based on the
-   EAP-EDHOC Peer-Id and Server-Id determined as described in Section {{peer-identities}}.
-
-   In the case of the EAP-EDHOC peer, this involves ensuring that the
-   certificate presented by the EAP-EDHOC server was intended to be used
-   as a server certificate.  Implementations SHOULD use the Extended Key
-   Usage (see [RFC5280]) extension and ensure that
-   at least one of the following is true:
-
-   1) The certificate issuer included no Extended Key Usage identifiers
-      in the certificate.
-   2) The issuer included the anyExtendedKeyUsage identifier in the
-      certificate.
-   3) The issuer included the id-kp-serverAuth identifier in the
-      certificate.
-
-[//]: # ( When performing this comparison, implementations MUST follow the validation rules specified in Section 3.1 of [RFC2818].)
-
-
-   In the case of the server, this involves ensuring the certificate presented by
-   the EAP-EDHOC peer was intended to be used as a client certificate.
-   Implementations SHOULD use the Extended Key Usage (see [RFC5280]) extension and ensure that at least one of the
-   following is true:
-
-   1) The certificate issuer included no Extended Key Usage identifiers
-      in the certificate.
-   2) The issuer included the anyExtendedKeyUsage identifier in the
-      certificate 
-   3) The issuer included the id-kp-clientAuth identifier in the
-      certificate (see [RFC5280]).
-
-## Certificate Revocation
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Certificates are long-lived assertions of identity.  Therefore, it is
-   important for EAP-EDHOC implementations to be capable of checking
-   whether these assertions have been revoked.
-
-   EAP-EDHOC peer and server implementations MUST support the use of
-   Certificate Revocation Lists (CRLs); for details, see 
-   [RFC5280].  EAP-EDHOC peer and server implementations SHOULD also
-   support the Online Certificate Status Protocol (OCSP), described in
-   "X.509 Internet Public Key Infrastructure Online Certificate Status
-   Protocol - OCSP" [RFC6960].  OCSP messages are typically much smaller
-   than CRLs, which can shorten connection times especially in
-   bandwidth-constrained environments.  While EAP-EDHOC servers are
-   typically connected to the Internet during the EAP conversation, an
-   EAP-EDHOC peer may not have Internet connectivity until authentication
-   completes.
-
-   In the case where the peer is initiating a voluntary Layer 2 tunnel
-   using PPTP [RFC2637] or L2TP [RFC2661], the peer will typically
-   already have a PPP interface and Internet connectivity established at
-   the time of tunnel initiation.
-
-  There are a number of reasons (e.g., key compromise, CA compromise, privilege withdrawn, etc.) why EAP-EDHOC peer, EAP-EDHOC server, or sub-CA certificates have to be revoked before their expiry date. Revocation of the EAP-EDHOC server's certificate is complicated by the fact that the EAP-EDHOC peer may not have Internet connectivity until authentication completes. When EAP-EDHOC is used, the revocation status of all the certificates in the certificate chains MUST be checked (except the trust anchor). An implementation may use the Certificate Revocation List (CRL), Online Certificate Status Protocol (OSCP), or other standardized/proprietary methods for revocation checking. Examples of proprietary methods are non-standard formats for distribution of revocation lists as well as certificates with very short lifetime. EAP-EDHOC servers  MUST implement Certificate Status Requests (OCSP stapling) as specified in [RFC6066] and Section 4.4.2.1 of [RFC8446]. It is RECOMMENDED that EAP-EDHOC peers and EAP-EDHOC servers use OCSP stapling for verifying the status of the EAP-EDHOC server's certificate chain. When an EAP-EDHOC peer uses Certificate Status Requests to check the revocation status of the EAP-EDHOC server's certificate chain, it MUST treat a CertificateEntry (but not the trust anchor) without a valid CertificateStatus extension as invalid and abort the handshake with an appropriate alert. The OCSP information is carried in the CertificateEntry containing the associated certificate instead of a separate CertificateStatus message as in [RFC6066]. This enables sending OCSP information for all certificates in the certificate chain (except the trust anchor).To enable revocation checking in situations where EAP-EDHOC peers do not implement or use OCSP stapling, and where network connectivity is not available prior to authentication completion, EAP-EDHOC peer implementations MUST also support checking for certificate revocation after authentication completes and network connectivity is available. An EAP peer implementation SHOULD NOT trust the network (and any services) until it has verified the revocation status of the server certificate after receiving network connectivity. An EAP peer MUST use a secure transport to verify the revocation status of the server certificate. An EAP peer SHOULD NOT send any other traffic before revocation checking for the server certificate is complete.
-
-
-## Packet Modification Attacks
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-  The integrity protection of EAP-EDHOC packets does not extend to the
-   EAP header fields (Code, Identifier, Length) or the Type or Flags
-   fields.  As a result, these fields can be modified by an attacker.
-
-  The only information that is integrity and replay protected in EAP-EDHOC are the parts of the EDHOC message that EDHOC protects. All other information in the EAP-EDHOC message exchange including EAP-Request and EAP-Response headers, the identity in the Identity Response, EAP-EDHOC packet header fields, Type, Flags, EAP-Success, and EAP-Failure can be modified, spoofed, or replayed. Protected EDHOC Error messages are protected failure result indications and enable the EAP-EDHOC peer and EAP-EDHOC server to determine that the failure result was not spoofed by an attacker. Protected failure result indications provide integrity and replay protection but MAY be unauthenticated. 
-
-
-## Authorization
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-EAP servers will usually require the EAP peer to provide a valid certificate and will fail the connection if one is not provided. Some deployments may permit no peer authentication for some or all connections. When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for unauthenticated peers, and implementations MUST use resumption with caution to ensure that a resumed session is not granted more privilege than was intended for the original session. An example of limiting network access would be to invoke a vendor's walled garden or quarantine network functionality. EAP-EDHOC is typically encapsulated in other protocols such as PPP [RFC1661], RADIUS [RFC2865], Diameter [RFC6733], or the Protocol for Carrying Authentication for Network Access (PANA) [RFC5191]. The encapsulating protocols can also provide additional, non-EAP information to an EAP-EDHOC server. This information can include, but is not limited to, information about the authenticator, information about the EAP-EDHOC peer, or information about the protocol layers above or below EAP (MAC addresses, IP addresses, port numbers, Wi-Fi Service Set Identifiers (SSIDs), etc.). EAP-EDHOC servers implementing EAP-EDHOC inside those protocols can make policy decisions and enforce authorization based on a combination of information from the EAP-EDHOC exchange and non-EAP information. The identity presented in EAP-Response/Identity is not authenticated by EAP-EDHOC and is therefore trivial for an attacker to forge, modify, or replay. Authorization and accounting MUST be based on authenticated information such as information in the certificate. Note that the requirements for Network Access Identifiers (NAIs) specified in Section 4 of [RFC7542] still apply and MUST be followed. EAP-EDHOC servers MAY reject conversations based on non-EAP information provided by the encapsulating protocol, for example if the MAC address of the authenticator does not match the expected policy.In addition to allowing configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension, EAP peer implementations MAY allow binding the configured acceptable SAN to a specific CA (or CAs) that should have issued the server certificate to prevent attacks from rogue or compromised CAs.
-
-## Privacy Considerations
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-In this section, we only discuss the privacy properties of EAP-EDHOC. For privacy properties of EDHOC itself, see {{I-D.ietf-lake-edhoc}}. EAP-EDHOC sends the EDHOC messages encapsulated in EAP packets. Additionally, the EAP-EDHOC peer sends an identity in the first EAP-Response. The other fields in the EAP-EDHOC Request and the EAP-EDHOC Response packets do not contain any cleartext privacy-sensitive information. Tracking of users by eavesdropping on Identity Responses or certificates is a well-known problem in many EAP methods. When EAP-EDHOC is used, all certificates are encrypted, and the username part of the Identity Response is not revealed (e.g., using anonymous NAIs). Note that even though all certificates are encrypted, the server's identity is only protected against passive attackers while the client's identity is protected against both passive and active attackers. As with other EAP methods, even when privacy-friendly identifiers or EAP tunneling is used, the domain name (i.e., the realm) in the NAI is still typically visible. 
-  How much privacy-sensitive information the domain name leaks is highly dependent on how many other users are using the same domain name in the particular access network. If all EAP-EDHOC peers have the same domain, no additional information is leaked. If a domain name is used by a small subset of the EAP-EDHOC peers, it may aid an attacker in tracking or identifying the user.Without padding, information about the size of the client certificate is leaked from the size of the EAP-EDHOC packets. The EAP-EDHOC packets sizes may therefore leak information that can be used to track or identify the user. If all client certificates have the same length, no information is leaked. 
-  EAP-EDHOC peers SHOULD use padding; see Section 8.6 of {{I-D.ietf-lake-edhoc}} to reduce information leakage of certificate sizes.
-  If anonymous NAIs are not used, the privacy-friendly identifiers need to be generated with care. The identities MUST be generated in a cryptographically secure way so that it is computationally infeasible for an attacker to differentiate two identities belonging to the same user from two identities belonging to different users in the same realm. This can be achieved, for instance, by using random or pseudo-random usernames such as random byte strings or ciphertexts and only using the pseudo-random usernames a single time. Note that the privacy-friendly usernames also MUST NOT include substrings that can be used to relate the identity to a specific user. Similarly, privacy-friendly usernames MUST NOT be formed by a fixed mapping that stays the same across multiple different authentications. 
-
-
-## Pervasive Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Pervasive monitoring refers to widespread surveillance of users. In the context of EAP-EDHOC, pervasive monitoring attacks can target EAP-EDHOC peer devices for tracking them (and their users) when they join a network. By encrypting more information, mandating the use of privacy, and always providing forward secrecy, EAP-EDHOC offers much better protection against pervasive monitoring. In addition to the privacy attacks discussed above, surveillance on a large scale may enable tracking of a user over a wide geographical area and across different access networks. Using information from EAP-EDHOC together with information gathered from other protocols increases the risk of identifying individual users. In EDHOC, key derivation mechanism provides forward secrecy for the traffic secrets. EDHOC does not provide a similar mechanism for MSK and EMSK. Implementation using the exported MSK and EMSK can achieve forward secrecy by frequently deriving new keys.
-
-
-
-## Cross-Protocol Attacks
-~~~~~~~~~~~~~~~~~~~~~~~
-Editors Note: Fill this section
-~~~~~~~~~~~~~~~~~~~~~~~
-This is a new section when compared to [RFC5216].
-
-Allowing the same certificate to be used in multiple protocols can potentially allow an attacker to authenticate via one protocol and then "resume" that session in another protocol. 
-
-Section {{identity-verification}} suggests that certificates typically have one or more FQDNs in the SAN extension. However, those fields are for EAP validation only and do not indicate that the certificates are suitable for use with HTTPS or other protocols on the named host. 
-
-Along with making sure that appropriate authorization information is available and used during resumption, using different certificates for different protocols is RECOMMENDED to help keep different protocol usages separate.
-
+    EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, ciphersuites, and external authorization data.
 
 --- back
 
