@@ -4,6 +4,7 @@ docname: draft-ingles-eap-edhoc-05
 abbrev: EAP-EDHOC
 
 ipr: trust200902
+submissionType: IETF
 area: SEC
 workgroup: EMU Working Group
 cat: std
@@ -87,7 +88,7 @@ This document also provides guidance on authentication and authorization for EAP
 # Introduction
 
 The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a standard mechanism for support of multiple authentication methods.
-This document specifies the EAP authentication method EAP-EDHOC which uses COSE defined credential-based mutual authentication, utilising the EDHOC protocol cipher suite negotiation and establishment of shared secret keying material.
+This document specifies the EAP authentication method EAP-EDHOC which uses COSE defined credential-based mutual authentication, utilizing the EDHOC protocol cipher suite negotiation and establishment of shared secret keying material.
 Ephemeral Diffie-Hellman Over COSE (EDHOC, {{I-D.ietf-lake-edhoc}}) is a very compact and lightweight authenticated key exchange protocol designed for highly constrained settings.
 The main objective for EDHOC is to be a matching security handshake protocol to OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators.
  EDHOC reuses the same lightweight primitives as OSCORE, CBOR {{RFC8949}} and COSE {{RFC8152}}, and specifies the use of CoAP but is not bound to a particular transport.
@@ -338,7 +339,7 @@ It is RECOMMENDED to use anonymous NAIs {{RFC7542}} in the Identity Response as 
 
 While opaque blobs are allowed by {{RFC3748}}, such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
 
-Many client certificates contain an identity such as an email address, which is already in NAI format. When the client certificate contains an NAI as subject name or alternative subject name, an anonymous NAI SHOULD be derived from the NAI in the certificate; See section {{privacy}}.
+Many client certificates contain an identity such as an email address, which is already in NAI format. When the client certificate contains an NAI as subject name or alternative subject name, an anonymous NAI SHOULD be derived from the NAI in the certificate; See {{privacy}}.
 
 
 
@@ -354,7 +355,7 @@ EAP-EDHOC  is always used with privacy. This does not add any extra round trips 
 ### Fragmentation
 
 EAP-EDHOC fragmentation support is provided through the addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field of four octets.
- To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See section {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bit is set, we are specifying that the next message will be fragmented and that in such a message we can also find the length of the message.
+ To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bit is set, we are specifying that the next message will be fragmented and that in such a message we can also find the length of the message.
 
 
 Implementations MUST NOT set the L bit in unfragmented messages, but they MUST accept unfragmented messages with and without the L bit set.
@@ -368,7 +369,7 @@ In the basic message construction, the size of plaintext in message_2 is limited
 However, EDHOC also defines an optional backwards compatible method for handling arbitrarily long message_2 plaintext sizes, see Appendix G in {{I-D.ietf-lake-edhoc}}. The other three EAP-EDHOC messages do not have an upper bound.
 
 Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
-Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dail-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
+Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dial-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
 
 Since EAP is a simple ACK-NAK protocol, fragmentation support can be
    added in a simple manner. In EAP, fragments that are lost or damaged
