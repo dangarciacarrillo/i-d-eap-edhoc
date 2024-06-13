@@ -1,6 +1,6 @@
 ---
 title: Using the Extensible Authentication Protocol with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ingles-eap-edhoc-05
+docname: draft-ietf-emu-eap-edhoc-00
 abbrev: EAP-EDHOC
 
 ipr: trust200902
@@ -18,13 +18,6 @@ pi: # can use array (if all yes) or hash here
   tocdepth: 3
 
 author:
-- name: Eduardo Ingles-Sanchez
-  surname: Ingles-Sanchez
-  org: University of Murcia
-  abbrev: University of Murcia
-  street: Murcia  30100
-  country: Spain
-  email: eduardo.ingles@um.es
 - name: Dan Garcia-Carrillo
   surname: Garcia-Carrillo
   org: University of Oviedo
@@ -58,7 +51,7 @@ author:
 
 normative:
 
-   I-D.ietf-lake-edhoc:
+   RFC9528:
    RFC2119:
    RFC3748:
    RFC4137:
@@ -89,7 +82,7 @@ This document also provides guidance on authentication and authorization for EAP
 
 The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a standard mechanism for support of multiple authentication methods.
 This document specifies the EAP authentication method EAP-EDHOC which uses COSE defined credential-based mutual authentication, utilizing the EDHOC protocol cipher suite negotiation and establishment of shared secret keying material.
-Ephemeral Diffie-Hellman Over COSE (EDHOC, {{I-D.ietf-lake-edhoc}}) is a very compact and lightweight authenticated key exchange protocol designed for highly constrained settings.
+Ephemeral Diffie-Hellman Over COSE (EDHOC, {{RFC9528}}) is a very compact and lightweight authenticated key exchange protocol designed for highly constrained settings.
 The main objective for EDHOC is to be a matching security handshake protocol to OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators.
  EDHOC reuses the same lightweight primitives as OSCORE, CBOR {{RFC8949}} and COSE {{RFC8152}}, and specifies the use of CoAP but is not bound to a particular transport.
 The EAP-EDHOC method will enable the integration of EDHOC in different applications and use cases making use of the EAP framework.
@@ -106,7 +99,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory, as an alternate success indication.
 
-After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{I-D.ietf-lake-edhoc}}. This document only lists additional and different requirements, restrictions, and processing compared to {{I-D.ietf-lake-edhoc}}.
+After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
 
 
@@ -161,7 +154,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{I-D.ietf-lake-edhoc}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {{RFC3748}}. 
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{RFC9528}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {{RFC3748}}. 
 
 For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer. In other words, the EAP layer will do the retransmissions if the EAP lower layer cannot do it.
 
@@ -366,7 +359,7 @@ In addition, it is RECOMMENDED to use mechanisms that reduce the sizes of Certif
 
 EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons.
 In the basic message construction, the size of plaintext in message_2 is limited to the length of the output of the key derivation function which in turn is decided by the EDHOC hash function. For example, with SHA-256 as EDHOC hash algorithm the maximum size of plaintext in message_2 is 8160 bytes.
-However, EDHOC also defines an optional backwards compatible method for handling arbitrarily long message_2 plaintext sizes, see Appendix G in {{I-D.ietf-lake-edhoc}}. The other three EAP-EDHOC messages do not have an upper bound.
+However, EDHOC also defines an optional backwards compatible method for handling arbitrarily long message_2 plaintext sizes, see Appendix G in {{RFC9528}}. The other three EAP-EDHOC messages do not have an upper bound.
 
 Furthermore, in the case of sending a certificate in a message instead of a reference, a certificate may in principle be as long as 16 MB.
 Hence, the EAP-EDHOC messages sent in a single round may thus be larger than the MTU size or the maximum Remote Authentication Dial-In User Service (RADIUS) packet size of 4096 octets.  As a result, an EAP-EDHOC implementation MUST provide its own support for fragmentation and reassembly.
@@ -495,7 +488,7 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 ## Key Hierarchy
 
-The key schedule for EDHOC is described in Section 4 of {{I-D.ietf-lake-edhoc}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC-Exporter interface, see Section 4.2.1 of {{I-D.ietf-lake-edhoc}}.
+The key schedule for EDHOC is described in Section 4 of {{RFC9528}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC-Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
 Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, the Type field has the value TBD1.
 
@@ -512,7 +505,7 @@ EAP-EDHOC exports the MSK and the EMSK and does not specify how it is used by lo
 
 ## Parameter Negotiation and Compliance Requirements
 
-The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requirements (mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, extensions, etc.) defined in Section 7  of {{I-D.ietf-lake-edhoc}}.
+The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requirements (mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, extensions, etc.) defined in Section 7  of {{RFC9528}}.
 
 
 
@@ -736,6 +729,6 @@ Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 # Acknowledgments
 {: numbered="no"}
 
-Work on this document has in part been supported by the H2020 Projects IoTCrawler (grant agreement no. 779852) and INSPIRE-5Gplus (grant agreement no. 871808).
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work.
 
 --- fluff
