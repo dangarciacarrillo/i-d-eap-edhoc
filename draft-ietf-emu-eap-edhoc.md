@@ -99,7 +99,13 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. EAP-EDHOC uses all messages in the exchange, and message_4 is mandatory, as an alternate success indication.
+
+The EDHOC protocol running between an Initiator and a Responder
+   consists of three mandatory messages (message_1, message_2,
+   message_3), an optional message_4, and an error message.  EAP-EDHOC
+   uses all messages in the exchange, and message_4 is mandatory, as an
+   protected success indication.
+
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC protocol encapsulated in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of the EDHOC message SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
@@ -158,7 +164,10 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, EDHOC specification has a set of requirements for its transport protocol {{RFC9528}}. These include handling message loss, reordering, duplication, fragmentation, demultiplex EDHOC messages from other types of messages, denial-of-service protection, and message correlation. All these requirements are fulfilled either by the EAP protocol, EAP method or EAP lower layer, as specified in {{RFC3748}}. 
 
-For message loss, this can be either fulfilled by the EAP protocol or the EAP lower layer, as retransmissions can occur both in the lower layer and the EAP layer when EAP is run over a reliable lower layer. In other words, the EAP layer will do the retransmissions if the EAP lower layer cannot do it.
+
+For message loss, this can be either fulfilled by the EAP layer or
+   the EAP lower layer or both.
+
 
 For reordering, EAP is reliant on the EAP lower layer ordering guarantees for correct operation.
 
@@ -287,7 +296,9 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 {: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
 
 
-{{message3-reject}} shows an example message flow where the EAP-EDHOC server sends the EDHOC message_4 to the EAP peer, but the success indication fails, and the peer sends an EDHOC error message.
+{{message3-reject}} shows an example message flow where the EAP-EDHOC server
+   sends the EDHOC message_4 to the EAP peer, but the protected success indication
+   fails, and the peer sends an EDHOC error message.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -349,8 +360,9 @@ EAP-EDHOC  is always used with privacy. This does not add any extra round trips 
 
 ### Fragmentation
 
-EAP-EDHOC fragmentation support is provided through the addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field of four octets.
- To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bit is set, we are specifying that the next message will be fragmented and that in such a message we can also find the length of the message.
+EAP-EDHOC fragmentation support is provided through the addition of a flags octet within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be one to four octets.
+
+ To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). Of these fields, we will highlight the one that contains the flag octet, which is used to steer the fragmentation process. If the L bits are set, we are specifying that the message will be fragmented and the length of the message is in EAP-EDHOC Message Length field, which can be one to four octets long. 
 
 
 Implementations MUST NOT set the L bit in unfragmented messages, but they MUST accept unfragmented messages with and without the L bit set.
@@ -373,15 +385,15 @@ Since EAP is a simple ACK-NAK protocol, fragmentation support can be
    fragment offset field as is provided in IPv4
    EAP-EDHOC fragmentation support is provided through the addition of a flags
    octet within the EAP-Response and EAP-Request packets, as well as a
-   EDHOC Message Length field of four octets.  Flags include the Length
+   EDHOC Message Length field.  Flags include the Length
    included (L), More fragments (M), and EAP-EDHOC Start (S) bits.  The L
-   flag is set to indicate the presence of the four-octet EDHOC Message
+   flag is set to indicate the presence of the EDHOC Message
    Length field, and MUST be set for the first fragment of a fragmented
-   EDHOC message or set of messages.  The M flag is set on all but the
+   EDHOC message.  The M flag is set on all but the
    last fragment.  The S flag is set only within the EAP-EDHOC start
    message sent from the EAP server to the peer.  The EDHOC Message Length
-   field is four octets, and provides the total length of the EDHOC
-   message or set of messages that is being fragmented; this simplifies
+   field  provides the total length of the EDHOC
+   message that is being fragmented; this simplifies
    buffer allocation.
 
    When an EAP-EDHOC peer receives an EAP-Request packet with the M bit
@@ -394,7 +406,7 @@ Since EAP is a simple ACK-NAK protocol, fragmentation support can be
    value in the fragment ACK contained within the EAP-Response.
    Retransmitted fragments will contain the same Identifier value.
 
-Similarly, when the EAP server receives an EAP-Response with the M
+Similarly, when the EAP-EDHOC server receives an EAP-Response with the M
    bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC
    and no data.  This serves as a fragment ACK.  The EAP peer MUST wait
    until it receives the EAP-Request before sending another fragment.
@@ -523,8 +535,8 @@ been sent or received. Implementations following {{RFC4137}} can then
 set the eapKeyData and aaaEapKeyData variables. 
 
 The keying material can be made available to lower layers and the
-authenticator after the authenticated success result indication has
-been sent or received (message_4). Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
+authenticator after the protected success indication (message_4) has
+been sent or received. Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 
 
 
@@ -582,26 +594,28 @@ Code
      M = More fragments
      L = Length of EDHOC Message Length
 
-      The L bits (length included) are set to indicate the presence of the
-      EDHOC Message Length field and MUST be set for the first fragment of a 
-      fragmented EDHOC message or set of messages. The three bits
-      expressing L provides a way of indicating if the EDHOC Message Length field
-      is present, and if it is, the size of the field from 1 byte to 4 bytes.
-      In this sense, all 3 bits set to 0 will indicate the field will not be present, 
-      all 3 bits representing 1 in binary will indicate the size of the field is 1 byte and so on. 
-
-      The M bit (more fragments) is set on all but the last fragment.  
+      Implementations of this specification MUST set the reserved bits to zero and 
+      MUST ignore them on reception.
 
       The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message.  This
       differentiates the EAP-EDHOC Start message from a fragment
-      acknowledgement.  Implementations of this specification MUST set
-      the reserved bits to zero and MUST ignore them on reception.
+      acknowledgement.  
+
+      The M bit (more fragments) is set on all but the last fragment.  
+
+      The three L bits is the binary encoding of the size of the EDHOC Message Length, 
+      in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field 
+      is not present. If the first two L bits are set to 0, and the final L bit of the 
+      flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and 
+      so on.  
+  
+
 
    EDHOC Message Length
 
-      The EDHOC Message Length field can have a size of one to four octets and is present only
-      if the L bits represent a value greater than 0.  This field provides the total length of the
-      EDHOC message or set of messages that is being fragmented.
+      The EDHOC Message Length field can have a size of one to four octets and is 
+      present only if the L bits represent a value greater than 0.  This field provides 
+      the total length of the EDHOC message that is being fragmented.
 
    EDHOC data
 
@@ -658,28 +672,23 @@ The fields are transmitted from left to right.
      M = More fragments
      L = Length of EDHOC Message Length
 
-      The L bits (length included) ARE set to indicate the presence of the
-      four-octet EDHOC Message Length field, and MUST be set for the first
-      fragment of a fragmented EDHOC message or set of messages.  
-
-      Lhe L bits (length included) are set to indicate the presence of the
-      EDHOC Message Length field and MUST be set for the first fragment of a 
-      fragmented EDHOC message or set of messages. The three bits
-      expressing L provides a way of indicating if the EDHOC Message Length field
-      is present, and if it is, the size of the field from 1 byte to 4 bytes.
-      In this sense, all 3 bits set to 0 will indicate the field will not be present, 
-      all 3 bits representing 1 in binary will indicate the size of the field is 1 byte and so on. 
-
-      The M bit (more fragments) is set on all but the last fragment.
-      
       Implementations of this specification MUST set the reserved bits
       to zero and MUST ignore them on reception.
 
+      The M bit (more fragments) is set on all but the last fragment.
+
+      The three L bits is the binary encoding of the size of the EDHOC Message Length, 
+      in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field 
+      is not present. If the first two L bits are set to 0, and the final L bit of the 
+      flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and 
+      so on.  
+      
+
    EDHOC Message Length
 
-      The EDHOC Message Length field is four octets and is present only
+      The EDHOC Message Length field can be one to four octets, and is present only
       if the L bit is set.  This field provides the total length of the
-      EDHOC message or set of messages that is being fragmented.
+      EDHOC message that is being fragmented.
 
    EDHOC data
 
@@ -715,9 +724,11 @@ The allocations have been updated to reference this document.
 
 # Security Considerations {#security}
 
-The security considerations for EAP-TLS1.3{{RFC9190}} and EDHOC {{RFC9528}} apply to this document.
 
-We derive specific keys that are not exported with the exception of MSK and EMSK.
+The security considerations of EDHOC {{RFC9528}} applies to this document. The design of EAP-EDHOC follows closely EAP-TLS 1.3 {{RFC9190}} and so its security considerations also applies.
+
+Except for MSK and EMSK, derived keys are not exported.
+
 
 ## Security Claims 
 
