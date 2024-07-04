@@ -1,6 +1,6 @@
 ---
 title: Using the Extensible Authentication Protocol with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ietf-emu-eap-edhoc-00
+docname: draft-ietf-emu-eap-edhoc-01
 abbrev: EAP-EDHOC
 
 ipr: trust200902
@@ -57,6 +57,7 @@ normative:
    RFC4137:
    RFC7542:
    RFC8174:
+   RFC9190:
 
 informative:
 
@@ -571,29 +572,35 @@ Code
 
    Flags
 
-      0 1 2 3 4 5 6 7 8
-      +-+-+-+-+-+-+-+-+
-      |L M S R R R R R|
-      +-+-+-+-+-+-+-+-+
+     0 1 2 3 4 5 6 7 8
+     +-+-+-+-+-+-+-+-+
+     |R R R S M L L L|
+     +-+-+-+-+-+-+-+-+
 
-      L = Length included
-      M = More fragments
-      S = EAP-EDHOC start
-      R = Reserved
+     R = Reserved
+     S = EAP-EDHOC start
+     M = More fragments
+     L = Length of EDHOC Message Length
 
-      The L bit (length included) is set to indicate the presence of the
-      four-octet EDHOC Message Length field and MUST be set for the first
-      fragment of a fragmented EDHOC message or set of messages.  The M
-      bit (more fragments) is set on all but the last fragment.  The S
-      bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message.  This
+      The L bits (length included) are set to indicate the presence of the
+      EDHOC Message Length field and MUST be set for the first fragment of a 
+      fragmented EDHOC message or set of messages. The three bits
+      expressing L provides a way of indicating if the EDHOC Message Length field
+      is present, and if it is, the size of the field from 1 byte to 4 bytes.
+      In this sense, all 3 bits set to 0 will indicate the field will not be present, 
+      all 3 bits representing 1 in binary will indicate the size of the field is 1 byte and so on. 
+
+      The M bit (more fragments) is set on all but the last fragment.  
+
+      The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message.  This
       differentiates the EAP-EDHOC Start message from a fragment
       acknowledgement.  Implementations of this specification MUST set
       the reserved bits to zero and MUST ignore them on reception.
 
    EDHOC Message Length
 
-      The EDHOC Message Length field is four octets and is present only
-      if the L bit is set.  This field provides the total length of the
+      The EDHOC Message Length field can have a size of one to four octets and is present only
+      if the L bits represent a value greater than 0.  This field provides the total length of the
       EDHOC message or set of messages that is being fragmented.
 
    EDHOC data
@@ -641,20 +648,30 @@ The fields are transmitted from left to right.
 
  Flags
 
-      0 1 2 3 4 5 6 7 8
-      +-+-+-+-+-+-+-+-+
-      |L M R R R R R R|
-      +-+-+-+-+-+-+-+-+
 
-      L = Length included
-      M = More fragments
-      R = Reserved
+     0 1 2 3 4 5 6 7 8
+     +-+-+-+-+-+-+-+-+
+     |R R R R M L L L|
+     +-+-+-+-+-+-+-+-+
 
-      The L bit (length included) is set to indicate the presence of the
-      four-octet EDHOC Message Length field, 
-      and MUST be set for the first
-      fragment of a fragmented EDHOC message or set of messages.  The M
-      bit (more fragments) is set on all but the last fragment.
+     R = Reserved
+     M = More fragments
+     L = Length of EDHOC Message Length
+
+      The L bits (length included) ARE set to indicate the presence of the
+      four-octet EDHOC Message Length field, and MUST be set for the first
+      fragment of a fragmented EDHOC message or set of messages.  
+
+      Lhe L bits (length included) are set to indicate the presence of the
+      EDHOC Message Length field and MUST be set for the first fragment of a 
+      fragmented EDHOC message or set of messages. The three bits
+      expressing L provides a way of indicating if the EDHOC Message Length field
+      is present, and if it is, the size of the field from 1 byte to 4 bytes.
+      In this sense, all 3 bits set to 0 will indicate the field will not be present, 
+      all 3 bits representing 1 in binary will indicate the size of the field is 1 byte and so on. 
+
+      The M bit (more fragments) is set on all but the last fragment.
+      
       Implementations of this specification MUST set the reserved bits
       to zero and MUST ignore them on reception.
 
@@ -698,11 +715,9 @@ The allocations have been updated to reference this document.
 
 # Security Considerations {#security}
 
-TBD.
+The security considerations for EAP-TLS1.3{{RFC9190}} and EDHOC {{RFC9528}} apply to this document.
 
-~~~~~~~~~~~~~~~~~~~~~~~
-[Editor's note: More security considerations to be added.]
-~~~~~~~~~~~~~~~~~~~~~~~
+We derive specific keys that are not exported with the exception of MSK and EMSK.
 
 ## Security Claims 
 
