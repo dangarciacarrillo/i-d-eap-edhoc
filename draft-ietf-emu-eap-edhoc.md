@@ -756,6 +756,6 @@ Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 # Acknowledgments
 {: numbered="no"}
 
-The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work.
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Francisco Lopez Gomez for his work on the implementation of EAP-EDHOC.
 
 --- fluff
