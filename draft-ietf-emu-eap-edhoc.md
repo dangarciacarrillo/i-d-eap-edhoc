@@ -124,38 +124,33 @@ The optimization combining the execution of EDHOC with the first subsequent OSCO
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC Start)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC Start)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_2)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_3)                                   |
     | ----------------------------------------------------> |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_4)   |
+    | <---------------------------------------------------- |
     |                                                       |
-    |                                         EAP-Request/  |
-    |                                   EAP-Type=EAP-EDHOC  |
-    |                                    (EDHOC message_4)  |
-    | <---------------------------------------------------  |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
-    |  ---------------------------------------------------> |
-    |                                        EAP-Success    |
-    | <---------------------------------------------------  |
-    +                                                       +
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
+    | ----------------------------------------------------> |
+    |                                                       |
+    |                                         EAP-Success   |
+    | <---------------------------------------------------- |
+    |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #message-flow title="EAP-EDHOC Message Flow" artwork-align="center"}
 
@@ -198,28 +193,25 @@ This method does not provide other mitigation against denial-of-service than EAP
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC Start)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC Start)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                   (EDHOC error)       |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC error)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                                       |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     | ----------------------------------------------------> |
     |                                                       |
-    |                                        EAP-Failure    |
+    |                                         EAP-Failure   |
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -230,29 +222,27 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC Start)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC Start)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_2)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC error)                                       |
     | ----------------------------------------------------> |
-    |                                        EAP-Failure    |
+    |                                                       |
+    |                                         EAP-Failure   |
     | <---------------------------------------------------- |
+    |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #message2-reject title="EAP-EDHOC Peer rejection of message_2" artwork-align="center"}
 
@@ -262,36 +252,31 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC Start)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC Start)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_2)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_3)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC error)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC error)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                                       |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     | ----------------------------------------------------> |
     |                                                       |
-    |                                        EAP-Failure    |
+    |                                         EAP-Failure   |
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -305,36 +290,31 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                           EAP-Request/Identity        |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                     (EDHOC Start)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                       (EDHOC Start)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_2)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_3)                                   |
     | ----------------------------------------------------> |
-    |                                         EAP-Request/  |
-    |                                   EAP-Type=EAP-EDHOC  |
-    |                                    (EDHOC message_4)  |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_4)   |
     | <---------------------------------------------------  |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC error)                                       |
     | ----------------------------------------------------> |
-    |                                        EAP-Failure    |
+    |                                                       |
+    |                                         EAP-Failure   |
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,70 +406,57 @@ Similarly, when the EAP-EDHOC server receives an EAP-Response with the M
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                               EAP-Request/Identity    |
+    |                                EAP-Request/Identity   |
     | <---------------------------------------------------- |
-    |   EAP-Response/Identity (Privacy-Friendly)            |
+    |   EAP-Response/Identity                               |
+    |   (Privacy-Friendly)                                  |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                          (EDHOC Start, S bit set)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                            (EDHOC Start, S bit set)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     |   (EDHOC message_1)                                   |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2,     |
-    |                          Fragment 1: L,M bits set)    |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |         (EDHOC message_2, Fragment 1: L,M bits set)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                                       |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2,     |
-    |                           (Fragment 2: M bits set)    |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |            (EDHOC message_2, Fragment 2: M bit set)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
+    |                                                       |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     | ----------------------------------------------------> |
-    |                                      EAP-Request/     |
-    |                                EAP-Type=EAP-EDHOC     |
-    |                                 (EDHOC message_2,     |
-    |                                       Fragment 3)     |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                       (EDHOC message_2, Fragment 3)   |
     | <---------------------------------------------------- |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
-    |   (EDHOC message_3,                                   |
-    |    Fragment 1: L,M bits set)                          |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
+    |   (EDHOC message_3, Fragment 1: L,M bits set)         |
     | ----------------------------------------------------> |
-    |                                         EAP-Request/  |
-    |                                   EAP-Type=EAP-EDHOC  |
-    | <---------------------------------------------------  |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
-    |   (EDHOC message_3,                                   |
-    |    Fragment 2: M bits set)                            |
+    |                                                       |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    | <---------------------------------------------------- |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
+    |   (EDHOC message_3, Fragment 2: M bit set)            |
     | ----------------------------------------------------> |
-    |                                         EAP-Request/  |
-    |                                   EAP-Type=EAP-EDHOC  |
-    | <---------------------------------------------------  |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
-    |   (EDHOC message_3,                                   |
-    |    Fragment 3)                                        |
+    |                                                       |
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    | <---------------------------------------------------- |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
+    |   (EDHOC message_3, Fragment 3)                       |
     | ----------------------------------------------------> |
-    |                                         EAP-Request/  |
-    |                                   EAP-Type=EAP-EDHOC  |
-    |                                    (EDHOC message_4)  |
-    | <---------------------------------------------------  |
-    |   EAP-Response/                                       |
-    |   EAP-Type=EAP-EDHOC                                  |
-    |  ---------------------------------------------------> |
-    |                                        EAP-Success    |
-    | <---------------------------------------------------  |
-    +                                                       +
+    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
+    |                                   (EDHOC message_4)   |
+    | <---------------------------------------------------- |
+    |                                                       |
+    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
+    | ----------------------------------------------------> |
+    |                                                       |
+    |                                         EAP-Success   |
+    | <---------------------------------------------------- |
+    |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #fragmentation-flow title="Fragmentation example of EAP-EDHOC Authentication" artwork-align="center"}
 
