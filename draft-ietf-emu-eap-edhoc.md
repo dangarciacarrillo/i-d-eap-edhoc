@@ -94,7 +94,7 @@ The EAP-EDHOC method will enable the integration of EDHOC in different applicati
 
 {::boilerplate bcp14-tagged}
 
-Readers are expected to be familiar with the terms and concepts described in EAP {{RFC3748}}  and OSCORE {{RFC8613}}.
+Readers are expected to be familiar with the terms and concepts described in EAP {{RFC3748}}  and EDHOC {{RFC9528}}.
 
 # Protocol Overview {#overview}
 
