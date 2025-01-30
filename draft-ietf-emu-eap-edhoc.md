@@ -17,6 +17,13 @@ pi: # can use array (if all yes) or hash here
   symrefs: yes
   tocdepth: 3
 
+venue:
+  group: "EAP Method Update"
+  type: "Working Group"
+  mail: emu@ietf.org
+  arch: https://mailarchive.ietf.org/arch/browse/emu/
+  github: "dangarciacarrillo/i-d-eap-edhoc"
+
 author:
 - name: Dan Garcia-Carrillo
   surname: Garcia-Carrillo
