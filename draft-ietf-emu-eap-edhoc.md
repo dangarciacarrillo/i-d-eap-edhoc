@@ -104,7 +104,6 @@ Readers are expected to be familiar with the terms and concepts described in EAP
 The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message.  
 In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.
 
-
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
 As a reminder of the EAP entities and their roles involved in the EAP exchange, we have the EAP peer, EAP authenticator and EAP server. The EAP authenticator is the entity initiating the EAP authentication. The EAP peer is the entity that responds to the EAP authenticator. The EAP server is the entity that determines the EAP authentication method to be used. If the EAP server is not located on a backend authentication server, the EAP server is part of the EAP authenticator. For simplicity, we will show in the Figures with flows of operation only the EAP peer and EAP server.
@@ -227,7 +226,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message1-reject title="EAP-EDHOC Server rejection of message_1" artwork-align="center"}
+{: #message1-reject title="EAP-EDHOC Server Rejection of message_1" artwork-align="center"}
 
 {{message2-reject}} shows an example message flow where the EAP-EDHOC server authentication is unsuccessful and the EAP-EDHOC peer sends an EDHOC error message.
 
@@ -262,7 +261,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message2-reject title="EAP-EDHOC Peer rejection of message_2" artwork-align="center"}
+{: #message2-reject title="EAP-EDHOC Peer Rejection of message_2" artwork-align="center"}
 
 {{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server, and the server sends an EDHOC error message.
 
@@ -305,7 +304,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
+{: #message3-reject title="EAP-EDHOC Server Rejection of message_3" artwork-align="center"}
 
 
 {{message4-reject}} shows an example message flow where the EAP-EDHOC server
@@ -351,7 +350,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message4-reject title="EAP-EDHOC Peer rejection of message_4" artwork-align="center"}
+{: #message4-reject title="EAP-EDHOC Peer Rejection of message_4" artwork-align="center"}
 
 
 ### Identity
@@ -502,7 +501,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #fragmentation-flow title="Fragmentation example of EAP-EDHOC Authentication" artwork-align="center"}
+{: #fragmentation-flow title="Fragmentation Example of EAP-EDHOC Authentication" artwork-align="center"}
 
 
 ## Identity Verification {#identity-verification}
