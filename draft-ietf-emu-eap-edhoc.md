@@ -31,31 +31,22 @@ venue:
 
 author:
 - name: Dan Garcia-Carrillo
-  surname: Garcia-Carrillo
   org: University of Oviedo
-  abbrev: University of Oviedo
   street: Gijon, Asturias  33203
   country: Spain
   email: garciadan@uniovi.es
 - name: Rafael Marin-Lopez
-  surname: Marin-Lopez
   org: University of Murcia
-  abbrev: University of Murcia
   street: Murcia  30100
   country: Spain
   email: rafa@um.es
 - name: Göran Selander
-  surname: Selander
   org: Ericsson
-  abbrev: Ericsson
   street: SE-164 80 Stockholm
   country: Sweden
   email: goran.selander@ericsson.com
-- name: John Preuß Mattsson
-  initials: J
-  surname: Preuß Mattsson
+- name: John | Preuß Mattsson
   org: Ericsson
-  abbrev: Ericsson
   street: SE-164 80 Stockholm
   country: Sweden
   email: john.mattsson@ericsson.com
