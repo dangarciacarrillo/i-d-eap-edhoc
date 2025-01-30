@@ -190,7 +190,7 @@ This method does not provide other mitigation against denial-of-service than EAP
 
 
 
-{{message1-reject}}, {{message2-reject}}, and {{message3-reject}} illustrate message flows in several cases where the EAP-EDHOC peer or EAP-EDHOC server sends an EDHOC error message.
+{{message1-reject}}, {{message2-reject}}, {{message3-reject}}, and {{message4-reject}} illustrate message flows in several cases where the EAP-EDHOC peer or EAP-EDHOC server sends an EDHOC error message.
 
 {{message1-reject}} shows an example message flow where the EAP-EDHOC server rejects message_1 with an EDHOC error message.
 
@@ -298,7 +298,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 {: #message3-reject title="EAP-EDHOC Server rejection of message_3" artwork-align="center"}
 
 
-{{message3-reject}} shows an example message flow where the EAP-EDHOC server
+{{message4-reject}} shows an example message flow where the EAP-EDHOC server
    sends the EDHOC message_4 to the EAP peer, but the protected success indication
    fails, and the peer sends an EDHOC error message.
 
@@ -420,7 +420,7 @@ Similarly, when the EAP-EDHOC server receives an EAP-Response with the M
    Response.
 
    In the case where the EAP-EDHOC mutual authentication is successful,
-   and fragmentation is required, the conversation will appear as
+   and fragmentation is required, the conversation, illustrated in {{fragmentation-flow}} will appear as
    follows:
 
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -491,7 +491,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------  |
     +                                                       +
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: title="Fragmentation example of EAP-EDHOC Authentication" artwork-align="center"}
+{: #fragmentation-flow title="Fragmentation example of EAP-EDHOC Authentication" artwork-align="center"}
 
 
 ## Identity Verification {#identity-verification}
@@ -760,6 +760,8 @@ Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 {: numbered="no"}
 
 The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Francisco Lopez Gomez for his work on the implementation of EAP-EDHOC.
+
+We also want to thank Marco Tiloca for his review.
 
 This work has be possible partially by grant PID2020-112675RB-C44 funded by MCIN/AEI/10.13039/5011000011033.
 
