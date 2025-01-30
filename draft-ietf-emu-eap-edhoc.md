@@ -557,156 +557,95 @@ been sent or received. Implementations following {{RFC4137}} can set the eapKeyA
 
 # Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
 
-
 ## EAP-EDHOC Request Packet
 
-   A summary of the EAP-EDHOC Request packet format is shown below.  The
-   fields are transmitted from left to right.
+A summary of the EAP-EDHOC Request packet format is shown below. The fields are transmitted from left to right.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-   0                   1                   2                   3
-   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    0                   1                   2                   3   
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |     Code      |   Identifier  |            Length             |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |     Flags     |      EDHOC Message Length
+   |     Type      |  R  |S|M|  L  |      EDHOC Message Length      
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |   EDHOC Message Length        |       EDHOC Data...
+   |     EDHOC Message Length      |         EDHOC Data...          
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Code
+Code:
+: 1
 
-      1
+Identifier:
+: The Identifier field is one octet and aids in matching responses with requests. The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response.
 
-  Identifier
+Length:
+: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields.  Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
-      The Identifier field is one octet and aids in matching responses
-      with requests.  The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response.
+Type:
+: TBD1 -- EAP-EDHOC
 
-   Length
+R:
+: Implementations of this specification MUST set the R bits (reserved) to zero and MUST ignore them on reception.
 
-      The Length field is two octets and indicates the length of the EAP
-      packet including the Code, Identifier, Length, Type, and Data
-      fields.  Octets outside the range of the Length field should be
-      treated as Data Link Layer padding and MUST be ignored on
-      reception.
+S:
+: The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message. This differentiates the EAP-EDHOC Start message from a fragment acknowledgement.
 
-   Type
+M:
+: The M bit (more fragments) is set on all but the last fragment.  
 
-      TBD1 -- EAP-EDHOC
+L:
+: The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
 
-   Flags
+EDHOC Message Length:
+: The EDHOC Message Length field can have a size of one to four octets and is  present only if the L bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented.
 
-     0 1 2 3 4 5 6 7 8
-     +-+-+-+-+-+-+-+-+
-     |R R R S M L L L|
-     +-+-+-+-+-+-+-+-+
-
-     R = Reserved
-     S = EAP-EDHOC start
-     M = More fragments
-     L = Length of EDHOC Message Length
-
-      Implementations of this specification MUST set the reserved bits to zero and 
-      MUST ignore them on reception.
-
-      The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message.  This
-      differentiates the EAP-EDHOC Start message from a fragment
-      acknowledgement.  
-
-      The M bit (more fragments) is set on all but the last fragment.  
-
-      The three L bits is the binary encoding of the size of the EDHOC Message Length, 
-      in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field 
-      is not present. If the first two L bits are set to 0, and the final L bit of the 
-      flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and 
-      so on.  
-  
-
-
-   EDHOC Message Length
-
-      The EDHOC Message Length field can have a size of one to four octets and is 
-      present only if the L bits represent a value greater than 0.  This field provides 
-      the total length of the EDHOC message that is being fragmented.
-
-   EDHOC data
-
-      The EDHOC data consists of the transported EDHOC message.
+EDHOC data:
+: The EDHOC data consists of the transported EDHOC message.
 
 ## EAP-EDHOC Response Packet
 
 A summary of the EAP-EDHOC Response packet format is shown below.
 The fields are transmitted from left to right.
 
-~~~~~~~~~~~~~~~~~~~~~~~
-   0                   1                   2                   3
-   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+~~~~~~~~~~~~~~~~~~~~~~
+    0                   1                   2                   3   
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |     Code      |   Identifier  |            Length             |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |     Flags     |      EDHOC Message Length
+   |     Type      |   R   |M|  L  |      EDHOC Message Length      
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |   EDHOC Message Length        |       EDHOC Data...
+   |     EDHOC Message Length      |         EDHOC Data...          
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-   Code
+Code:
+: 2
 
-      2
+Identifier:
+: The Identifier field is one octet and MUST match the Identifier field from the corresponding request.
 
-   Identifier
+Length:
+: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
-      The Identifier field is one octet and MUST match the Identifier
-      field from the corresponding request.
+Type:
+: TBD1 -- EAP-EDHOC
 
-   Length
+R:
+: Implementations of this specification MUST set the R bits (reserved) to zero and MUST ignore them on reception.
 
-      The Length field is two octets and indicates the length of the EAP
-      packet including the Code, Identifier, Length, Type, and Data
-      fields.  Octets outside the range of the Length field should be
-      treated as Data Link Layer padding and MUST be ignored on
-      reception.
+M:
+: The M bit (more fragments) is set on all but the last fragment.  
 
-   Type
+L:
+: The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
 
-      TBD1 -- EAP-EDHOC
+EDHOC Message Length:
+: The EDHOC Message Length field can have a size of one to four octets and is  present only if the L bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented.
 
- Flags
-
-
-     0 1 2 3 4 5 6 7 8
-     +-+-+-+-+-+-+-+-+
-     |R R R R M L L L|
-     +-+-+-+-+-+-+-+-+
-
-     R = Reserved
-     M = More fragments
-     L = Length of EDHOC Message Length
-
-      Implementations of this specification MUST set the reserved bits
-      to zero and MUST ignore them on reception.
-
-      The M bit (more fragments) is set on all but the last fragment.
-
-      The three L bits are the binary encoding of the size of the EDHOC Message Length, 
-      in the range of 1 byte to 4 bytes. All three bits set to 0 indicate that the field 
-      is not present. If the first two L bits are set to 0, and the final L bit of the 
-      flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and 
-      so on.  
-      
-
-   EDHOC Message Length
-
-      The EDHOC Message Length field can be one to four octets and is present only
-      if the L bit is set.  This field provides the total length of the
-      EDHOC message that is being fragmented.
-
-   EDHOC data
-
-      The EDHOC data consists of the transported EDHOC message.
-
+EDHOC data:
+: The EDHOC data consists of the transported EDHOC message.
 
 # IANA Considerations {#iana}
 
