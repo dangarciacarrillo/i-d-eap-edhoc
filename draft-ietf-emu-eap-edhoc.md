@@ -54,25 +54,23 @@ author:
 
 normative:
 
-   RFC9528:
    RFC2119:
    RFC3748:
    RFC4137:
    RFC7542:
    RFC8174:
    RFC9190:
+   RFC9528:
 
 informative:
 
-  I-D.ietf-core-oscore-edhoc:
   RFC7252:
   RFC7593:
-  RFC9052:
-  RFC9053:
   RFC8613:
   RFC8949:
-  
-
+  RFC9052:
+  RFC9053:
+  RFC9668:
 
 --- abstract
 
@@ -119,7 +117,7 @@ EAP-EDHOC authentication credentials can be of any type supported by COSE and be
 
 EAP-EDHOC provides forward secrecy, by means of the ephemeral Diffie-Hellman public keys exchanged in message_1 and message_2.
 
-The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{I-D.ietf-core-oscore-edhoc}} is not supported in this EAP method.
+The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{RFC9668}} is not supported in this EAP method.
 
 {{message-flow}} shows an example message flow for a successful execution of EAP-EDHOC.
 
