@@ -599,20 +599,20 @@ Except for MSK and EMSK, derived keys are not exported.
 
 Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 
-  1. Mutual authentication:
-    The initiator and responder authenticate each other through the EDHOC exchange.    
+1. Mutual authentication:
+The initiator and responder authenticate each other through the EDHOC exchange.    
 
-  2. Forward secrecy:
-    Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
+2. Forward secrecy:
+Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
 
-  3. Identity protection:
-    EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its message_1 to the same address.
+3. Identity protection:
+EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its message_1 to the same address.
     
-  4. Cipher suite negotiation:
-    The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder.
+4. Cipher suite negotiation:
+The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder.
 
-  5. Integrity protection:
-    EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.
+5. Integrity protection:
+EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.
 
 --- back
 
