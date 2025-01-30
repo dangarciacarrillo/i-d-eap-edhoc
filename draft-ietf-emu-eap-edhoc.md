@@ -28,7 +28,7 @@ venue:
   mail: emu@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/emu/
   github: "dangarciacarrillo/i-d-eap-edhoc"
-
+ 
 author:
 - name: Dan Garcia-Carrillo
   org: University of Oviedo
@@ -123,7 +123,7 @@ The optimization combining the execution of EDHOC with the first subsequent OSCO
 
 {{message-flow}} shows an example message flow for a successful execution of EAP-EDHOC.
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                           EAP-Request/Identity        |
@@ -197,7 +197,7 @@ This method does not provide other mitigation against denial-of-service than EAP
 
 {{message1-reject}} shows an example message flow where the EAP-EDHOC server rejects message_1 with an EDHOC error message.
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                           EAP-Request/Identity        |
@@ -229,7 +229,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 {{message2-reject}} shows an example message flow where the EAP-EDHOC server authentication is unsuccessful and the EAP-EDHOC peer sends an EDHOC error message.
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                           EAP-Request/Identity        |
@@ -261,8 +261,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 {{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server, and the server sends an EDHOC error message.
 
 
-
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                           EAP-Request/Identity        |
@@ -305,7 +304,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
    sends the EDHOC message_4 to the EAP peer, but the protected success indication
    fails, and the peer sends an EDHOC error message.
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                           EAP-Request/Identity        |
@@ -426,7 +425,7 @@ Similarly, when the EAP-EDHOC server receives an EAP-Response with the M
    and fragmentation is required, the conversation, illustrated in {{fragmentation-flow}} will appear as
    follows:
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
     |                               EAP-Request/Identity    |
