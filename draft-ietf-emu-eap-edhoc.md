@@ -1,7 +1,12 @@
 ---
+v: 3
 title: Using the Extensible Authentication Protocol (EAP) with Ephemeral Diffie-Hellman over COSE (EDHOC)
 docname: draft-ietf-emu-eap-edhoc-02
 abbrev: EAP-EDHOC
+
+v3xml2rfc:
+  silence:
+  - Found SVG with width or height specified
 
 ipr: trust200902
 submissionType: IETF
