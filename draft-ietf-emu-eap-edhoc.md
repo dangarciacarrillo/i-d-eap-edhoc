@@ -385,14 +385,14 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | ----------------------------------------------------> |
     |                                                       |
     |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |         (EDHOC message_2, Fragment 1: L,M bits set)   |
+    |     (EDHOC message_2, Fragment 1, L and M bits set)   |
     | <---------------------------------------------------- |
     |                                                       |
     |   EAP-Response/EAP-Type=EAP-EDHOC                     |
     | ----------------------------------------------------> |
     |                                                       |
     |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |            (EDHOC message_2, Fragment 2: M bit set)   |
+    |            (EDHOC message_2, Fragment 2, M bit set)   |
     | <---------------------------------------------------- |
     |                                                       |
     |   EAP-Response/EAP-Type=EAP-EDHOC                     |
@@ -403,14 +403,14 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
     | <---------------------------------------------------- |
     |                                                       |
     |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_3, Fragment 1: L, M bits set)        |
+    |   (EDHOC message_3, Fragment 1, L and M bits set)     |
     | ----------------------------------------------------> |
     |                                                       |
     |                      EAP-Request/EAP-Type=EAP-EDHOC   |
     | <---------------------------------------------------- |
     |                                                       |
     |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_3, Fragment 2: M bit set)            |
+    |   (EDHOC message_3, Fragment 2, M bit set)            |
     | ----------------------------------------------------> |
     |                                                       |
     |                      EAP-Request/EAP-Type=EAP-EDHOC   |
