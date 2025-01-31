@@ -482,7 +482,7 @@ The keying material can be made available to lower layers and the EAP authentica
 
 # Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
 
-A summary of the EAP-EDHOC Request and Response packet format is shown in {{packet}}. The fields are transmitted from left to right. The packet format is highly inspired by the EAP-TLS packet format {{RFC5216}}.
+A summary of the EAP-EDHOC Request and Response packet format is shown in {{packet}}. The fields are transmitted from left to right. The packet format is inspired by the EAP-TLS packet format {{RFC5216}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
  0                   1                   2                   3   
