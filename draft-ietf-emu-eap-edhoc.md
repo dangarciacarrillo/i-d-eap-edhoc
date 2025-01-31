@@ -473,7 +473,7 @@ The keying material can be made available to lower layers and the EAP authentica
 
 # Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
 
-A summary of the EAP-EDHOC Request and Response packet format is shown below. The fields are transmitted from left to right.
+A summary of the EAP-EDHOC Request and Response packet format is shown in {{packet}}. The fields are transmitted from left to right.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
  0                   1                   2                   3   
@@ -486,7 +486,7 @@ A summary of the EAP-EDHOC Request and Response packet format is shown below. Th
 |     EDHOC Message Length      |         EDHOC Data...          
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #message-flow title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
+{: #packet title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
 
 ## EAP-EDHOC Request Packet
 
