@@ -557,7 +557,12 @@ EDHOC Data:
 
 ## EAP Type
 
-IANA has allocated EAP Type TBD1 for method EAP-EDHOC. The allocation has been updated to reference this document.
+IANA has registered the following new type in the "Method Types" registry under the group name "Extensible Authentication Protocol (EAP) Registry":
+
+~~~~~~~~~~~~~~~~~~~~~~~
+Value: TBD1
+Description: EAP-EDHOC
+~~~~~~~~~~~~~~~~~~~~~~~
 
 ## EDHOC Exporter Label Registry
 
