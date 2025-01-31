@@ -609,9 +609,7 @@ EDHOC integrity protects all message content using transcript hashes for key der
 # Acknowledgments
 {: numbered="no"}
 
-The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Francisco Lopez Gomez for his work on the implementation of EAP-EDHOC.
-
-We also want to thank Marco Tiloca for his review.
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Francisco Lopez Gomez for his work on the implementation of EAP-EDHOC and Marco Tiloca for his review.
 
 This work has be possible partially by grant PID2020-112675RB-C44 funded by MCIN/AEI/10.13039/5011000011033.
 
