@@ -482,7 +482,7 @@ The keying material can be made available to lower layers and the EAP authentica
 
 # Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
 
-A summary of the EAP-EDHOC Request and Response packet format is shown in {{packet}}. The fields are transmitted from left to right. The packet format is inspired by the EAP-TLS packet format {{RFC5216}}.
+A summary of the EAP-EDHOC packet format used for Requests and Responses is shown in {{packet}}. The fields are transmitted from left to right. The packet format is inspired by the EAP-TLS packet format {{RFC5216}}.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
  0                   1                   2                   3   
@@ -495,7 +495,7 @@ A summary of the EAP-EDHOC Request and Response packet format is shown in {{pack
 |                         EDHOC Data...                         ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #packet title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
+{: #packet title="EAP-EDHOC Packet Format" artwork-align="center"}
 
 ## EAP-EDHOC Request Packet
 
@@ -518,7 +518,7 @@ S:
 : The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message. This differentiates the EAP-EDHOC Start message from a fragment acknowledgement.
 
 M:
-: The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation it is set to zero.
+: The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
 : The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
@@ -551,7 +551,7 @@ S:
 : The S bit (EAP-EDHOC start) is set to zero.
 
 M:
-: The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation it is set to zero.
+: The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
 : The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
