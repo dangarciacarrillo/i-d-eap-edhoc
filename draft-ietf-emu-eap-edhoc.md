@@ -473,21 +473,22 @@ The keying material can be made available to lower layers and the EAP authentica
 
 # Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
 
+A summary of the EAP-EDHOC Request and Response packet format is shown below. The fields are transmitted from left to right.
+
+~~~~~~~~~~~~~~~~~~~~~~~
+ 0                   1                   2                   3   
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Code      |   Identifier  |            Length             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     Type      |  R  |S|M|  L  |      EDHOC Message Length      
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|     EDHOC Message Length      |         EDHOC Data...          
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~~~~~~~~~~~~~~~~~~~~
+{: #message-flow title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
+
 ## EAP-EDHOC Request Packet
-
-A summary of the EAP-EDHOC Request packet format is shown below. The fields are transmitted from left to right.
-
-~~~~~~~~~~~~~~~~~~~~~~~
-    0                   1                   2                   3   
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Code      |   Identifier  |            Length             |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |  R  |S|M|  L  |      EDHOC Message Length      
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     EDHOC Message Length      |         EDHOC Data...          
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-~~~~~~~~~~~~~~~~~~~~~~~
 
 Code:
 : 1
@@ -521,21 +522,6 @@ EDHOC Data:
 
 ## EAP-EDHOC Response Packet
 
-A summary of the EAP-EDHOC Response packet format is shown below.
-The fields are transmitted from left to right.
-
-~~~~~~~~~~~~~~~~~~~~~~
-    0                   1                   2                   3   
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Code      |   Identifier  |            Length             |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     Type      |   R   |M|  L  |      EDHOC Message Length      
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |     EDHOC Message Length      |         EDHOC Data...          
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-~~~~~~~~~~~~~~~~~~~~~~~
-
 Code:
 : 2
 
@@ -550,6 +536,10 @@ Type:
 
 R:
 : Implementations of this specification MUST set the R bits (reserved) to zero and MUST ignore them on reception.
+
+
+S:
+: The S bit (EAP-EDHOC start) is set to zero.
 
 M:
 : The M bit (more fragments) is set on all but the last fragment.  
