@@ -581,7 +581,7 @@ The allocations have been updated to reference this document.
 
 # Security Considerations {#security}
 
-The security considerations of EDHOC {{RFC9528}} apply to this document. The design of EAP-EDHOC follows closely EAP-TLS 1.3 {{RFC9190}} and so its security considerations also apply.
+The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to this document. Since the design of EAP-EDHOC closely follows EAP-TLS 1.3 {{RFC9190}}, many of its security considerations are also relevant.
 
 Except for MSK and EMSK, derived keys are not exported.
 
