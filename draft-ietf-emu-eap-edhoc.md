@@ -454,12 +454,12 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 The key schedule for EDHOC is described in Section 4 of {{RFC9528}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
-Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, the Type field has the value TBD1.
+Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Type        =  TBD1
-MSK         =  EDHOC_Exporter(TBD2 ,<< Type >>, 64)
-EMSK        =  EDHOC_Exporter(TBD3 ,<< Type >>, 64)
+MSK         =  EDHOC_Exporter(TBD2, << Type >>, 64)
+EMSK        =  EDHOC_Exporter(TBD3, << Type >>, 64)
 Method-Id   =  EDHOC_Exporter(TBD4, << Type >>, 64)
 Session-Id  =  Type || Method-Id
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -521,7 +521,7 @@ M:
 : The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
-: The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
+: The L field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0, and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
 
 EDHOC Message Length:
 : The EDHOC Message Length field can have a size of one to four octets and is present only if the L fild represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation it is not present.
@@ -554,7 +554,7 @@ M:
 : The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
-: The three L bits is the binary encoding of the size of the EDHOC Message Length, in the range 1 byte to 4 bytes. All three bits set to 0 indicates that the field is not present. If the first two L bits are set to 0, and the final L bit of the flag is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
+: The L field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0, and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
 
 EDHOC Message Length:
 : The EDHOC Message Length field can have a size of one to four octets and is  present only if the L bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation it is not present.
