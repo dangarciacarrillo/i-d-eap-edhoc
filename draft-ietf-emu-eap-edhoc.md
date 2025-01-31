@@ -72,6 +72,13 @@ informative:
   RFC9052:
   RFC9053:
   RFC9668:
+  Sec5G:
+    target: https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169
+    title: "Security architecture and procedures for 5G System"
+    author:
+      -
+        ins: 3GPP TS 33.501
+    date: January 2025
 
 --- abstract
 
@@ -87,7 +94,7 @@ The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a
 
 {::boilerplate bcp14-tagged}
 
-Readers are expected to be familiar with the terms and concepts described in EAP {{RFC3748}}  and EDHOC {{RFC9528}}.
+Readers are expected to be familiar with the terms and concepts described in EAP {{RFC3748}} and EDHOC {{RFC9528}}.
 
 # Protocol Overview {#overview}
 
@@ -99,11 +106,11 @@ After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in th
 
 As a reminder of the EAP entities and their roles involved in the EAP exchange, we have the EAP peer, EAP authenticator and EAP server. The EAP authenticator is the entity initiating the EAP authentication. The EAP peer is the entity that responds to the EAP authenticator. The EAP server is the entity that determines the EAP authentication method to be used. If the EAP server is not located on a backend authentication server, the EAP server is part of the EAP authenticator. For simplicity, we will show in the Figures with flows of operation only the EAP peer and EAP server.
 
+EAP-EDHOC provides (perfect) forward secrecy, by means of the ephemeral key exchange in message_1 and message_2. This ensures that the compromise of a session key or authentication key does not let an active attacker to compromise earlier sessions' keys. It also ensures that compromise of a session key or authentication key does not let an passive attacker to compromise future sessions' keys
+
 ### Authentication
 
 EAP-EDHOC authentication credentials can be of any type supported by COSE and be transported or referenced by EDHOC.
-
-EAP-EDHOC provides forward secrecy, by means of the ephemeral Diffie-Hellman public keys exchanged in message_1 and message_2.
 
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{RFC9668}} is not supported in this EAP method.
 
@@ -153,6 +160,7 @@ If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send
 
 If the EAP-EDHOC server authenticates successfully, and the EAP-EDHOC peer achieves key confirmation by successfully verifying EDHOC message_4, then the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing no data. Finally, the EAP-EDHOC server sends an EAP-Success.
 
+Note that the Identity request is optional {{RFC3748}} and might not be used in systems like 3GPP 5G {{Sec5G}} where the identity is transfered encrypted by other means before the EAP exchange.  And while the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory {{RFC3748}}} they do not contain any information and are might be encoded into other system specific messages {{Sec5G}}.
 
 ### Transport and Message Correlation
 
