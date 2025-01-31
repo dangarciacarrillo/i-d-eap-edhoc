@@ -481,9 +481,9 @@ A summary of the EAP-EDHOC Request and Response packet format is shown in {{pack
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     Code      |   Identifier  |            Length             |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|     Type      |  R  |S|M|  L  |      EDHOC Message Length      
+|     Type      |  R  |S|M|  L  |      EDHOC Message Length     ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|     EDHOC Message Length      |         EDHOC Data...          
+|                         EDHOC Data...                         ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #packet title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
