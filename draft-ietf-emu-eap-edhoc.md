@@ -448,7 +448,7 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 The key schedule for EDHOC is described in Section 4 of {{RFC9528}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
-Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The use of Type in the EDHOC_Exporter context allows the same same exporter labels to be used for other EAP methods based and EDHOC.
+Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Type        =  TBD1
@@ -474,9 +474,9 @@ The keying material can be derived after the EDHOC message_2 has been sent or re
 
 The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (message_4) has been sent or received. Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 
-# Detailed Description of the EAP-EDHOC Protocol {#detailed-description}
+# Detailed Description of the EAP-EDHOC Request and Response Protocol {#detailed-description}
 
-A summary of the EAP-EDHOC packet format used for Requests and Responses is shown in {{packet}}. The fields are transmitted from left to right. The packet format is inspired by the EAP-TLS packet format {{RFC5216}}.
+The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right. following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
  0                   1                   2                   3   
@@ -486,10 +486,10 @@ A summary of the EAP-EDHOC packet format used for Requests and Responses is show
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     Type      |  R  |S|M|  L  |      EDHOC Message Length     ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                         EDHOC Data...                         ~
+|                          EDHOC Data                           ~
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~~~~~~~~~~~~~~~~~~~~
-{: #packet title="EAP-EDHOC Packet Format" artwork-align="center"}
+{: #packet title="EAP-EDHOC Request and Response Packet Format" artwork-align="center"}
 
 ## EAP-EDHOC Request Packet
 
