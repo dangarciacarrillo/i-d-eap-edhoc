@@ -448,7 +448,7 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 The key schedule for EDHOC is described in Section 4 of {{RFC9528}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
-Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1.
+Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The use of Type in the EDHOC_Exporter context allows the same same exporter labels to be used for other EAP methods based and EDHOC.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Type        =  TBD1
