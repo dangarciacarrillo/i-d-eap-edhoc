@@ -145,8 +145,6 @@ The message processing in {{Section 5 of RFC9528}} states that certain data is m
 
 Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
 
-EAP-EDHOC provides (perfect) forward secrecy, by means of the ephemeral key exchange in message_1 and message_2. This ensures that the compromise of a session key or authentication key does not let an active attacker to compromise earlier sessions' keys. It also ensures that compromise of a session key or authentication key does not let an passive attacker to compromise future sessions' keys
-
 ### Successful EAP-EDHOC Message Flow without Fragmentation
 
 EAP-EDHOC authentication credentials can be of any type supported by COSE and be transported or referenced by EDHOC.
@@ -640,7 +638,7 @@ Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 The initiator and responder authenticate each other through the EDHOC exchange.    
 
 2. Forward secrecy:
-Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
+The ephemeral Diffie-Hellman key exchange ensures that the compromise of a session key or an authentication key does not let an active attacker compromise earlier sessions' keys. It also ensures that a compromise of a session key or authentication key does not let a passive attacker compromise future sessions' keys.
 
 3. Identity protection:
 EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its message_1 to the same address.
