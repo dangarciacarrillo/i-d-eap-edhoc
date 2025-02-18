@@ -67,11 +67,16 @@ informative:
   RFC5216:
   RFC7252:
   RFC7593:
+  RFC8392:
+  RFC8446:
   RFC8613:
   RFC8949:
   RFC9052:
   RFC9053:
   RFC9668:
+  I-D.ietf-lake-edhoc-psk:
+  I-D.ietf-cose-cbor-encoded-cert:
+  I-D.ietf-lake-app-profiles:
   Sec5G:
     target: https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169
     title: "Security architecture and procedures for 5G System"
@@ -82,13 +87,40 @@ informative:
 
 --- abstract
 
-The Extensible Authentication Protocol (EAP), defined in RFC 3748, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, based on Ephemeral Diffie-Hellman Over COSE (EDHOC). EDHOC provides a lightweight authenticated Diffie-Hellman key exchange with ephemeral keys, using COSE to provide security services efficiently encoded in CBOR. This document also provides guidance on authentication and authorization for EAP-EDHOC.
+The Extensible Authentication Protocol (EAP), defined in RFC 3748, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, based on Ephemeral Diffie-Hellman Over COSE (EDHOC). EDHOC is a lightweight security handshake protocol, enabling authentication and establishment of shared secret keys suitable in constrained settings. This document also provides guidance on authentication and authorization for EAP-EDHOC.
 
 --- middle
 
 # Introduction
 
-The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, which uses COSE-defined credential-based mutual authentication, utilizing the cipher suite negotiation and the establishment of shared secret keying material provided by Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}}. EDHOC is a very compact and lightweight authenticated key exchange protocol designed for highly constrained settings. The main objective for EDHOC is to be a matching security handshake protocol to OSCORE {{RFC8613}}, i.e., to provide authentication and session key establishment for IoT use cases, such as those built on CoAP {{RFC7252}} involving 'things' with embedded microcontrollers, sensors, and actuators. EDHOC reuses the same lightweight primitives as OSCORE, i.e., CBOR {{RFC8949}} and COSE {{RFC9052}} {{RFC9053}}, and specifies the use of CoAP but is not bound to a particular transport. The EAP-EDHOC method will enable the integration of EDHOC in different applications and use cases using the EAP framework.
+The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, which is based on the lightweight security handshake protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) {{RFC9528}}.
+
+EAP-EDHOC is similar to EAP-TLS 1.3 {{RFC9190}}, since EDHOC is based on a similar security protocol design as the TLS 1.3 handshake {{RFC8446}}. However, EDHOC has been optimized for highly constrained settings, for example involving wirelessly connected battery powered 'things' with embedded microcontrollers, sensors, and actuators. An overview of EDHOC is given in {{edhoc-overview}}.
+
+ The EAP-EDHOC method enables the integration of EDHOC into different applications and use cases using the EAP framework.
+
+## EDHOC Overview {#edhoc-overview}
+
+Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral Diffie-Hellman key exchange, including mutual authentication and establishment of shared secret keying material, see {{RFC9528}}.
+
+EDHOC provides state-of-the-art security design at very low message overhead, targeting low complexity implementations and allowing extensibility. The security of EDHOC has been thoroughly analysed, some references are provided in {{Section 9.1 of RFC9528}}.
+
+The main features of EDHOC are:
+
+* Support for different authentication methods and credentials. The authentication methods includes (mixed) signatures and static Diffie-Hellman keys {{RFC9528}}, and pre-shared keys {{I-D.ietf-lake-edhoc-psk}}. A large and extensible variety of authentication credentials is supported, including public key certificates such as X.509 and C509 {{I-D.ietf-cose-cbor-encoded-cert}}, CBOR Web Tokens and CWT Claims Sets {{RFC8392}}.
+
+* A standardized and extensible format for identification of credentials, using COSE header parameters {{RFC9052}}, supporting credential transport by value or by reference, enabling very compact representations.
+
+* Crypto agility and secure ciphersuite negotiation, with predefined compactly represented ciphersuites and support for extensibility using the COSE algorithms registry {{RFC9053}}.
+
+* Selection of connection identifiers identifying a connection for which keys are agreed.
+
+* Support for integration of external security applications into EDHOC by transporting External Authorization Data (EAD) included in and protected as EDHOC messages.
+
+A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile including method, ciphersuite,  etc. More details are provided in  {{I-D.ietf-lake-app-profiles}}.
+
+EDHOC messages makes use of lightweight primitives, specifically CBOR {{RFC8949}} and COSE {{RFC9052}} {{RFC9053}} for efficient encoding and security services in constrained devices. EDHOC is optimized for use of with CoAP {{RFC7252}} and OSCORE {{RFC8613}} to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.
+
 
 # Conventions and Definitions
 
