@@ -77,6 +77,7 @@ informative:
   I-D.ietf-lake-edhoc-psk:
   I-D.ietf-cose-cbor-encoded-cert:
   I-D.ietf-lake-app-profiles:
+  I-D.ietf-lake-edhoc-impl-cons:
   Sec5G:
     target: https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169
     title: "Security architecture and procedures for 5G System"
@@ -132,11 +133,17 @@ Readers are expected to be familiar with the terms and concepts described in EAP
 
 ## Overview of the EAP-EDHOC Conversation
 
+As a reminder of the EAP entities and their roles involved in the EAP exchange, we have the EAP peer, EAP authenticator and EAP server. The EAP authenticator is the entity initiating the EAP authentication. The EAP peer is the entity that responds to the EAP authenticator. The EAP server is the entity that determines the EAP authentication method to be used. If the EAP server is not located on a backend authentication server, the EAP server is part of the EAP authenticator. For simplicity, we will show in the Figures with flows of operation only the EAP peer and EAP server.
+
 The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
-As a reminder of the EAP entities and their roles involved in the EAP exchange, we have the EAP peer, EAP authenticator and EAP server. The EAP authenticator is the entity initiating the EAP authentication. The EAP peer is the entity that responds to the EAP authenticator. The EAP server is the entity that determines the EAP authentication method to be used. If the EAP server is not located on a backend authentication server, the EAP server is part of the EAP authenticator. For simplicity, we will show in the Figures with flows of operation only the EAP peer and EAP server.
+The message processing in {{Section 5 of RFC9528}} states that certain data is made available to the application, which may need to be reconsidered for EAP-EDHOC.
+
+* EAD items may need to be processed by the application before continuing the protocol. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
+
+Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
 
 EAP-EDHOC provides (perfect) forward secrecy, by means of the ephemeral key exchange in message_1 and message_2. This ensures that the compromise of a session key or authentication key does not let an active attacker to compromise earlier sessions' keys. It also ensures that compromise of a session key or authentication key does not let an passive attacker to compromise future sessions' keys
 
