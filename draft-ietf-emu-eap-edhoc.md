@@ -290,6 +290,8 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 {{message3-reject}} shows an example message flow where the EAP-EDHOC server authenticates to the EAP-EDHOC peer successfully, but the EAP-EDHOC peer fails to authenticate to the EAP-EDHOC server, and the server sends an EDHOC error message.
 
+Note that the EDHOC error message may not be omitted. For example with EDHOC ERR_CODE 3 "Unknown credential referenced" it is indicated that the EDHOC peer should, for the next EDHOC session, try another credential identifier supported according to the application profile.
+
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
