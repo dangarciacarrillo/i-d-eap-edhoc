@@ -139,9 +139,7 @@ The EDHOC protocol running between an Initiator and a Responder consists of thre
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
-The message processing in {{Section 5 of RFC9528}} states that certain data is made available to the application, which may need to be reconsidered for EAP-EDHOC.
-
-* EAD items may need to be processed by the application before continuing the protocol. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
+The message processing in {{Section 5 of RFC9528}} states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to further this data to complete the protocol. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
 
 Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
 
