@@ -78,6 +78,7 @@ informative:
   RFC9052:
   RFC9053:
   RFC9668:
+  RFC9360:
   I-D.ietf-lake-edhoc-psk:
   I-D.ietf-cose-cbor-encoded-cert:
   I-D.ietf-lake-app-profiles:
@@ -487,7 +488,7 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 ## Key Hierarchy
 
-The key schedule for EDHOC is described in Section 4 of {{RFC9528}}. The Key_Material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
+The key derivation for EDHOC is described in Section 4 of {{RFC9528}}. The key material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
 Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.
 
@@ -632,26 +633,95 @@ The allocations have been updated to reference this document.
 
 The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to this document. Since the design of EAP-EDHOC closely follows EAP-TLS 1.3 {{RFC9190}}, many of its security considerations are also relevant.
 
-Except for MSK and EMSK, derived keys are not exported.
 
 ## Security Claims
 
-Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
+### EAP Security Claims
 
-1. Mutual authentication:
-The initiator and responder authenticate each other through the EDHOC exchange.
+EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
+EAP-EDHOC security claims are described next.
 
-2. Forward secrecy:
-The ephemeral Diffie-Hellman key exchange ensures that the compromise of a session key or an authentication key does not let an active attacker compromise earlier sessions' keys. It also ensures that a compromise of a session key or authentication key does not let a passive attacker compromise future sessions' keys.
+| Claim                     | |
+|Auth. principle:           | Certificates, CWTs (1) |
+|Ciphersuite negotiation:   | Yes (2)|
+|Mutual authentication:     | Yes (3)|
+|Integrity protection:      | Yes (4)|
+|Replay protection:         | Yes (5)|
+|Confidentiality:           | Yes (6)|
+|Key derivation:            | Yes (7)|
+|Key strength:              | The specified cryptosuites provide key strength of at least 128 bits.|
+|Dictionary attack prot.:  | Yes (8)|
+|Fast reconnect:           | No |
+|Crypt. binding:           | N/A  |
+|Session independence:     | Yes (9)|
+|Fragmentation:            | Yes |
+|Channel binding:          | No |
 
-3. Identity protection:
-EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its message_1 to the same address.
 
-4. Cipher suite negotiation:
-The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder.
+- (1) Authentication principle.  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1) and CCSs ({{RFC8392}} Section 3.5.3.1)
 
-5. Integrity protection:
-EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.
+
+- (2) Cipher suite negotiation:
+  The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.
+
+- (3) Mutual authentication:
+  The initiator and responder authenticate each other through the EDHOC exchange.
+
+- (4) Integrity protection:
+  EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.
+
+- (5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
+
+- (6) Confidentiality. It is required that the encryption of message_3 provides confidentiality against active attackers and EDHOC message_4 relies on the use of authenticated encryption.
+
+- (7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in {{Key_Hierarchy}}.
+
+- (8) Dictionary attack protection. EAP-EDHOC provides Dictionary attack protection.
+
+- (9) Session independence. EDHOC generates computationally independent keys derived from the ECDH shared secret.
+
+
+### Additional Security Claims
+
+- (10) Cryptographic strength and Forward secrecy:
+  Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
+
+- (11) Identity protection:
+  EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.
+
+## Peer and Server Identities
+Same considerations as EAP-TLS1.3 Section 5.2 {{RFC9190}} apply here.
+
+
+## Certificate Validation
+Same considerations as EAP-TLS1.3 Section 5.3 {{RFC9190}} apply here.
+
+## Certificate Revocation
+Same considerations as EAP-TLS1.3 Section 5.4 {{RFC9190}} apply here.
+
+## Packet Modification Attacks
+EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change is detected by means of the transcript hashes integrity verification.
+
+## Authorization
+Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, where EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
+
+When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for authenticated peers. Authorization and accounting MUST be based on authenticated information such as information in the certificate. The requirements for Network Access Identifiers (NAIs) specified in Section 4 of {{RFC7542}} apply and MUST be followed.
+
+
+## Resumption
+Not implemented
+
+
+## Privacy Considerations
+Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of {{RFC9190}} regarding anonymous NAIs also applies.
+
+
+## Pervasive Monitoring
+Considerations in  Section 9.1. of {{RFC9528}} about pervasive monitoring apply here.
+
+## Cross-Protocol Attacks
+This in TLS1.3 is applied in the context of resumption. Does not apply here.
+
 
 --- back
 
