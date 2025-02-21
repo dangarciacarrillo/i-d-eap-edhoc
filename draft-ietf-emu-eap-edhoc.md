@@ -28,7 +28,7 @@ venue:
   mail: emu@ietf.org
   arch: https://mailarchive.ietf.org/arch/browse/emu/
   github: "dangarciacarrillo/i-d-eap-edhoc"
- 
+
 author:
 - name: Dan Garcia-Carrillo
   org: University of Oviedo
@@ -203,7 +203,7 @@ Note that the Identity request is optional {{RFC3748}} and might not be used in 
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, {{RFC9528}} provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. All these requirements are fulfilled by the EAP protocol, EAP method, or EAP lower layer, as specified in {{RFC3748}}. 
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, {{RFC9528}} provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. All these requirements are fulfilled by the EAP protocol, EAP method, or EAP lower layer, as specified in {{RFC3748}}.
 
 For message loss, this can be either fulfilled by the EAP layer, or the EAP lower layer, or both.
 
@@ -395,7 +395,7 @@ A node supporting EAP-EDHOC MUST NOT send its username (or any other permanent i
 
 EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
-To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). If the L bits are set, we are specifying that the message will be fragmented and the length of the message, which is in the EAP-EDHOC Message Length field. 
+To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). If the L bits are set, we are specifying that the message will be fragmented and the length of the message, which is in the EAP-EDHOC Message Length field.
 
 Implementations MUST NOT set the L bit in unfragmented messages, but they MUST accept unfragmented messages with and without the L bit set. Some EAP implementations and access networks may limit the number of EAP packet exchanges that can be handled. To avoid fragmentation, it is RECOMMENDED to keep the sizes of EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials small and the length of certificate chains short.
 
@@ -511,7 +511,7 @@ The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success re
 
 EDHOC error messages SHOULD be considered failure result indication, as defined in {{RFC3748}}. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure. EDHOC error messages are unprotected.
 
-The keying material can be derived after the EDHOC message_2 has been sent or received. Implementations following {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables. 
+The keying material can be derived after the EDHOC message_2 has been sent or received. Implementations following {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables.
 
 The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (message_4) has been sent or received. Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 
@@ -520,8 +520,8 @@ The keying material can be made available to lower layers and the EAP authentica
 The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right. following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
- 0                   1                   2                   3   
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |     Code      |   Identifier  |            Length             |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -634,19 +634,19 @@ The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to th
 
 Except for MSK and EMSK, derived keys are not exported.
 
-## Security Claims 
+## Security Claims
 
 Using EAP-EDHOC provides the security claims of EDHOC, which are described next.
 
 1. Mutual authentication:
-The initiator and responder authenticate each other through the EDHOC exchange.    
+The initiator and responder authenticate each other through the EDHOC exchange.
 
 2. Forward secrecy:
 The ephemeral Diffie-Hellman key exchange ensures that the compromise of a session key or an authentication key does not let an active attacker compromise earlier sessions' keys. It also ensures that a compromise of a session key or authentication key does not let a passive attacker compromise future sessions' keys.
 
 3. Identity protection:
 EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending its message_1 to the same address.
-    
+
 4. Cipher suite negotiation:
 The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder.
 
