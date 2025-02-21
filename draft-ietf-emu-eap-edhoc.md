@@ -1,7 +1,7 @@
 ---
 v: 3
 title: Using the Extensible Authentication Protocol (EAP) with Ephemeral Diffie-Hellman over COSE (EDHOC)
-docname: draft-ietf-emu-eap-edhoc-02
+docname: draft-ietf-emu-eap-edhoc-latest
 abbrev: EAP-EDHOC
 
 v3xml2rfc:
