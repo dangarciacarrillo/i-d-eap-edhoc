@@ -2,11 +2,11 @@
 
 This is the working area for the IETF [EMU Working Group](https://datatracker.ietf.org/group/emu/documents/) Internet-Draft, "Using the Extensible Authentication Protocol (EAP) with Ephemeral Diffie-Hellman over COSE (EDHOC)".
 
-* [Editor's Copy](https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.html)
+* [Editor's Copy HTML](https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.html)
+* [Editor's Copy Text](https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.txt)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-emu-eap-edhoc)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-emu-eap-edhoc)
 * [Compare Editor's Copy to Working Group Draft](https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.diff)
-
 
 ## Contributing
 
