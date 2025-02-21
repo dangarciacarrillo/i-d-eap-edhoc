@@ -3,3 +3,4 @@ lib/
 *.txt
 *.xml
 .targets.mk
+.DS_Store
