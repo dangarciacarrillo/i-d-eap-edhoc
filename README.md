@@ -5,7 +5,7 @@ This is the working area for the IETF [EMU Working Group](https://datatracker.ie
 * [Editor's Copy](https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-emu-eap-edhoc)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-emu-eap-edhoc)
-* [Compare Editor's Copy to Working Group Draft]([https://dangarciacarrillo.github.io/i-d-eap-edhoc/#go.draft-ietf-emu-eap-edhoc.diff](https://author-tools.ietf.org/iddiff?url1=https://tools.ietf.org/id/draft-ietf-emu-eap-edhoc.txt&url2=https://raw.githubusercontent.com/dangarciacarrillo/i-d-eap-edhoc/refs/heads/gh-pages/draft-ietf-emu-eap-edhoc.txt))
+* [Compare Editor's Copy to Working Group Draft](https://author-tools.ietf.org/iddiff?url1=https://tools.ietf.org/id/draft-ietf-emu-eap-edhoc.txt&url2=https://raw.githubusercontent.com/dangarciacarrillo/i-d-eap-edhoc/refs/heads/gh-pages/draft-ietf-emu-eap-edhoc.txt)
 
 
 ## Contributing
