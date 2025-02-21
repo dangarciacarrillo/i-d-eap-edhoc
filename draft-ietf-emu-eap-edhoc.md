@@ -10,8 +10,8 @@ v3xml2rfc:
 
 ipr: trust200902
 submissionType: IETF
-area: SEC
-workgroup: EMU Working Group
+area: ""
+workgroup: "EAP Method Update"
 cat: std
 consensus: true
 
@@ -24,9 +24,9 @@ pi: # can use array (if all yes) or hash here
 
 venue:
   group: "EAP Method Update"
-  type: "Working Group"
-  mail: emu@ietf.org
-  arch: https://mailarchive.ietf.org/arch/browse/emu/
+  type: ""
+  mail: "emu@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/emu"
   github: "dangarciacarrillo/i-d-eap-edhoc"
 
 author:
