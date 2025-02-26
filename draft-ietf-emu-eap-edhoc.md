@@ -632,7 +632,7 @@ The allocations have been updated to reference this document.
 
 ## EDHOC External Authorization Data Registry
 
-IANA has registered the following new labels in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
+IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD5
@@ -680,7 +680,7 @@ EAP-EDHOC security claims are described next.
 |Crypt. binding:           | N/A  |
 |Session independence:     | Yes (9)|
 |Fragmentation:            | Yes |
-|Channel binding:          | Yes (Section {{Channel_Binding}}: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)|
+|Channel binding:          | Yes ({{Channel_Binding}}: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)|
 
 
 - (1) Authentication principle:
