@@ -648,7 +648,7 @@ The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to th
 
 ### EAP Channel Binding {#Channel_Binding}
 
-EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in {{RFC6677}}. 
+EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in {{RFC6677}}.
 
 Section 6 in {{RFC6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
 
@@ -661,7 +661,7 @@ Accordingly, a new EAD item is defined to incorporate EAP channel binding inform
 * ead_label = TBD5
 * ead_value is a CBOR byte string.
 
-### EAP Security Claims 
+### EAP Security Claims
 
 EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
 EAP-EDHOC security claims are described next.
@@ -683,7 +683,7 @@ EAP-EDHOC security claims are described next.
 |Channel binding:          | Yes (Section {{Channel_Binding}}: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)|
 
 
-- (1) Authentication principle: 
+- (1) Authentication principle:
   EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1) and CCSs ({{RFC8392}} Section 3.5.3.1).
 
 - (2) Cipher suite negotiation:
