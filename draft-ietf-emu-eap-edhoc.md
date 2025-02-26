@@ -69,6 +69,7 @@ normative:
 informative:
 
   RFC5216:
+  RFC6677:
   RFC7252:
   RFC7593:
   RFC8392:
@@ -629,6 +630,15 @@ Description: Method-Id of EAP method EAP-EDHOC
 ~~~~~~~~~~~~~~~~~~~~~~~
 The allocations have been updated to reference this document.
 
+## EDHOC External Authorization Data Registry
+
+IANA has registered the following new labels in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
+
+~~~~~~~~~~~~~~~~~~~~~~~
+Label: TBD5
+Description: EAP channel binding information
+~~~~~~~~~~~~~~~~~~~~~~~
+
 # Security Considerations {#security}
 
 The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to this document. Since the design of EAP-EDHOC closely follows EAP-TLS 1.3 {{RFC9190}}, many of its security considerations are also relevant.
@@ -636,7 +646,22 @@ The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to th
 
 ## Security Claims
 
-### EAP Security Claims
+### EAP Channel Binding {#Channel_Binding}
+
+EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in {{RFC 6677}}. 
+
+Section 6 in {{RFC 6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
+
+The channel binding protocol defined in {{RFC 6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively, are perfect candidates for this purpose.
+
+If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message, and the EAP server will conclude the exchange with an EAP-Failure message.
+
+Accordingly, a new EAD item is defined to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages:
+
+* ead_label = TBD5
+* ead_value is a CBOR byte string.
+
+### EAP Security Claims 
 
 EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
 EAP-EDHOC security claims are described next.
@@ -655,11 +680,11 @@ EAP-EDHOC security claims are described next.
 |Crypt. binding:           | N/A  |
 |Session independence:     | Yes (9)|
 |Fragmentation:            | Yes |
-|Channel binding:          | No |
+|Channel binding:          | Yes (Section {{Channel_Binding}}: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)|
 
 
-- (1) Authentication principle.  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1) and CCSs ({{RFC8392}} Section 3.5.3.1)
-
+- (1) Authentication principle: 
+  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1) and CCSs ({{RFC8392}} Section 3.5.3.1).
 
 - (2) Cipher suite negotiation:
   The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.
