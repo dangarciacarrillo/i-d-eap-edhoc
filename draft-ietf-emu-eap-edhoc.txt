@@ -900,7 +900,7 @@ Table of Contents
 
 5.3.  EDHOC External Authorization Data Registry
 
-   IANA has registered the following new labels in the "EDHOC External
+   IANA has registered the following new label in the "EDHOC External
    Authorization Data" registry under the group name "Ephemeral Diffie-
    Hellman Over COSE (EDHOC)":
 
@@ -955,49 +955,49 @@ Table of Contents
    EAP security claims are defined in Section 7.2.1 of [RFC3748].  EAP-
    EDHOC security claims are described next.
 
-       +==================+========================================+
-       | Claim            |                                        |
-       +==================+========================================+
-       | Auth. principle: | Certificates, CWTs (1)                 |
-       +------------------+----------------------------------------+
-       | Ciphersuite      | Yes (2)                                |
-       | negotiation:     |                                        |
-       +------------------+----------------------------------------+
-       | Mutual           | Yes (3)                                |
-       | authentication:  |                                        |
-       +------------------+----------------------------------------+
-       | Integrity        | Yes (4)                                |
-       | protection:      |                                        |
-       +------------------+----------------------------------------+
-       | Replay           | Yes (5)                                |
-       | protection:      |                                        |
-       +------------------+----------------------------------------+
-       | Confidentiality: | Yes (6)                                |
-       +------------------+----------------------------------------+
-       | Key derivation:  | Yes (7)                                |
-       +------------------+----------------------------------------+
-       | Key strength:    | The specified cryptosuites provide key |
-       |                  | strength of at least 128 bits.         |
-       +------------------+----------------------------------------+
-       | Dictionary       | Yes (8)                                |
-       | attack prot.:    |                                        |
-       +------------------+----------------------------------------+
-       | Fast reconnect:  | No                                     |
-       +------------------+----------------------------------------+
-       | Crypt. binding:  | N/A                                    |
-       +------------------+----------------------------------------+
-       | Session          | Yes (9)                                |
-       | independence:    |                                        |
-       +------------------+----------------------------------------+
-       | Fragmentation:   | Yes                                    |
-       +------------------+----------------------------------------+
-       | Channel binding: | Yes (Section Section 6.1.1: EAD_3 and  |
-       |                  | EAD_4 can be used to convey integrity- |
-       |                  | protected channel properties, such as  |
-       |                  | network SSID or peer MAC address.)     |
-       +------------------+----------------------------------------+
+       +==================+=======================================+
+       | Claim            |                                       |
+       +==================+=======================================+
+       | Auth. principle: | Certificates, CWTs (1)                |
+       +------------------+---------------------------------------+
+       | Ciphersuite      | Yes (2)                               |
+       | negotiation:     |                                       |
+       +------------------+---------------------------------------+
+       | Mutual           | Yes (3)                               |
+       | authentication:  |                                       |
+       +------------------+---------------------------------------+
+       | Integrity        | Yes (4)                               |
+       | protection:      |                                       |
+       +------------------+---------------------------------------+
+       | Replay           | Yes (5)                               |
+       | protection:      |                                       |
+       +------------------+---------------------------------------+
+       | Confidentiality: | Yes (6)                               |
+       +------------------+---------------------------------------+
+       | Key derivation:  | Yes (7)                               |
+       +------------------+---------------------------------------+
+       | Key strength:    | The specified cryptosuites provide    |
+       |                  | key strength of at least 128 bits.    |
+       +------------------+---------------------------------------+
+       | Dictionary       | Yes (8)                               |
+       | attack prot.:    |                                       |
+       +------------------+---------------------------------------+
+       | Fast reconnect:  | No                                    |
+       +------------------+---------------------------------------+
+       | Crypt. binding:  | N/A                                   |
+       +------------------+---------------------------------------+
+       | Session          | Yes (9)                               |
+       | independence:    |                                       |
+       +------------------+---------------------------------------+
+       | Fragmentation:   | Yes                                   |
+       +------------------+---------------------------------------+
+       | Channel binding: | Yes (Section 6.1.1: EAD_3 and EAD_4   |
+       |                  | can be used to convey integrity-      |
+       |                  | protected channel properties, such as |
+       |                  | network SSID or peer MAC address.)    |
+       +------------------+---------------------------------------+
 
-                                  Table 1
+                                 Table 1
 
    *  (1) Authentication principle: EAP-EDHOC establishes a shared
       secret based on an authenticated ECDH key exchange.  The key
