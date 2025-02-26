@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 25 August 2025</td>
+<td class="center">Expires 30 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-21" class="published">21 February 2025</time>
+<time datetime="2025-02-26" class="published">26 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-25">25 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-30">30 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1234,6 +1234,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
                 <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-edhoc-exporter-label-regist" class="internal xref">EDHOC Exporter Label Registry</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-edhoc-external-authorizatio" class="internal xref">EDHOC External Authorization Data Registry</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
@@ -1243,10 +1246,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-security-claims" class="internal xref">Security Claims</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
-                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-eap-security-claims" class="internal xref">EAP Security Claims</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-eap-channel-binding" class="internal xref">EAP Channel Binding</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
-                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-additional-security-claims" class="internal xref">Additional Security Claims</a></p>
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-eap-security-claims" class="internal xref">EAP Security Claims</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.3">
+                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-additional-security-claims" class="internal xref">Additional Security Claims</a></p>
 </li>
                 </ul>
 </li>
@@ -2078,6 +2084,20 @@ Description: Method-Id of EAP method EAP-EDHOC
 <p id="section-5.2-5">The allocations have been updated to reference this document.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="edhoc-external-authorization-data-registry">
+<section id="section-5.3">
+        <h3 id="name-edhoc-external-authorizatio">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-edhoc-external-authorizatio" class="section-name selfRef">EDHOC External Authorization Data Registry</a>
+        </h3>
+<p id="section-5.3-1">IANA has registered the following new labels in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.3-2">
+<pre>
+Label: TBD5
+Description: EAP channel binding information
+</pre><a href="#section-5.3-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="security">
@@ -2091,13 +2111,33 @@ Description: Method-Id of EAP method EAP-EDHOC
         <h3 id="name-security-claims">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-security-claims" class="section-name selfRef">Security Claims</a>
         </h3>
-<div id="eap-security-claims">
+<div id="Channel_Binding">
 <section id="section-6.1.1">
-          <h4 id="name-eap-security-claims">
-<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-eap-security-claims" class="section-name selfRef">EAP Security Claims</a>
+          <h4 id="name-eap-channel-binding">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-eap-channel-binding" class="section-name selfRef">EAP Channel Binding</a>
           </h4>
-<p id="section-6.1.1-1">EAP security claims are defined in Section 7.2.1 of <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.
-EAP-EDHOC security claims are described next.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-1">EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span>.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-2">Section 6 in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-3">The channel binding protocol defined in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively, are perfect candidates for this purpose.<a href="#section-6.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-4">If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message, and the EAP server will conclude the exchange with an EAP-Failure message.<a href="#section-6.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-5">Accordingly, a new EAD item is defined to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages:<a href="#section-6.1.1-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.1-6.1">
+              <p id="section-6.1.1-6.1.1">ead_label = TBD5<a href="#section-6.1.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-6.2">
+              <p id="section-6.1.1-6.2.1">ead_value is a CBOR byte string.<a href="#section-6.1.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="eap-security-claims">
+<section id="section-6.1.2">
+          <h4 id="name-eap-security-claims">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-eap-security-claims" class="section-name selfRef">EAP Security Claims</a>
+          </h4>
+<p id="section-6.1.2-1">EAP security claims are defined in Section 7.2.1 of <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.
+EAP-EDHOC security claims are described next.<a href="#section-6.1.2-1" class="pilcrow">¶</a></p>
 <table class="center" id="table-1">
             <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
 <thead>
@@ -2161,57 +2201,58 @@ EAP-EDHOC security claims are described next.<a href="#section-6.1.1-1" class="p
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">Channel binding:</td>
-                <td class="text-left" rowspan="1" colspan="1">No</td>
+                <td class="text-left" rowspan="1" colspan="1">Yes (Section <a href="#Channel_Binding" class="auto internal xref">Section 6.1.1</a>: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)</td>
               </tr>
             </tbody>
           </table>
 <ul class="normal">
-<li class="normal" id="section-6.1.1-3.1">
-              <p id="section-6.1.1-3.1.1">(1) Authentication principle.  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>, C509 certificates, CWTs (<span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> Section 3.5.3.1) and CCSs (<span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> Section 3.5.3.1)<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.2-3.1">
+              <p id="section-6.1.2-3.1.1">(1) Authentication principle:
+EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. This include X.509 certificates <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>, C509 certificates, CWTs (<span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> Section 3.5.3.1) and CCSs (<span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> Section 3.5.3.1).<a href="#section-6.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.2">
-              <p id="section-6.1.1-3.2.1">(2) Cipher suite negotiation:
-The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.<a href="#section-6.1.1-3.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.2">
+              <p id="section-6.1.2-3.2.1">(2) Cipher suite negotiation:
+The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.<a href="#section-6.1.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.3">
-              <p id="section-6.1.1-3.3.1">(3) Mutual authentication:
-The initiator and responder authenticate each other through the EDHOC exchange.<a href="#section-6.1.1-3.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.3">
+              <p id="section-6.1.2-3.3.1">(3) Mutual authentication:
+The initiator and responder authenticate each other through the EDHOC exchange.<a href="#section-6.1.2-3.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.4">
-              <p id="section-6.1.1-3.4.1">(4) Integrity protection:
-EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.<a href="#section-6.1.1-3.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.4">
+              <p id="section-6.1.2-3.4.1">(4) Integrity protection:
+EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.<a href="#section-6.1.2-3.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.5">
-              <p id="section-6.1.1-3.5.1">(5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.<a href="#section-6.1.1-3.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.5">
+              <p id="section-6.1.2-3.5.1">(5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.<a href="#section-6.1.2-3.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.6">
-              <p id="section-6.1.1-3.6.1">(6) Confidentiality. It is required that the encryption of message_3 provides confidentiality against active attackers and EDHOC message_4 relies on the use of authenticated encryption.<a href="#section-6.1.1-3.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.6">
+              <p id="section-6.1.2-3.6.1">(6) Confidentiality. It is required that the encryption of message_3 provides confidentiality against active attackers and EDHOC message_4 relies on the use of authenticated encryption.<a href="#section-6.1.2-3.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.7">
-              <p id="section-6.1.1-3.7.1">(7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in <a href="#Key_Hierarchy" class="auto internal xref">Section 3.3</a>.<a href="#section-6.1.1-3.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.7">
+              <p id="section-6.1.2-3.7.1">(7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in <a href="#Key_Hierarchy" class="auto internal xref">Section 3.3</a>.<a href="#section-6.1.2-3.7.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.8">
-              <p id="section-6.1.1-3.8.1">(8) Dictionary attack protection. EAP-EDHOC provides Dictionary attack protection.<a href="#section-6.1.1-3.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.8">
+              <p id="section-6.1.2-3.8.1">(8) Dictionary attack protection. EAP-EDHOC provides Dictionary attack protection.<a href="#section-6.1.2-3.8.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.1-3.9">
-              <p id="section-6.1.1-3.9.1">(9) Session independence. EDHOC generates computationally independent keys derived from the ECDH shared secret.<a href="#section-6.1.1-3.9.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.2-3.9">
+              <p id="section-6.1.2-3.9.1">(9) Session independence. EDHOC generates computationally independent keys derived from the ECDH shared secret.<a href="#section-6.1.2-3.9.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="additional-security-claims">
-<section id="section-6.1.2">
+<section id="section-6.1.3">
           <h4 id="name-additional-security-claims">
-<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-additional-security-claims" class="section-name selfRef">Additional Security Claims</a>
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-additional-security-claims" class="section-name selfRef">Additional Security Claims</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-6.1.2-1.1">
-              <p id="section-6.1.2-1.1.1">(10) Cryptographic strength and Forward secrecy:
-Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1.3-1.1">
+              <p id="section-6.1.3-1.1.1">(10) Cryptographic strength and Forward secrecy:
+Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-6.1.2-1.2">
-              <p id="section-6.1.2-1.2.1">(11) Identity protection:
-EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.<a href="#section-6.1.2-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-6.1.3-1.2">
+              <p id="section-6.1.3-1.2.1">(11) Identity protection:
+EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.<a href="#section-6.1.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2360,6 +2401,10 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
 <dt id="RFC5216">[RFC5216]</dt>
         <dd>
 <span class="refAuthor">Simon, D.</span>, <span class="refAuthor">Aboba, B.</span>, and <span class="refAuthor">R. Hurst</span>, <span class="refTitle">"The EAP-TLS Authentication Protocol"</span>, <span class="seriesInfo">RFC 5216</span>, <span class="seriesInfo">DOI 10.17487/RFC5216</span>, <time datetime="2008-03" class="refDate">March 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5216">https://www.rfc-editor.org/rfc/rfc5216</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6677">[RFC6677]</dt>
+        <dd>
+<span class="refAuthor">Hartman, S., Ed.</span>, <span class="refAuthor">Clancy, T.</span>, and <span class="refAuthor">K. Hoeper</span>, <span class="refTitle">"Channel-Binding Support for Extensible Authentication Protocol (EAP) Methods"</span>, <span class="seriesInfo">RFC 6677</span>, <span class="seriesInfo">DOI 10.17487/RFC6677</span>, <time datetime="2012-07" class="refDate">July 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6677">https://www.rfc-editor.org/rfc/rfc6677</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7252">[RFC7252]</dt>
         <dd>

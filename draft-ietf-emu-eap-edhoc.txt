@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 25 August 2025                             University of Murcia
+Expires: 30 August 2025                             University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                        21 February 2025
+                                                        26 February 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 August 2025.
+   This Internet-Draft will expire on 30 August 2025.
 
 Copyright Notice
 
@@ -99,10 +99,12 @@ Table of Contents
    5.  IANA Considerations
      5.1.  EAP Type
      5.2.  EDHOC Exporter Label Registry
+     5.3.  EDHOC External Authorization Data Registry
    6.  Security Considerations
      6.1.  Security Claims
-       6.1.1.  EAP Security Claims
-       6.1.2.  Additional Security Claims
+       6.1.1.  EAP Channel Binding
+       6.1.2.  EAP Security Claims
+       6.1.3.  Additional Security Claims
      6.2.  Peer and Server Identities
      6.3.  Certificate Validation
      6.4.  Certificate Revocation
@@ -896,6 +898,15 @@ Table of Contents
 
    The allocations have been updated to reference this document.
 
+5.3.  EDHOC External Authorization Data Registry
+
+   IANA has registered the following new labels in the "EDHOC External
+   Authorization Data" registry under the group name "Ephemeral Diffie-
+   Hellman Over COSE (EDHOC)":
+
+   Label: TBD5
+   Description: EAP channel binding information
+
 6.  Security Considerations
 
    The security considerations of EAP [RFC3748] and EDHOC [RFC9528]
@@ -905,53 +916,96 @@ Table of Contents
 
 6.1.  Security Claims
 
-6.1.1.  EAP Security Claims
+6.1.1.  EAP Channel Binding
+
+   EAP-EDHOC allows the secure exchange of information between the
+   endpoints of the authentication process (i.e., the EAP peer and the
+   EAP server) using protected data fields.  These fields can be used to
+   exchange EAP channel binding information, as defined in [RFC6677].
+
+   Section 6 in [RFC6677] outlines requirements for components
+   implementing channel binding information, all of which are satisfied
+   by EAP-EDHOC, including confidentiality and integrity protection.
+   Additionally, EAP-EDHOC supports fragmentation, allowing the
+   inclusion of additional information at the method level without
+   issues.
+
+   The channel binding protocol defined in [RFC6677] must be transported
+   after keying material has been derived between the endpoints in the
+   EAP communication and before the peer is exposed to potential adverse
+   effects from joining an adversarial network.  Therefore, the EAD_3
+   and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4,
+   respectively, are perfect candidates for this purpose.
+
+   If the server detects a consistency error in the channel binding
+   information contained in EAD_3, it will send a protected indication
+   of failed consistency in EAD_4.  Subsequently, the EAP peer will
+   respond with the standard empty EAP-EDHOC message, and the EAP server
+   will conclude the exchange with an EAP-Failure message.
+
+   Accordingly, a new EAD item is defined to incorporate EAP channel
+   binding information into the EAD fields of the EAP-EDHOC messages:
+
+   *  ead_label = TBD5
+
+   *  ead_value is a CBOR byte string.
+
+6.1.2.  EAP Security Claims
 
    EAP security claims are defined in Section 7.2.1 of [RFC3748].  EAP-
    EDHOC security claims are described next.
 
-     +==========================+====================================+
-     | Claim                    |                                    |
-     +==========================+====================================+
-     | Auth. principle:         | Certificates, CWTs (1)             |
-     +--------------------------+------------------------------------+
-     | Ciphersuite negotiation: | Yes (2)                            |
-     +--------------------------+------------------------------------+
-     | Mutual authentication:   | Yes (3)                            |
-     +--------------------------+------------------------------------+
-     | Integrity protection:    | Yes (4)                            |
-     +--------------------------+------------------------------------+
-     | Replay protection:       | Yes (5)                            |
-     +--------------------------+------------------------------------+
-     | Confidentiality:         | Yes (6)                            |
-     +--------------------------+------------------------------------+
-     | Key derivation:          | Yes (7)                            |
-     +--------------------------+------------------------------------+
-     | Key strength:            | The specified cryptosuites provide |
-     |                          | key strength of at least 128 bits. |
-     +--------------------------+------------------------------------+
-     | Dictionary attack prot.: | Yes (8)                            |
-     +--------------------------+------------------------------------+
-     | Fast reconnect:          | No                                 |
-     +--------------------------+------------------------------------+
-     | Crypt. binding:          | N/A                                |
-     +--------------------------+------------------------------------+
-     | Session independence:    | Yes (9)                            |
-     +--------------------------+------------------------------------+
-     | Fragmentation:           | Yes                                |
-     +--------------------------+------------------------------------+
-     | Channel binding:         | No                                 |
-     +--------------------------+------------------------------------+
+       +==================+========================================+
+       | Claim            |                                        |
+       +==================+========================================+
+       | Auth. principle: | Certificates, CWTs (1)                 |
+       +------------------+----------------------------------------+
+       | Ciphersuite      | Yes (2)                                |
+       | negotiation:     |                                        |
+       +------------------+----------------------------------------+
+       | Mutual           | Yes (3)                                |
+       | authentication:  |                                        |
+       +------------------+----------------------------------------+
+       | Integrity        | Yes (4)                                |
+       | protection:      |                                        |
+       +------------------+----------------------------------------+
+       | Replay           | Yes (5)                                |
+       | protection:      |                                        |
+       +------------------+----------------------------------------+
+       | Confidentiality: | Yes (6)                                |
+       +------------------+----------------------------------------+
+       | Key derivation:  | Yes (7)                                |
+       +------------------+----------------------------------------+
+       | Key strength:    | The specified cryptosuites provide key |
+       |                  | strength of at least 128 bits.         |
+       +------------------+----------------------------------------+
+       | Dictionary       | Yes (8)                                |
+       | attack prot.:    |                                        |
+       +------------------+----------------------------------------+
+       | Fast reconnect:  | No                                     |
+       +------------------+----------------------------------------+
+       | Crypt. binding:  | N/A                                    |
+       +------------------+----------------------------------------+
+       | Session          | Yes (9)                                |
+       | independence:    |                                        |
+       +------------------+----------------------------------------+
+       | Fragmentation:   | Yes                                    |
+       +------------------+----------------------------------------+
+       | Channel binding: | Yes (Section Section 6.1.1: EAD_3 and  |
+       |                  | EAD_4 can be used to convey integrity- |
+       |                  | protected channel properties, such as  |
+       |                  | network SSID or peer MAC address.)     |
+       +------------------+----------------------------------------+
 
                                   Table 1
 
-   *  (1) Authentication principle.  EAP-EDHOC establishes a shared
+   *  (1) Authentication principle: EAP-EDHOC establishes a shared
       secret based on an authenticated ECDH key exchange.  The key
       exchange is authenticated using different kinds of credentials.
       EAP-EDHOC supports EDHOC credential types.  EDHOC supports all
       credential types for which COSE header parameters are defined.
       This include X.509 certificates [RFC9360], C509 certificates, CWTs
-      ([RFC9528] Section 3.5.3.1) and CCSs ([RFC8392] Section 3.5.3.1)
+      ([RFC9528] Section 3.5.3.1) and CCSs ([RFC8392] Section 3.5.3.1).
 
    *  (2) Cipher suite negotiation: The Initiator's list of supported
       cipher suites and order of preference is fixed, and the selected
@@ -987,7 +1041,7 @@ Table of Contents
    *  (9) Session independence.  EDHOC generates computationally
       independent keys derived from the ECDH shared secret.
 
-6.1.2.  Additional Security Claims
+6.1.3.  Additional Security Claims
 
    *  (10) Cryptographic strength and Forward secrecy: Only ephemeral
       Diffie-Hellman methods are supported by EDHOC, which ensures that
@@ -1127,6 +1181,11 @@ Table of Contents
    [RFC5216]  Simon, D., Aboba, B., and R. Hurst, "The EAP-TLS
               Authentication Protocol", RFC 5216, DOI 10.17487/RFC5216,
               March 2008, <https://www.rfc-editor.org/rfc/rfc5216>.
+
+   [RFC6677]  Hartman, S., Ed., Clancy, T., and K. Hoeper, "Channel-
+              Binding Support for Extensible Authentication Protocol
+              (EAP) Methods", RFC 6677, DOI 10.17487/RFC6677, July 2012,
+              <https://www.rfc-editor.org/rfc/rfc6677>.
 
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,
