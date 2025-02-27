@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-25T00:36:03.559802+00:00",
+  "timestamp": "2025-02-27T00:35:49.632496+00:00",
   "repo": "dangarciacarrillo/i-d-eap-edhoc",
   "labels": [
     {
@@ -309,7 +309,7 @@
       "labels": [],
       "body": "It would be interesting to discuss if channel binding is worth to be added to the current document.  \nUsing EAD_3 and EAD_4 might be possible to have an easy solution. ",
       "createdAt": "2025-02-14T11:32:27Z",
-      "updatedAt": "2025-02-24T06:35:02Z",
+      "updatedAt": "2025-02-25T11:29:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -325,6 +325,13 @@
           "body": "RFC 6677 provides a solution for providing EAP channel binding inside the EAP method. That is, alternative 1. Moreover it  defines a format for transporting the information (Figure 2: Channel-Binding Encoding), which is not based on CBOR of course. RFC 6677 says \"The transport protocol SHOULD provide confidentiality\" for the privacy issue. Since EAD_3 and EAD_4 are good places to exchange the channel binding protection. \n\nIt is also mentioned that \"... after\n   sending a protected indication of failed consistency, the EAP server MUST send an EAP-Failure message to terminate the session.\" That happens with in EAD_4 , the EAP peer will answer with the typical empty EAP-EDHOC message and the EAP server will give an EAP-Failure.\n\nIn my opinion, it would be easier to provide something as EAP-GPSK does in section 12.3 by saying that EAP-EDHOC provides a way of transporting channel binding information in EAD_3 and EAD_4 using a bit string , we define a new ead label but we do not define anything else.  We would say in the Channel Binding security claims \"Extensible\" as EAP-GPSK does \"The design of EAP-GPSK allows to securely exchange information\n      between the EAP peer and the EAP server using protected data\n      fields.  These fields might, for example, be used to exchange\n      channel binding information or to provide support for identity\n      confidentiality.\"\n",
           "createdAt": "2025-02-24T06:35:01Z",
           "updatedAt": "2025-02-24T06:35:01Z"
+        },
+        {
+          "author": "dangarciacarrillo",
+          "authorAssociation": "OWNER",
+          "body": "That sound good to me. \nIt would also be good to present the idea at the IETF and see the response. ",
+          "createdAt": "2025-02-25T11:28:23Z",
+          "updatedAt": "2025-02-25T11:29:25Z"
         }
       ]
     }
