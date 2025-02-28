@@ -393,7 +393,7 @@ Many client certificates contain an identity such as an email address, which is 
 EAP-EDHOC peer and server implementations supporting EAP-EDHOC MUST support anonymous Network Access Identifiers (NAIs) (Section 2.4 of {{RFC7542}}).
 A node supporting EAP-EDHOC MUST NOT send its username (or any other permanent identifiers) in cleartext in the Identity Response (or any message used instead of the Identity Response). Following {{RFC7542}}, it is RECOMMENDED to omit the username (i.e., the NAI is @realm), but other constructions such as a fixed username (e.g., anonymous@realm) or an encrypted username (e.g., xCZINCPTK5+7y81CrSYbPg+RKPE3OTrYLn4AQc4AC2U=@realm) are allowed. Note that the NAI MUST be a UTF-8 string as defined by the grammar in Section 2.2 of {{RFC7542}}.
 
-### Fragmentation
+### Fragmentation {#fragmentation}
 
 EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
@@ -664,7 +664,7 @@ Accordingly, a new EAD item is defined to incorporate EAP channel binding inform
 ### EAP Security Claims
 
 EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
-EAP-EDHOC security claims are described next.
+EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 | Claim                     | |
 |Auth. principle:           | Certificates, CWTs and all credential types for which COSE header parameters are defined (1) |
@@ -679,8 +679,9 @@ EAP-EDHOC security claims are described next.
 |Fast reconnect:           | No |
 |Crypt. binding:           | N/A  |
 |Session independence:     | Yes (9)|
-|Fragmentation:            | Yes |
+|Fragmentation:            | Yes ({{fragmentation}})|
 |Channel binding:          | Yes ({{Channel_Binding}}: EAD_3 and EAD_4 can be used to convey integrity-protected channel properties, such as network SSID or peer MAC address.)|
+{: #sec-claims title="EAP-EDHOC security claims"}
 
 
 - (1) Authentication principle:
