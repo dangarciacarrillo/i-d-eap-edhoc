@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 30 August 2025</td>
+<td class="center">Expires 1 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-26" class="published">26 February 2025</time>
+<time datetime="2025-02-28" class="published">28 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-30">30 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-01">1 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1272,16 +1272,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.6.1"><a href="#section-6.6" class="auto internal xref">6.6</a>.  <a href="#name-authorization" class="internal xref">Authorization</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.7">
-                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="auto internal xref">6.7</a>.  <a href="#name-resumption" class="internal xref">Resumption</a></p>
+                <p id="section-toc.1-1.6.2.7.1"><a href="#section-6.7" class="auto internal xref">6.7</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.8">
-                <p id="section-toc.1-1.6.2.8.1"><a href="#section-6.8" class="auto internal xref">6.8</a>.  <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
+                <p id="section-toc.1-1.6.2.8.1"><a href="#section-6.8" class="auto internal xref">6.8</a>.  <a href="#name-pervasive-monitoring" class="internal xref">Pervasive Monitoring</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.9">
-                <p id="section-toc.1-1.6.2.9.1"><a href="#section-6.9" class="auto internal xref">6.9</a>.  <a href="#name-pervasive-monitoring" class="internal xref">Pervasive Monitoring</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.10">
-                <p id="section-toc.1-1.6.2.10.1"><a href="#section-6.10" class="auto internal xref">6.10</a>. <a href="#name-cross-protocol-attacks" class="internal xref">Cross-Protocol Attacks</a></p>
+                <p id="section-toc.1-1.6.2.9.1"><a href="#section-6.9" class="auto internal xref">6.9</a>.  <a href="#name-cross-protocol-attacks" class="internal xref">Cross-Protocol Attacks</a></p>
 </li>
             </ul>
 </li>
@@ -2149,7 +2146,7 @@ EAP-EDHOC security claims are described next.<a href="#section-6.1.2-1" class="p
             <tbody>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">Auth. principle:</td>
-                <td class="text-left" rowspan="1" colspan="1">Certificates, CWTs (1)</td>
+                <td class="text-left" rowspan="1" colspan="1">Certificates, CWTs and all credential types for which COSE header parameters are defined (1)</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">Ciphersuite negotiation:</td>
@@ -2264,7 +2261,9 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-peer-and-server-identities">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-peer-and-server-identities" class="section-name selfRef">Peer and Server Identities</a>
         </h3>
-<p id="section-6.2-1">Same considerations as EAP-TLS1.3 Section 5.2 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The Peer-Id represents the identity to be used for access control and accounting purposes.  The Server-Id represents the identity of the EAP server. The Peer-Id and Server-Id are determined from the information provided in the credentials used.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Same considerations as EAP-TLS1.3 Section 5.2 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here in relation to the use of certificates.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">When other types of credentials are used such as CWT/CCS, that include the "sub" claim, will be used.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="certificate-validation">
@@ -2272,7 +2271,8 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-certificate-validation">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-certificate-validation" class="section-name selfRef">Certificate Validation</a>
         </h3>
-<p id="section-6.3-1">Same considerations as EAP-TLS1.3 Section 5.3 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">Same considerations as EAP-TLS1.3 Section 5.3 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here in relation to the use of certificates.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">When other types of credentials are used such as CWT/CCS, the application needs to have a clear trust-establishment mechanism and identify the pertinent trust anchors <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="certificate-revocation">
@@ -2280,7 +2280,8 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-certificate-revocation">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-certificate-revocation" class="section-name selfRef">Certificate Revocation</a>
         </h3>
-<p id="section-6.4-1">Same considerations as EAP-TLS1.3 Section 5.4 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">Same considerations as EAP-TLS1.3 Section 5.4 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here in relation to certificates.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">When other types of credentials are used such as CWT/CCS, the endpoints are in charge of handling revocation and confirming the validity and integrity of CWT/CCS <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="packet-modification-attacks">
@@ -2300,36 +2301,28 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
 <p id="section-6.6-2">When peer authentication is not used, EAP-EDHOC server implementations <span class="bcp14">MUST</span> take care to limit network access appropriately for authenticated peers. Authorization and accounting <span class="bcp14">MUST</span> be based on authenticated information such as information in the certificate. The requirements for Network Access Identifiers (NAIs) specified in Section 4 of <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span> apply and <span class="bcp14">MUST</span> be followed.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="resumption">
-<section id="section-6.7">
-        <h3 id="name-resumption">
-<a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-resumption" class="section-name selfRef">Resumption</a>
-        </h3>
-<p id="section-6.7-1">Not implemented<a href="#section-6.7-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="privacy-considerations">
-<section id="section-6.8">
+<section id="section-6.7">
         <h3 id="name-privacy-considerations">
-<a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
+<a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
         </h3>
-<p id="section-6.8-1">Considerations in Section 9.6 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> regarding anonymous NAIs also applies.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">Considerations in Section 9.6 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> regarding anonymous NAIs also applies.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="pervasive-monitoring">
-<section id="section-6.9">
+<section id="section-6.8">
         <h3 id="name-pervasive-monitoring">
-<a href="#section-6.9" class="section-number selfRef">6.9. </a><a href="#name-pervasive-monitoring" class="section-name selfRef">Pervasive Monitoring</a>
+<a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-pervasive-monitoring" class="section-name selfRef">Pervasive Monitoring</a>
         </h3>
-<p id="section-6.9-1">Considerations in  Section 9.1. of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> about pervasive monitoring apply here.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">Considerations in  Section 9.1 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> about pervasive monitoring apply here.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cross-protocol-attacks">
-<section id="section-6.10">
+<section id="section-6.9">
         <h3 id="name-cross-protocol-attacks">
-<a href="#section-6.10" class="section-number selfRef">6.10. </a><a href="#name-cross-protocol-attacks" class="section-name selfRef">Cross-Protocol Attacks</a>
+<a href="#section-6.9" class="section-number selfRef">6.9. </a><a href="#name-cross-protocol-attacks" class="section-name selfRef">Cross-Protocol Attacks</a>
         </h3>
-<p id="section-6.10-1">This in TLS1.3 is applied in the context of resumption. Does not apply here.<a href="#section-6.10-1" class="pilcrow">¶</a></p>
+<p id="section-6.9-1">This in TLS1.3 is applied in the context of resumption. Does not apply here.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

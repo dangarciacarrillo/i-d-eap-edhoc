@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 30 August 2025                             University of Murcia
+Expires: 1 September 2025                           University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                        26 February 2025
+                                                        28 February 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2025.
+   This Internet-Draft will expire on 1 September 2025.
 
 Copyright Notice
 
@@ -110,10 +110,9 @@ Table of Contents
      6.4.  Certificate Revocation
      6.5.  Packet Modification Attacks
      6.6.  Authorization
-     6.7.  Resumption
-     6.8.  Privacy Considerations
-     6.9.  Pervasive Monitoring
-     6.10. Cross-Protocol Attacks
+     6.7.  Privacy Considerations
+     6.8.  Pervasive Monitoring
+     6.9.  Cross-Protocol Attacks
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -958,7 +957,9 @@ Table of Contents
        +==================+=======================================+
        | Claim            |                                       |
        +==================+=======================================+
-       | Auth. principle: | Certificates, CWTs (1)                |
+       | Auth. principle: | Certificates, CWTs and all credential |
+       |                  | types for which COSE header           |
+       |                  | parameters are defined (1)            |
        +------------------+---------------------------------------+
        | Ciphersuite      | Yes (2)                               |
        | negotiation:     |                                       |
@@ -1057,15 +1058,34 @@ Table of Contents
 
 6.2.  Peer and Server Identities
 
-   Same considerations as EAP-TLS1.3 Section 5.2 [RFC9190] apply here.
+   The Peer-Id represents the identity to be used for access control and
+   accounting purposes.  The Server-Id represents the identity of the
+   EAP server.  The Peer-Id and Server-Id are determined from the
+   information provided in the credentials used.
+
+   Same considerations as EAP-TLS1.3 Section 5.2 [RFC9190] apply here in
+   relation to the use of certificates.
+
+   When other types of credentials are used such as CWT/CCS, that
+   include the "sub" claim, will be used.
 
 6.3.  Certificate Validation
 
-   Same considerations as EAP-TLS1.3 Section 5.3 [RFC9190] apply here.
+   Same considerations as EAP-TLS1.3 Section 5.3 [RFC9190] apply here in
+   relation to the use of certificates.
+
+   When other types of credentials are used such as CWT/CCS, the
+   application needs to have a clear trust-establishment mechanism and
+   identify the pertinent trust anchors [RFC9528].
 
 6.4.  Certificate Revocation
 
-   Same considerations as EAP-TLS1.3 Section 5.4 [RFC9190] apply here.
+   Same considerations as EAP-TLS1.3 Section 5.4 [RFC9190] apply here in
+   relation to certificates.
+
+   When other types of credentials are used such as CWT/CCS, the
+   endpoints are in charge of handling revocation and confirming the
+   validity and integrity of CWT/CCS [RFC9528].
 
 6.5.  Packet Modification Attacks
 
@@ -1087,23 +1107,19 @@ Table of Contents
    The requirements for Network Access Identifiers (NAIs) specified in
    Section 4 of [RFC7542] apply and MUST be followed.
 
-6.7.  Resumption
-
-   Not implemented
-
-6.8.  Privacy Considerations
+6.7.  Privacy Considerations
 
    Considerations in Section 9.6 of [RFC9528] against tracking of users
    and eavesdropping on Identity Responses or certificates apply here.
    Also, the considerations of Section 5.8 of [RFC9190] regarding
    anonymous NAIs also applies.
 
-6.9.  Pervasive Monitoring
+6.8.  Pervasive Monitoring
 
-   Considerations in Section 9.1. of [RFC9528] about pervasive
-   monitoring apply here.
+   Considerations in Section 9.1 of [RFC9528] about pervasive monitoring
+   apply here.
 
-6.10.  Cross-Protocol Attacks
+6.9.  Cross-Protocol Attacks
 
    This in TLS1.3 is applied in the context of resumption.  Does not
    apply here.
