@@ -667,7 +667,7 @@ EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
 EAP-EDHOC security claims are described next.
 
 | Claim                     | |
-|Auth. principle:           | Certificates, CWTs (1) |
+|Auth. principle:           | Certificates, CWTs and all credential types for which COSE header parameters are defined (1) |
 |Ciphersuite negotiation:   | Yes (2)|
 |Mutual authentication:     | Yes (3)|
 |Integrity protection:      | Yes (4)|
@@ -715,14 +715,24 @@ EAP-EDHOC security claims are described next.
   EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.
 
 ## Peer and Server Identities
-Same considerations as EAP-TLS1.3 Section 5.2 {{RFC9190}} apply here.
+The Peer-Id represents the identity to be used for access control and accounting purposes.  The Server-Id represents the identity of the EAP server. The Peer-Id and Server-Id are determined from the information provided in the credentials used.
+
+Same considerations as EAP-TLS1.3 Section 5.2 {{RFC9190}} apply here in relation to the use of certificates.
+
+When other types of credentials are used such as CWT/CCS, that include the "sub" claim, will be used.
 
 
 ## Certificate Validation
-Same considerations as EAP-TLS1.3 Section 5.3 {{RFC9190}} apply here.
+Same considerations as EAP-TLS1.3 Section 5.3 {{RFC9190}} apply here in relation to the use of certificates.
+
+When other types of credentials are used such as CWT/CCS, the application needs to have a clear trust-establishment mechanism and identify the pertinent trust anchors {{RFC9528}}.
+
 
 ## Certificate Revocation
-Same considerations as EAP-TLS1.3 Section 5.4 {{RFC9190}} apply here.
+Same considerations as EAP-TLS1.3 Section 5.4 {{RFC9190}} apply here in relation to certificates.
+
+When other types of credentials are used such as CWT/CCS, the endpoints are in charge of handling revocation and confirming the validity and integrity of CWT/CCS {{RFC9528}}.
+
 
 ## Packet Modification Attacks
 EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change is detected by means of the transcript hashes integrity verification.
@@ -733,16 +743,12 @@ Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation 
 When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for authenticated peers. Authorization and accounting MUST be based on authenticated information such as information in the certificate. The requirements for Network Access Identifiers (NAIs) specified in Section 4 of {{RFC7542}} apply and MUST be followed.
 
 
-## Resumption
-Not implemented
-
-
 ## Privacy Considerations
 Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of {{RFC9190}} regarding anonymous NAIs also applies.
 
 
 ## Pervasive Monitoring
-Considerations in  Section 9.1. of {{RFC9528}} about pervasive monitoring apply here.
+Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
 This in TLS1.3 is applied in the context of resumption. Does not apply here.
