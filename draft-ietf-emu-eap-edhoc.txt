@@ -952,7 +952,7 @@ Table of Contents
 6.1.2.  EAP Security Claims
 
    EAP security claims are defined in Section 7.2.1 of [RFC3748].  EAP-
-   EDHOC security claims are described next.
+   EDHOC security claims are described next and summarized in Table 1.
 
        +==================+=======================================+
        | Claim            |                                       |
@@ -990,7 +990,7 @@ Table of Contents
        | Session          | Yes (9)                               |
        | independence:    |                                       |
        +------------------+---------------------------------------+
-       | Fragmentation:   | Yes                                   |
+       | Fragmentation:   | Yes (Section 3.1.6)                   |
        +------------------+---------------------------------------+
        | Channel binding: | Yes (Section 6.1.1: EAD_3 and EAD_4   |
        |                  | can be used to convey integrity-      |
@@ -998,7 +998,7 @@ Table of Contents
        |                  | network SSID or peer MAC address.)    |
        +------------------+---------------------------------------+
 
-                                 Table 1
+                    Table 1: EAP-EDHOC security claims
 
    *  (1) Authentication principle: EAP-EDHOC establishes a shared
       secret based on an authenticated ECDH key exchange.  The key
