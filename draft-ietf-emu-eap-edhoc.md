@@ -499,6 +499,8 @@ MSK         =  EDHOC_Exporter(TBD2, << Type >>, 64)
 EMSK        =  EDHOC_Exporter(TBD3, << Type >>, 64)
 Method-Id   =  EDHOC_Exporter(TBD4, << Type >>, 64)
 Session-Id  =  Type || Method-Id
+Peer-Id     =  ID_CRED_I
+Server-Id   =  ID_CRED_R
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 EAP-EDHOC exports the MSK and the EMSK and does not specify how it is used by lower layers.
@@ -718,9 +720,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 ## Peer and Server Identities
 The Peer-Id represents the identity to be used for access control and accounting purposes.  The Server-Id represents the identity of the EAP server. The Peer-Id and Server-Id are determined from the information provided in the credentials used.
 
-Same considerations as EAP-TLS1.3 Section 5.2 {{RFC9190}} apply here in relation to the use of certificates.
-
-When other types of credentials are used such as CWT/CCS, that include the "sub" claim, will be used.
+ID_CRED_I and ID_CRED_R are used to identify the credentials of the initiator (EAP peer) and Responder (EAP server). Therefore, for Server-Id the ID_CRED_R is used, and for Peer-Id the ID_CRED_I is used.
 
 
 ## Certificate Validation
