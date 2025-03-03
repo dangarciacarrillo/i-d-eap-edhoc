@@ -1139,12 +1139,6 @@ Table of Contents
               (EAP)", RFC 3748, DOI 10.17487/RFC3748, June 2004,
               <https://www.rfc-editor.org/rfc/rfc3748>.
 
-   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
-              "State Machines for Extensible Authentication Protocol
-              (EAP) Peer and Authenticator", RFC 4137,
-              DOI 10.17487/RFC4137, August 2005,
-              <https://www.rfc-editor.org/rfc/rfc4137>.
-
    [RFC7542]  DeKok, A., "The Network Access Identifier", RFC 7542,
               DOI 10.17487/RFC7542, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7542>.
@@ -1195,6 +1189,12 @@ Table of Contents
               psk-03, 1 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
               edhoc-psk-03>.
+
+   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
+              "State Machines for Extensible Authentication Protocol
+              (EAP) Peer and Authenticator", RFC 4137,
+              DOI 10.17487/RFC4137, August 2005,
+              <https://www.rfc-editor.org/rfc/rfc4137>.
 
    [RFC5216]  Simon, D., Aboba, B., and R. Hurst, "The EAP-TLS
               Authentication Protocol", RFC 5216, DOI 10.17487/RFC5216,
