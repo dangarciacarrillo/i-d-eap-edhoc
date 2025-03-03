@@ -139,7 +139,7 @@ Readers are expected to be familiar with the terms and concepts described in EAP
 
 ## Overview of the EAP-EDHOC Conversation
 
-As a reminder of the EAP entities and their roles involved in the EAP exchange, we have the EAP peer, EAP authenticator and EAP server. The EAP authenticator is the entity initiating the EAP authentication. The EAP peer is the entity that responds to the EAP authenticator. The EAP server is the entity that determines the EAP authentication method to be used. If the EAP server is not located on a backend authentication server, the EAP server is part of the EAP authenticator. For simplicity, we will show in the Figures with flows of operation only the EAP peer and EAP server.
+The EAP exchange involves three key entities: the EAP peer, the EAP authenticator, and the EAP server. The EAP authenticator is a network device that enforces access control and initiates the EAP authentication process. The EAP peer is the device seeking network access and communicates directly with the EAP authenticator. The EAP server is responsible for selecting and implementing the authentication methods and for authenticating the EAP peer. When the EAP server is not located on a separate backend authentication server, it is integrated into the EAP authenticator. For simplicity, the operational flow diagrams in this document decipt only the EAP peer and the EAP server.
 
 The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.
 
@@ -382,7 +382,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 ### Identity
 
-It is RECOMMENDED to use anonymous NAIs {{RFC7542}} in the Identity Response as such identities are routable and privacy-friendly.
+It is RECOMMENDED to use anonymous NAIs {{RFC7542}} in the Identity Response, as such identities are routable and privacy-friendly.
 
 While opaque blobs are allowed by {{RFC3748}}, such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
 
@@ -399,7 +399,7 @@ EAP-EDHOC fragmentation support is provided through the addition of flag bits (M
 
 To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). If the L bits are set, we are specifying that the message will be fragmented and the length of the message, which is in the EAP-EDHOC Message Length field.
 
-Implementations MUST NOT set the L bit in unfragmented messages, but they MUST accept unfragmented messages with and without the L bit set. Some EAP implementations and access networks may limit the number of EAP packet exchanges that can be handled. To avoid fragmentation, it is RECOMMENDED to keep the sizes of EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials small and the length of certificate chains short.
+Implementations MUST NOT set the L bit in unfragmented messages. However, they MUST accept unfragmented messages regardless of whether the L bit is set. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
 
 EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are passed by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations MUST provide support for fragmentation and reassembly. Since EAP is a lock-step protocol, fragmentation support can be easily added.
 
