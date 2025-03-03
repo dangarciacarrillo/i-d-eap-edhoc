@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 2 September 2025                           University of Murcia
+Expires: 4 September 2025                           University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            1 March 2025
+                                                            3 March 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 September 2025.
+   This Internet-Draft will expire on 4 September 2025.
 
 Copyright Notice
 
@@ -563,11 +563,7 @@ Table of Contents
    so small that fragmentation is not needed.  However as EAP-EDHOC also
    supports large X.509 certificate chains, EAP-EDHOC implementations
    MUST provide support for fragmentation and reassembly.  Since EAP is
-   a simple ACK-NAK protocol, fragmentation support can be easily added.
-   In EAP, fragments that are lost or damaged in transit will be
-   retransmitted, and since sequencing information is provided by the
-   Identifier field in EAP, there is no need for a fragment offset field
-   as is provided in IPv4.
+   a lock-step protocol, fragmentation support can be easily added.
 
    EAP-EDHOC fragmentation support is provided through the addition of
    two bits (L and M) within the EAP-Response and EAP-Request packets,
