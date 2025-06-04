@@ -519,6 +519,21 @@ The keying material can be derived after the EDHOC message_2 has been sent or re
 
 The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (message_4) has been sent or received. Implementations following {{RFC4137}} can set the eapKeyAvailable and aaaEapKeyAvailable variables.
 
+## EAP Channel Binding {#Channel_Binding}
+
+EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in {{RFC6677}}.
+
+Section 6 in {{RFC6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
+
+While EAP_1 and EAP_2 are integrity protected through the transcript hash, the channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with {{RFC6677}} requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.
+
+If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message, and the EAP server will conclude the exchange with an EAP-Failure message.
+
+Accordingly, a new EAD item is defined to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages:
+
+* ead_label = TBD5
+* ead_value is a CBOR byte string.
+
 # Detailed Description of the EAP-EDHOC Request and Response Protocol {#detailed-description}
 
 The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right. following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
@@ -647,21 +662,6 @@ The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to th
 
 
 ## Security Claims
-
-### EAP Channel Binding {#Channel_Binding}
-
-EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in {{RFC6677}}.
-
-Section 6 in {{RFC6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
-
-While EAP_1 and EAP_2 are integrity protected through the transcript hash, the channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with {{RFC6677}} requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.
-
-If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message, and the EAP server will conclude the exchange with an EAP-Failure message.
-
-Accordingly, a new EAD item is defined to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages:
-
-* ead_label = TBD5
-* ead_value is a CBOR byte string.
 
 ### EAP Security Claims
 
