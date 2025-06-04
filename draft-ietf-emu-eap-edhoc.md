@@ -108,7 +108,7 @@ EAP-EDHOC is similar to EAP-TLS 1.3 {{RFC9190}}, since EDHOC is based on a simil
 
 ## EDHOC Overview {#edhoc-overview}
 
-Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral Diffie-Hellman key exchange, including mutual authentication and establishment of shared secret keying material, see {{RFC9528}}.
+Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral key exchange, including mutual authentication and establishment of shared secret keying material, see {{RFC9528}}.
 
 EDHOC provides state-of-the-art security design at very low message overhead, targeting low complexity implementations and allowing extensibility. The security of EDHOC has been thoroughly analyzed, some references are provided in {{Section 9.1 of RFC9528}}.
 
@@ -712,7 +712,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 ### Additional Security Claims
 
 - (10) Cryptographic strength and Forward secrecy:
-  Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
+  Only ephemeral key exchange methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.
 
 - (11) Identity protection:
   EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.
