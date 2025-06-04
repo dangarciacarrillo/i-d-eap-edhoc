@@ -752,8 +752,7 @@ Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eaves
 Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
-This in TLS 1.3 is applied in the context of resumption. Does not apply here.
-
+This applies in the context of TLS 1.3 resumption. Does not apply here.
 
 --- back
 
