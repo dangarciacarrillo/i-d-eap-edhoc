@@ -736,7 +736,7 @@ When other types of credentials are used such as CWT/CCS, the endpoints are in c
 
 
 ## Packet Modification Attacks
-EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change is detected by means of the transcript hashes integrity verification.
+EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change in any message is detected by means of the transcript hashes integrity verification.
 
 ## Authorization
 Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, where EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
