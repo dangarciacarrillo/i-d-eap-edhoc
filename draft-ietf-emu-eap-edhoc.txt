@@ -1071,8 +1071,8 @@ Table of Contents
 
 6.3.  Certificate Validation
 
-   Same considerations as EAP-TLS1.3 Section 5.3 [RFC9190] apply here in
-   relation to the use of certificates.
+   Same considerations as EAP-TLS 1.3 Section 5.3 [RFC9190] apply here
+   in relation to the use of certificates.
 
    When other types of credentials are used such as CWT/CCS, the
    application needs to have a clear trust-establishment mechanism and
@@ -1080,8 +1080,8 @@ Table of Contents
 
 6.4.  Certificate Revocation
 
-   Same considerations as EAP-TLS1.3 Section 5.4 [RFC9190] apply here in
-   relation to certificates.
+   Same considerations as EAP-TLS 1.3 Section 5.4 [RFC9190] apply here
+   in relation to certificates.
 
    When other types of credentials are used such as CWT/CCS, the
    endpoints are in charge of handling revocation and confirming the
@@ -1121,7 +1121,7 @@ Table of Contents
 
 6.9.  Cross-Protocol Attacks
 
-   This in TLS1.3 is applied in the context of resumption.  Does not
+   This in TLS 1.3 is applied in the context of resumption.  Does not
    apply here.
 
 7.  References
