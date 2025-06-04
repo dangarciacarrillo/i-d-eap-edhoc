@@ -90,7 +90,7 @@ informative:
     author:
       -
         ins: 3GPP TS 33.501
-    date: January 2025
+    date: March 2025
 
 --- abstract
 
