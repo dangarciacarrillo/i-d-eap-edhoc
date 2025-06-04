@@ -1316,7 +1316,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-edhoc-overview">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-edhoc-overview" class="section-name selfRef">EDHOC Overview</a>
         </h3>
-<p id="section-1.1-1">Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral Diffie-Hellman key exchange, including mutual authentication and establishment of shared secret keying material, see <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral key exchange, including mutual authentication and establishment of shared secret keying material, see <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">EDHOC provides state-of-the-art security design at very low message overhead, targeting low complexity implementations and allowing extensibility. The security of EDHOC has been thoroughly analyzed, some references are provided in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-9.1" class="relref">Section 9.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">The main features of EDHOC are:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2252,7 +2252,7 @@ EDHOC integrity protects all message content using transcript hashes for key der
 <ul class="normal">
 <li class="normal" id="section-6.1.3-1.1">
               <p id="section-6.1.3-1.1.1">(10) Cryptographic strength and Forward secrecy:
-Only ephemeral Diffie-Hellman methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
+Only ephemeral key exchange methods are supported by EDHOC, which ensures that the compromise of a session key does not also compromise earlier sessions' keys.<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.3-1.2">
               <p id="section-6.1.3-1.2.1">(11) Identity protection:

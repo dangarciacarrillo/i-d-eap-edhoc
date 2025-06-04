@@ -140,9 +140,8 @@ Table of Contents
 1.1.  EDHOC Overview
 
    Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight
-   authenticated ephemeral Diffie-Hellman key exchange, including mutual
-   authentication and establishment of shared secret keying material,
-   see [RFC9528].
+   authenticated ephemeral key exchange, including mutual authentication
+   and establishment of shared secret keying material, see [RFC9528].
 
    EDHOC provides state-of-the-art security design at very low message
    overhead, targeting low complexity implementations and allowing
@@ -1047,7 +1046,7 @@ Table of Contents
 6.1.3.  Additional Security Claims
 
    *  (10) Cryptographic strength and Forward secrecy: Only ephemeral
-      Diffie-Hellman methods are supported by EDHOC, which ensures that
+      key exchange methods are supported by EDHOC, which ensures that
       the compromise of a session key does not also compromise earlier
       sessions' keys.
 
