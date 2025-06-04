@@ -127,7 +127,7 @@ The main features of EDHOC are:
 
 A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile including method, cipher suite,  etc. More details are provided in  {{I-D.ietf-lake-app-profiles}}.
 
-EDHOC messages makes use of lightweight primitives, specifically CBOR {{RFC8949}} and COSE {{RFC9052}} {{RFC9053}} for efficient encoding and security services in constrained devices. EDHOC is optimized for use of with CoAP {{RFC7252}} and OSCORE {{RFC8613}} to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.
+EDHOC messages makes use of lightweight primitives, specifically CBOR {{RFC8949}} and COSE {{RFC9052}} {{RFC9053}} for efficient encoding and security services in constrained devices. EDHOC is optimized for use with CoAP {{RFC7252}} and OSCORE {{RFC8613}} to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.
 
 
 # Conventions and Definitions
@@ -146,13 +146,13 @@ The EDHOC protocol running between an Initiator and a Responder consists of thre
 
 After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages SHALL be done as specified in {{RFC9528}}. This document only lists additional and different requirements, restrictions, and processing compared to {{RFC9528}}.
 
-The message processing in {{Section 5 of RFC9528}} states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to further this data to complete the protocol. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
+The message processing in {{Section 5 of RFC9528}} states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to handle this data to complete the protocol execution. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
 
 Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
 
 ### Successful EAP-EDHOC Message Flow without Fragmentation
 
-EAP-EDHOC authentication credentials can be of any type supported by COSE and be transported or referenced by EDHOC.
+EDHOC allows EAP-EDHOC to support authentication credentials of any type defined by COSE, which can be either transported or referenced during the protocol.
 
 The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{RFC9668}} is not supported in this EAP method.
 
@@ -202,7 +202,7 @@ If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send
 
 If the EAP-EDHOC server authenticates successfully, and the EAP-EDHOC peer achieves key confirmation by successfully verifying EDHOC message_4, then the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing no data. Finally, the EAP-EDHOC server sends an EAP-Success.
 
-Note that the Identity request is optional {{RFC3748}} and might not be used in systems like 3GPP 5G {{Sec5G}} where the identity is transferred encrypted by other means before the EAP exchange.  And while the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory {{RFC3748}}} they do not contain any information and might be encoded into other system specific messages {{Sec5G}}.
+Note that the Identity request is optional {{RFC3748}} and might not be used in systems like 3GPP 5G {{Sec5G}} where the identity is transferred encrypted by other means before the EAP exchange. And while the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory {{RFC3748}}} they do not contain any information and might be encoded into other system specific messages {{Sec5G}}.
 
 ### Transport and Message Correlation
 
@@ -396,19 +396,19 @@ A node supporting EAP-EDHOC MUST NOT send its username (or any other permanent i
 
 ### Fragmentation {#fragmentation}
 
-EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
+EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are passed by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations MUST provide support for fragmentation and reassembly. Since EAP is a lock-step protocol, fragmentation support can be easily added.
 
-To do so, the EAP request and response messages of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See  {{detailed-description}} for the detailed description). If the L bits are set, we are specifying that the message will be fragmented and the length of the message, which is in the EAP-EDHOC Message Length field.
+To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (See {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
+
+If the L bits are set, this indicates that the message is fragmented, and that the total message length is specified in the EAP-EDHOC Message Length field.
 
 Implementations MUST NOT set the L bit in unfragmented messages. However, they MUST accept unfragmented messages regardless of whether the L bit is set. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
 
-EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are passed by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations MUST provide support for fragmentation and reassembly. Since EAP is a lock-step protocol, fragmentation support can be easily added.
+To be more specific, the L field indicates the length of the EDHOC Message Length field, which MUST be present for the first fragment of a fragmented EDHOC message. The M flag bit is set on all but the last fragment. The S flag bit is set only within the EAP-EDHOC start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The EDHOC Message Length field provides the total length of the EDHOC message that is being fragmented; this simplifies buffer allocation.
 
-EAP-EDHOC fragmentation support is provided through the addition of two bits (L and M) within the EAP-Response and EAP-Request packets, as well as an EDHOC Message Length field.  The L field indicate the length of the EDHOC Message Length field, which MUST be present for the first fragment of a fragmented EDHOC message.  The M flag bit is set on all but the last fragment.  The S flag bit is set only within the EAP-EDHOC start message sent by the EAP server to the peer.  The EDHOC Message Length field provides the total length of the EDHOC message that is being fragmented; this simplifies buffer allocation.
+When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
 
-When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data.  This serves as a fragment ACK.  The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
-
-Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data.  This serves as a fragment ACK.  The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
+Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
 
 In the case where the EAP-EDHOC mutual authentication is successful, and fragmentation is required, the conversation, illustrated in {{fragmentation-flow}} will appear as follows:
 
