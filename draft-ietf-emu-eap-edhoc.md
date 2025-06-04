@@ -724,13 +724,13 @@ ID_CRED_I and ID_CRED_R are used to identify the credentials of the initiator (E
 
 
 ## Certificate Validation
-Same considerations as EAP-TLS1.3 Section 5.3 {{RFC9190}} apply here in relation to the use of certificates.
+Same considerations as EAP-TLS 1.3 Section 5.3 {{RFC9190}} apply here in relation to the use of certificates.
 
 When other types of credentials are used such as CWT/CCS, the application needs to have a clear trust-establishment mechanism and identify the pertinent trust anchors {{RFC9528}}.
 
 
 ## Certificate Revocation
-Same considerations as EAP-TLS1.3 Section 5.4 {{RFC9190}} apply here in relation to certificates.
+Same considerations as EAP-TLS 1.3 Section 5.4 {{RFC9190}} apply here in relation to certificates.
 
 When other types of credentials are used such as CWT/CCS, the endpoints are in charge of handling revocation and confirming the validity and integrity of CWT/CCS {{RFC9528}}.
 
@@ -752,7 +752,7 @@ Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eaves
 Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
-This in TLS1.3 is applied in the context of resumption. Does not apply here.
+This in TLS 1.3 is applied in the context of resumption. Does not apply here.
 
 
 --- back
