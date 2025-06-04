@@ -654,7 +654,7 @@ EAP-EDHOC allows the secure exchange of information between the endpoints of the
 
 Section 6 in {{RFC6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
 
-The channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively, are perfect candidates for this purpose.
+While EAP_1 and EAP_2 are integrity protected through the transcript hash, the channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with {{RFC6677}} requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.
 
 If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message, and the EAP server will conclude the exchange with an EAP-Failure message.
 
