@@ -690,14 +690,13 @@ Table of Contents
    (SAN) extension in the server certificate.  If any of the configured
    names match any of the names in the SAN extension, then the name
    check passes.  To simplify name matching, an EAP-EDHOC deployment can
-   assign a name to represent an authorized EAP server and EAP Server
-   certificates can include this name in the list of SANs for each
-   certificate that represents an EAP-EDHOC server.  If server name
-   matching is not used, this degrades the confidence that the EAP
-   server with which the EAP peer is interacting is authoritative for
-   the given network.  If name matching is not used with a public root
-   CA, then effectively any server can obtain a certificate that will be
-   trusted for EAP authentication by the peer.
+   assign a designated name to represent an authorized EAP server.  This
+   name can then be included in the SANs list of each certificate used
+   by this EAP-EDHOC server.  If server name matching is not used, the
+   EAP peer has reduced assurance that the EAP server it is interacting
+   with is authoritative for the given network.  If name matching is not
+   used with a public root CA, then effectively any server can obtain a
+   certificate that will be trusted for EAP authentication by the peer.
 
    The process of configuring a root CA certificate and a server name is
    non-trivial; therefore, automated methods of provisioning are
@@ -743,9 +742,9 @@ Table of Contents
 3.4.  Parameter Negotiation and Compliance Requirements
 
    The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the
-   compliance requirements (mandatory-to-implement cipher suites,
-   signature algorithms, key exchange algorithms, extensions, etc.)
-   defined in Section 8 of [RFC9528].
+   requirements defined in Section 8 of [RFC9528], including mandatory-
+   to-implement cipher suites, signature algorithms, key exchange
+   algorithms, and extensions.
 
 3.5.  EAP State Machines
 
@@ -1036,7 +1035,7 @@ Table of Contents
       from a different EDHOC session.
 
    *  (6) Confidentiality.  EDHOC message_2 provides confidentiality
-      against passive attackers and message_3 and message_4 provides
+      against passive attackers and message_3 and message_4 provide
       confidentiality against active attackers.
 
    *  (7) Key derivation.  Except for MSK and EMSK, derived keys are not
@@ -1101,9 +1100,9 @@ Table of Contents
 6.6.  Authorization
 
    Following the considerations of EDHOC in appendix D.5 Unauthenticated
-   Operation [RFC9528], where EDHOC can be used without authentication
-   by allowing the Initiator or Responder to communicate with any
-   identity except its own.
+   Operation [RFC9528], EDHOC can be used without authentication by
+   allowing the Initiator or Responder to communicate with any identity
+   except its own.
 
    When peer authentication is not used, EAP-EDHOC server
    implementations MUST take care to limit network access appropriately
