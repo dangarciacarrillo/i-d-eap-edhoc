@@ -139,7 +139,7 @@ Readers are expected to be familiar with the terms and concepts described in EAP
 
 ## Overview of the EAP-EDHOC Conversation
 
-The EAP exchange involves three key entities: the EAP peer, the EAP authenticator, and the EAP server. The EAP authenticator is a network device that enforces access control and initiates the EAP authentication process. The EAP peer is the device seeking network access and communicates directly with the EAP authenticator. The EAP server is responsible for selecting and implementing the authentication methods and for authenticating the EAP peer. When the EAP server is not located on a separate backend authentication server, it is integrated into the EAP authenticator. For simplicity, the operational flow diagrams in this document decipt only the EAP peer and the EAP server.
+The EAP exchange involves three key entities: the EAP peer, the EAP authenticator, and the EAP server. The EAP authenticator is a network device that enforces access control and initiates the EAP authentication process. The EAP peer is the device seeking network access and communicates directly with the EAP authenticator. The EAP server is responsible for selecting and implementing the authentication methods and for authenticating the EAP peer. When the EAP server is not located on a separate backend authentication server, it is integrated into the EAP authenticator. For simplicity, the operational flow diagrams in this document depict only the EAP peer and the EAP server.
 
 The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.
 
@@ -201,7 +201,7 @@ If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server MUST send
 
 If the EAP-EDHOC server authenticates successfully, and the EAP-EDHOC peer achieves key confirmation by successfully verifying EDHOC message_4, then the EAP-EDHOC peer MUST send an EAP-Response message with EAP-Type=EAP-EDHOC containing no data. Finally, the EAP-EDHOC server sends an EAP-Success.
 
-Note that the Identity request is optional {{RFC3748}} and might not be used in systems like 3GPP 5G {{Sec5G}} where the identity is transfered encrypted by other means before the EAP exchange.  And while the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory {{RFC3748}}} they do not contain any information and are might be encoded into other system specific messages {{Sec5G}}.
+Note that the Identity request is optional {{RFC3748}} and might not be used in systems like 3GPP 5G {{Sec5G}} where the identity is transferred encrypted by other means before the EAP exchange.  And while the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory {{RFC3748}}} they do not contain any information and might be encoded into other system specific messages {{Sec5G}}.
 
 ### Transport and Message Correlation
 
@@ -563,10 +563,10 @@ L:
 : The L field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0, and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
 
 EDHOC Message Length:
-: The EDHOC Message Length field can have a size of one to four octets and is present only if the L fild represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation it is not present.
+: The EDHOC Message Length field can have a size of one to four octets and is present only if the L field represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation it is not present.
 
 EDHOC Data:
-: The EDHOC data consists of the the whole or a fragment of transported EDHOC message.
+: The EDHOC data consists of the whole or a fragment of transported EDHOC message.
 
 ## EAP-EDHOC Response Packet
 
