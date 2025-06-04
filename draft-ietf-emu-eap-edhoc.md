@@ -484,7 +484,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information MUST NOT be used for accounting purposes or to give authorization. The EAP authenticator and the EAP server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers MAY reject conversations if the identity does not match their policy.
 
-The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a name to represent an authorized EAP server and EAP Server certificates can include this name in the list of SANs for each certificate that represents an EAP-EDHOC server. If server name matching is not used, this degrades the confidence that the EAP server with which the EAP peer is interacting is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.
+The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.
 
 The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are RECOMMENDED. For example, the eduroam federation {{RFC7593}} provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers MAY implement a Trust On First Use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.
 
@@ -508,7 +508,7 @@ EAP-EDHOC exports the MSK and the EMSK and does not specify how it is used by lo
 
 ## Parameter Negotiation and Compliance Requirements
 
-The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the compliance requirements (mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, extensions, etc.) defined in Section 8 of {{RFC9528}}.
+The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the requirements defined in Section 8 of {{RFC9528}}, including mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, and extensions.
 
 ## EAP State Machines
 
@@ -561,7 +561,7 @@ Identifier:
 : The Identifier field is one octet and aids in matching responses with requests. The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response.
 
 Length:
-: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields.  Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
+: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
 Type:
 : TBD1 (EAP-EDHOC)
@@ -701,7 +701,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 - (5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
 
-- (6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers and message_3 and message_4 provides confidentiality against active attackers.
+- (6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers and message_3 and message_4 provide confidentiality against active attackers.
 
 - (7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in {{Key_Hierarchy}}.
 
@@ -719,7 +719,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
   EDHOC secures the Responder's credential identifier against passive attacks and the Initiator's credential identifier against active attacks. An active attacker can get the credential identifier of the Responder by eavesdropping on the destination address used for transporting message_1 and then sending their own message_1.
 
 ## Peer and Server Identities
-The Peer-Id represents the identity to be used for access control and accounting purposes.  The Server-Id represents the identity of the EAP server. The Peer-Id and Server-Id are determined from the information provided in the credentials used.
+The Peer-Id represents the identity to be used for access control and accounting purposes. The Server-Id represents the identity of the EAP server. The Peer-Id and Server-Id are determined from the information provided in the credentials used.
 
 ID_CRED_I and ID_CRED_R are used to identify the credentials of the initiator (EAP peer) and Responder (EAP server). Therefore, for Server-Id the ID_CRED_R is used, and for Peer-Id the ID_CRED_I is used.
 
@@ -740,7 +740,7 @@ When other types of credentials are used such as CWT/CCS, the endpoints are in c
 EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change in any message is detected by means of the transcript hashes integrity verification.
 
 ## Authorization
-Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, where EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
+Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
 
 When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for authenticated peers. Authorization and accounting MUST be based on authenticated information such as information in the certificate. The requirements for Network Access Identifiers (NAIs) specified in Section 4 of {{RFC7542}} apply and MUST be followed.
 
