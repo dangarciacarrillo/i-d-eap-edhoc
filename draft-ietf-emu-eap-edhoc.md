@@ -700,7 +700,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 - (5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
 
-- (6) Confidentiality. It is required that the encryption of message_3 provides confidentiality against active attackers and EDHOC message_4 relies on the use of authenticated encryption.
+- (6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers and message_3 and message_4 provides confidentiality against active attackers.
 
 - (7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in {{Key_Hierarchy}}.
 
