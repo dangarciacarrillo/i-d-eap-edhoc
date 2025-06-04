@@ -62,6 +62,7 @@ normative:
    RFC3748:
    RFC7542:
    RFC8174:
+   RFC8610:
    RFC9190:
    RFC9528:
 
@@ -491,7 +492,7 @@ The process of configuring a root CA certificate and a server name is non-trivia
 
 The key derivation for EDHOC is described in Section 4 of {{RFC9528}}. The key material and Method-Id SHALL be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of {{RFC9528}}.
 
-Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.
+Type is the value of the EAP Type field defined in Section 2 of {{RFC3748}}. For EAP-EDHOC, Type has the value TBD1. The << >> notation defined in Section G.3 of {{RFC8610}} means that the integer Type value is embedded in a CBOR byte string. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Type        =  TBD1
