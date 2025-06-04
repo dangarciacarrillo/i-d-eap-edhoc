@@ -1121,8 +1121,8 @@ Table of Contents
 
 6.9.  Cross-Protocol Attacks
 
-   This in TLS 1.3 is applied in the context of resumption.  Does not
-   apply here.
+   This applies in the context of TLS 1.3 resumption.  Does not apply
+   here.
 
 7.  References
 
