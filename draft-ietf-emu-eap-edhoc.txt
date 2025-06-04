@@ -1090,8 +1090,8 @@ Table of Contents
 6.5.  Packet Modification Attacks
 
    EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity
-   protect as much information as possible.  Any change is detected by
-   means of the transcript hashes integrity verification.
+   protect as much information as possible.  Any change in any message
+   is detected by means of the transcript hashes integrity verification.
 
 6.6.  Authorization
 
