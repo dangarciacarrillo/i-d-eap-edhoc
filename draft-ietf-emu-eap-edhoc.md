@@ -110,7 +110,7 @@ EAP-EDHOC is similar to EAP-TLS 1.3 {{RFC9190}}, since EDHOC is based on a simil
 
 Ephemeral Diffie-Hellman Over COSE (EDHOC) is a lightweight authenticated ephemeral Diffie-Hellman key exchange, including mutual authentication and establishment of shared secret keying material, see {{RFC9528}}.
 
-EDHOC provides state-of-the-art security design at very low message overhead, targeting low complexity implementations and allowing extensibility. The security of EDHOC has been thoroughly analysed, some references are provided in {{Section 9.1 of RFC9528}}.
+EDHOC provides state-of-the-art security design at very low message overhead, targeting low complexity implementations and allowing extensibility. The security of EDHOC has been thoroughly analyzed, some references are provided in {{Section 9.1 of RFC9528}}.
 
 The main features of EDHOC are:
 
@@ -118,13 +118,13 @@ The main features of EDHOC are:
 
 * A standardized and extensible format for identification of credentials, using COSE header parameters {{RFC9052}}, supporting credential transport by value or by reference, enabling very compact representations.
 
-* Crypto agility and secure ciphersuite negotiation, with predefined compactly represented ciphersuites and support for extensibility using the COSE algorithms registry {{RFC9053}}.
+* Crypto agility and secure cipher suite negotiation, with predefined compactly represented cipher suites and support for extensibility using the COSE algorithms registry {{RFC9053}}.
 
 * Selection of connection identifiers identifying a connection for which keys are agreed.
 
 * Support for integration of external security applications into EDHOC by transporting External Authorization Data (EAD) included in and protected as EDHOC messages.
 
-A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile including method, ciphersuite,  etc. More details are provided in  {{I-D.ietf-lake-app-profiles}}.
+A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile including method, cipher suite,  etc. More details are provided in  {{I-D.ietf-lake-app-profiles}}.
 
 EDHOC messages makes use of lightweight primitives, specifically CBOR {{RFC8949}} and COSE {{RFC9052}} {{RFC9053}} for efficient encoding and security services in constrained devices. EDHOC is optimized for use of with CoAP {{RFC7252}} and OSCORE {{RFC8613}} to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.
 
@@ -599,7 +599,7 @@ EDHOC Message Length:
 : The EDHOC Message Length field can have a size of one to four octets and is  present only if the L bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation it is not present.
 
 EDHOC Data:
-: The EDHOC data consists of the the whole or a fragment of transported EDHOC message.
+: The EDHOC data consists of the whole or a fragment of transported EDHOC message.
 
 # IANA Considerations {#iana}
 
@@ -676,7 +676,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 |Replay protection:         | Yes (5)|
 |Confidentiality:           | Yes (6)|
 |Key derivation:            | Yes (7)|
-|Key strength:              | The specified cryptosuites provide key strength of at least 128 bits.|
+|Key strength:              | The specified cipher suites provide key strength of at least 128 bits.|
 |Dictionary attack prot.:  | Yes (8)|
 |Fast reconnect:           | No |
 |Crypt. binding:           | N/A  |
