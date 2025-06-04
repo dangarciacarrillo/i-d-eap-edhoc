@@ -2230,7 +2230,7 @@ EDHOC integrity protects all message content using transcript hashes for key der
               <p id="section-6.1.2-3.5.1">(5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.<a href="#section-6.1.2-3.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.2-3.6">
-              <p id="section-6.1.2-3.6.1">(6) Confidentiality. It is required that the encryption of message_3 provides confidentiality against active attackers and EDHOC message_4 relies on the use of authenticated encryption.<a href="#section-6.1.2-3.6.1" class="pilcrow">¶</a></p>
+              <p id="section-6.1.2-3.6.1">(6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers and message_3 and message_4 provides confidentiality against active attackers.<a href="#section-6.1.2-3.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.2-3.7">
               <p id="section-6.1.2-3.7.1">(7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in <a href="#Key_Hierarchy" class="auto internal xref">Section 3.3</a>.<a href="#section-6.1.2-3.7.1" class="pilcrow">¶</a></p>
