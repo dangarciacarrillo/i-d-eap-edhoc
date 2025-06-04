@@ -146,7 +146,7 @@ Table of Contents
 
    EDHOC provides state-of-the-art security design at very low message
    overhead, targeting low complexity implementations and allowing
-   extensibility.  The security of EDHOC has been thoroughly analysed,
+   extensibility.  The security of EDHOC has been thoroughly analyzed,
    some references are provided in Section 9.1 of [RFC9528].
 
    The main features of EDHOC are:
@@ -165,9 +165,9 @@ Table of Contents
       credential transport by value or by reference, enabling very
       compact representations.
 
-   *  Crypto agility and secure ciphersuite negotiation, with predefined
-      compactly represented ciphersuites and support for extensibility
-      using the COSE algorithms registry [RFC9053].
+   *  Crypto agility and secure cipher suite negotiation, with
+      predefined compactly represented cipher suites and support for
+      extensibility using the COSE algorithms registry [RFC9053].
 
    *  Selection of connection identifiers identifying a connection for
       which keys are agreed.
@@ -178,7 +178,7 @@ Table of Contents
 
    A necessary condition for a successful completion of an EDHOC session
    is that both peers support a common application profile including
-   method, ciphersuite, etc.  More details are provided in
+   method, cipher suite, etc.  More details are provided in
    [I-D.ietf-lake-app-profiles].
 
    EDHOC messages makes use of lightweight primitives, specifically CBOR
@@ -868,8 +868,8 @@ Table of Contents
       the EDHOC message that is being fragmented.  When there is no
       fragmentation it is not present.
 
-   EDHOC Data:  The EDHOC data consists of the the whole or a fragment
-      of transported EDHOC message.
+   EDHOC Data:  The EDHOC data consists of the whole or a fragment of
+      transported EDHOC message.
 
 5.  IANA Considerations
 
@@ -979,7 +979,7 @@ Table of Contents
        +------------------+---------------------------------------+
        | Key derivation:  | Yes (7)                               |
        +------------------+---------------------------------------+
-       | Key strength:    | The specified cryptosuites provide    |
+       | Key strength:    | The specified cipher suites provide   |
        |                  | key strength of at least 128 bits.    |
        +------------------+---------------------------------------+
        | Dictionary       | Yes (8)                               |
