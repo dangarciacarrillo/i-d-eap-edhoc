@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 10 January 2026                            University of Murcia
+Expires: 16 January 2026                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                             9 July 2025
+                                                            15 July 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 January 2026.
+   This Internet-Draft will expire on 16 January 2026.
 
 Copyright Notice
 
@@ -245,8 +245,8 @@ Table of Contents
    during the protocol.
 
    The optimization combining the execution of EDHOC with the first
-   subsequent OSCORE transaction specified in [RFC9668] is not supported
-   in this EAP method.
+   subsequent OSCORE transaction specified in [RFC9668] is not
+   applicable to this EAP method.
 
    Figure 1 shows an example message flow for a successful execution of
    EAP-EDHOC.
