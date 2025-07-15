@@ -154,7 +154,7 @@ Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method
 
 EDHOC allows EAP-EDHOC to support authentication credentials of any type defined by COSE, which can be either transported or referenced during the protocol.
 
-The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{RFC9668}} is not supported in this EAP method.
+The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in {{RFC9668}} is not applicable to this EAP method.
 
 {{message-flow}} shows an example message flow for a successful execution of EAP-EDHOC.
 
