@@ -654,8 +654,8 @@ Label: TBD5
 Description: EAP channel binding information
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This new EAD item is intended only for EAD_3 and EAD_4. Then, it MUST be ignored if included in other EAD fields. This new EAD item is considered as non-critical.
-Multiple occurrences of this new EAD item in one EAD field are allowed.
+This new EAD item is intended only for EAD_3 and EAD_4. Then, it MUST be ignored if included in other EAD fields. This new EAD item is considered as critical.
+Multiple occurrences of this new EAD item in one EAD field are NOT allowed.
 
 # Security Considerations {#security}
 
