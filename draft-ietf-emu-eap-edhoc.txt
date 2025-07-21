@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 16 January 2026                            University of Murcia
+Expires: 22 January 2026                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            15 July 2025
+                                                            21 July 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 January 2026.
+   This Internet-Draft will expire on 22 January 2026.
 
 Copyright Notice
 
@@ -949,8 +949,8 @@ Table of Contents
 
    This new EAD item is intended only for EAD_3 and EAD_4.  Then, it
    MUST be ignored if included in other EAD fields.  This new EAD item
-   is considered as non-critical.  Multiple occurrences of this new EAD
-   item in one EAD field are allowed.
+   is considered as critical.  Multiple occurrences of this new EAD item
+   in one EAD field are NOT allowed.
 
 6.  Security Considerations
 
