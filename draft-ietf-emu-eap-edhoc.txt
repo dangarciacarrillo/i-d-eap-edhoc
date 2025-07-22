@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 22 January 2026                            University of Murcia
+Expires: 23 January 2026                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            21 July 2025
+                                                            22 July 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 January 2026.
+   This Internet-Draft will expire on 23 January 2026.
 
 Copyright Notice
 
@@ -783,7 +783,7 @@ Table of Contents
    inclusion of additional information at the method level without
    issues.
 
-   While the EAD_1 and EAD_2 fields (transmitted in EDHOC message_1 and
+   While the EAD_1 and EAD_2 fields (carried in EDHOC message_1 and
    EDHOC message_2, respectively) are integrity protected through the
    transcript hash, the channel binding protocol defined in [RFC6677]
    must be transported after keying material has been derived between
@@ -793,15 +793,30 @@ Table of Contents
    EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4,
    respectively.
 
-   If the server detects a consistency error in the channel binding
-   information contained in EAD_3, it will send a protected indication
-   of failed consistency in EAD_4.  Subsequently, the EAP peer will
-   respond with the standard empty EAP-EDHOC message and the EAP server
-   will conclude the exchange with an EAP-Failure message.
+   It is important to note that EAD fields in EDHOC are optional;
+   consequently, the inclusion of EAP Channel Binding information in an
+   authentication exchange is also optional.
 
    Accordingly, this document specifies a new EAD item, with ead_label =
    TBD5, to incorporate EAP channel binding information into the EAD
-   fields of the EAP-EDHOC messages.  See Section 5.3.
+   fields of the EAP-EDHOC messages.  See the definition in Section 5.3.
+
+      *Implementation Note:* This document defines only the container
+      for carrying EAP Channel Binding information within EAP-EDHOC
+      messages, using the EAD_3 and EAD_4 fields.  The format and
+      semantics of the channel binding content are application-specific
+      and are determined by the authentication domain in which the
+      protocol is deployed.
+
+   If the server detects a consistency error in the channel binding
+   information contained in EAD_3, it MUST send an EDHOC error message,
+   as specified in [RFC9528], since the new EAD item defined to carry
+   EAP Channel Binding information is critical.  In this case, the
+   exchange proceeds according to Figure 4.
+
+   Similarly, if the Initiator detects an error in the channel binding
+   information contained in EAD_4, it MUST send an EDHOC error message,
+   and the exchange proceeds according to Figure 5.
 
 4.  Detailed Description of the EAP-EDHOC Request and Response Protocol
 
