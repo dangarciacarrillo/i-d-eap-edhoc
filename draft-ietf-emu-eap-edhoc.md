@@ -85,6 +85,7 @@ informative:
   I-D.ietf-cose-cbor-encoded-cert:
   I-D.ietf-lake-app-profiles:
   I-D.ietf-lake-edhoc-impl-cons:
+  I-D.ietf-lake-authz:
   Sec5G:
     target: https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169
     title: "Security architecture and procedures for 5G System"
@@ -487,6 +488,8 @@ The EAP peer identity provided in the EAP-Response/Identity is not authenticated
 The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.
 
 The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are RECOMMENDED. For example, the eduroam federation {{RFC7593}} provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers MAY implement a Trust On First Use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.
+
+As an alternative to standard certificate validation, EDHOC extensions such as the Lightweight Authorization mechanism defined in {{I-D.ietf-lake-authz}} can provide additional means of verifying server credentials. Such mechanisms may be suitable in deployments where no prior trust relationship exists or where managing trusted root CAs is impractical.
 
 ## Key Hierarchy {#Key_Hierarchy}
 
