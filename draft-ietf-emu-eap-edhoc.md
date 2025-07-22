@@ -526,11 +526,18 @@ EAP-EDHOC allows the secure exchange of information between the endpoints of the
 
 Section 6 in {{RFC6677}} outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.
 
-While the EAD_1 and EAD_2 fields (transmitted in EDHOC message_1 and EDHOC message_2, respectively) are integrity protected through the transcript hash, the channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with {{RFC6677}} requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.
+While the EAD_1 and EAD_2 fields (carried in EDHOC message_1 and EDHOC message_2, respectively) are integrity protected through the transcript hash, the channel binding protocol defined in {{RFC6677}} must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with {{RFC6677}} requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.
 
-If the server detects a consistency error in the channel binding information contained in EAD_3, it will send a protected indication of failed consistency in EAD_4. Subsequently, the EAP peer will respond with the standard empty EAP-EDHOC message and the EAP server will conclude the exchange with an EAP-Failure message.
+It is important to note that EAD fields in EDHOC are optional; consequently, the inclusion of EAP Channel Binding information in an authentication exchange is also optional.
 
-Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See {{iana-ead}}.
+Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in {{iana-ead}}.
+
+> **Implementation Note:**
+> This document defines only the container for carrying EAP Channel Binding information within EAP-EDHOC messages, using the `EAD_3` and `EAD_4` fields. The format and semantics of the channel binding content are application-specific and are determined by the authentication domain in which the protocol is deployed.
+
+If the server detects a consistency error in the channel binding information contained in EAD_3, it MUST send an EDHOC error message, as specified in {{RFC9528}}, since the new EAD item defined to carry EAP Channel Binding information is critical. In this case, the exchange proceeds according to {{message3-reject}}.
+
+Similarly, if the Initiator detects an error in the channel binding information contained in EAD_4, it MUST send an EDHOC error message, and the exchange proceeds according to {{message4-reject}}.
 
 # Detailed Description of the EAP-EDHOC Request and Response Protocol {#detailed-description}
 
