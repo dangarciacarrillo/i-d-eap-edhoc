@@ -718,6 +718,13 @@ Table of Contents
    interception attacks and should only be used if there are adequate
    controls in place to mitigate this risk.
 
+   As an alternative to standard certificate validation, EDHOC
+   extensions such as the Lightweight Authorization mechanism defined in
+   [I-D.ietf-lake-authz] can provide additional means of verifying
+   server credentials.  Such mechanisms may be suitable in deployments
+   where no prior trust relationship exists or where managing trusted
+   root CAs is impractical.
+
 3.3.  Key Hierarchy
 
    The key derivation for EDHOC is described in Section 4 of [RFC9528].
@@ -1207,6 +1214,14 @@ Table of Contents
               ietf-lake-app-profiles-02, 7 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
               app-profiles-02>.
+
+   [I-D.ietf-lake-authz]
+              Selander, G., Mattsson, J. P., Vučinić, M., Fedrecheski,
+              G., and M. Richardson, "Lightweight Authorization using
+              Ephemeral Diffie-Hellman Over COSE (ELA)", Work in
+              Progress, Internet-Draft, draft-ietf-lake-authz-05, 7 July
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lake-authz-05>.
 
    [I-D.ietf-lake-edhoc-impl-cons]
               Tiloca, M., "Implementation Considerations for Ephemeral
