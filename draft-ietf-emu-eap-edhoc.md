@@ -770,7 +770,7 @@ This applies in the context of TLS 1.3 resumption, while it does not apply here.
 # Acknowledgments
 {: numbered="no"}
 
-The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca for his review.
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca, Christian Amsüss and Gabriel Lopez-Millan for their review.
 
 This work was supported partially by grant PID2020-112675RB-C44 funded by MCIN/AEI/10.13039/5011000011033 (ONOFRE3-UMU).
 
