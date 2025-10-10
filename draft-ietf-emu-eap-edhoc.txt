@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 31 January 2026                            University of Murcia
+Expires: 13 April 2026                              University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            30 July 2025
+                                                         10 October 2025
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 January 2026.
+   This Internet-Draft will expire on 13 April 2026.
 
 Copyright Notice
 
@@ -156,8 +156,8 @@ Table of Contents
       [I-D.ietf-lake-edhoc-psk].  A large and extensible variety of
       authentication credentials is supported, including public key
       certificates such as X.509 and C509
-      [I-D.ietf-cose-cbor-encoded-cert], CBOR Web Tokens, and CWT Claims
-      Sets [RFC8392].
+      [I-D.ietf-cose-cbor-encoded-cert], CBOR Web Token (CWT), and CWT
+      Claims Set (CCS) [RFC8392].
 
    *  A standardized and extensible format for identification of
       credentials, using COSE header parameters [RFC9052], supporting
@@ -559,28 +559,28 @@ Table of Contents
    Request packets, as well as a (conditional) EAP-EDHOC Message Length
    field that can be zero to four octets.
 
-   If the L bits are set, this indicates that the message is fragmented,
-   and that the total message length is specified in the EAP-EDHOC
-   Message Length field.
+   If the L flag bits are set (at least one different from zero), this
+   indicates that the message is fragmented, and that the total message
+   length is specified in the EAP-EDHOC Message Length field.
 
-   Implementations MUST NOT set the L bit in unfragmented messages.
-   However, they MUST accept unfragmented messages regardless of whether
-   the L bit is set.  Some EAP implementations and access networks
-   impose limits on the number of EAP packet exchanges that can be
-   processed.  To minimize fragmentation, it is RECOMMENDED to use
-   compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor
+   Implementations MUST NOT set the L flag bits in unfragmented
+   messages.  However, they MUST accept unfragmented messages regardless
+   of whether the L flag bits are set.  Some EAP implementations and
+   access networks impose limits on the number of EAP packet exchanges
+   that can be processed.  To minimize fragmentation, it is RECOMMENDED
+   to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor
    authentication credentials, as well as to limit the length of
    certificate chains.  Additionally, mechanisms that reduce the size of
    Certificate messages are RECOMMENDED.
 
-   To be more specific, the L field indicates the length of the EDHOC
-   Message Length field, which MUST be present for the first fragment of
-   a fragmented EDHOC message.  The M flag bit is set on all but the
-   last fragment.  The S flag bit is set only within the EAP-EDHOC start
-   message sent by the EAP server to the peer (and is also used in
-   unfragmented exchanges).  The EDHOC Message Length field provides the
-   total length of the EDHOC message that is being fragmented; this
-   simplifies buffer allocation.
+   To be more specific, the L flag bits field indicates the length of
+   the EDHOC Message Length field, which MUST be present for the first
+   fragment of a fragmented EDHOC message.  The M flag bit is set on all
+   but the last fragment.  The S flag bit is set only within the EAP-
+   EDHOC start message sent by the EAP server to the peer (and is also
+   used in unfragmented exchanges).  The EDHOC Message Length field
+   provides the total length of the EDHOC message that is being
+   fragmented; this simplifies buffer allocation.
 
    When an EAP-EDHOC peer receives an EAP-Request packet with the M bit
    set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and
@@ -857,7 +857,8 @@ Table of Contents
       responses with requests.  The Identifier field MUST be changed on
       each new (non-retransmission) Request packet, and MUST be the same
       if a Request packet is retransmitted due to a timeout while
-      waiting for a Response.
+      waiting for a Response.  In the case of fragmented messages, the
+      Identifier will follow the indications of Section 3.1.6.
 
    Length:  The Length field is two octets and indicates the length of
       the EAP packet including the Code, Identifier, Length, Type, and
@@ -877,18 +878,19 @@ Table of Contents
    M:  The M bit (more fragments) is set on all but the last fragment.
       I.e., when there is no fragmentation, it is set to zero.
 
-   L:  The L field is the binary encoding of the size of the EDHOC
-      Message Length, in the range 0 byte to 4 bytes.  All three bits
-      set to 0 indicates that the EDHOC Message Length field is not
-      present.  If the first two bits of the L field are set to 0 and
-      the final bit is set to 1, then the size of the EDHOC Message
-      Length field is 1 byte, and so on.
+   L:  The L flag bits field is the binary encoding of the size of the
+      EDHOC Message Length, in the range 0 byte to 4 bytes.  All three
+      bits set to 0 indicates that the EDHOC Message Length field is not
+      present.  If the first two bits of the L flag bits field are set
+      to 0 and the final bit is set to 1, then the size of the EDHOC
+      Message Length field is 1 byte, and so on.  Values from 5-7 are
+      not considered in the specification.
 
    EDHOC Message Length:  The EDHOC Message Length field can have a size
-      of one to four octets and is present only if the L field represent
-      a value greater than 0.  This field provides the total length of
-      the EDHOC message that is being fragmented.  When there is no
-      fragmentation, it is not present.
+      of one to four octets and is present only if the L flag bits field
+      represent a value greater than 0.  This field provides the total
+      length of the EDHOC message that is being fragmented.  When there
+      is no fragmentation, it is not present.
 
    EDHOC Data:  The EDHOC data consists of the whole or a fragment of
       the transported EDHOC message.
@@ -916,18 +918,19 @@ Table of Contents
    M:  The M bit (more fragments) is set on all but the last fragment.
       I.e., when there is no fragmentation, it is set to zero.
 
-   L:  The L field is the binary encoding of the size of the EDHOC
-      Message Length, in the range 0 byte to 4 bytes.  All three bits
-      set to 0 indicates that the EDHOC Message Length field is not
+   L:  The L flag bits field is the binary encoding of the size of the
+      EDHOC Message Length, in the range 0 byte to 4 bytes.  All three
+      bits set to 0 indicates that the EDHOC Message Length field is not
       present.  If the first two bits of the L field are set to 0 and
       the final bit is set to 1, then the size of the EDHOC Message
-      Length field is 1 byte, and so on.
+      Length field is 1 byte, and so on.  Values from 5 to 7 are not
+      considered in the specification.
 
    EDHOC Message Length:  The EDHOC Message Length field can have a size
-      of one to four octets and is present only if the L bits represent
-      a value greater than 0.  This field provides the total length of
-      the EDHOC message that is being fragmented.  When there is no
-      fragmentation, it is not present.
+      of one to four octets and is present only if the L flag bits
+      represent a value greater than 0.  This field provides the total
+      length of the EDHOC message that is being fragmented.  When there
+      is no fragmentation, it is not present.
 
    EDHOC Data:  The EDHOC data consists of the whole or a fragment of
       the transported EDHOC message.
@@ -1042,7 +1045,7 @@ Table of Contents
       credential types for which COSE header parameters are defined.
       These include X.509 certificates [RFC9360], C509 certificates,
       CWTs ([RFC9528] Section 3.5.3.1), and CCSs ([RFC8392]
-      Section 3.5.3.1).
+      Section 7.1).
 
    *  (2) Cipher suite negotiation: The Initiator's list of supported
       cipher suites and order of preference is fixed, and the selected
@@ -1203,9 +1206,9 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-14, 23 June 2025,
+              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-14>.
+              cbor-encoded-cert-15>.
 
    [I-D.ietf-lake-app-profiles]
               Tiloca, M. and R. Höglund, "Coordinating the Use of
@@ -1231,12 +1234,12 @@ Table of Contents
               lake-edhoc-impl-cons-04>.
 
    [I-D.ietf-lake-edhoc-psk]
-              Lopez-Perez, Selander, G., Mattsson, J. P., and R. Marin-
-              Lopez, "EDHOC Authenticated with Pre-Shared Keys (PSK)",
-              Work in Progress, Internet-Draft, draft-ietf-lake-edhoc-
-              psk-04, 7 July 2025,
+              Lopez-Perez, Selander, G., Mattsson, J. P., Marin-Lopez,
+              R., and F. Lopez-Gomez, "EDHOC Authenticated with Pre-
+              Shared Keys (PSK)", Work in Progress, Internet-Draft,
+              draft-ietf-lake-edhoc-psk-05, 17 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              edhoc-psk-04>.
+              edhoc-psk-05>.
 
    [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
               "State Machines for Extensible Authentication Protocol
