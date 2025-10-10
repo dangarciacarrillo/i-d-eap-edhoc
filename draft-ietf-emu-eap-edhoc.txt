@@ -883,7 +883,7 @@ Table of Contents
       bits set to 0 indicates that the EDHOC Message Length field is not
       present.  If the first two bits of the L flag bits field are set
       to 0 and the final bit is set to 1, then the size of the EDHOC
-      Message Length field is 1 byte, and so on.  Values from 5-7 are
+      Message Length field is 1 byte, and so on.  Values from 5 to 7 are
       not considered in the specification.
 
    EDHOC Message Length:  The EDHOC Message Length field can have a size
