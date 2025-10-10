@@ -116,7 +116,7 @@ EDHOC provides state-of-the-art security design at very low message overhead, ta
 
 The main features of EDHOC are:
 
-* Support for different authentication methods and credentials. The authentication methods include (mixed) signatures and static Diffie-Hellman keys {{RFC9528}}, and pre-shared keys {{I-D.ietf-lake-edhoc-psk}}. A large and extensible variety of authentication credentials is supported, including public key certificates such as X.509 and C509 {{I-D.ietf-cose-cbor-encoded-cert}}, CBOR Web Tokens, and CWT Claims Sets {{RFC8392}}.
+* Support for different authentication methods and credentials. The authentication methods include (mixed) signatures and static Diffie-Hellman keys {{RFC9528}}, and pre-shared keys {{I-D.ietf-lake-edhoc-psk}}. A large and extensible variety of authentication credentials is supported, including public key certificates such as X.509 and C509 {{I-D.ietf-cose-cbor-encoded-cert}}, CBOR Web Token (CWT), and CWT Claims Set (CCS) {{RFC8392}}.
 
 * A standardized and extensible format for identification of credentials, using COSE header parameters {{RFC9052}}, supporting credential transport by value or by reference, enabling very compact representations.
 
@@ -401,11 +401,11 @@ EDHOC is designed to perform well in constrained networks where message sizes ar
 
 To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
-If the L bits are set, this indicates that the message is fragmented, and that the total message length is specified in the EAP-EDHOC Message Length field.
+If the L flag bits are set (at least one different from zero), this indicates that the message is fragmented, and that the total message length is specified in the EAP-EDHOC Message Length field.
 
-Implementations MUST NOT set the L bit in unfragmented messages. However, they MUST accept unfragmented messages regardless of whether the L bit is set. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
+Implementations MUST NOT set the L flag bits in unfragmented messages. However, they MUST accept unfragmented messages regardless of whether the L flag bits are set. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
 
-To be more specific, the L field indicates the length of the EDHOC Message Length field, which MUST be present for the first fragment of a fragmented EDHOC message. The M flag bit is set on all but the last fragment. The S flag bit is set only within the EAP-EDHOC start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The EDHOC Message Length field provides the total length of the EDHOC message that is being fragmented; this simplifies buffer allocation.
+To be more specific, the L flag bits field indicates the length of the EDHOC Message Length field, which MUST be present for the first fragment of a fragmented EDHOC message. The M flag bit is set on all but the last fragment. The S flag bit is set only within the EAP-EDHOC start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The EDHOC Message Length field provides the total length of the EDHOC message that is being fragmented; this simplifies buffer allocation.
 
 When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
 
@@ -565,7 +565,7 @@ Code:
 : 1 (Request)
 
 Identifier:
-: The Identifier field is one octet and aids in matching responses with requests. The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response.
+: The Identifier field is one octet and aids in matching responses with requests. The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response. In the case of fragmented messages, the Identifier will follow the indications of {{fragmentation}}.
 
 Length:
 : The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
@@ -583,10 +583,10 @@ M:
 : The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
-: The L field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
+: The L flag bits field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L flag bits field are set to 0 and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5-7 are not considered in the specification.
 
 EDHOC Message Length:
-: The EDHOC Message Length field can have a size of one to four octets and is present only if the L field represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
+: The EDHOC Message Length field can have a size of one to four octets and is present only if the L flag bits field represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
 
 EDHOC Data:
 : The EDHOC data consists of the whole or a fragment of the transported EDHOC message.
@@ -600,7 +600,7 @@ Identifier:
 : The Identifier field is one octet and MUST match the Identifier field from the corresponding request.
 
 Length:
-: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
+: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception. 
 
 Type:
 : TBD1 (EAP-EDHOC)
@@ -616,10 +616,10 @@ M:
 : The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.
 
 L:
-: The L field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on.
+: The L flag bits field is the binary encoding of the size of the EDHOC Message Length, in the range 0 byte to 4 bytes. All three bits set to 0 indicates that the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the final bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5 to 7 are not considered in the specification.
 
 EDHOC Message Length:
-: The EDHOC Message Length field can have a size of one to four octets and is  present only if the L bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
+: The EDHOC Message Length field can have a size of one to four octets and is  present only if the L flag bits represent a value greater than 0.  This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
 
 EDHOC Data:
 : The EDHOC data consists of the whole or a fragment of the transported EDHOC message.
@@ -698,7 +698,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 
 - (1) Authentication principle:
-  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1), and CCSs ({{RFC8392}} Section 3.5.3.1).
+  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1), and CCSs ({{RFC8392}} Section 7.1).
 
 - (2) Cipher suite negotiation:
   The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.
