@@ -600,7 +600,7 @@ Identifier:
 : The Identifier field is one octet and MUST match the Identifier field from the corresponding request.
 
 Length:
-: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception. 
+: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
 Type:
 : TBD1 (EAP-EDHOC)
