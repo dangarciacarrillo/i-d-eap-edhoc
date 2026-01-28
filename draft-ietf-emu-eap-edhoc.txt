@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 14 April 2026                              University of Murcia
+Expires: 1 August 2026                              University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                         11 October 2025
+                                                         28 January 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,11 +59,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 April 2026.
+   This Internet-Draft will expire on 1 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -548,40 +548,38 @@ Table of Contents
    typically so small that fragmentation is not needed.  However, as
    EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC
    implementations MUST provide support for fragmentation and
-   reassembly.  Since EAP is a lock-step protocol, fragmentation support
-   can be easily added.
+   reassembly.  Some EAP implementations and access networks impose
+   limits on the number of EAP packet exchanges that can be processed.
+   To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC
+   peer, EAP-EDHOC server, and trust anchor authentication credentials,
+   as well as to limit the length of certificate chains.  Additionally,
+   mechanisms that reduce the size of Certificate messages are
+   RECOMMENDED.
 
-   To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have
-   a set of information fields that allow for the specification of the
-   fragmentation process (see Section 4 for the detailed description).
-   As a summary, EAP-EDHOC fragmentation support is provided through the
-   addition of flag bits (M and L) within the EAP-Response and EAP-
-   Request packets, as well as a (conditional) EAP-EDHOC Message Length
-   field that can be zero to four octets.
+   Since EAP is a lock-step protocol, fragmentation support can be
+   easily added.  To do so, the EAP-Response and EAP-Request packets of
+   EAP-EDHOC have a set of information fields that allow for the
+   specification of the fragmentation process (see Section 4 for the
+   detailed description).  As a summary, EAP-EDHOC fragmentation support
+   is provided through the addition of flag bits (M and L) within the
+   EAP-Response and EAP-Request packets, as well as a (conditional) EAP-
+   EDHOC Message Length field that can be zero to four octets.
 
-   If any of the L flag bits are set (i.e., at least one bit has the
-   value 1), this indicates that the message is fragmented and that the
-   total message length is provided in the EAP-EDHOC Message Length
-   field.
+   The EDHOC Message Length field conveys the total length of the EDHOC
+   message being fragmented, which facilitates buffer allocation.  The L
+   flag consists of three bits that determine the length of the EDHOC
+   Message Length field.  This L flag MUST be present in the first
+   fragment of a fragmented EDHOC message, indicating the size of the
+   EAP-EDHOC Message Length field and thereby signaling that the EDHOC
+   message is fragmented.  Implementations MUST NOT set any of the L
+   flag bits to 1 in unfragmented messages.  However, implementations
+   MUST accept unfragmented messages regardless of the value of the L
+   flag bits.
 
-   Implementations MUST NOT set any of the L flag bits to 1 in
-   unfragmented messages.  However, they MUST accept unfragmented
-   messages regardless of the value of the L flag bits.  Some EAP
-   implementations and access networks impose limits on the number of
-   EAP packet exchanges that can be processed.  To minimize
-   fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-
-   EDHOC server, and trust anchor authentication credentials, as well as
-   to limit the length of certificate chains.  Additionally, mechanisms
-   that reduce the size of Certificate messages are RECOMMENDED.
-
-   More precisely, the L flag bits indicate the length of the EDHOC
-   Message Length field, which MUST be present in the first fragment of
-   a fragmented EDHOC message.  The M flag bit SHALL be set in all
-   fragments except the last one.  The S flag bit SHALL be set only in
-   the EAP-EDHOC Start message sent by the EAP server to the peer (and
-   is also used in unfragmented exchanges).  The EDHOC Message Length
-   field conveys the total length of the EDHOC message being fragmented,
-   which facilitates buffer allocation.
+   The S flag bit SHALL be set only in the EAP-EDHOC Start message sent
+   by the EAP server to the peer (and is also used in unfragmented
+   exchanges).  The M flag bit SHALL be set in all fragments except the
+   last one.
 
    When an EAP-EDHOC peer receives an EAP-Request packet with the M bit
    set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and
@@ -887,11 +885,12 @@ Table of Contents
       Length field is 1 byte, and so on.  Values from 5 to 7 are not
       used in this specification.
 
-   EDHOC Message Length:  The EDHOC Message Length field can have a size
-      of one to four octets and is present only if the L flag bits
-      represent a value greater than 0.  This field provides the total
-      length of the EDHOC message that is being fragmented.  When there
-      is no fragmentation, it is not present.
+   EDHOC Message Length:  The EDHOC Message Length field, when present,
+      has a size of one to four octets, as determined by the L flag
+      bits.  It is included only if the L flag bits indicate a value
+      greater than zero and specifies the total length of the EDHOC
+      message being fragmented.  When fragmentation is not used, this
+      field is omitted.
 
    EDHOC Data:  The EDHOC data consists of the whole or a fragment of
       the transported EDHOC message.
@@ -927,11 +926,12 @@ Table of Contents
       Length field is 1 byte, and so on.  Values from 5 to 7 are not
       used in this specification.
 
-   EDHOC Message Length:  The EDHOC Message Length field can have a size
-      of one to four octets and is present only if the L flag bits
-      represent a value greater than 0.  This field provides the total
-      length of the EDHOC message that is being fragmented.  When there
-      is no fragmentation, it is not present.
+   EDHOC Message Length:  The EDHOC Message Length field, when present,
+      has a size of one to four octets, as determined by the L flag
+      bits.  It is included only if the L flag bits indicate a value
+      greater than zero and specifies the total length of the EDHOC
+      message being fragmented.  When fragmentation is not used, this
+      field is omitted.
 
    EDHOC Data:  The EDHOC data consists of the whole or a fragment of
       the transported EDHOC message.
@@ -1177,6 +1177,17 @@ Table of Contents
               (EAP)", RFC 3748, DOI 10.17487/RFC3748, June 2004,
               <https://www.rfc-editor.org/rfc/rfc3748>.
 
+   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
+              "State Machines for Extensible Authentication Protocol
+              (EAP) Peer and Authenticator", RFC 4137,
+              DOI 10.17487/RFC4137, August 2005,
+              <https://www.rfc-editor.org/rfc/rfc4137>.
+
+   [RFC6677]  Hartman, S., Ed., Clancy, T., and K. Hoeper, "Channel-
+              Binding Support for Extensible Authentication Protocol
+              (EAP) Methods", RFC 6677, DOI 10.17487/RFC6677, July 2012,
+              <https://www.rfc-editor.org/rfc/rfc6677>.
+
    [RFC7542]  DeKok, A., "The Network Access Identifier", RFC 7542,
               DOI 10.17487/RFC7542, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7542>.
@@ -1207,55 +1218,44 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
+              ietf-cose-cbor-encoded-cert-16, 25 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-15>.
+              cbor-encoded-cert-16>.
 
    [I-D.ietf-lake-app-profiles]
               Tiloca, M. and R. Höglund, "Coordinating the Use of
               Application Profiles for Ephemeral Diffie-Hellman Over
               COSE (EDHOC)", Work in Progress, Internet-Draft, draft-
-              ietf-lake-app-profiles-02, 7 July 2025,
+              ietf-lake-app-profiles-03, 20 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              app-profiles-02>.
+              app-profiles-03>.
 
    [I-D.ietf-lake-authz]
               Selander, G., Mattsson, J. P., Vučinić, M., Fedrecheski,
               G., and M. Richardson, "Lightweight Authorization using
               Ephemeral Diffie-Hellman Over COSE (ELA)", Work in
-              Progress, Internet-Draft, draft-ietf-lake-authz-05, 7 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lake-authz-05>.
+              Progress, Internet-Draft, draft-ietf-lake-authz-06, 20
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lake-authz-06>.
 
    [I-D.ietf-lake-edhoc-impl-cons]
               Tiloca, M., "Implementation Considerations for Ephemeral
               Diffie-Hellman Over COSE (EDHOC)", Work in Progress,
-              Internet-Draft, draft-ietf-lake-edhoc-impl-cons-04, 7 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lake-edhoc-impl-cons-04>.
+              Internet-Draft, draft-ietf-lake-edhoc-impl-cons-05, 7
+              January 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lake-edhoc-impl-cons-05>.
 
    [I-D.ietf-lake-edhoc-psk]
               Lopez-Perez, Selander, G., Mattsson, J. P., Marin-Lopez,
               R., and F. Lopez-Gomez, "EDHOC Authenticated with Pre-
               Shared Keys (PSK)", Work in Progress, Internet-Draft,
-              draft-ietf-lake-edhoc-psk-05, 17 September 2025,
+              draft-ietf-lake-edhoc-psk-06, 20 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              edhoc-psk-05>.
-
-   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
-              "State Machines for Extensible Authentication Protocol
-              (EAP) Peer and Authenticator", RFC 4137,
-              DOI 10.17487/RFC4137, August 2005,
-              <https://www.rfc-editor.org/rfc/rfc4137>.
+              edhoc-psk-06>.
 
    [RFC5216]  Simon, D., Aboba, B., and R. Hurst, "The EAP-TLS
               Authentication Protocol", RFC 5216, DOI 10.17487/RFC5216,
               March 2008, <https://www.rfc-editor.org/rfc/rfc5216>.
-
-   [RFC6677]  Hartman, S., Ed., Clancy, T., and K. Hoeper, "Channel-
-              Binding Support for Extensible Authentication Protocol
-              (EAP) Methods", RFC 6677, DOI 10.17487/RFC6677, July 2012,
-              <https://www.rfc-editor.org/rfc/rfc6677>.
 
    [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
               Application Protocol (CoAP)", RFC 7252,

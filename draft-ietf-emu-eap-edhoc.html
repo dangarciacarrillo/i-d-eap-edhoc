@@ -13,22 +13,21 @@
 <meta content="
        The Extensible Authentication Protocol (EAP), defined in RFC 3748, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, based on Ephemeral Diffie-Hellman Over COSE (EDHOC). EDHOC is a lightweight security handshake protocol, enabling authentication and establishment of shared secret keys suitable in constrained settings. This document also provides guidance on authentication and authorization for EAP-EDHOC. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-emu-eap-edhoc-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.4.0
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-ietf-emu-eap-edhoc.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -569,6 +568,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -639,7 +639,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1047,11 +1047,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EAP-EDHOC</td>
-<td class="right">October 2025</td>
+<td class="right">January 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 14 April 2026</td>
+<td class="center">Expires 1 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-11" class="published">11 October 2025</time>
+<time datetime="2026-01-28" class="published">28 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-14">14 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-01">1 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1143,7 +1143,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1707,18 +1707,17 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
           <h4 id="name-fragmentation">
 <a href="#section-3.1.6" class="section-number selfRef">3.1.6. </a><a href="#name-fragmentation" class="section-name selfRef">Fragmentation</a>
           </h4>
-<p id="section-3.1.6-1">EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations <span class="bcp14">MUST</span> provide support for fragmentation and reassembly. Since EAP is a lock-step protocol, fragmentation support can be easily added.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-2">To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see <a href="#detailed-description" class="auto internal xref">Section 4</a> for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.<a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-3">If any of the L flag bits are set (i.e., at least one bit has the value 1), this indicates that the message is fragmented and that the total message length is provided in the EAP-EDHOC Message Length field.<a href="#section-3.1.6-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-4">Implementations <span class="bcp14">MUST NOT</span> set any of the L flag bits to 1 in unfragmented messages. However, they <span class="bcp14">MUST</span> accept unfragmented messages regardless of the value of the L flag bits. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is <span class="bcp14">RECOMMENDED</span> to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.6-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-5">More precisely, the L flag bits indicate the length of the EDHOC Message Length field, which <span class="bcp14">MUST</span> be present in the first fragment of a fragmented EDHOC message. The M flag bit <span class="bcp14">SHALL</span> be set in all fragments except the last one. The S flag bit <span class="bcp14">SHALL</span> be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-6">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-7">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-7" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-8"><a href="#fragmentation-flow" class="auto internal xref">Figure 6</a> illustrates the conversation beetween the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:<a href="#section-3.1.6-8" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-1">EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations <span class="bcp14">MUST</span> provide support for fragmentation and reassembly. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is <span class="bcp14">RECOMMENDED</span> to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-2">Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see <a href="#detailed-description" class="auto internal xref">Section 4</a> for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.<a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-3">The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag <span class="bcp14">MUST</span> be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations <span class="bcp14">MUST NOT</span> set any of the L flag bits to 1 in unfragmented messages. However, implementations <span class="bcp14">MUST</span> accept unfragmented messages regardless of the value of the L flag bits.<a href="#section-3.1.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-4">The S flag bit <span class="bcp14">SHALL</span> be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The M flag bit <span class="bcp14">SHALL</span> be set in all fragments except the last one.<a href="#section-3.1.6-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-5">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-6">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-7"><a href="#fragmentation-flow" class="auto internal xref">Figure 6</a> illustrates the conversation beetween the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:<a href="#section-3.1.6-7" class="pilcrow">¶</a></p>
 <span id="name-eap-edhoc-fragmentation-exa"></span><div id="fragmentation-flow">
 <figure id="figure-6">
-            <div id="section-3.1.6-9.1">
-              <div class="alignCenter art-svg artwork" id="section-3.1.6-9.1.1">
+            <div id="section-3.1.6-8.1">
+              <div class="alignCenter art-svg artwork" id="section-3.1.6-8.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="1056" width="528" viewBox="0 0 528 1056" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 40,64 L 40,1040" fill="none" stroke="black"></path>
                   <path d="M 488,64 L 488,1040" fill="none" stroke="black"></path>
@@ -1829,7 +1828,7 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="192" y="964">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="416" y="1012">EAP-Success</text>
                   </g>
-                </svg><a href="#section-3.1.6-9.1.1" class="pilcrow">¶</a>
+                </svg><a href="#section-3.1.6-8.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
@@ -1986,7 +1985,7 @@ This document defines only the container for carrying EAP Channel Binding inform
           <dd class="break"></dd>
 <dt id="section-4.1-1.17">EDHOC Message Length:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.18">
-            <p id="section-4.1-1.18.1">The EDHOC Message Length field can have a size of one to four octets and is present only if the L flag bits represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.<a href="#section-4.1-1.18.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-1.18.1">The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.<a href="#section-4.1-1.18.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.19">EDHOC Data:</dt>
@@ -2045,7 +2044,7 @@ This document defines only the container for carrying EAP Channel Binding inform
           <dd class="break"></dd>
 <dt id="section-4.2-1.17">EDHOC Message Length:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.18">
-            <p id="section-4.2-1.18.1">The EDHOC Message Length field can have a size of one to four octets and is present only if the L flag bits represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.<a href="#section-4.2-1.18.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.18.1">The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.<a href="#section-4.2-1.18.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.19">EDHOC Data:</dt>
@@ -2355,6 +2354,14 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <dd>
 <span class="refAuthor">Aboba, B.</span>, <span class="refAuthor">Blunk, L.</span>, <span class="refAuthor">Vollbrecht, J.</span>, <span class="refAuthor">Carlson, J.</span>, and <span class="refAuthor">H. Levkowetz, Ed.</span>, <span class="refTitle">"Extensible Authentication Protocol (EAP)"</span>, <span class="seriesInfo">RFC 3748</span>, <span class="seriesInfo">DOI 10.17487/RFC3748</span>, <time datetime="2004-06" class="refDate">June 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3748">https://www.rfc-editor.org/rfc/rfc3748</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC4137">[RFC4137]</dt>
+        <dd>
+<span class="refAuthor">Vollbrecht, J.</span>, <span class="refAuthor">Eronen, P.</span>, <span class="refAuthor">Petroni, N.</span>, and <span class="refAuthor">Y. Ohba</span>, <span class="refTitle">"State Machines for Extensible Authentication Protocol (EAP) Peer and Authenticator"</span>, <span class="seriesInfo">RFC 4137</span>, <span class="seriesInfo">DOI 10.17487/RFC4137</span>, <time datetime="2005-08" class="refDate">August 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4137">https://www.rfc-editor.org/rfc/rfc4137</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6677">[RFC6677]</dt>
+        <dd>
+<span class="refAuthor">Hartman, S., Ed.</span>, <span class="refAuthor">Clancy, T.</span>, and <span class="refAuthor">K. Hoeper</span>, <span class="refTitle">"Channel-Binding Support for Extensible Authentication Protocol (EAP) Methods"</span>, <span class="seriesInfo">RFC 6677</span>, <span class="seriesInfo">DOI 10.17487/RFC6677</span>, <time datetime="2012-07" class="refDate">July 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6677">https://www.rfc-editor.org/rfc/rfc6677</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7542">[RFC7542]</dt>
         <dd>
 <span class="refAuthor">DeKok, A.</span>, <span class="refTitle">"The Network Access Identifier"</span>, <span class="seriesInfo">RFC 7542</span>, <span class="seriesInfo">DOI 10.17487/RFC7542</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7542">https://www.rfc-editor.org/rfc/rfc7542</a>&gt;</span>. </dd>
@@ -2386,35 +2393,27 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
 <dl class="references">
 <dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
         <dd>
-<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-15</span>, <time datetime="2025-08-18" class="refDate">18 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-16</span>, <time datetime="2026-01-25" class="refDate">25 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-16">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-app-profiles">[I-D.ietf-lake-app-profiles]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-app-profiles-02</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-02">https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-app-profiles-03</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-03">https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-authz">[I-D.ietf-lake-authz]</dt>
         <dd>
-<span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Vučinić, M.</span>, <span class="refAuthor">Fedrecheski, G.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Lightweight Authorization using Ephemeral Diffie-Hellman Over COSE (ELA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-authz-05</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-05">https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Vučinić, M.</span>, <span class="refAuthor">Fedrecheski, G.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Lightweight Authorization using Ephemeral Diffie-Hellman Over COSE (ELA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-authz-06</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-06">https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-edhoc-impl-cons">[I-D.ietf-lake-edhoc-impl-cons]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span>, <span class="refTitle">"Implementation Considerations for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-impl-cons-04</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-04">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span>, <span class="refTitle">"Implementation Considerations for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-impl-cons-05</span>, <time datetime="2026-01-07" class="refDate">7 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-05">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-edhoc-psk">[I-D.ietf-lake-edhoc-psk]</dt>
         <dd>
-<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-05</span>, <time datetime="2025-09-17" class="refDate">17 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-05">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC4137">[RFC4137]</dt>
-        <dd>
-<span class="refAuthor">Vollbrecht, J.</span>, <span class="refAuthor">Eronen, P.</span>, <span class="refAuthor">Petroni, N.</span>, and <span class="refAuthor">Y. Ohba</span>, <span class="refTitle">"State Machines for Extensible Authentication Protocol (EAP) Peer and Authenticator"</span>, <span class="seriesInfo">RFC 4137</span>, <span class="seriesInfo">DOI 10.17487/RFC4137</span>, <time datetime="2005-08" class="refDate">August 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4137">https://www.rfc-editor.org/rfc/rfc4137</a>&gt;</span>. </dd>
+<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-06</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-06">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5216">[RFC5216]</dt>
         <dd>
 <span class="refAuthor">Simon, D.</span>, <span class="refAuthor">Aboba, B.</span>, and <span class="refAuthor">R. Hurst</span>, <span class="refTitle">"The EAP-TLS Authentication Protocol"</span>, <span class="seriesInfo">RFC 5216</span>, <span class="seriesInfo">DOI 10.17487/RFC5216</span>, <time datetime="2008-03" class="refDate">March 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5216">https://www.rfc-editor.org/rfc/rfc5216</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC6677">[RFC6677]</dt>
-        <dd>
-<span class="refAuthor">Hartman, S., Ed.</span>, <span class="refAuthor">Clancy, T.</span>, and <span class="refAuthor">K. Hoeper</span>, <span class="refTitle">"Channel-Binding Support for Extensible Authentication Protocol (EAP) Methods"</span>, <span class="seriesInfo">RFC 6677</span>, <span class="seriesInfo">DOI 10.17487/RFC6677</span>, <time datetime="2012-07" class="refDate">July 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6677">https://www.rfc-editor.org/rfc/rfc6677</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7252">[RFC7252]</dt>
         <dd>
