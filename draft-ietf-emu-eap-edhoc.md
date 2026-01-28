@@ -60,6 +60,8 @@ normative:
 
    RFC2119:
    RFC3748:
+   RFC4137:
+   RFC6677:
    RFC7542:
    RFC8174:
    RFC8610:
@@ -68,9 +70,7 @@ normative:
 
 informative:
 
-  RFC4137:
   RFC5216:
-  RFC6677:
   RFC7252:
   RFC7593:
   RFC8392:
@@ -397,15 +397,13 @@ A node supporting EAP-EDHOC MUST NOT send its username (or any other permanent i
 
 ### Fragmentation {#fragmentation}
 
-EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations MUST provide support for fragmentation and reassembly. Since EAP is a lock-step protocol, fragmentation support can be easily added.
+EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations MUST provide support for fragmentation and reassembly. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
 
-To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
+Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
-If any of the L flag bits are set (i.e., at least one bit has the value 1), this indicates that the message is fragmented and that the total message length is provided in the EAP-EDHOC Message Length field.
+The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag MUST be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages. However, implementations MUST accept unfragmented messages regardless of the value of the L flag bits.
 
-Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages. However, they MUST accept unfragmented messages regardless of the value of the L flag bits. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is RECOMMENDED to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are RECOMMENDED.
-
-More precisely, the L flag bits indicate the length of the EDHOC Message Length field, which MUST be present in the first fragment of a fragmented EDHOC message. The M flag bit SHALL be set in all fragments except the last one. The S flag bit SHALL be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation.
+The S flag bit SHALL be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The M flag bit SHALL be set in all fragments except the last one.
 
 When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
 
@@ -586,7 +584,7 @@ L:
 : The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5 to 7 are not used in this specification.
 
 EDHOC Message Length:
-: The EDHOC Message Length field can have a size of one to four octets and is present only if the L flag bits represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
+: The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.
 
 EDHOC Data:
 : The EDHOC data consists of the whole or a fragment of the transported EDHOC message.
@@ -608,7 +606,6 @@ Type:
 R:
 : Implementations of this specification MUST set the R bits (reserved) to zero and MUST ignore them on reception.
 
-
 S:
 : The S bit (EAP-EDHOC start) is set to zero.
 
@@ -619,7 +616,7 @@ L:
 : The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5 to 7 are not used in this specification.
 
 EDHOC Message Length:
-: The EDHOC Message Length field can have a size of one to four octets and is present only if the L flag bits represent a value greater than 0. This field provides the total length of the EDHOC message that is being fragmented. When there is no fragmentation, it is not present.
+: The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.
 
 EDHOC Data:
 : The EDHOC data consists of the whole or a fragment of the transported EDHOC message.
