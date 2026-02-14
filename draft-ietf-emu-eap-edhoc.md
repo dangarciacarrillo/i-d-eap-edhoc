@@ -409,7 +409,7 @@ When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUS
 
 Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
 
-{{fragmentation-flow}} illustrates the conversation beetween the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:
+{{fragmentation-flow}} illustrates the conversation between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:
 
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
@@ -542,7 +542,7 @@ Similarly, if the Initiator detects an error in the channel binding information 
 
 # Detailed Description of the EAP-EDHOC Request and Response Protocol {#detailed-description}
 
-The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right. following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
+The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
  0                   1                   2                   3
