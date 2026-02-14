@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 1 August 2026                              University of Murcia
+Expires: 18 August 2026                             University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                         28 January 2026
+                                                        14 February 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2026.
+   This Internet-Draft will expire on 18 August 2026.
 
 Copyright Notice
 
@@ -1315,11 +1315,15 @@ Acknowledgments
 
    The authors sincerely thank Eduardo Ingles-Sanchez for his
    contribution in the initial phase of this work.  We also want to
-   thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan and Renzo
-   Navas for their reviews.
+   thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan, Renzo
+   Navas, Paul Wouters, Rich Salz and Ines Robles for their reviews.
 
-   This work was supported partially by grant PID2020-112675RB-C44
-   funded by MCIN/AEI/10.13039/5011000011033 (ONOFRE3-UMU).
+   This work was supported partially by Project PID2023-148104OB-C43
+   (ONOFRE4-UMU) from MCIN/AEI; the Formacion del Profesorado
+   Universitario predoctoral grant FPU24/03871, also from MCIN/AEI; and
+   the European Union's NextGenerationEU, as part of the Recovery,
+   Transformation, and Resilience Plan, supported by Spanish INCIBE (6G-
+   SOC project).
 
    This work was supported partially by Vinnova - the Swedish Agency for
    Innovation Systems - through the EUREKA CELTIC-NEXT project CYPRESS.
