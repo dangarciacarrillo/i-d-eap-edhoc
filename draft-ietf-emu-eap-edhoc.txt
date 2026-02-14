@@ -601,7 +601,7 @@ Table of Contents
    Identifier value in the subsequent fragment contained within an EAP-
    Response.
 
-   Figure 6 illustrates the conversation beetween the endpoints in the
+   Figure 6 illustrates the conversation between the endpoints in the
    case where the EAP-EDHOC mutual authentication is successful and
    fragmentation is required:
 
@@ -827,7 +827,7 @@ Table of Contents
 4.  Detailed Description of the EAP-EDHOC Request and Response Protocol
 
    The EAP-EDHOC packet format for Requests and Responses is summarized
-   in Figure 7.  Fields are transmitted from left to right. following a
+   in Figure 7.  Fields are transmitted from left to right, following a
    structure inspired by the EAP-TLS packet format [RFC5216].  As
    specified in Section 4.1 of [RFC3748], EAP Request and Response
    packets consist of Code, Identifier, Length, Type, and Type-Data
