@@ -767,9 +767,9 @@ This applies in the context of TLS 1.3 resumption, while it does not apply here.
 # Acknowledgments
 {: numbered="no"}
 
-The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan and Renzo Navas for their reviews.
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan, Renzo Navas, Paul Wouters, Rich Salz and Ines Robles for their reviews.
 
-This work was supported partially by grant PID2020-112675RB-C44 funded by MCIN/AEI/10.13039/5011000011033 (ONOFRE3-UMU).
+This work was supported partially by Project PID2023-148104OB-C43 (ONOFRE4-UMU) from MCIN/AEI; the Formacion del Profesorado Universitario predoctoral grant FPU24/03871, also from MCIN/AEI; and the European Union's NextGenerationEU, as part of the Recovery, Transformation, and Resilience Plan, supported by Spanish INCIBE (6G-SOC project).
 
 This work was supported partially by Vinnova - the Swedish Agency for Innovation Systems - through the EUREKA CELTIC-NEXT project CYPRESS.
 
