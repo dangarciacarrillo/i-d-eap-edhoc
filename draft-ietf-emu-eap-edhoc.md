@@ -764,7 +764,7 @@ Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eaves
 Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
-This consideration applies in the context of TLS 1.3 session resumption. It does not apply here, as no resumption mechanism is defined in this document for EAP-EDHOC.
+The cross-protocol attack of {{RFC9190}} does not apply here, as no resumption mechanism has been defined for EAP-EDHOC.
 
 --- back
 
