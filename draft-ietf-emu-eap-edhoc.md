@@ -207,11 +207,11 @@ Note that the Identity request is optional {{RFC3748}} and might not be used in 
 
 ### Transport and Message Correlation
 
-EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, {{RFC9528}} provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. All these requirements are fulfilled by the EAP protocol, EAP method, or EAP lower layer, as specified in {{RFC3748}}.
+EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, {{RFC9528}} provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. These requirements can be met by the EAP framework, the EAP-EDHOC method specification, and properties of the EAP lower layer, as specified in {{RFC3748}}.
 
-For message loss, this can be either fulfilled by the EAP layer, or the EAP lower layer, or both.
+For message loss, this can be either fulfilled by the EAP layer, the EAP lower layer, or both.
 
-For reordering, EAP relies on the EAP lower layer ordering guarantees, for correct operation.
+For message reordering, correct operation assumes that the EAP lower layer preserves packet ordering within an EAP conversation.
 
 For duplication and message correlation, EAP has the Identifier field, which allows both the EAP peer and EAP authenticator to detect duplicates and match a request with a response.
 
@@ -219,7 +219,7 @@ Fragmentation is defined by this EAP method, see {{fragmentation}}. The EAP fram
 
 To demultiplex EDHOC messages from other types of messages, EAP provides the Type field.
 
-This method does not provide other mitigation against denial-of-service than EAP {{RFC3748}}.
+This method does not provide any additional mitigation against denial-of-service attacks beyond those specified in EAP {{RFC3748}}.
 
 ### Termination
 
@@ -401,81 +401,85 @@ EDHOC is designed to perform well in constrained networks where message sizes ar
 
 Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
-The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag MUST be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages. However, implementations MUST accept unfragmented messages regardless of the value of the L flag bits.
+The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag MUST be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages.
 
 The S flag bit SHALL be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The M flag bit SHALL be set in all fragments except the last one.
 
-When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
+When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
 
-Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
+Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
 
-{{fragmentation-flow}} illustrates the conversation between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:
+{{fragmentation-flow}} illustrates the exchange between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required. EAP Identifiers are also shown to illustrate their progression. A retransmission is also included.
 
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
 EAP-EDHOC Peer                                   EAP-EDHOC Server
 
-    |                                                       |
-    |                                EAP-Request/Identity   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/Identity                               |
-    |   (Privacy-Friendly)                                  |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |                            (EDHOC Start, S bit set)   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_1)                                   |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |     (EDHOC message_2, Fragment 1, L and M bits set)   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |            (EDHOC message_2, Fragment 2, M bit set)   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |                       (EDHOC message_2, Fragment 3)   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_3, Fragment 1, L and M bits set)     |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_3, Fragment 2, M bit set)            |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    |   (EDHOC message_3, Fragment 3)                       |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                      EAP-Request/EAP-Type=EAP-EDHOC   |
-    |                                   (EDHOC message_4)   |
-    | <---------------------------------------------------- |
-    |                                                       |
-    |   EAP-Response/EAP-Type=EAP-EDHOC                     |
-    | ----------------------------------------------------> |
-    |                                                       |
-    |                                         EAP-Success   |
-    | <---------------------------------------------------- |
-    |                                                       |
+    |                                                        |
+    |                   EAP-Request/Identity (EAP-ID: 0x0)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/Identity (EAP-ID: 0x0)                  |
+    |   (Privacy-Friendly)                                   |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x1)   |
+    |                             (EDHOC Start, S bit set)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x1)        |
+    |   (EDHOC message_1)                                    |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x2)   |
+    |      (EDHOC message_2, Fragment 1, L and M bits set)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x2)        |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x3)   |
+    |             (EDHOC message_2, Fragment 2, M bit set)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x3)        |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x4)   |
+    |                        (EDHOC message_2, Fragment 3)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x4)        |
+    |   (EDHOC message_3, Fragment 1, L and M bits set)      |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x5)   |
+    |                            X-------------------------- |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x5)   |
+    |                                     (Retransmission)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x5)        |
+    |   (EDHOC message_3, Fragment 2, M bit set)             |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x6)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x6)        |
+    |   (EDHOC message_3, Fragment 3)                        |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |         EAP-Request/EAP-Type=EAP-EDHOC (EAP-ID: 0x7)   |
+    |                                    (EDHOC message_4)   |
+    | <----------------------------------------------------- |
+    |                                                        |
+    |   EAP-Response/EAP-Type=EAP-EDHOC (EAP-ID: 0x7)        |
+    | -----------------------------------------------------> |
+    |                                                        |
+    |                            EAP-Success (EAP-ID: 0x7)   |
+    | <----------------------------------------------------- |
+    |                                                        |
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #fragmentation-flow title="EAP-EDHOC Fragmentation Example" artwork-align="center"}
 
@@ -515,7 +519,7 @@ The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the requirements defi
 
 The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.
 
-EDHOC error messages SHOULD be considered failure result indication, as defined in {{RFC3748}}. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure. EDHOC error messages are unprotected.
+Because EDHOC error messages are unauthenticated, they MUST NOT be relied upon to determine the cause of failure; they only indicate that the exchange did not complete and are vulnerable to injection by an attacker (DoS). However, EDHOC error messages SHOULD be considered failure result indication, as defined in {{RFC3748}}. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.
 
 The keying material can be derived by the Initiator upon receiving EDHOC message_2, and by the Responder upon receiving EDHOC message_3. Implementations following {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables.
 
@@ -708,7 +712,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 - (5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
 
-- (6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers, while message_3 and message_4 provide confidentiality against active attackers.
+- (6) Confidentiality. EDHOC protects the method payload transported within the EAP-Request and EAP-Response messages; however, the EAP-Success and EAP-Failure packets themselves are not encrypted or protected by EDHOC. EDHOC message_1 is not confidential, but it does not convey any private information. EDHOC message_2 provides confidentiality against passive attackers, while message_3 and message_4 provide confidentiality against active attackers.
 
 - (7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in {{Key_Hierarchy}}.
 
@@ -760,7 +764,7 @@ Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eaves
 Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
-This applies in the context of TLS 1.3 resumption, while it does not apply here.
+This consideration applies in the context of TLS 1.3 session resumption. It does not apply here, as no resumption mechanism is defined in this document for EAP-EDHOC.
 
 --- back
 
