@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T00:58:06.017997+00:00",
+  "timestamp": "2026-03-05T00:57:22.382278+00:00",
   "repo": "dangarciacarrillo/i-d-eap-edhoc",
   "labels": [
     {
@@ -359,5 +359,32 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 11,
+      "id": "PR_kwDOHgXWVs7H69l2",
+      "title": " GENART IETF LC review - changes",
+      "url": "https://github.com/dangarciacarrillo/i-d-eap-edhoc/pull/11",
+      "state": "OPEN",
+      "author": "francislopezg",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-04T16:15:50Z",
+      "updatedAt": "2026-03-04T18:27:12Z",
+      "baseRepository": "dangarciacarrillo/i-d-eap-edhoc",
+      "baseRefName": "main",
+      "baseRefOid": "9c066595c3b99deb76b7dc90ad032f352d0da88a",
+      "headRepository": "dangarciacarrillo/i-d-eap-edhoc",
+      "headRefName": "GENART-IETF-LC-review",
+      "headRefOid": "1d524d45bb41a6aa4cb286e43274432bface05ac",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
