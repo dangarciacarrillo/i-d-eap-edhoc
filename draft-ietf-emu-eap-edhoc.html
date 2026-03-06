@@ -1048,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EAP-EDHOC</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 18 August 2026</td>
+<td class="center">Expires 7 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-14" class="published">14 February 2026</time>
+<time datetime="2026-03-06" class="published">6 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-18">18 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-07">7 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1446,13 +1446,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-transport-and-message-corre">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-transport-and-message-corre" class="section-name selfRef">Transport and Message Correlation</a>
           </h4>
-<p id="section-3.1.2-1">EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. All these requirements are fulfilled by the EAP protocol, EAP method, or EAP lower layer, as specified in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-2">For message loss, this can be either fulfilled by the EAP layer, or the EAP lower layer, or both.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-3">For reordering, EAP relies on the EAP lower layer ordering guarantees, for correct operation.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. These requirements can be met by the EAP framework, the EAP-EDHOC method specification, and properties of the EAP lower layer, as specified in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-2">For message loss, this can be either fulfilled by the EAP layer, the EAP lower layer, or both.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-3">For message reordering, correct operation assumes that the EAP lower layer preserves packet ordering within an EAP conversation.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-4">For duplication and message correlation, EAP has the Identifier field, which allows both the EAP peer and EAP authenticator to detect duplicates and match a request with a response.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-5">Fragmentation is defined by this EAP method, see <a href="#fragmentation" class="auto internal xref">Section 3.1.6</a>. The EAP framework <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, specifies that EAP methods need to provide fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-6">To demultiplex EDHOC messages from other types of messages, EAP provides the Type field.<a href="#section-3.1.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-7">This method does not provide other mitigation against denial-of-service than EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-7">This method does not provide any additional mitigation against denial-of-service attacks beyond those specified in EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="termination">
@@ -1710,47 +1710,48 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
           </h4>
 <p id="section-3.1.6-1">EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations <span class="bcp14">MUST</span> provide support for fragmentation and reassembly. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is <span class="bcp14">RECOMMENDED</span> to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-2">Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see <a href="#detailed-description" class="auto internal xref">Section 4</a> for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.<a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-3">The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag <span class="bcp14">MUST</span> be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations <span class="bcp14">MUST NOT</span> set any of the L flag bits to 1 in unfragmented messages. However, implementations <span class="bcp14">MUST</span> accept unfragmented messages regardless of the value of the L flag bits.<a href="#section-3.1.6-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-3">The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag <span class="bcp14">MUST</span> be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations <span class="bcp14">MUST NOT</span> set any of the L flag bits to 1 in unfragmented messages.<a href="#section-3.1.6-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-4">The S flag bit <span class="bcp14">SHALL</span> be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The M flag bit <span class="bcp14">SHALL</span> be set in all fragments except the last one.<a href="#section-3.1.6-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-5">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Response with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-6">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Request with EAP-Type=EAP-EDHOC and no data. This serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-7"><a href="#fragmentation-flow" class="auto internal xref">Figure 6</a> illustrates the conversation between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required:<a href="#section-3.1.6-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-5">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Response packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-6">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Request packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-7"><a href="#fragmentation-flow" class="auto internal xref">Figure 6</a> illustrates the exchange between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required. EAP Identifiers are also shown to illustrate their progression. A retransmission is also included.<a href="#section-3.1.6-7" class="pilcrow">¶</a></p>
 <span id="name-eap-edhoc-fragmentation-exa"></span><div id="fragmentation-flow">
 <figure id="figure-6">
             <div id="section-3.1.6-8.1">
               <div class="alignCenter art-svg artwork" id="section-3.1.6-8.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="1056" width="528" viewBox="0 0 528 1056" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-                  <path d="M 40,64 L 40,1040" fill="none" stroke="black"></path>
-                  <path d="M 488,64 L 488,1040" fill="none" stroke="black"></path>
-                  <path d="M 56,96 L 472,96" fill="none" stroke="black"></path>
-                  <path d="M 56,160 L 472,160" fill="none" stroke="black"></path>
-                  <path d="M 56,224 L 472,224" fill="none" stroke="black"></path>
-                  <path d="M 56,288 L 472,288" fill="none" stroke="black"></path>
-                  <path d="M 56,352 L 472,352" fill="none" stroke="black"></path>
-                  <path d="M 56,400 L 472,400" fill="none" stroke="black"></path>
-                  <path d="M 56,464 L 472,464" fill="none" stroke="black"></path>
-                  <path d="M 56,512 L 472,512" fill="none" stroke="black"></path>
-                  <path d="M 56,576 L 472,576" fill="none" stroke="black"></path>
-                  <path d="M 56,640 L 472,640" fill="none" stroke="black"></path>
-                  <path d="M 56,688 L 472,688" fill="none" stroke="black"></path>
-                  <path d="M 56,752 L 472,752" fill="none" stroke="black"></path>
-                  <path d="M 56,800 L 472,800" fill="none" stroke="black"></path>
-                  <path d="M 56,864 L 472,864" fill="none" stroke="black"></path>
-                  <path d="M 56,928 L 472,928" fill="none" stroke="black"></path>
-                  <path d="M 56,976 L 472,976" fill="none" stroke="black"></path>
-                  <path d="M 56,1024 L 472,1024" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="480,976 468,970.4 468,981.6" fill="black" transform="rotate(0,472,976)"></polygon>
-                  <polygon class="arrowhead" points="480,864 468,858.4 468,869.6" fill="black" transform="rotate(0,472,864)"></polygon>
-                  <polygon class="arrowhead" points="480,752 468,746.4 468,757.6" fill="black" transform="rotate(0,472,752)"></polygon>
-                  <polygon class="arrowhead" points="480,640 468,634.4 468,645.6" fill="black" transform="rotate(0,472,640)"></polygon>
-                  <polygon class="arrowhead" points="480,512 468,506.4 468,517.6" fill="black" transform="rotate(0,472,512)"></polygon>
-                  <polygon class="arrowhead" points="480,400 468,394.4 468,405.6" fill="black" transform="rotate(0,472,400)"></polygon>
-                  <polygon class="arrowhead" points="480,288 468,282.4 468,293.6" fill="black" transform="rotate(0,472,288)"></polygon>
-                  <polygon class="arrowhead" points="480,160 468,154.4 468,165.6" fill="black" transform="rotate(0,472,160)"></polygon>
-                  <polygon class="arrowhead" points="64,1024 52,1018.4 52,1029.6" fill="black" transform="rotate(180,56,1024)"></polygon>
-                  <polygon class="arrowhead" points="64,928 52,922.4 52,933.6" fill="black" transform="rotate(180,56,928)"></polygon>
-                  <polygon class="arrowhead" points="64,800 52,794.4 52,805.6" fill="black" transform="rotate(180,56,800)"></polygon>
-                  <polygon class="arrowhead" points="64,688 52,682.4 52,693.6" fill="black" transform="rotate(180,56,688)"></polygon>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="1120" width="528" viewBox="0 0 528 1120" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                  <path d="M 40,64 L 40,1104" fill="none" stroke="black"></path>
+                  <path d="M 496,64 L 496,1104" fill="none" stroke="black"></path>
+                  <path d="M 56,96 L 480,96" fill="none" stroke="black"></path>
+                  <path d="M 56,160 L 480,160" fill="none" stroke="black"></path>
+                  <path d="M 56,224 L 480,224" fill="none" stroke="black"></path>
+                  <path d="M 56,288 L 480,288" fill="none" stroke="black"></path>
+                  <path d="M 56,352 L 480,352" fill="none" stroke="black"></path>
+                  <path d="M 56,400 L 480,400" fill="none" stroke="black"></path>
+                  <path d="M 56,464 L 480,464" fill="none" stroke="black"></path>
+                  <path d="M 56,512 L 480,512" fill="none" stroke="black"></path>
+                  <path d="M 56,576 L 480,576" fill="none" stroke="black"></path>
+                  <path d="M 56,640 L 480,640" fill="none" stroke="black"></path>
+                  <path d="M 280,688 L 480,688" fill="none" stroke="black"></path>
+                  <path d="M 56,752 L 480,752" fill="none" stroke="black"></path>
+                  <path d="M 56,816 L 480,816" fill="none" stroke="black"></path>
+                  <path d="M 56,864 L 480,864" fill="none" stroke="black"></path>
+                  <path d="M 56,928 L 480,928" fill="none" stroke="black"></path>
+                  <path d="M 56,992 L 480,992" fill="none" stroke="black"></path>
+                  <path d="M 56,1040 L 480,1040" fill="none" stroke="black"></path>
+                  <path d="M 56,1088 L 480,1088" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="488,1040 476,1034.4 476,1045.6" fill="black" transform="rotate(0,480,1040)"></polygon>
+                  <polygon class="arrowhead" points="488,928 476,922.4 476,933.6" fill="black" transform="rotate(0,480,928)"></polygon>
+                  <polygon class="arrowhead" points="488,816 476,810.4 476,821.6" fill="black" transform="rotate(0,480,816)"></polygon>
+                  <polygon class="arrowhead" points="488,640 476,634.4 476,645.6" fill="black" transform="rotate(0,480,640)"></polygon>
+                  <polygon class="arrowhead" points="488,512 476,506.4 476,517.6" fill="black" transform="rotate(0,480,512)"></polygon>
+                  <polygon class="arrowhead" points="488,400 476,394.4 476,405.6" fill="black" transform="rotate(0,480,400)"></polygon>
+                  <polygon class="arrowhead" points="488,288 476,282.4 476,293.6" fill="black" transform="rotate(0,480,288)"></polygon>
+                  <polygon class="arrowhead" points="488,160 476,154.4 476,165.6" fill="black" transform="rotate(0,480,160)"></polygon>
+                  <polygon class="arrowhead" points="64,1088 52,1082.4 52,1093.6" fill="black" transform="rotate(180,56,1088)"></polygon>
+                  <polygon class="arrowhead" points="64,992 52,986.4 52,997.6" fill="black" transform="rotate(180,56,992)"></polygon>
+                  <polygon class="arrowhead" points="64,864 52,858.4 52,869.6" fill="black" transform="rotate(180,56,864)"></polygon>
+                  <polygon class="arrowhead" points="64,752 52,746.4 52,757.6" fill="black" transform="rotate(180,56,752)"></polygon>
                   <polygon class="arrowhead" points="64,576 52,570.4 52,581.6" fill="black" transform="rotate(180,56,576)"></polygon>
                   <polygon class="arrowhead" points="64,464 52,458.4 52,469.6" fill="black" transform="rotate(180,56,464)"></polygon>
                   <polygon class="arrowhead" points="64,352 52,346.4 52,357.6" fill="black" transform="rotate(180,56,352)"></polygon>
@@ -1761,44 +1762,64 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="100" y="36">Peer</text>
                     <text x="432" y="36">EAP-EDHOC</text>
                     <text x="500" y="36">Server</text>
-                    <text x="380" y="84">EAP-Request/Identity</text>
+                    <text x="276" y="84">EAP-Request/Identity</text>
+                    <text x="396" y="84">(EAP-ID:</text>
+                    <text x="452" y="84">0x0)</text>
                     <text x="152" y="132">EAP-Response/Identity</text>
+                    <text x="276" y="132">(EAP-ID:</text>
+                    <text x="332" y="132">0x0)</text>
                     <text x="140" y="148">(Privacy-Friendly)</text>
-                    <text x="340" y="196">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="292" y="212">(EDHOC</text>
-                    <text x="348" y="212">Start,</text>
-                    <text x="384" y="212">S</text>
-                    <text x="408" y="212">bit</text>
-                    <text x="444" y="212">set)</text>
+                    <text x="236" y="196">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="196">(EAP-ID:</text>
+                    <text x="452" y="196">0x1)</text>
+                    <text x="300" y="212">(EDHOC</text>
+                    <text x="356" y="212">Start,</text>
+                    <text x="392" y="212">S</text>
+                    <text x="416" y="212">bit</text>
+                    <text x="452" y="212">set)</text>
                     <text x="192" y="260">EAP-Response/EAP-Type=EAP-EDHOC</text>
+                    <text x="356" y="260">(EAP-ID:</text>
+                    <text x="412" y="260">0x1)</text>
                     <text x="92" y="276">(EDHOC</text>
                     <text x="164" y="276">message_1)</text>
-                    <text x="340" y="324">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="108" y="340">(EDHOC</text>
-                    <text x="180" y="340">message_2,</text>
-                    <text x="260" y="340">Fragment</text>
-                    <text x="308" y="340">1,</text>
-                    <text x="328" y="340">L</text>
-                    <text x="352" y="340">and</text>
-                    <text x="376" y="340">M</text>
-                    <text x="404" y="340">bits</text>
-                    <text x="444" y="340">set)</text>
+                    <text x="236" y="324">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="324">(EAP-ID:</text>
+                    <text x="452" y="324">0x2)</text>
+                    <text x="116" y="340">(EDHOC</text>
+                    <text x="188" y="340">message_2,</text>
+                    <text x="268" y="340">Fragment</text>
+                    <text x="316" y="340">1,</text>
+                    <text x="336" y="340">L</text>
+                    <text x="360" y="340">and</text>
+                    <text x="384" y="340">M</text>
+                    <text x="412" y="340">bits</text>
+                    <text x="452" y="340">set)</text>
                     <text x="192" y="388">EAP-Response/EAP-Type=EAP-EDHOC</text>
-                    <text x="340" y="436">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="164" y="452">(EDHOC</text>
-                    <text x="236" y="452">message_2,</text>
-                    <text x="316" y="452">Fragment</text>
-                    <text x="364" y="452">2,</text>
-                    <text x="384" y="452">M</text>
-                    <text x="408" y="452">bit</text>
-                    <text x="444" y="452">set)</text>
+                    <text x="356" y="388">(EAP-ID:</text>
+                    <text x="412" y="388">0x2)</text>
+                    <text x="236" y="436">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="436">(EAP-ID:</text>
+                    <text x="452" y="436">0x3)</text>
+                    <text x="172" y="452">(EDHOC</text>
+                    <text x="244" y="452">message_2,</text>
+                    <text x="324" y="452">Fragment</text>
+                    <text x="372" y="452">2,</text>
+                    <text x="392" y="452">M</text>
+                    <text x="416" y="452">bit</text>
+                    <text x="452" y="452">set)</text>
                     <text x="192" y="500">EAP-Response/EAP-Type=EAP-EDHOC</text>
-                    <text x="340" y="548">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="252" y="564">(EDHOC</text>
-                    <text x="324" y="564">message_2,</text>
-                    <text x="404" y="564">Fragment</text>
-                    <text x="452" y="564">3)</text>
+                    <text x="356" y="500">(EAP-ID:</text>
+                    <text x="412" y="500">0x3)</text>
+                    <text x="236" y="548">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="548">(EAP-ID:</text>
+                    <text x="452" y="548">0x4)</text>
+                    <text x="260" y="564">(EDHOC</text>
+                    <text x="332" y="564">message_2,</text>
+                    <text x="412" y="564">Fragment</text>
+                    <text x="460" y="564">3)</text>
                     <text x="192" y="612">EAP-Response/EAP-Type=EAP-EDHOC</text>
+                    <text x="356" y="612">(EAP-ID:</text>
+                    <text x="412" y="612">0x4)</text>
                     <text x="92" y="628">(EDHOC</text>
                     <text x="164" y="628">message_3,</text>
                     <text x="244" y="628">Fragment</text>
@@ -1808,26 +1829,45 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="360" y="628">M</text>
                     <text x="388" y="628">bits</text>
                     <text x="428" y="628">set)</text>
-                    <text x="340" y="676">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="192" y="724">EAP-Response/EAP-Type=EAP-EDHOC</text>
-                    <text x="92" y="740">(EDHOC</text>
-                    <text x="164" y="740">message_3,</text>
-                    <text x="244" y="740">Fragment</text>
-                    <text x="292" y="740">2,</text>
-                    <text x="312" y="740">M</text>
-                    <text x="336" y="740">bit</text>
-                    <text x="372" y="740">set)</text>
-                    <text x="340" y="788">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="192" y="836">EAP-Response/EAP-Type=EAP-EDHOC</text>
-                    <text x="92" y="852">(EDHOC</text>
-                    <text x="164" y="852">message_3,</text>
-                    <text x="244" y="852">Fragment</text>
-                    <text x="292" y="852">3)</text>
-                    <text x="340" y="900">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="348" y="916">(EDHOC</text>
-                    <text x="420" y="916">message_4)</text>
-                    <text x="192" y="964">EAP-Response/EAP-Type=EAP-EDHOC</text>
-                    <text x="416" y="1012">EAP-Success</text>
+                    <text x="236" y="676">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="676">(EAP-ID:</text>
+                    <text x="452" y="676">0x5)</text>
+                    <text x="272" y="692">X</text>
+                    <text x="236" y="724">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="724">(EAP-ID:</text>
+                    <text x="452" y="724">0x5)</text>
+                    <text x="404" y="740">(Retransmission)</text>
+                    <text x="192" y="788">EAP-Response/EAP-Type=EAP-EDHOC</text>
+                    <text x="356" y="788">(EAP-ID:</text>
+                    <text x="412" y="788">0x5)</text>
+                    <text x="92" y="804">(EDHOC</text>
+                    <text x="164" y="804">message_3,</text>
+                    <text x="244" y="804">Fragment</text>
+                    <text x="292" y="804">2,</text>
+                    <text x="312" y="804">M</text>
+                    <text x="336" y="804">bit</text>
+                    <text x="372" y="804">set)</text>
+                    <text x="236" y="852">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="852">(EAP-ID:</text>
+                    <text x="452" y="852">0x6)</text>
+                    <text x="192" y="900">EAP-Response/EAP-Type=EAP-EDHOC</text>
+                    <text x="356" y="900">(EAP-ID:</text>
+                    <text x="412" y="900">0x6)</text>
+                    <text x="92" y="916">(EDHOC</text>
+                    <text x="164" y="916">message_3,</text>
+                    <text x="244" y="916">Fragment</text>
+                    <text x="292" y="916">3)</text>
+                    <text x="236" y="964">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="396" y="964">(EAP-ID:</text>
+                    <text x="452" y="964">0x7)</text>
+                    <text x="356" y="980">(EDHOC</text>
+                    <text x="428" y="980">message_4)</text>
+                    <text x="192" y="1028">EAP-Response/EAP-Type=EAP-EDHOC</text>
+                    <text x="356" y="1028">(EAP-ID:</text>
+                    <text x="412" y="1028">0x7)</text>
+                    <text x="312" y="1076">EAP-Success</text>
+                    <text x="396" y="1076">(EAP-ID:</text>
+                    <text x="452" y="1076">0x7)</text>
                   </g>
                 </svg><a href="#section-3.1.6-8.1.1" class="pilcrow">¶</a>
 </div>
@@ -1886,7 +1926,7 @@ Server-Id   =  ID_CRED_R
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-eap-state-machines" class="section-name selfRef">EAP State Machines</a>
         </h3>
 <p id="section-3.5-1">The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">EDHOC error messages <span class="bcp14">SHOULD</span> be considered failure result indication, as defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure. EDHOC error messages are unprotected.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">Because EDHOC error messages are unauthenticated, they <span class="bcp14">MUST NOT</span> be relied upon to determine the cause of failure; they only indicate that the exchange did not complete and are vulnerable to injection by an attacker (DoS). However, EDHOC error messages <span class="bcp14">SHOULD</span> be considered failure result indication, as defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.5-3">The keying material can be derived by the Initiator upon receiving EDHOC message_2, and by the Responder upon receiving EDHOC message_3. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can then set the eapKeyData and aaaEapKeyData variables.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
 <p id="section-3.5-4">The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (message_4) has been sent or received. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can set the eapKeyAvailable and aaaEapKeyAvailable variables.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 </section>
@@ -2233,7 +2273,7 @@ EDHOC integrity protects all message content using transcript hashes for key der
               <p id="section-6.1.1-3.5.1">(5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.<a href="#section-6.1.1-3.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.1-3.6">
-              <p id="section-6.1.1-3.6.1">(6) Confidentiality. EDHOC message_2 provides confidentiality against passive attackers, while message_3 and message_4 provide confidentiality against active attackers.<a href="#section-6.1.1-3.6.1" class="pilcrow">¶</a></p>
+              <p id="section-6.1.1-3.6.1">(6) Confidentiality. EDHOC protects the method payload transported within the EAP-Request and EAP-Response messages; however, the EAP-Success and EAP-Failure packets themselves are not encrypted or protected by EDHOC. EDHOC message_1 is not confidential, but it does not convey any private information. EDHOC message_2 provides confidentiality against passive attackers, while message_3 and message_4 provide confidentiality against active attackers.<a href="#section-6.1.1-3.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.1-3.7">
               <p id="section-6.1.1-3.7.1">(7) Key derivation. Except for MSK and EMSK, derived keys are not exported. Key derivation is discussed in <a href="#Key_Hierarchy" class="auto internal xref">Section 3.3</a>.<a href="#section-6.1.1-3.7.1" class="pilcrow">¶</a></p>
@@ -2331,7 +2371,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-cross-protocol-attacks">
 <a href="#section-6.9" class="section-number selfRef">6.9. </a><a href="#name-cross-protocol-attacks" class="section-name selfRef">Cross-Protocol Attacks</a>
         </h3>
-<p id="section-6.9-1">This applies in the context of TLS 1.3 resumption, while it does not apply here.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
+<p id="section-6.9-1">The cross-protocol attack of <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> does not apply here, as no resumption mechanism has been defined for EAP-EDHOC.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2394,23 +2434,23 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
 <dl class="references">
 <dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
         <dd>
-<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-16</span>, <time datetime="2026-01-25" class="refDate">25 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-16">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-17</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-17">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-app-profiles">[I-D.ietf-lake-app-profiles]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-app-profiles-03</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-03">https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Coordinating the Use of Application Profiles for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-app-profiles-04</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-04">https://datatracker.ietf.org/doc/html/draft-ietf-lake-app-profiles-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-authz">[I-D.ietf-lake-authz]</dt>
         <dd>
-<span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Vučinić, M.</span>, <span class="refAuthor">Fedrecheski, G.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Lightweight Authorization using Ephemeral Diffie-Hellman Over COSE (ELA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-authz-06</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-06">https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Vučinić, M.</span>, <span class="refAuthor">Fedrecheski, G.</span>, and <span class="refAuthor">M. Richardson</span>, <span class="refTitle">"Lightweight Authorization using Ephemeral Diffie-Hellman Over COSE (ELA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-authz-07</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-07">https://datatracker.ietf.org/doc/html/draft-ietf-lake-authz-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-edhoc-impl-cons">[I-D.ietf-lake-edhoc-impl-cons]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span>, <span class="refTitle">"Implementation Considerations for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-impl-cons-05</span>, <time datetime="2026-01-07" class="refDate">7 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-05">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span>, <span class="refTitle">"Implementation Considerations for Ephemeral Diffie-Hellman Over COSE (EDHOC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-impl-cons-06</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-06">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-impl-cons-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lake-edhoc-psk">[I-D.ietf-lake-edhoc-psk]</dt>
         <dd>
-<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-06</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-06">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Lopez-Perez</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Marin-Lopez, R.</span>, and <span class="refAuthor">F. Lopez-Gomez</span>, <span class="refTitle">"EDHOC Authenticated with Pre-Shared Keys (PSK)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lake-edhoc-psk-07</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-07">https://datatracker.ietf.org/doc/html/draft-ietf-lake-edhoc-psk-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5216">[RFC5216]</dt>
         <dd>
