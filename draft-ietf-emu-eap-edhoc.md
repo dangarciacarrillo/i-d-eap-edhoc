@@ -535,7 +535,7 @@ While the EAD_1 and EAD_2 fields (carried in EDHOC message_1 and EDHOC message_2
 
 It is important to note that EAD fields in EDHOC are optional; consequently, the inclusion of EAP Channel Binding information in an authentication exchange is also optional.
 
-Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in {{iana-ead}}.
+Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in {{iana-ead}}. This new EAD item is intended only for EAD_3 and EAD_4. Then, it MUST be ignored if included in other EAD fields. Multiple occurrences of this new EAD item in one EAD field are NOT allowed.
 
 > **Implementation Note:**
 > This document defines only the container for carrying EAP Channel Binding information within EAP-EDHOC messages, using the `EAD_3` and `EAD_4` fields. The format and semantics of the channel binding content are application-specific and are determined by the authentication domain in which the protocol is deployed.
@@ -634,6 +634,7 @@ IANA has registered the following new type in the "Method Types" registry under 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Value: TBD1
 Description: EAP-EDHOC
+Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 ## EDHOC Exporter Label Registry
@@ -643,17 +644,24 @@ IANA has registered the following new labels in the "EDHOC Exporter Label" regis
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD2
 Description: MSK of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD3
 Description: EMSK of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD4
 Description: Method-Id of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
+
 The allocations have been updated to reference this document.
 
 ## EDHOC External Authorization Data Registry {#iana-ead}
@@ -661,12 +669,11 @@ The allocations have been updated to reference this document.
 IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
 
 ~~~~~~~~~~~~~~~~~~~~~~~
+Name: EAPCBinding
 Label: TBD5
 Description: EAP channel binding information
+Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
-
-This new EAD item is intended only for EAD_3 and EAD_4. Then, it MUST be ignored if included in other EAD fields. This new EAD item is considered as critical.
-Multiple occurrences of this new EAD item in one EAD field are NOT allowed.
 
 # Security Considerations {#security}
 
