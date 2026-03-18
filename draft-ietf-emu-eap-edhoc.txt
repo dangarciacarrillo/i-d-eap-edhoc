@@ -1206,12 +1206,6 @@ Table of Contents
               (EAP)", RFC 3748, DOI 10.17487/RFC3748, June 2004,
               <https://www.rfc-editor.org/rfc/rfc3748>.
 
-   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
-              "State Machines for Extensible Authentication Protocol
-              (EAP) Peer and Authenticator", RFC 4137,
-              DOI 10.17487/RFC4137, August 2005,
-              <https://www.rfc-editor.org/rfc/rfc4137>.
-
    [RFC6677]  Hartman, S., Ed., Clancy, T., and K. Hoeper, "Channel-
               Binding Support for Extensible Authentication Protocol
               (EAP) Methods", RFC 6677, DOI 10.17487/RFC6677, July 2012,
@@ -1281,6 +1275,12 @@ Table of Contents
               draft-ietf-lake-edhoc-psk-07, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
               edhoc-psk-07>.
+
+   [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
+              "State Machines for Extensible Authentication Protocol
+              (EAP) Peer and Authenticator", RFC 4137,
+              DOI 10.17487/RFC4137, August 2005,
+              <https://www.rfc-editor.org/rfc/rfc4137>.
 
    [RFC5216]  Simon, D., Aboba, B., and R. Hurst, "The EAP-TLS
               Authentication Protocol", RFC 5216, DOI 10.17487/RFC5216,
