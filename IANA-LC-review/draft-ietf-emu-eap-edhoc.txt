@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 17 September 2026                          University of Murcia
+Expires: 19 September 2026                          University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                           16 March 2026
+                                                           18 March 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 September 2026.
+   This Internet-Draft will expire on 19 September 2026.
 
 Copyright Notice
 
@@ -990,7 +990,7 @@ Table of Contents
    Authorization Data" registry under the group name "Ephemeral Diffie-
    Hellman Over COSE (EDHOC)":
 
-   Name: EAPCBinding
+   Name: EAPChannelBinding
    Label: TBD5
    Description: EAP channel binding information
    Reference: [this document]
