@@ -669,7 +669,7 @@ The allocations have been updated to reference this document.
 IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-Name: EAPCBinding
+Name: EAPChannelBinding
 Label: TBD5
 Description: EAP channel binding information
 Reference: [this document]
