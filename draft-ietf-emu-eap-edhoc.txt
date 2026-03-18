@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 7 September 2026                           University of Murcia
+Expires: 19 September 2026                          University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            6 March 2026
+                                                           18 March 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 September 2026.
+   This Internet-Draft will expire on 19 September 2026.
 
 Copyright Notice
 
@@ -816,6 +816,9 @@ Table of Contents
    Accordingly, this document specifies a new EAD item, with ead_label =
    TBD5, to incorporate EAP channel binding information into the EAD
    fields of the EAP-EDHOC messages.  See the definition in Section 5.3.
+   This new EAD item is intended only for EAD_3 and EAD_4.  Then, it
+   MUST be ignored if included in other EAD fields.  Multiple
+   occurrences of this new EAD item in one EAD field are NOT allowed.
 
       *Implementation Note:* This document defines only the container
       for carrying EAP Channel Binding information within EAP-EDHOC
@@ -956,6 +959,9 @@ Table of Contents
 
    Value: TBD1
    Description: EAP-EDHOC
+   Reference: [this document]
+
+   NOTE: Suggested value: TBD1 = 57.  RFC Editor: Remove this note.
 
 5.2.  EDHOC Exporter Label Registry
 
@@ -965,12 +971,21 @@ Table of Contents
 
    Label: TBD2
    Description: MSK of EAP method EAP-EDHOC
+   Change Controller: IETF
+   Reference: [this document]
 
    Label: TBD3
    Description: EMSK of EAP method EAP-EDHOC
+   Change Controller: IETF
+   Reference: [this document]
 
    Label: TBD4
    Description: Method-Id of EAP method EAP-EDHOC
+   Change Controller: IETF
+   Reference: [this document]
+
+   NOTE: Suggested values: TBD2 = 26, TBD3 = 27, TBD4 = 28.  RFC Editor:
+   Remove this note.
 
    The allocations have been updated to reference this document.
 
@@ -980,13 +995,12 @@ Table of Contents
    Authorization Data" registry under the group name "Ephemeral Diffie-
    Hellman Over COSE (EDHOC)":
 
+   Name: EAPChannelBinding
    Label: TBD5
    Description: EAP channel binding information
+   Reference: [this document]
 
-   This new EAD item is intended only for EAD_3 and EAD_4.  Then, it
-   MUST be ignored if included in other EAD fields.  This new EAD item
-   is considered as critical.  Multiple occurrences of this new EAD item
-   in one EAD field are NOT allowed.
+   NOTE: Suggested value: TBD5 = 1.  RFC Editor: Remove this note.
 
 6.  Security Considerations
 

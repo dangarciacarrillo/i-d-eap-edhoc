@@ -13,21 +13,21 @@
 <meta content="
        The Extensible Authentication Protocol (EAP), defined in RFC 3748, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, based on Ephemeral Diffie-Hellman Over COSE (EDHOC). EDHOC is a lightweight security handshake protocol, enabling authentication and establishment of shared secret keys suitable in constrained settings. This document also provides guidance on authentication and authorization for EAP-EDHOC. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="draft-ietf-emu-eap-edhoc-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-emu-eap-edhoc.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 7 September 2026</td>
+<td class="center">Expires 19 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-06" class="published">6 March 2026</time>
+<time datetime="2026-03-18" class="published">18 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-07">7 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-19">19 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1940,7 +1940,7 @@ Server-Id   =  ID_CRED_R
 <p id="section-3.6-2">Section 6 in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
 <p id="section-3.6-3">While the EAD_1 and EAD_2 fields (carried in EDHOC message_1 and EDHOC message_2, respectively) are integrity protected through the transcript hash, the channel binding protocol defined in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 <p id="section-3.6-4">It is important to note that EAD fields in EDHOC are optional; consequently, the inclusion of EAP Channel Binding information in an authentication exchange is also optional.<a href="#section-3.6-4" class="pilcrow">¶</a></p>
-<p id="section-3.6-5">Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in <a href="#iana-ead" class="auto internal xref">Section 5.3</a>.<a href="#section-3.6-5" class="pilcrow">¶</a></p>
+<p id="section-3.6-5">Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in <a href="#iana-ead" class="auto internal xref">Section 5.3</a>. This new EAD item is intended only for EAD_3 and EAD_4. Then, it <span class="bcp14">MUST</span> be ignored if included in other EAD fields. Multiple occurrences of this new EAD item in one EAD field are NOT allowed.<a href="#section-3.6-5" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-3.6-6.1">
             <p id="section-3.6-6.1.1"><strong>Implementation Note:</strong>
@@ -2113,8 +2113,11 @@ This document defines only the container for carrying EAP Channel Binding inform
 <pre>
 Value: TBD1
 Description: EAP-EDHOC
+Reference: [this document]
 </pre><a href="#section-5.1-2" class="pilcrow">¶</a>
 </div>
+<p id="section-5.1-3">NOTE: Suggested value: TBD1 = 57.
+RFC Editor: Remove this note.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="edhoc-exporter-label-registry">
@@ -2127,21 +2130,29 @@ Description: EAP-EDHOC
 <pre>
 Label: TBD2
 Description: MSK of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 </pre><a href="#section-5.2-2" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-5.2-3">
 <pre>
 Label: TBD3
 Description: EMSK of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 </pre><a href="#section-5.2-3" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-5.2-4">
 <pre>
 Label: TBD4
 Description: Method-Id of EAP method EAP-EDHOC
+Change Controller: IETF
+Reference: [this document]
 </pre><a href="#section-5.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-5">The allocations have been updated to reference this document.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">NOTE: Suggested values: TBD2 = 26, TBD3 = 27, TBD4 = 28.
+RFC Editor: Remove this note.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+<p id="section-5.2-6">The allocations have been updated to reference this document.<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-ead">
@@ -2152,12 +2163,14 @@ Description: Method-Id of EAP method EAP-EDHOC
 <p id="section-5.3-1">IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.3-2">
 <pre>
+Name: EAPChannelBinding
 Label: TBD5
 Description: EAP channel binding information
+Reference: [this document]
 </pre><a href="#section-5.3-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5.3-3">This new EAD item is intended only for EAD_3 and EAD_4. Then, it <span class="bcp14">MUST</span> be ignored if included in other EAD fields. This new EAD item is considered as critical.
-Multiple occurrences of this new EAD item in one EAD field are NOT allowed.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">NOTE: Suggested value: TBD5 = 1.
+RFC Editor: Remove this note.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
