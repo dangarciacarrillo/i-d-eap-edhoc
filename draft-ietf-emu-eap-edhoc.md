@@ -637,6 +637,9 @@ Description: EAP-EDHOC
 Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+NOTE: Suggested value: TBD1 = 57.
+RFC Editor: Remove this note.
+
 ## EDHOC Exporter Label Registry
 
 IANA has registered the following new labels in the "EDHOC Exporter Label" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
@@ -662,6 +665,9 @@ Change Controller: IETF
 Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+NOTE: Suggested values: TBD2 = 26, TBD3 = 27, TBD4 = 28.
+RFC Editor: Remove this note.
+
 The allocations have been updated to reference this document.
 
 ## EDHOC External Authorization Data Registry {#iana-ead}
@@ -674,6 +680,9 @@ Label: TBD5
 Description: EAP channel binding information
 Reference: [this document]
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+NOTE: Suggested value: TBD5 = 1.
+RFC Editor: Remove this note.
 
 # Security Considerations {#security}
 
