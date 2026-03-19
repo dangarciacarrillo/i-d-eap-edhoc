@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-17T00:57:35.925773+00:00",
+  "timestamp": "2026-03-19T01:00:55.314441+00:00",
   "repo": "dangarciacarrillo/i-d-eap-edhoc",
   "labels": [
     {
@@ -393,24 +393,26 @@
       "id": "PR_kwDOHgXWVs7K3Ba2",
       "title": "Addressing the comments from the IANA LC rw",
       "url": "https://github.com/dangarciacarrillo/i-d-eap-edhoc/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "francislopezg",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-03-16T09:26:53Z",
-      "updatedAt": "2026-03-16T09:26:54Z",
+      "updatedAt": "2026-03-18T11:22:17Z",
       "baseRepository": "dangarciacarrillo/i-d-eap-edhoc",
       "baseRefName": "main",
       "baseRefOid": "78ebf4be13813d3925221bd03e43d070f48adcdc",
       "headRepository": "dangarciacarrillo/i-d-eap-edhoc",
       "headRefName": "IANA-LC-review",
-      "headRefOid": "223594a64381ac195708de6218150113b876ea9d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1719d1b70e3d42e205764bf6f4d0943490e907e8",
+      "closedAt": "2026-03-18T11:22:17Z",
+      "mergedAt": "2026-03-18T11:22:17Z",
+      "mergedBy": "francislopezg",
+      "mergeCommit": {
+        "oid": "b91c528f187b1e7d45d7769dae54e11fea007a8a"
+      },
       "comments": [],
       "reviews": []
     }
