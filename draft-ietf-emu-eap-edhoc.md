@@ -60,6 +60,7 @@ normative:
 
    RFC2119:
    RFC3748:
+   RFC5247:
    RFC6677:
    RFC7542:
    RFC8174:
@@ -696,7 +697,7 @@ RFC Editor: Remove this note.
 
 # Security Considerations {#security}
 
-The security considerations of EAP {{RFC3748}} and EDHOC {{RFC9528}} apply to this document. Since the design of EAP-EDHOC closely follows EAP-TLS 1.3 {{RFC9190}}, many of its security considerations are also relevant.
+The security considerations of EAP {{RFC3748}} {{RFC5247}} and EDHOC {{RFC9528}} apply to this document. Since the design of EAP-EDHOC closely follows EAP-TLS 1.3 {{RFC9190}}, many of its security considerations are also relevant.
 
 
 ## Security Claims
@@ -793,6 +794,48 @@ Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply h
 The cross-protocol attack of {{RFC9190}} does not apply here, as no resumption mechanism has been defined for EAP-EDHOC.
 
 --- back
+
+# Fragmented Message Example with Header Values
+
+This section provides an example of a fragmented message, including all header field values, to improve clarity and avoid ambiguity.
+
+In this example, the total size of the EDHOC message is 128 octets. The MTU allows 32 EAP bytes to be transmitted per packet. No retransmissions are considered in this example. Furthermore, this does not correspond to the EAP-EDHOC Start message. The packets sent by the server are shown below:
+
+~~~~~~~~~~~~~~~~~~~~~~~
++-----
+Code = 1 | ID = 1 | Length = 32 |
+Type = TBD1 | R = 0 | S = 0 | M = 1 | L = 0b001 | EDHOC Msg Length = 128 |
+EDHOC Data Bytes 1-25
++-----
+
++-----
+Code = 1 | ID = 2 | Length = 32 |
+Type = TBD1 | R = 0 | S = 0 | M = 1 | L = 0b000 |
+EDHOC Data Bytes 26-51
++-----
+
++-----
+Code = 1 | ID = 3 | Length = 32 |
+Type = TBD1 | R = 0 | S = 0 | M = 1 | L = 0b000 |
+EDHOC Data Bytes 52-77
++-----
+
++-----
+Code = 1 | ID = 4 | Length = 32 |
+Type = TBD1 | R = 0 | S = 0 | M = 1 | L = 0b000 |
+EDHOC Data Bytes 78-103
++-----
+
++-----
+Code = 1 | ID = 5 | Length = 32 |
+Type = TBD1 | R = 0 | S = 0 | M = 0 | L = 0b000 |
+EDHOC Data Bytes 104-128
++-----
+~~~~~~~~~~~~~~~~~~~~~~~
+
+As shown, the L flags have a value of 0b001 in the first fragment, indicating that the EDHOC Msg Length field is 1 byte in size. The EDHOC Msg Length field indicates the total size of the EDHOC message being fragmented, which is 128 bytes. The L flags and the EDHOC Msg Length field are only present in the first fragment.
+
+Another relevant detail is that the first fragment includes 7 bytes of header (1 byte Code, 1 byte Identifier, 2 bytes Length, 1 byte Type, 1 byte Flags, and 1 byte EDHOC Msg Length), as illustrated in {{packet}}. Subsequent fragments include 6 bytes of header, since they do not carry the EDHOC Msg Length field. Consequently, with an MTU of 32 bytes, the first fragment carries 25 bytes of payload, while each subsequent fragment carries up to 26 bytes of payload.
 
 # Acknowledgments
 {: numbered="no"}
