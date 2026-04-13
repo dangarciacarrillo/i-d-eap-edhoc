@@ -795,7 +795,7 @@ The cross-protocol attack of {{RFC9190}} does not apply here, as no resumption m
 
 --- back
 
-# Fragmented Message Example with Header Values
+# Fragmented Message Example
 
 This section provides an example of a fragmented message, including all header field values, to improve clarity and avoid ambiguity.
 
