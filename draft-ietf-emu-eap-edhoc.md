@@ -135,7 +135,13 @@ EDHOC messages make use of lightweight primitives, specifically CBOR {{RFC8949}}
 
 {::boilerplate bcp14-tagged}
 
-Readers are expected to be familiar with the terms and concepts described in EAP {{RFC3748}} and EDHOC {{RFC9528}}.
+Readers are expected to be familiar with the terms and concepts defined in EAP {{RFC3748}} and EDHOC {{RFC9528}}, in particular the following.
+
+Acronyms and Terms:
+* MSK - Master Session Key; defined in {{RFC3748}}.
+* EMSK - Extended Master Session Key; defined in {{RFC3748}}.
+* Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, this term is used interchangeably with EAP peer; defined in {{RFC9528}}.
+* Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, this term is used interchangeably with EAP server; defined in {{RFC9528}}.
 
 # Protocol Overview {#overview}
 
@@ -401,13 +407,15 @@ EDHOC is designed to perform well in constrained networks where message sizes ar
 
 Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see {{detailed-description}} for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.
 
-The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag MUST be present in the first fragment of a fragmented EDHOC message, indicating the size of the EAP-EDHOC Message Length field and thereby signaling that the EDHOC message is fragmented. Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages.
+The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag and the EAP-EDHOC Message Length field MUST be present only in the first fragment of a fragmented EDHOC message, thereby signaling that the EDHOC message is fragmented. Implementations MUST NOT set any of the L flag bits to 1 in unfragmented messages.
 
-The S flag bit SHALL be set only in the EAP-EDHOC Start message sent by the EAP server to the peer (and is also used in unfragmented exchanges). The M flag bit SHALL be set in all fragments except the last one.
+The S flag bit SHALL be set in the EAP-EDHOC Start message sent by the EAP server to the peer. The S flag bit SHALL NOT be set in any other EAP-EDHOC messages. The M flag bit SHALL be set in all fragments except the last one.
 
 When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it MUST respond with an EAP-Response packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP server MUST wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier field for each fragment contained within an EAP-Request, and the peer MUST include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.
 
 Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it MUST respond with an EAP-Request packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP peer MUST wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server MUST increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer MUST include this Identifier value in the subsequent fragment contained within an EAP-Response.
+
+Explanations and considerations regarding retransmission timers are provided in {{RFC4137}}.
 
 {{fragmentation-flow}} illustrates the exchange between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required. EAP Identifiers are also shown to illustrate their progression. A retransmission is also included.
 
@@ -487,7 +495,7 @@ EAP-EDHOC Peer                                   EAP-EDHOC Server
 
 The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information MUST NOT be used for accounting purposes or to give authorization. The EAP authenticator and the EAP server MAY examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers MAY reject conversations if the identity does not match their policy.
 
-The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a public root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.
+The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations SHOULD allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a trusted root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.
 
 The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are RECOMMENDED. For example, the eduroam federation {{RFC7593}} provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers MAY implement a Trust On First Use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.
 
@@ -516,6 +524,8 @@ EAP-EDHOC exports the MSK and the EMSK and does not specify how it is used by lo
 The EAP-EDHOC peers and EAP-EDHOC servers MUST comply with the requirements defined in Section 8 of {{RFC9528}}, including mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, and extensions.
 
 ## EAP State Machines
+
+It is worth remembering that the EAP state machine is defined in [RFC4137]. However, the following considerations apply to EAP-EDHOC.
 
 The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.
 
