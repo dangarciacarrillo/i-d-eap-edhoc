@@ -116,7 +116,7 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Fragmented Message Example with Header Values
+   Appendix A.  Fragmented Message Example
    Acknowledgments
    Authors' Addresses
 
@@ -1361,7 +1361,7 @@ Table of Contents
               <https://portal.3gpp.org/desktopmodules/Specifications/
               SpecificationDetails.aspx?specificationId=3169>.
 
-Appendix A.  Fragmented Message Example with Header Values
+Appendix A.  Fragmented Message Example
 
    This section provides an example of a fragmented message, including
    all header field values, to improve clarity and avoid ambiguity.
