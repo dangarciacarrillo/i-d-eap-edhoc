@@ -840,7 +840,7 @@ Another relevant detail is that the first fragment includes 7 bytes of header (1
 # Acknowledgments
 {: numbered="no"}
 
-The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan, Renzo Navas, Paul Wouters, Rich Salz and Ines Robles for their reviews.
+The authors sincerely thank Eduardo Ingles-Sanchez for his contribution in the initial phase of this work. We also want to thank Marco Tiloca, Christian Amsüss, Gabriel Lopez-Millan, Renzo Navas, Paul Wouters, Rich Salz, Ines Robles and Christopher Inacio for their reviews.
 
 This work was supported partially by Project PID2023-148104OB-C43 (ONOFRE4-UMU) from MCIN/AEI; the Formacion del Profesorado Universitario predoctoral grant FPU24/03871, also from MCIN/AEI; and the European Union's NextGenerationEU, as part of the Recovery, Transformation, and Resilience Plan, supported by Spanish INCIBE (6G-SOC project).
 
