@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-14T01:12:25.122189+00:00",
+  "timestamp": "2026-04-19T01:14:06.695406+00:00",
   "repo": "dangarciacarrillo/i-d-eap-edhoc",
   "labels": [
     {
@@ -421,24 +421,26 @@
       "id": "PR_kwDOHgXWVs7R4wyP",
       "title": "Changes from the AD rw",
       "url": "https://github.com/dangarciacarrillo/i-d-eap-edhoc/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "francislopezg",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-04-13T06:31:03Z",
-      "updatedAt": "2026-04-13T07:11:00Z",
+      "updatedAt": "2026-04-16T07:34:31Z",
       "baseRepository": "dangarciacarrillo/i-d-eap-edhoc",
       "baseRefName": "main",
       "baseRefOid": "e32aa0361a3e70677813d3368ce72ed826b98b9b",
       "headRepository": "dangarciacarrillo/i-d-eap-edhoc",
       "headRefName": "AD-rw-2",
       "headRefOid": "577735fa5612d6cdbde93057e3f015621b538183",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-04-16T07:34:31Z",
+      "mergedAt": "2026-04-16T07:34:31Z",
+      "mergedBy": "francislopezg",
+      "mergeCommit": {
+        "oid": "7320a732b64e34ede6641f7acfe06a4e66a1333e"
+      },
       "comments": [],
       "reviews": []
     }
