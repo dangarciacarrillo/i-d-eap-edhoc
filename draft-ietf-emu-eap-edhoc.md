@@ -774,7 +774,7 @@ When other types of credentials are used such as CWT/CCS, the endpoints are in c
 
 
 ## Packet Modification Attacks
-EAP-EDHOC relies on EDHOC, which is designed which is designed to maximize confidentiality by encrypting handshake elements as early as the protocol state permits. In addition, the protocol is cryptographically bound such that any modification to any message (encrypted or unencrypted) results in a verification failure, as transcript hashes computed over the plaintext messages are used to derive the cryptographic material used by both endpoints.
+EAP-EDHOC relies on EDHOC, which is designed to maximize confidentiality by encrypting handshake elements as early as the protocol state permits. In addition, the protocol is cryptographically bound such that any modification to any message (encrypted or unencrypted) results in a verification failure, as transcript hashes computed over the plaintext messages are used to derive the cryptographic material used by both endpoints.
 
 ## Authorization
 Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
