@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 18 October 2026                            University of Murcia
+Expires: 22 November 2026                           University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                           16 April 2026
+                                                             21 May 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 October 2026.
+   This Internet-Draft will expire on 22 November 2026.
 
 Copyright Notice
 
@@ -200,13 +200,19 @@ Table of Contents
    defined in EAP [RFC3748] and EDHOC [RFC9528], in particular the
    following.
 
-   Acronyms and Terms: * MSK - Master Session Key; defined in [RFC3748].
-   * EMSK - Extended Master Session Key; defined in [RFC3748]. *
-   Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC
-   Initiator; therefore, this term is used interchangeably with EAP
-   peer; defined in [RFC9528]. * Responder - In EAP-EDHOC, the EAP
-   server assumes the role of the EDHOC Responder; therefore, this term
-   is used interchangeably with EAP server; defined in [RFC9528].
+   Acronyms and Terms:
+
+   *  MSK - Master Session Key; defined in [RFC3748].
+
+   *  EMSK - Extended Master Session Key; defined in [RFC3748].
+
+   *  Initiator - In EAP-EDHOC, the EAP peer assumes the role of the
+      EDHOC Initiator; therefore, this term is used interchangeably with
+      EAP peer; defined in [RFC9528].
+
+   *  Responder - In EAP-EDHOC, the EAP server assumes the role of the
+      EDHOC Responder; therefore, this term is used interchangeably with
+      EAP server; defined in [RFC9528].
 
 3.  Protocol Overview
 
@@ -1259,12 +1265,12 @@ Table of Contents
 7.2.  Informative References
 
    [I-D.ietf-cose-cbor-encoded-cert]
-              Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
-              M. Furuhed, "CBOR Encoded X.509 Certificates (C509
-              Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-17, 2 March 2026,
+              Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
+              Furuhed, M., and L. Liao, "CBOR Encoded X.509 Certificates
+              (C509 Certificates)", Work in Progress, Internet-Draft,
+              draft-ietf-cose-cbor-encoded-cert-19, 11 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-17>.
+              cbor-encoded-cert-19>.
 
    [I-D.ietf-lake-app-profiles]
               Tiloca, M. and R. Höglund, "Coordinating the Use of
