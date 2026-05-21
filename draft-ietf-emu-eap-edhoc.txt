@@ -1176,9 +1176,9 @@ Table of Contents
 
 6.5.  Packet Modification Attacks
 
-   EAP-EDHOC relies on EDHOC, which is designed which is designed to
-   maximize confidentiality by encrypting handshake elements as early as
-   the protocol state permits.  In addition, the protocol is
+   EAP-EDHOC relies on EDHOC, which is designed to maximize
+   confidentiality by encrypting handshake elements as early as the
+   protocol state permits.  In addition, the protocol is
    cryptographically bound such that any modification to any message
    (encrypted or unencrypted) results in a verification failure, as
    transcript hashes computed over the plaintext messages are used to
