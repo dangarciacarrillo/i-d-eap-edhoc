@@ -157,8 +157,6 @@ After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in th
 
 The message processing in {{Section 5 of RFC9528}} states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to handle this data to complete the protocol execution. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
 
-Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
-
 ### Successful EAP-EDHOC Message Flow without Fragmentation
 
 EDHOC allows EAP-EDHOC to support authentication credentials of any type defined by COSE, which can be either transported or referenced during the protocol.
@@ -776,7 +774,7 @@ When other types of credentials are used such as CWT/CCS, the endpoints are in c
 
 
 ## Packet Modification Attacks
-EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change in any message is detected by means of the transcript hashes integrity verification.
+EAP-EDHOC relies on EDHOC, which is designed which is designed to maximize confidentiality by encrypting handshake elements as early as the protocol state permits. In addition, the protocol is cryptographically bound such that any modification to any message (encrypted or unencrypted) results in a verification failure, as transcript hashes computed over the plaintext messages are used to derive the cryptographic material used by both endpoints.
 
 ## Authorization
 Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation {{RFC9528}}, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
