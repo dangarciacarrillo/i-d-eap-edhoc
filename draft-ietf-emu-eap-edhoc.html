@@ -1387,7 +1387,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3.1-2">The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages <span class="bcp14">SHALL</span> be done as specified in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. This document only lists additional and different requirements, restrictions, and processing compared to <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">The message processing in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-5" class="relref">Section 5</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to handle this data to complete the protocol execution. See also <span>[<a href="#I-D.ietf-lake-edhoc-impl-cons" class="cite xref">I-D.ietf-lake-edhoc-impl-cons</a>]</span>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method <span>[<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span>.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div id="successful-eap-edhoc-message-flow-without-fragmentation">
 <section id="section-3.1.1">
           <h4 id="name-successful-eap-edhoc-messag">
@@ -2371,7 +2370,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-packet-modification-attacks">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-packet-modification-attacks" class="section-name selfRef">Packet Modification Attacks</a>
         </h3>
-<p id="section-6.5-1">EAP-EDHOC relies on EDHOC, which is designed to encrypt and integrity protect as much information as possible. Any change in any message is detected by means of the transcript hashes integrity verification.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">EAP-EDHOC relies on EDHOC, which is designed which is designed to maximize confidentiality by encrypting handshake elements as early as the protocol state permits. In addition, the protocol is cryptographically bound such that any modification to any message (encrypted or unencrypted) results in a verification failure, as transcript hashes computed over the plaintext messages are used to derive the cryptographic material used by both endpoints.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authorization">
