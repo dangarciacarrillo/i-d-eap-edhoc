@@ -139,6 +139,7 @@ EDHOC messages make use of lightweight primitives, specifically CBOR {{RFC8949}}
 Readers are expected to be familiar with the terms and concepts defined in EAP {{RFC3748}} and EDHOC {{RFC9528}}, in particular the following.
 
 Acronyms and Terms:
+
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
 * Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, this term is used interchangeably with EAP peer; defined in {{RFC9528}}.
