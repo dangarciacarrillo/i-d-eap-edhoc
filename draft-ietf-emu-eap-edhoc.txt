@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 22 November 2026                           University of Murcia
+Expires: 26 November 2026                           University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                             21 May 2026
+                                                             25 May 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2026.
+   This Internet-Draft will expire on 26 November 2026.
 
 Copyright Notice
 
@@ -250,6 +250,9 @@ Table of Contents
    acting as the application of EDHOC, it may need to handle this data
    to complete the protocol execution.  See also
    [I-D.ietf-lake-edhoc-impl-cons].
+
+   Resumption of EAP-EDHOC may be defined using the EDHOC-PSK
+   authentication method [I-D.ietf-lake-edhoc-psk].
 
 3.1.1.  Successful EAP-EDHOC Message Flow without Fragmentation
 
@@ -1212,8 +1215,10 @@ Table of Contents
 
 6.9.  Cross-Protocol Attacks
 
-   The cross-protocol attack of [RFC9190] does not apply here, as no
-   resumption mechanism has been defined for EAP-EDHOC.
+   The cross-protocol attack described in [RFC9190] does not currently
+   apply, as no resumption mechanism has been defined for EAP-EDHOC in
+   this document.  However, any future document defining such a
+   mechanism will also need to address this issue.
 
 7.  References
 

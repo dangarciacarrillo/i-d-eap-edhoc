@@ -1052,7 +1052,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 22 November 2026</td>
+<td class="center">Expires 26 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-21" class="published">21 May 2026</time>
+<time datetime="2026-05-25" class="published">25 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-22">22 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-26">26 November 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1387,6 +1387,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3.1-2">The EDHOC protocol running between an Initiator and a Responder consists of three mandatory messages (message_1, message_2, message_3), an optional message_4, and an error message. In an EDHOC session, EAP-EDHOC uses all messages including message_4, which is mandatory and acts as a protected success indication.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1-3">After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in this document, the conversation will continue with the EDHOC messages transported in the data fields of EAP-Response and EAP-Request packets. When EAP-EDHOC is used, the formatting and processing of EDHOC messages <span class="bcp14">SHALL</span> be done as specified in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. This document only lists additional and different requirements, restrictions, and processing compared to <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.1-4">The message processing in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-5" class="relref">Section 5</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to handle this data to complete the protocol execution. See also <span>[<a href="#I-D.ietf-lake-edhoc-impl-cons" class="cite xref">I-D.ietf-lake-edhoc-impl-cons</a>]</span>.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method <span>[<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span>.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <div id="successful-eap-edhoc-message-flow-without-fragmentation">
 <section id="section-3.1.1">
           <h4 id="name-successful-eap-edhoc-messag">
@@ -2403,7 +2404,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-cross-protocol-attacks">
 <a href="#section-6.9" class="section-number selfRef">6.9. </a><a href="#name-cross-protocol-attacks" class="section-name selfRef">Cross-Protocol Attacks</a>
         </h3>
-<p id="section-6.9-1">The cross-protocol attack of <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> does not apply here, as no resumption mechanism has been defined for EAP-EDHOC.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
+<p id="section-6.9-1">The cross-protocol attack described in <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> does not currently apply, as no resumption mechanism has been defined for EAP-EDHOC in this document. However, any future document defining such a mechanism will also need to address this issue.<a href="#section-6.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
