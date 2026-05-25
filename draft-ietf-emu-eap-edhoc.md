@@ -157,6 +157,8 @@ After receiving an EAP-Request packet with EAP-Type=EAP-EDHOC as described in th
 
 The message processing in {{Section 5 of RFC9528}} states that certain data (EAD items, connection identifiers, application algorithms, etc.) is made available to the application. Since EAP-EDHOC is now acting as the application of EDHOC, it may need to handle this data to complete the protocol execution. See also {{I-D.ietf-lake-edhoc-impl-cons}}.
 
+Resumption of EAP-EDHOC may be defined using the EDHOC-PSK authentication method {{I-D.ietf-lake-edhoc-psk}}.
+
 ### Successful EAP-EDHOC Message Flow without Fragmentation
 
 EDHOC allows EAP-EDHOC to support authentication credentials of any type defined by COSE, which can be either transported or referenced during the protocol.
@@ -790,7 +792,7 @@ Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eaves
 Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
-The cross-protocol attack of {{RFC9190}} does not apply here, as no resumption mechanism has been defined for EAP-EDHOC.
+The cross-protocol attack described in {{RFC9190}} does not currently apply, as no resumption mechanism has been defined for EAP-EDHOC in this document. However, any future document defining such a mechanism will also need to address this issue.
 
 --- back
 
