@@ -142,8 +142,8 @@ Acronyms and Terms:
 
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
-* Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, this term is used interchangeably with EAP peer; defined in {{RFC9528}}. It is worth noting that in EDHOC the Initiator is the entity sending EDHOC Message_1, which should not be confused with the EDHOC Start message, a new message introduced in this specification.
-* Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, this term is used interchangeably with EAP server; defined in {{RFC9528}}.
+* Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, the terms "Initiator" and "EAP peer" are used interchangeably in this document. As defined in {{RFC9528}}, the Initiator is the entity that sends EDHOC message_1. This role must not be confused with the sender of the EDHOC Start message introduced in this specification.
+* Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, the terms "Responder" and "EAP server" are used interchangeably in this document. The term is defined in {{RFC9528}}.
 
 # Protocol Overview {#overview}
 
