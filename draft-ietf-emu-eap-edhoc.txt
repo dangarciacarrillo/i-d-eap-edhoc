@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 26 November 2026                           University of Murcia
+Expires: 4 December 2026                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                             25 May 2026
+                                                             2 June 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 November 2026.
+   This Internet-Draft will expire on 4 December 2026.
 
 Copyright Notice
 
@@ -208,7 +208,10 @@ Table of Contents
 
    *  Initiator - In EAP-EDHOC, the EAP peer assumes the role of the
       EDHOC Initiator; therefore, this term is used interchangeably with
-      EAP peer; defined in [RFC9528].
+      EAP peer; defined in [RFC9528].  It is worth noting that in EDHOC
+      the Initiator is the entity sending EDHOC Message_1, which should
+      not be confused with the EDHOC Start message, a new message
+      introduced in this specification.
 
    *  Responder - In EAP-EDHOC, the EAP server assumes the role of the
       EDHOC Responder; therefore, this term is used interchangeably with
@@ -1101,7 +1104,7 @@ Table of Contents
       Responder.  EDHOC supports all signature algorithms defined by
       COSE.
 
-   *  (3) Mutual authentication: The initiator and responder
+   *  (3) Mutual authentication: The Initiator and Responder
       authenticate each other through the EDHOC exchange.
 
    *  (4) Integrity protection: EDHOC integrity protects all message
