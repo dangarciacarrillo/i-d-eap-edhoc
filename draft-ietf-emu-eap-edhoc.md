@@ -142,7 +142,7 @@ Acronyms and Terms:
 
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
-* Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, this term is used interchangeably with EAP peer; defined in {{RFC9528}}.
+* Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, this term is used interchangeably with EAP peer; defined in {{RFC9528}}. It is worth noting that in EDHOC the Initiator is the entity sending EDHOC Message_1, which should not be confused with the EDHOC Start message, a new message introduced in this specification.
 * Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, this term is used interchangeably with EAP server; defined in {{RFC9528}}.
 
 # Protocol Overview {#overview}
@@ -733,12 +733,12 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
   The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.
 
 - (3) Mutual authentication:
-  The initiator and responder authenticate each other through the EDHOC exchange.
+  The Initiator and Responder authenticate each other through the EDHOC exchange.
 
 - (4) Integrity protection:
   EDHOC integrity protects all message content using transcript hashes for key derivation and as additional authenticated data, including, e.g., method type, cipher suites, and external authorization data.
 
-- (5) Replay protection. EDHOC broadens the message authentication coverage to include  algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
+- (5) Replay protection. EDHOC broadens the message authentication coverage to include algorithms, external authorization data, and prior plaintext messages, as well as adding an explicit method type. By doing this, an attacker cannot replay or inject messages from a different EDHOC session.
 
 - (6) Confidentiality. EDHOC protects the method payload transported within the EAP-Request and EAP-Response messages; however, the EAP-Success and EAP-Failure packets themselves are not encrypted or protected by EDHOC. EDHOC message_1 is not confidential, but it does not convey any private information. EDHOC message_2 provides confidentiality against passive attackers, while message_3 and message_4 provide confidentiality against active attackers.
 
