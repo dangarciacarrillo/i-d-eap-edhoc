@@ -146,7 +146,7 @@ EDHOC messages make use of lightweight primitives, specifically CBOR {{RFC8949}}
 
 {::boilerplate bcp14-tagged}
 
-Readers are expected to be familiar with the terms and concepts defined in EAP {{RFC3748}} and EDHOC {{RFC9528}}, in particular the following: 
+Readers are expected to be familiar with the terms and concepts defined in EAP {{RFC3748}} and EDHOC {{RFC9528}}, in particular the following:
 
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
