@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 4 December 2026                            University of Murcia
+Expires: 5 December 2026                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                             2 June 2026
+                                                             3 June 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2026.
+   This Internet-Draft will expire on 5 December 2026.
 
 Copyright Notice
 
@@ -99,7 +99,7 @@ Table of Contents
      4.2.  EAP-EDHOC Response Packet
    5.  IANA Considerations
      5.1.  EAP Type
-     5.2.  EDHOC Exporter Label Registry
+     5.2.  EDHOC Exporter Labels Registry
      5.3.  EDHOC External Authorization Data Registry
    6.  Security Considerations
      6.1.  Security Claims
@@ -544,8 +544,8 @@ Table of Contents
    Many client certificates contain an identity such as an email
    address, which is already in NAI format.  When the certificate
    contains an NAI as subject name or alternative subject name, an
-   anonymous NAI SHOULD be derived from the NAI in the certificate.  See
-   Section 3.1.5.
+   anonymous NAI MUST be derived from the NAI in the certificate to
+   preserve privacy.  See Section 3.1.5.
 
 3.1.5.  Privacy
 
@@ -796,10 +796,10 @@ Table of Contents
    Because EDHOC error messages are unauthenticated, they MUST NOT be
    relied upon to determine the cause of failure; they only indicate
    that the exchange did not complete and are vulnerable to injection by
-   an attacker (DoS).  However, EDHOC error messages SHOULD be
-   considered failure result indication, as defined in [RFC3748].  After
-   sending or receiving an EDHOC error message, the EAP-EDHOC server may
-   only send an EAP-Failure.
+   an attacker (DoS).  However, EDHOC error messages MUST be considered
+   failure result indication, as defined in [RFC3748].  After sending or
+   receiving an EDHOC error message, the EAP-EDHOC server may only send
+   an EAP-Failure.
 
    The keying material can be derived by the Initiator upon receiving
    EDHOC message_2, and by the Responder upon receiving EDHOC message_3.
@@ -898,11 +898,11 @@ Table of Contents
       waiting for a Response.  In the case of fragmented messages, the
       Identifier will follow the indications of Section 3.1.6.
 
-   Length:  The Length field is two octets and indicates the length of
-      the EAP packet including the Code, Identifier, Length, Type, and
-      Data fields.  Octets outside the range of the Length field should
-      be treated as Data Link Layer padding and MUST be ignored on
-      reception.
+   Length:  The Length field is two octets and indicates the length in
+      octets of the EAP packet including the Code, Identifier, Length,
+      Type, and Data fields.  Octets outside the range of the Length
+      field should be treated as Data Link Layer padding and MUST be
+      ignored on reception.
 
    Type:  TBD1 (EAP-EDHOC)
 
@@ -941,11 +941,11 @@ Table of Contents
    Identifier:  The Identifier field is one octet and MUST match the
       Identifier field from the corresponding request.
 
-   Length:  The Length field is two octets and indicates the length of
-      the EAP packet including the Code, Identifier, Length, Type, and
-      Data fields.  Octets outside the range of the Length field should
-      be treated as Data Link Layer padding and MUST be ignored on
-      reception.
+   Length:  The Length field is two octets and indicates the length in
+      octets of the EAP packet including the Code, Identifier, Length,
+      Type, and Data fields.  Octets outside the range of the Length
+      field should be treated as Data Link Layer padding and MUST be
+      ignored on reception.
 
    Type:  TBD1 (EAP-EDHOC)
 
@@ -981,7 +981,7 @@ Table of Contents
 
    IANA has registered the following new type in the "Method Types"
    registry under the group name "Extensible Authentication Protocol
-   (EAP) Registry":
+   (EAP) Registry" [IANA-EAP]:
 
    Value: TBD1
    Description: EAP-EDHOC
@@ -989,11 +989,11 @@ Table of Contents
 
    NOTE: Suggested value: TBD1 = 57.  RFC Editor: Remove this note.
 
-5.2.  EDHOC Exporter Label Registry
+5.2.  EDHOC Exporter Labels Registry
 
    IANA has registered the following new labels in the "EDHOC Exporter
-   Label" registry under the group name "Ephemeral Diffie-Hellman Over
-   COSE (EDHOC)":
+   Labels" registry under the group name "Ephemeral Diffie-Hellman Over
+   COSE (EDHOC)" [IANA-EDHOC]:
 
    Label: TBD2
    Description: MSK of EAP method EAP-EDHOC
@@ -1019,7 +1019,7 @@ Table of Contents
 
    IANA has registered the following new label in the "EDHOC External
    Authorization Data" registry under the group name "Ephemeral Diffie-
-   Hellman Over COSE (EDHOC)":
+   Hellman Over COSE (EDHOC)" [IANA-EDHOC]:
 
    Name: EAPChannelBinding
    Label: TBD5
@@ -1312,6 +1312,16 @@ Table of Contents
               draft-ietf-lake-edhoc-psk-07, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
               edhoc-psk-07>.
+
+   [IANA-EAP] Internet Assigned Numbers Authority (IANA), "Extensible
+              Authentication Protocol (EAP) Registry", n.d.,
+              <https://www.iana.org/assignments/eap-numbers/eap-
+              numbers.xhtml>.
+
+   [IANA-EDHOC]
+              Internet Assigned Numbers Authority (IANA), "Ephemeral
+              Diffie-Hellman Over COSE (EDHOC) Registry", n.d.,
+              <https://www.iana.org/assignments/edhoc/edhoc.xhtml>.
 
    [RFC4137]  Vollbrecht, J., Eronen, P., Petroni, N., and Y. Ohba,
               "State Machines for Extensible Authentication Protocol
