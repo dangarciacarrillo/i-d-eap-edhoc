@@ -94,6 +94,16 @@ informative:
       -
         ins: 3GPP TS 33.501
     date: March 2025
+  IANA-EAP:
+    title: "Extensible Authentication Protocol (EAP) Registry"
+    author:
+      - org: Internet Assigned Numbers Authority (IANA)
+    target: https://www.iana.org/assignments/eap-numbers/eap-numbers.xhtml
+  IANA-EDHOC:
+    title: "Ephemeral Diffie-Hellman Over COSE (EDHOC) Registry"
+    author:
+      - org: Internet Assigned Numbers Authority (IANA)
+    target: https://www.iana.org/assignments/edhoc/edhoc.xhtml
 
 --- abstract
 
@@ -396,7 +406,7 @@ It is RECOMMENDED to use anonymous Network Access Identifiers (NAIs) {{RFC7542}}
 
 While opaque blobs are allowed by {{RFC3748}}, such identities are NOT RECOMMENDED as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.
 
-Many client certificates contain an identity such as an email address, which is already in NAI format. When the certificate contains an NAI as subject name or alternative subject name, an anonymous NAI SHOULD be derived from the NAI in the certificate. See {{privacy}}.
+Many client certificates contain an identity such as an email address, which is already in NAI format. When the certificate contains an NAI as subject name or alternative subject name, an anonymous NAI MUST be derived from the NAI in the certificate to preserve privacy. See {{privacy}}.
 
 ### Privacy
 
@@ -531,7 +541,7 @@ It is worth remembering that the EAP state machine is defined in [RFC4137]. Howe
 
 The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.
 
-Because EDHOC error messages are unauthenticated, they MUST NOT be relied upon to determine the cause of failure; they only indicate that the exchange did not complete and are vulnerable to injection by an attacker (DoS). However, EDHOC error messages SHOULD be considered failure result indication, as defined in {{RFC3748}}. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.
+Because EDHOC error messages are unauthenticated, they MUST NOT be relied upon to determine the cause of failure; they only indicate that the exchange did not complete and are vulnerable to injection by an attacker (DoS). However, EDHOC error messages MUST be considered failure result indication, as defined in {{RFC3748}}. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.
 
 The keying material can be derived by the Initiator upon receiving EDHOC message_2, and by the Responder upon receiving EDHOC message_3. Implementations following {{RFC4137}} can then set the eapKeyData and aaaEapKeyData variables.
 
@@ -560,7 +570,7 @@ Similarly, if the Initiator detects an error in the channel binding information 
 
 The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
 
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~aasvg
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -582,7 +592,7 @@ Identifier:
 : The Identifier field is one octet and aids in matching responses with requests. The Identifier field MUST be changed on each new (non-retransmission) Request packet, and MUST be the same if a Request packet is retransmitted due to a timeout while waiting for a Response. In the case of fragmented messages, the Identifier will follow the indications of {{fragmentation}}.
 
 Length:
-: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
+: The Length field is two octets and indicates the length in octets of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
 Type:
 : TBD1 (EAP-EDHOC)
@@ -614,7 +624,7 @@ Identifier:
 : The Identifier field is one octet and MUST match the Identifier field from the corresponding request.
 
 Length:
-: The Length field is two octets and indicates the length of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
+: The Length field is two octets and indicates the length in octets of the EAP packet including the Code, Identifier, Length, Type, and Data fields. Octets outside the range of the Length field should be treated as Data Link Layer padding and MUST be ignored on reception.
 
 Type:
 : TBD1 (EAP-EDHOC)
@@ -641,7 +651,7 @@ EDHOC Data:
 
 ## EAP Type
 
-IANA has registered the following new type in the "Method Types" registry under the group name "Extensible Authentication Protocol (EAP) Registry":
+IANA has registered the following new type in the "Method Types" registry under the group name "Extensible Authentication Protocol (EAP) Registry" {{IANA-EAP}}:
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Value: TBD1
@@ -652,9 +662,9 @@ Reference: [this document]
 NOTE: Suggested value: TBD1 = 57.
 RFC Editor: Remove this note.
 
-## EDHOC Exporter Label Registry
+## EDHOC Exporter Labels Registry
 
-IANA has registered the following new labels in the "EDHOC Exporter Label" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
+IANA has registered the following new labels in the "EDHOC Exporter Labels" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)" {{IANA-EDHOC}}:
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Label: TBD2
@@ -684,7 +694,7 @@ The allocations have been updated to reference this document.
 
 ## EDHOC External Authorization Data Registry {#iana-ead}
 
-IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)":
+IANA has registered the following new label in the "EDHOC External Authorization Data" registry under the group name "Ephemeral Diffie-Hellman Over COSE (EDHOC)" {{IANA-EDHOC}}:
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Name: EAPChannelBinding
