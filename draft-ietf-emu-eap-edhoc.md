@@ -116,7 +116,7 @@ The Extensible Authentication Protocol (EAP), defined in {{RFC3748}}, provides a
 
 EAP-EDHOC is similar to EAP-TLS 1.3 {{RFC9190}}, since EDHOC is based on a similar security protocol design as the TLS 1.3 handshake {{RFC8446}}. However, EDHOC has been optimized for highly constrained settings, for example, involving wirelessly connected battery powered 'things' with embedded microcontrollers, sensors, and actuators. An overview of EDHOC is given in {{edhoc-overview}}.
 
- The EAP-EDHOC method enables the integration of EDHOC into different applications and use cases using the EAP framework.
+The EAP-EDHOC method enables the integration of EDHOC into different applications and use cases using the EAP framework.
 
 ## EDHOC Overview {#edhoc-overview}
 
@@ -140,7 +140,6 @@ A necessary condition for a successful completion of an EDHOC session is that bo
 
 EDHOC messages make use of lightweight primitives, specifically CBOR {{RFC8949}} and COSE {{?STD96}} for efficient encoding and security services in constrained devices. EDHOC is optimized for use with CoAP {{RFC7252}} and OSCORE {{RFC8613}} to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.
 
-
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -149,6 +148,8 @@ Readers are expected to be familiar with the terms and concepts defined in EAP {
 
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
+* EAP peer - The device seeking network access. Terminology commonly used in the EAP framework.
+* EAP server - The entity providing authentication services within the EAP framework, responsible for authenticating the EAP peer on behalf of the authentication infrastructure. It may be colocated with the EAP authenticator or in a separate backend server.
 * Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, the terms "Initiator" and "EAP peer" are used interchangeably in this document. As defined in {{RFC9528}}, the Initiator is the entity that sends EDHOC message_1. This role must not be confused with the sender of the EDHOC Start message introduced in this specification.
 * Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, the terms "Responder" and "EAP server" are used interchangeably in this document. The term is defined in {{RFC9528}}.
 
