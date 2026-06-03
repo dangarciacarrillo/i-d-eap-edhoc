@@ -78,7 +78,6 @@ informative:
   RFC8446:
   RFC8613:
   RFC8949:
-  RFC9052:
   RFC9053:
   RFC9668:
   RFC9360:
@@ -566,7 +565,7 @@ Similarly, if the Initiator detects an error in the channel binding information 
 
 # Detailed Description of the EAP-EDHOC Request and Response Protocol {#detailed-description}
 
-The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in Section 4.1 of {{RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
+The EAP-EDHOC packet format for Requests and Responses is summarized in {{packet}}. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format {{RFC5216}}. As specified in {{Section 4.1 of RFC3748}}, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.
 
 ~~~~~~~~~~~~~~~~~~~~~~~aasvg
  0                   1                   2                   3
@@ -713,7 +712,7 @@ The security considerations of EAP {{RFC3748}} {{RFC5247}} and EDHOC {{RFC9528}}
 
 ### EAP Security Claims
 
-EAP security claims are defined in Section 7.2.1 of {{RFC3748}}.
+EAP security claims are defined in {{Section 7.2.1 of RFC3748}}.
 EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 | Claim                        | |
@@ -735,7 +734,7 @@ EAP-EDHOC security claims are described next and summarized in {{sec-claims}}.
 
 
 - (1) Authentication principle:
-  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{RFC9528}} Section 3.5.3.1), and CCSs ({{RFC8392}} Section 7.1).
+  EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates {{RFC9360}}, C509 certificates, CWTs ({{Section 3.5.3.1 of RFC9528}}), and CCSs ({{Section 7.1 of RFC8392}}).
 
 - (2) Cipher suite negotiation:
   The Initiator's list of supported cipher suites and order of preference is fixed, and the selected cipher suite is the cipher suite that is most preferred by the Initiator and that is supported by both the Initiator and the Responder. EDHOC supports all signature algorithms defined by COSE.
@@ -789,15 +788,15 @@ EAP-EDHOC relies on EDHOC, which is designed to maximize confidentiality by encr
 ## Authorization
 Following the considerations of EDHOC in Appendix D.5 (Unauthenticated Operation) of {{RFC9528}}, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.
 
-When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for authenticated peers. Authorization and accounting MUST be based on authenticated information such as information in the certificate. The requirements for NAIs specified in Section 4 of {{RFC7542}} apply and MUST be followed.
+When peer authentication is not used, EAP-EDHOC server implementations MUST take care to limit network access appropriately for authenticated peers. Authorization and accounting MUST be based on authenticated information such as information in the certificate. The requirements for NAIs specified in {{Section 4 of RFC7542}} apply and MUST be followed.
 
 
 ## Privacy Considerations
-Considerations in Section 9.6 of {{RFC9528}} against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of {{RFC9190}} regarding anonymous NAIs also applies.
+Considerations in {{Section 9.6 of RFC9528}} against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations in {{Section 5.8 of RFC9190}} regarding anonymous NAIs also apply.
 
 
 ## Pervasive Monitoring
-Considerations in  Section 9.1 of {{RFC9528}} about pervasive monitoring apply here.
+Considerations in {{Section 9.1 of RFC9528}} about pervasive monitoring apply here.
 
 ## Cross-Protocol Attacks
 The cross-protocol attack described in {{RFC9190}} does not currently apply, as no resumption mechanism has been defined for EAP-EDHOC in this document. However, any future document defining such a mechanism will also need to address this issue.
