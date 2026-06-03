@@ -148,8 +148,8 @@ Readers are expected to be familiar with the terms and concepts defined in EAP {
 
 * MSK - Master Session Key; defined in {{RFC3748}}.
 * EMSK - Extended Master Session Key; defined in {{RFC3748}}.
-* EAP peer - The device seeking network access. Terminology commonly used in the EAP framework.
-* EAP server - The entity providing authentication services within the EAP framework, responsible for authenticating the EAP peer on behalf of the authentication infrastructure. It may be colocated with the EAP authenticator or in a separate backend server.
+* EAP peer/Peer - The device seeking network access. Terminology commonly used in the EAP framework.
+* EAP server/Server - The entity providing authentication services within the EAP framework, responsible for authenticating the EAP peer on behalf of the authentication infrastructure. It may be colocated with the EAP authenticator or in a separate backend server.
 * Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, the terms "Initiator" and "EAP peer" are used interchangeably in this document. As defined in {{RFC9528}}, the Initiator is the entity that sends EDHOC message_1. This role must not be confused with the sender of the EDHOC Start message introduced in this specification.
 * Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, the terms "Responder" and "EAP server" are used interchangeably in this document. The term is defined in {{RFC9528}}.
 
