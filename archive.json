@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-19T01:14:06.695406+00:00",
+  "timestamp": "2026-06-04T02:12:22.637990+00:00",
   "repo": "dangarciacarrillo/i-d-eap-edhoc",
   "labels": [
     {
@@ -443,6 +443,46 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOHgXWVs7iOJTb",
+      "title": "some nits from Med's IESG Review",
+      "url": "https://github.com/dangarciacarrillo/i-d-eap-edhoc/pull/14",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "* some nits\r\n* fix so that rendered html version for the pointers with section allows to have a direct link to the relevant section\r\n* follow https://authors.ietf.org/en/reference-style-guidance for referencing STD",
+      "createdAt": "2026-06-03T12:41:21Z",
+      "updatedAt": "2026-06-03T15:51:35Z",
+      "baseRepository": "dangarciacarrillo/i-d-eap-edhoc",
+      "baseRefName": "main",
+      "baseRefOid": "c78f95bad99327f761804e2b1e478efade7af943",
+      "headRepository": "boucadair/i-d-eap-edhoc",
+      "headRefName": "patch-1",
+      "headRefOid": "3bb662a0d78d582cb7f4374716ba0303cf036c9d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHgXWVs8AAAABB2qFxg",
+          "commit": {
+            "abbreviatedOid": "5213926"
+          },
+          "author": "francislopezg",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thank you very much for taking the time to apply these changes. We greatly appreciate it.",
+          "createdAt": "2026-06-03T14:15:02Z",
+          "updatedAt": "2026-06-03T14:15:02Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
