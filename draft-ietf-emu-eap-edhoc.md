@@ -605,7 +605,7 @@ M:
 : The M bit (more fragments) is set to 1 in all but the last fragment. I.e., when there is no fragmentation, it is set to 0.
 
 L:
-: The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and MUST NOT be sent. Receipt of such a value MUST be treated as an invalid packet.
+: The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and MUST NOT be used. Receipt of such a value MUST be treated as an invalid packet.
 
 EDHOC Message Length:
 : The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.
@@ -637,7 +637,7 @@ M:
 : The M bit (more fragments) is set to 1 in all but the last fragment. I.e., when there is no fragmentation, it is set to 0.
 
 L:
-: The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and MUST NOT be sent. Receipt of such a value MUST be treated as an invalid packet.
+: The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and MUST NOT be used. Receipt of such a value MUST be treated as an invalid packet.
 
 EDHOC Message Length:
 : The EDHOC Message Length field, when present, has a size of one to four octets, as determined by the L flag bits. It is included only if the L flag bits indicate a value greater than zero and specifies the total length of the EDHOC message being fragmented. When fragmentation is not used, this field is omitted.
