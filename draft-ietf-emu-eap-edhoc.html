@@ -1050,7 +1050,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Garcia-Carrillo, et al.</td>
-<td class="center">Expires 5 December 2026</td>
+<td class="center">Expires 6 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg {
 <dd class="internet-draft">draft-ietf-emu-eap-edhoc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-03" class="published">3 June 2026</time>
+<time datetime="2026-06-04" class="published">4 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-06">6 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1133,7 +1133,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1311,7 +1311,7 @@ svg {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">The Extensible Authentication Protocol (EAP), defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, provides a standard mechanism for support of multiple authentication methods. This document specifies the EAP authentication method EAP-EDHOC, which is based on the lightweight security handshake protocol Ephemeral Diffie-Hellman Over COSE (EDHOC) <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">EAP-EDHOC is similar to EAP-TLS 1.3 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span>, since EDHOC is based on a similar security protocol design as the TLS 1.3 handshake <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, EDHOC has been optimized for highly constrained settings, for example involving wirelessly connected battery powered 'things' with embedded microcontrollers, sensors, and actuators. An overview of EDHOC is given in <a href="#edhoc-overview" class="auto internal xref">Section 1.1</a>.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">EAP-EDHOC is similar to EAP-TLS 1.3 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span>, since EDHOC is based on a similar security protocol design as the TLS 1.3 handshake <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>. However, EDHOC has been optimized for highly constrained settings, for example, involving wirelessly connected battery powered 'things' with embedded microcontrollers, sensors, and actuators. An overview of EDHOC is given in <a href="#edhoc-overview" class="auto internal xref">Section 1.1</a>.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">The EAP-EDHOC method enables the integration of EDHOC into different applications and use cases using the EAP framework.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="edhoc-overview">
 <section id="section-1.1">
@@ -1326,7 +1326,7 @@ svg {
             <p id="section-1.1-4.1.1">Support for different authentication methods and credentials. The authentication methods include (mixed) signatures and static Diffie-Hellman keys <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, and pre-shared keys <span>[<a href="#I-D.ietf-lake-edhoc-psk" class="cite xref">I-D.ietf-lake-edhoc-psk</a>]</span>. A wide and extensible range of authentication credentials is supported, including public key certificates such as X.509 and C509 <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>, as well as CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-1.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.2">
-            <p id="section-1.1-4.2.1">A standardized and extensible format for identification of credentials, using COSE header parameters <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, supporting credential transport by value or by reference, enabling very compact representations.<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-4.2.1">A standardized and extensible format for identification of credentials, using CBOR Object Signing and Encryption (COSE) header parameters <span>[<a href="#STD96" class="cite xref">STD96</a>]</span>, supporting credential transport by value or by reference, enabling very compact representations.<a href="#section-1.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-4.3">
             <p id="section-1.1-4.3.1">Crypto agility and secure cipher suite negotiation, with predefined compactly represented cipher suites and support for extensibility using the COSE algorithms registry <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span>.<a href="#section-1.1-4.3.1" class="pilcrow">¶</a></p>
@@ -1338,8 +1338,8 @@ svg {
             <p id="section-1.1-4.5.1">Support for integration of external security applications into EDHOC by transporting External Authorization Data (EAD) included in and protected as EDHOC messages.<a href="#section-1.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-1.1-5">A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile including method, cipher suite,  etc. More details are provided in  <span>[<a href="#I-D.ietf-lake-app-profiles" class="cite xref">I-D.ietf-lake-app-profiles</a>]</span>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
-<p id="section-1.1-6">EDHOC messages make use of lightweight primitives, specifically CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span> <span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span> for efficient encoding and security services in constrained devices. EDHOC is optimized for use with CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> and OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">A necessary condition for a successful completion of an EDHOC session is that both peers support a common application profile such as method and cipher suite. More details are provided in  <span>[<a href="#I-D.ietf-lake-app-profiles" class="cite xref">I-D.ietf-lake-app-profiles</a>]</span>.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-6">EDHOC messages make use of lightweight primitives, specifically CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and COSE <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> for efficient encoding and security services in constrained devices. EDHOC is optimized for use with CoAP <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span> and OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> to secure resource access in constrained IoT use cases, but it is not bound to a particular transport or communication security protocol.<a href="#section-1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1353,20 +1353,25 @@ svg {
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Readers are expected to be familiar with the terms and concepts defined in EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> and EDHOC <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, in particular the following.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">Acronyms and Terms:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-2">Readers are expected to be familiar with the terms and concepts defined in EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> and EDHOC <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, in particular the following:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-4.1">
-          <p id="section-2-4.1.1">MSK - Master Session Key; defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2-3.1">
+          <p id="section-2-3.1.1">MSK - Master Session Key; defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-2-3.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.2">
-          <p id="section-2-4.2.1">EMSK - Extended Master Session Key; defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-3.2">
+          <p id="section-2-3.2.1">EMSK - Extended Master Session Key; defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-2-3.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.3">
-          <p id="section-2-4.3.1">Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, the terms "Initiator" and "EAP peer" are used interchangeably in this document. As defined in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, the Initiator is the entity that sends EDHOC message_1. This role must not be confused with the sender of the EDHOC Start message introduced in this specification.<a href="#section-2-4.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-3.3">
+          <p id="section-2-3.3.1">EAP peer/Peer - The device seeking network access. Terminology commonly used in the EAP framework.<a href="#section-2-3.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-2-4.4">
-          <p id="section-2-4.4.1">Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, the terms "Responder" and "EAP server" are used interchangeably in this document. The term is defined in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-2-3.4">
+          <p id="section-2-3.4.1">EAP server/Server - The entity providing authentication services within the EAP framework, responsible for authenticating the EAP peer on behalf of the authentication infrastructure. It may be colocated with the EAP authenticator or in a separate backend server.<a href="#section-2-3.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-3.5">
+          <p id="section-2-3.5.1">Initiator - In EAP-EDHOC, the EAP peer assumes the role of the EDHOC Initiator; therefore, the terms "Initiator" and "EAP peer" are used interchangeably in this document. As defined in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, the Initiator is the entity that sends EDHOC message_1. This role must not be confused with the sender of the EDHOC Start message introduced in this specification.<a href="#section-2-3.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-3.6">
+          <p id="section-2-3.6.1">Responder - In EAP-EDHOC, the EAP server assumes the role of the EDHOC Responder; therefore, the terms "Responder" and "EAP server" are used interchangeably in this document. The term is defined in <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-2-3.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1394,7 +1399,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3.1.1-1">EDHOC allows EAP-EDHOC to support authentication credentials of any type defined by COSE, which can be either transported or referenced during the protocol.<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-2">The optimization combining the execution of EDHOC with the first subsequent OSCORE transaction specified in <span>[<a href="#RFC9668" class="cite xref">RFC9668</a>]</span> is not applicable to this EAP method.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-3"><a href="#message-flow" class="auto internal xref">Figure 1</a> shows an example message flow for a successful execution of EAP-EDHOC.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
-<span id="name-eap-edhoc-message-flow"></span><div id="message-flow">
+<span id="name-example-of-successful-eap-e"></span><div id="message-flow">
 <figure id="figure-1">
             <div id="section-3.1.1-4.1">
               <div class="alignCenter art-svg artwork" id="section-3.1.1-4.1.1">
@@ -1449,12 +1454,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-eap-edhoc-message-flow" class="selfRef">EAP-EDHOC Message Flow</a>
+<a href="#name-example-of-successful-eap-e" class="selfRef">Example of Successful EAP-EDHOC Message Flow Exchange</a>
             </figcaption></figure>
 </div>
 <p id="section-3.1.1-5">If the EAP-EDHOC peer authenticates successfully, the EAP-EDHOC server <span class="bcp14">MUST</span> send an EAP-Request packet with EAP-Type=EAP-EDHOC containing message_4 as a protected success indication.<a href="#section-3.1.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-6">If the EAP-EDHOC server authenticates successfully, and the EAP-EDHOC peer achieves key confirmation by successfully verifying EDHOC message_4, then the EAP-EDHOC peer <span class="bcp14">MUST</span> send an EAP-Response message with EAP-Type=EAP-EDHOC containing no data. Finally, the EAP-EDHOC server sends an EAP-Success.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-7">Note that the Identity request is optional <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> and might not be used in systems like 3GPP 5G <span>[<a href="#Sec5G" class="cite xref">Sec5G</a>]</span> where the identity is transferred encrypted by other means before the EAP exchange. While the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> they do not contain any information and might be encoded into other system specific messages <span>[<a href="#Sec5G" class="cite xref">Sec5G</a>]</span>.<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-7">Note that the Identity request is optional <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> and might not be used in systems like 3GPP 5G <span>[<a href="#Sec5G" class="cite xref">Sec5G</a>]</span> where the identity is transferred encrypted by other means before the EAP exchange. While the EAP-Response/EAP-Type=EAP-EDHOC and EAP-Success are mandatory <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span> they do not contain any information and might be encoded into other system specific messages (e.g., <span>[<a href="#Sec5G" class="cite xref">Sec5G</a>]</span>).<a href="#section-3.1.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="transport-and-message-correlation">
@@ -1462,13 +1467,13 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-transport-and-message-corre">
 <a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-transport-and-message-corre" class="section-name selfRef">Transport and Message Correlation</a>
           </h4>
-<p id="section-3.1.2-1">EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service protection. These requirements can be met by the EAP framework, the EAP-EDHOC method specification, and properties of the EAP lower layer, as specified in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-1">EDHOC is not bound to a particular transport layer and can even be used in environments without IP. Nonetheless, <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> provides a set of requirements for a transport protocol to use with EDHOC. These include: handling the loss, reordering, duplication, correlation, and fragmentation of messages; demultiplexing EDHOC messages from other types of messages; and denial-of-service (DoS) protection. These requirements can be met by the EAP framework, the EAP-EDHOC method specification, and properties of the EAP lower layer, as specified in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-2">For message loss, this can be either fulfilled by the EAP layer, the EAP lower layer, or both.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-3">For message reordering, correct operation assumes that the EAP lower layer preserves packet ordering within an EAP conversation.<a href="#section-3.1.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-4">For duplication and message correlation, EAP has the Identifier field, which allows both the EAP peer and EAP authenticator to detect duplicates and match a request with a response.<a href="#section-3.1.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-5">Fragmentation is defined by this EAP method, see <a href="#fragmentation" class="auto internal xref">Section 3.1.6</a>. The EAP framework <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, specifies that EAP methods need to provide fragmentation and reassembly if EAP packets can exceed the minimum MTU of 1020 octets.<a href="#section-3.1.2-5" class="pilcrow">¶</a></p>
 <p id="section-3.1.2-6">To demultiplex EDHOC messages from other types of messages, EAP provides the Type field.<a href="#section-3.1.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.1.2-7">This method does not provide any additional mitigation against denial-of-service attacks beyond those specified in EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.1.2-7">This method does not provide any additional mitigation against DoS attacks beyond those specified in EAP <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.<a href="#section-3.1.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="termination">
@@ -1707,7 +1712,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           </h4>
 <p id="section-3.1.4-1">It is <span class="bcp14">RECOMMENDED</span> to use anonymous Network Access Identifiers (NAIs) <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span> in the Identity Response, as such identities are routable and privacy-friendly.<a href="#section-3.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.4-2">While opaque blobs are allowed by <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, such identities are <span class="bcp14">NOT RECOMMENDED</span> as they are not routable and should only be considered in local deployments where the EAP-EDHOC peer, EAP authenticator, and EAP-EDHOC server all belong to the same network.<a href="#section-3.1.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.1.4-3">Many client certificates contain an identity such as an email address, which is already in NAI format. When the certificate contains an NAI as subject name or alternative subject name, an anonymous NAI <span class="bcp14">MUST</span> be derived from the NAI in the certificate to preserve privacy. See <a href="#privacy" class="auto internal xref">Section 3.1.5</a>.<a href="#section-3.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.4-3">Many client certificates contain an identity such as an email address, which is already in NAI format. When the certificate contains a NAI as subject name or alternative subject name, an anonymous NAI <span class="bcp14">MUST</span> be derived from the NAI in the certificate to preserve privacy. See <a href="#privacy" class="auto internal xref">Section 3.1.5</a>.<a href="#section-3.1.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy">
@@ -1715,8 +1720,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-privacy">
 <a href="#section-3.1.5" class="section-number selfRef">3.1.5. </a><a href="#name-privacy" class="section-name selfRef">Privacy</a>
           </h4>
-<p id="section-3.1.5-1">EAP-EDHOC peer and server implementations supporting EAP-EDHOC <span class="bcp14">MUST</span> support anonymous NAIs (Section 2.4 of <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>).
-A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its username (or any other permanent identifiers) in cleartext in the Identity Response (or any message used instead of the Identity Response). Following <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to omit the username (i.e., the NAI is @realm), but other constructions such as a fixed username (e.g., anonymous@realm) or an encrypted username (e.g., xCZINCPTK5+7y81CrSYbPg+RKPE3OTrYLn4AQc4AC2U=@realm) are allowed. Note that the NAI <span class="bcp14">MUST</span> be a UTF-8 string as defined by the grammar in Section 2.2 of <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.5-1">EAP-EDHOC peer and server implementations supporting EAP-EDHOC <span class="bcp14">MUST</span> support anonymous NAIs (<span><a href="https://rfc-editor.org/rfc/rfc7542#section-2.4" class="relref">Section 2.4</a> of [<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>).
+A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its username (or any other permanent identifiers) in cleartext in the Identity Response (or any message used instead of the Identity Response). Following <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to omit the username (i.e., the NAI is @realm), but other constructions such as a fixed username (e.g., anonymous@realm) or an encrypted username (e.g., xCZINCPTK5+7y81CrSYbPg+RKPE3OTrYLn4AQc4AC2U=@realm) are allowed. Note that the NAI <span class="bcp14">MUST</span> be a UTF-8 string as defined by the grammar in <span><a href="https://rfc-editor.org/rfc/rfc7542#section-2.2" class="relref">Section 2.2</a> of [<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>.<a href="#section-3.1.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="fragmentation">
@@ -1727,9 +1732,9 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
 <p id="section-3.1.6-1">EDHOC is designed to perform well in constrained networks where message sizes are restricted for performance reasons. When credentials are transferred by reference, EAP-EDHOC messages are typically so small that fragmentation is not needed. However, as EAP-EDHOC also supports large X.509 certificate chains, EAP-EDHOC implementations <span class="bcp14">MUST</span> provide support for fragmentation and reassembly. Some EAP implementations and access networks impose limits on the number of EAP packet exchanges that can be processed. To minimize fragmentation, it is <span class="bcp14">RECOMMENDED</span> to use compact EAP-EDHOC peer, EAP-EDHOC server, and trust anchor authentication credentials, as well as to limit the length of certificate chains. Additionally, mechanisms that reduce the size of Certificate messages are <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.6-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-2">Since EAP is a lock-step protocol, fragmentation support can be easily added. To do so, the EAP-Response and EAP-Request packets of EAP-EDHOC have a set of information fields that allow for the specification of the fragmentation process (see <a href="#detailed-description" class="auto internal xref">Section 4</a> for the detailed description). As a summary, EAP-EDHOC fragmentation support is provided through the addition of flag bits (M and L) within the EAP-Response and EAP-Request packets, as well as a (conditional) EAP-EDHOC Message Length field that can be zero to four octets.<a href="#section-3.1.6-2" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-3">The EDHOC Message Length field conveys the total length of the EDHOC message being fragmented, which facilitates buffer allocation. The L flag consists of three bits that determine the length of the EDHOC Message Length field. This L flag and the EAP-EDHOC Message Length field <span class="bcp14">MUST</span> be present only in the first fragment of a fragmented EDHOC message, thereby signaling that the EDHOC message is fragmented. Implementations <span class="bcp14">MUST NOT</span> set any of the L flag bits to 1 in unfragmented messages.<a href="#section-3.1.6-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-4">The S flag bit <span class="bcp14">SHALL</span> be set in the EAP-EDHOC Start message sent by the EAP server to the peer. The S flag bit <span class="bcp14">SHALL NOT</span> be set in any other EAP-EDHOC messages. The M flag bit <span class="bcp14">SHALL</span> be set in all fragments except the last one.<a href="#section-3.1.6-4" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-5">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Response packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
-<p id="section-3.1.6-6">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set, it <span class="bcp14">MUST</span> respond with an EAP-Request packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-4">The S flag bit <span class="bcp14">SHALL</span> be set to 1 in the EAP-EDHOC Start message sent by the EAP server to the peer. The S flag bit <span class="bcp14">SHALL NOT</span> be set to 1 in any other EAP-EDHOC messages. The M flag bit <span class="bcp14">SHALL</span> be set to 1 in all fragments except the last one.<a href="#section-3.1.6-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-5">When an EAP-EDHOC peer receives an EAP-Request packet with the M bit set to 1, it <span class="bcp14">MUST</span> respond with an EAP-Response packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP server <span class="bcp14">MUST</span> wait until it receives the EAP-Response before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier field for each fragment contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the fragment ACK contained within the EAP-Response. Retransmitted fragments will contain the same Identifier value.<a href="#section-3.1.6-5" class="pilcrow">¶</a></p>
+<p id="section-3.1.6-6">Similarly, when the EAP-EDHOC server receives an EAP-Response with the M bit set to 1, it <span class="bcp14">MUST</span> respond with an EAP-Request packet with EAP-Type=EAP-EDHOC, including the flags octect with S=0, M=0, L=0 and an empty EDHOC payload. This message serves as a fragment ACK. The EAP peer <span class="bcp14">MUST</span> wait until it receives the EAP-Request before sending another fragment. To prevent errors in the processing of fragments, the EAP server <span class="bcp14">MUST</span> increment the Identifier value for each fragment ACK contained within an EAP-Request, and the peer <span class="bcp14">MUST</span> include this Identifier value in the subsequent fragment contained within an EAP-Response.<a href="#section-3.1.6-6" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-7">Explanations and considerations regarding retransmission timers are provided in <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span>.<a href="#section-3.1.6-7" class="pilcrow">¶</a></p>
 <p id="section-3.1.6-8"><a href="#fragmentation-flow" class="auto internal xref">Figure 6</a> illustrates the exchange between the endpoints in the case where the EAP-EDHOC mutual authentication is successful and fragmentation is required. EAP Identifiers are also shown to illustrate their progression. A retransmission is also included.<a href="#section-3.1.6-8" class="pilcrow">¶</a></p>
 <span id="name-eap-edhoc-fragmentation-exa"></span><div id="fragmentation-flow">
@@ -1738,33 +1743,33 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
               <div class="alignCenter art-svg artwork" id="section-3.1.6-9.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="1120" width="528" viewBox="0 0 528 1120" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                   <path d="M 40,64 L 40,1104" fill="none" stroke="black"></path>
-                  <path d="M 496,64 L 496,1104" fill="none" stroke="black"></path>
-                  <path d="M 56,96 L 480,96" fill="none" stroke="black"></path>
-                  <path d="M 56,160 L 480,160" fill="none" stroke="black"></path>
-                  <path d="M 56,224 L 480,224" fill="none" stroke="black"></path>
-                  <path d="M 56,288 L 480,288" fill="none" stroke="black"></path>
-                  <path d="M 56,352 L 480,352" fill="none" stroke="black"></path>
-                  <path d="M 56,400 L 480,400" fill="none" stroke="black"></path>
-                  <path d="M 56,464 L 480,464" fill="none" stroke="black"></path>
-                  <path d="M 56,512 L 480,512" fill="none" stroke="black"></path>
-                  <path d="M 56,576 L 480,576" fill="none" stroke="black"></path>
-                  <path d="M 56,640 L 480,640" fill="none" stroke="black"></path>
-                  <path d="M 280,688 L 480,688" fill="none" stroke="black"></path>
-                  <path d="M 56,752 L 480,752" fill="none" stroke="black"></path>
-                  <path d="M 56,816 L 480,816" fill="none" stroke="black"></path>
-                  <path d="M 56,864 L 480,864" fill="none" stroke="black"></path>
-                  <path d="M 56,928 L 480,928" fill="none" stroke="black"></path>
-                  <path d="M 56,992 L 480,992" fill="none" stroke="black"></path>
-                  <path d="M 56,1040 L 480,1040" fill="none" stroke="black"></path>
-                  <path d="M 56,1088 L 480,1088" fill="none" stroke="black"></path>
-                  <polygon class="arrowhead" points="488,1040 476,1034.4 476,1045.6" fill="black" transform="rotate(0,480,1040)"></polygon>
-                  <polygon class="arrowhead" points="488,928 476,922.4 476,933.6" fill="black" transform="rotate(0,480,928)"></polygon>
-                  <polygon class="arrowhead" points="488,816 476,810.4 476,821.6" fill="black" transform="rotate(0,480,816)"></polygon>
-                  <polygon class="arrowhead" points="488,640 476,634.4 476,645.6" fill="black" transform="rotate(0,480,640)"></polygon>
-                  <polygon class="arrowhead" points="488,512 476,506.4 476,517.6" fill="black" transform="rotate(0,480,512)"></polygon>
-                  <polygon class="arrowhead" points="488,400 476,394.4 476,405.6" fill="black" transform="rotate(0,480,400)"></polygon>
-                  <polygon class="arrowhead" points="488,288 476,282.4 476,293.6" fill="black" transform="rotate(0,480,288)"></polygon>
-                  <polygon class="arrowhead" points="488,160 476,154.4 476,165.6" fill="black" transform="rotate(0,480,160)"></polygon>
+                  <path d="M 504,64 L 504,1104" fill="none" stroke="black"></path>
+                  <path d="M 56,96 L 488,96" fill="none" stroke="black"></path>
+                  <path d="M 56,160 L 488,160" fill="none" stroke="black"></path>
+                  <path d="M 56,224 L 488,224" fill="none" stroke="black"></path>
+                  <path d="M 56,288 L 488,288" fill="none" stroke="black"></path>
+                  <path d="M 56,352 L 488,352" fill="none" stroke="black"></path>
+                  <path d="M 56,400 L 488,400" fill="none" stroke="black"></path>
+                  <path d="M 56,464 L 488,464" fill="none" stroke="black"></path>
+                  <path d="M 56,512 L 488,512" fill="none" stroke="black"></path>
+                  <path d="M 56,576 L 488,576" fill="none" stroke="black"></path>
+                  <path d="M 56,640 L 488,640" fill="none" stroke="black"></path>
+                  <path d="M 280,688 L 488,688" fill="none" stroke="black"></path>
+                  <path d="M 56,752 L 488,752" fill="none" stroke="black"></path>
+                  <path d="M 56,816 L 488,816" fill="none" stroke="black"></path>
+                  <path d="M 56,864 L 488,864" fill="none" stroke="black"></path>
+                  <path d="M 56,928 L 488,928" fill="none" stroke="black"></path>
+                  <path d="M 56,992 L 488,992" fill="none" stroke="black"></path>
+                  <path d="M 56,1040 L 488,1040" fill="none" stroke="black"></path>
+                  <path d="M 56,1088 L 488,1088" fill="none" stroke="black"></path>
+                  <polygon class="arrowhead" points="496,1040 484,1034.4 484,1045.6" fill="black" transform="rotate(0,488,1040)"></polygon>
+                  <polygon class="arrowhead" points="496,928 484,922.4 484,933.6" fill="black" transform="rotate(0,488,928)"></polygon>
+                  <polygon class="arrowhead" points="496,816 484,810.4 484,821.6" fill="black" transform="rotate(0,488,816)"></polygon>
+                  <polygon class="arrowhead" points="496,640 484,634.4 484,645.6" fill="black" transform="rotate(0,488,640)"></polygon>
+                  <polygon class="arrowhead" points="496,512 484,506.4 484,517.6" fill="black" transform="rotate(0,488,512)"></polygon>
+                  <polygon class="arrowhead" points="496,400 484,394.4 484,405.6" fill="black" transform="rotate(0,488,400)"></polygon>
+                  <polygon class="arrowhead" points="496,288 484,282.4 484,293.6" fill="black" transform="rotate(0,488,288)"></polygon>
+                  <polygon class="arrowhead" points="496,160 484,154.4 484,165.6" fill="black" transform="rotate(0,488,160)"></polygon>
                   <polygon class="arrowhead" points="64,1088 52,1082.4 52,1093.6" fill="black" transform="rotate(180,56,1088)"></polygon>
                   <polygon class="arrowhead" points="64,992 52,986.4 52,997.6" fill="black" transform="rotate(180,56,992)"></polygon>
                   <polygon class="arrowhead" points="64,864 52,858.4 52,869.6" fill="black" transform="rotate(180,56,864)"></polygon>
@@ -1779,61 +1784,66 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="100" y="36">Peer</text>
                     <text x="432" y="36">EAP-EDHOC</text>
                     <text x="500" y="36">Server</text>
-                    <text x="276" y="84">EAP-Request/Identity</text>
-                    <text x="396" y="84">(EAP-ID:</text>
-                    <text x="452" y="84">0x0)</text>
+                    <text x="284" y="84">EAP-Request/Identity</text>
+                    <text x="404" y="84">(EAP-ID:</text>
+                    <text x="460" y="84">0x0)</text>
                     <text x="152" y="132">EAP-Response/Identity</text>
                     <text x="276" y="132">(EAP-ID:</text>
                     <text x="332" y="132">0x0)</text>
                     <text x="140" y="148">(Privacy-Friendly)</text>
-                    <text x="236" y="196">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="196">(EAP-ID:</text>
-                    <text x="452" y="196">0x1)</text>
-                    <text x="300" y="212">(EDHOC</text>
-                    <text x="356" y="212">Start,</text>
-                    <text x="392" y="212">S</text>
-                    <text x="416" y="212">bit</text>
-                    <text x="452" y="212">set)</text>
+                    <text x="244" y="196">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="196">(EAP-ID:</text>
+                    <text x="460" y="196">0x1)</text>
+                    <text x="308" y="212">(EDHOC</text>
+                    <text x="364" y="212">Start,</text>
+                    <text x="400" y="212">S</text>
+                    <text x="424" y="212">bit</text>
+                    <text x="448" y="212">=</text>
+                    <text x="468" y="212">1)</text>
                     <text x="192" y="260">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="260">(EAP-ID:</text>
                     <text x="412" y="260">0x1)</text>
                     <text x="92" y="276">(EDHOC</text>
                     <text x="164" y="276">message_1)</text>
-                    <text x="236" y="324">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="324">(EAP-ID:</text>
-                    <text x="452" y="324">0x2)</text>
-                    <text x="116" y="340">(EDHOC</text>
-                    <text x="188" y="340">message_2,</text>
-                    <text x="268" y="340">Fragment</text>
-                    <text x="316" y="340">1,</text>
-                    <text x="336" y="340">L</text>
-                    <text x="360" y="340">and</text>
-                    <text x="384" y="340">M</text>
-                    <text x="412" y="340">bits</text>
-                    <text x="452" y="340">set)</text>
+                    <text x="244" y="324">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="324">(EAP-ID:</text>
+                    <text x="460" y="324">0x2)</text>
+                    <text x="76" y="340">(EDHOC</text>
+                    <text x="148" y="340">message_2,</text>
+                    <text x="228" y="340">Fragment</text>
+                    <text x="276" y="340">1,</text>
+                    <text x="296" y="340">L</text>
+                    <text x="324" y="340">bits</text>
+                    <text x="356" y="340">!=</text>
+                    <text x="380" y="340">0,</text>
+                    <text x="400" y="340">M</text>
+                    <text x="424" y="340">bit</text>
+                    <text x="448" y="340">=</text>
+                    <text x="468" y="340">1)</text>
                     <text x="192" y="388">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="388">(EAP-ID:</text>
                     <text x="412" y="388">0x2)</text>
-                    <text x="236" y="436">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="436">(EAP-ID:</text>
-                    <text x="452" y="436">0x3)</text>
-                    <text x="172" y="452">(EDHOC</text>
-                    <text x="244" y="452">message_2,</text>
-                    <text x="324" y="452">Fragment</text>
-                    <text x="372" y="452">2,</text>
-                    <text x="392" y="452">M</text>
-                    <text x="416" y="452">bit</text>
-                    <text x="452" y="452">set)</text>
+                    <text x="244" y="436">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="436">(EAP-ID:</text>
+                    <text x="460" y="436">0x3)</text>
+                    <text x="180" y="452">(EDHOC</text>
+                    <text x="252" y="452">message_2,</text>
+                    <text x="332" y="452">Fragment</text>
+                    <text x="380" y="452">2,</text>
+                    <text x="400" y="452">M</text>
+                    <text x="424" y="452">bit</text>
+                    <text x="448" y="452">=</text>
+                    <text x="468" y="452">1)</text>
                     <text x="192" y="500">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="500">(EAP-ID:</text>
                     <text x="412" y="500">0x3)</text>
-                    <text x="236" y="548">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="548">(EAP-ID:</text>
-                    <text x="452" y="548">0x4)</text>
-                    <text x="260" y="564">(EDHOC</text>
-                    <text x="332" y="564">message_2,</text>
-                    <text x="412" y="564">Fragment</text>
-                    <text x="460" y="564">3)</text>
+                    <text x="244" y="548">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="548">(EAP-ID:</text>
+                    <text x="460" y="548">0x4)</text>
+                    <text x="268" y="564">(EDHOC</text>
+                    <text x="340" y="564">message_2,</text>
+                    <text x="420" y="564">Fragment</text>
+                    <text x="468" y="564">3)</text>
                     <text x="192" y="612">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="612">(EAP-ID:</text>
                     <text x="412" y="612">0x4)</text>
@@ -1842,18 +1852,21 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="244" y="628">Fragment</text>
                     <text x="292" y="628">1,</text>
                     <text x="312" y="628">L</text>
-                    <text x="336" y="628">and</text>
-                    <text x="360" y="628">M</text>
-                    <text x="388" y="628">bits</text>
-                    <text x="428" y="628">set)</text>
-                    <text x="236" y="676">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="676">(EAP-ID:</text>
-                    <text x="452" y="676">0x5)</text>
+                    <text x="340" y="628">bits</text>
+                    <text x="372" y="628">!=</text>
+                    <text x="396" y="628">0,</text>
+                    <text x="416" y="628">M</text>
+                    <text x="440" y="628">bit</text>
+                    <text x="464" y="628">=</text>
+                    <text x="484" y="628">1)</text>
+                    <text x="244" y="676">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="676">(EAP-ID:</text>
+                    <text x="460" y="676">0x5)</text>
                     <text x="272" y="692">X</text>
-                    <text x="236" y="724">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="724">(EAP-ID:</text>
-                    <text x="452" y="724">0x5)</text>
-                    <text x="404" y="740">(Retransmission)</text>
+                    <text x="244" y="724">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="724">(EAP-ID:</text>
+                    <text x="460" y="724">0x5)</text>
+                    <text x="412" y="740">(Retransmission)</text>
                     <text x="192" y="788">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="788">(EAP-ID:</text>
                     <text x="412" y="788">0x5)</text>
@@ -1863,10 +1876,11 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="292" y="804">2,</text>
                     <text x="312" y="804">M</text>
                     <text x="336" y="804">bit</text>
-                    <text x="372" y="804">set)</text>
-                    <text x="236" y="852">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="852">(EAP-ID:</text>
-                    <text x="452" y="852">0x6)</text>
+                    <text x="360" y="804">=</text>
+                    <text x="380" y="804">1)</text>
+                    <text x="244" y="852">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="852">(EAP-ID:</text>
+                    <text x="460" y="852">0x6)</text>
                     <text x="192" y="900">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="900">(EAP-ID:</text>
                     <text x="412" y="900">0x6)</text>
@@ -1874,17 +1888,17 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
                     <text x="164" y="916">message_3,</text>
                     <text x="244" y="916">Fragment</text>
                     <text x="292" y="916">3)</text>
-                    <text x="236" y="964">EAP-Request/EAP-Type=EAP-EDHOC</text>
-                    <text x="396" y="964">(EAP-ID:</text>
-                    <text x="452" y="964">0x7)</text>
-                    <text x="356" y="980">(EDHOC</text>
-                    <text x="428" y="980">message_4)</text>
+                    <text x="244" y="964">EAP-Request/EAP-Type=EAP-EDHOC</text>
+                    <text x="404" y="964">(EAP-ID:</text>
+                    <text x="460" y="964">0x7)</text>
+                    <text x="364" y="980">(EDHOC</text>
+                    <text x="436" y="980">message_4)</text>
                     <text x="192" y="1028">EAP-Response/EAP-Type=EAP-EDHOC</text>
                     <text x="356" y="1028">(EAP-ID:</text>
                     <text x="412" y="1028">0x7)</text>
-                    <text x="312" y="1076">EAP-Success</text>
-                    <text x="396" y="1076">(EAP-ID:</text>
-                    <text x="452" y="1076">0x7)</text>
+                    <text x="320" y="1076">EAP-Success</text>
+                    <text x="404" y="1076">(EAP-ID:</text>
+                    <text x="460" y="1076">0x7)</text>
                   </g>
                 </svg><a href="#section-3.1.6-9.1.1" class="pilcrow">¶</a>
 </div>
@@ -1903,7 +1917,7 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-identity-verification" class="section-name selfRef">Identity Verification</a>
         </h3>
 <p id="section-3.2-1">The EAP peer identity provided in the EAP-Response/Identity is not authenticated by EAP-EDHOC. Unauthenticated information <span class="bcp14">MUST NOT</span> be used for accounting purposes or to give authorization. The EAP authenticator and the EAP server <span class="bcp14">MAY</span> examine the identity presented in EAP-Response/Identity for purposes such as routing and EAP method selection. EAP-EDHOC servers <span class="bcp14">MAY</span> reject conversations if the identity does not match their policy.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">The EAP server identity in the EDHOC server certificate is typically a fully qualified domain name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations <span class="bcp14">SHOULD</span> allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a trusted root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The EAP server identity in the EDHOC server certificate is typically a Fully Qualified Domain Name (FQDN) in the SubjectAltName (SAN) extension. Since EAP-EDHOC deployments may use more than one EAP server, each with a different certificate, EAP peer implementations <span class="bcp14">SHOULD</span> allow for the configuration of one or more trusted root certificates (CA certificate) to authenticate the server certificate and one or more server names to match against the SubjectAltName (SAN) extension in the server certificate. If any of the configured names match any of the names in the SAN extension, then the name check passes. To simplify name matching, an EAP-EDHOC deployment can assign a designated name to represent an authorized EAP server. This name can then be included in the SANs list of each certificate used by this EAP-EDHOC server. If server name matching is not used, the EAP peer has reduced assurance that the EAP server it is interacting with is authoritative for the given network. If name matching is not used with a trusted root CA, then effectively any server can obtain a certificate that will be trusted for EAP authentication by the peer.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The process of configuring a root CA certificate and a server name is non-trivial; therefore, automated methods of provisioning are <span class="bcp14">RECOMMENDED</span>. For example, the eduroam federation <span>[<a href="#RFC7593" class="cite xref">RFC7593</a>]</span> provides a Configuration Assistant Tool (CAT) to automate the configuration process. In the absence of a trusted root CA certificate (user-configured or system-wide), EAP peers <span class="bcp14">MAY</span> implement a Trust On First Use (TOFU) mechanism where the peer trusts and stores the server certificate during the first connection attempt. The EAP peer ensures that the server presents the same stored certificate on subsequent interactions. The use of a TOFU mechanism does not allow for the server certificate to change without out-of-band validation of the certificate and is therefore not suitable for many deployments including ones where multiple EAP servers are deployed for high availability. TOFU mechanisms increase the susceptibility to traffic interception attacks and should only be used if there are adequate controls in place to mitigate this risk.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">As an alternative to standard certificate validation, EDHOC extensions such as the Lightweight Authorization mechanism defined in <span>[<a href="#I-D.ietf-lake-authz" class="cite xref">I-D.ietf-lake-authz</a>]</span> can provide additional means of verifying server credentials. Such mechanisms may be suitable in deployments where no prior trust relationship exists or where managing trusted root CAs is impractical.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
@@ -1913,8 +1927,8 @@ A node supporting EAP-EDHOC <span class="bcp14">MUST NOT</span> send its usernam
         <h3 id="name-key-hierarchy">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-key-hierarchy" class="section-name selfRef">Key Hierarchy</a>
         </h3>
-<p id="section-3.3-1">The key derivation for EDHOC is described in Section 4 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. The key material and Method-Id <span class="bcp14">SHALL</span> be derived from the PRK_exporter using the EDHOC_Exporter interface, see Section 4.2.1 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Type is the value of the EAP Type field defined in Section 2 of <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>. For EAP-EDHOC, Type has the value TBD1. The &lt;&lt; &gt;&gt; notation defined in Section G.3 of <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> means that the CBOR-encoded integer Type value is embedded in a CBOR byte string. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">The key derivation for EDHOC is described in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-4" class="relref">Section 4</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>. The key material and Method-Id <span class="bcp14">SHALL</span> be derived from the PRK_exporter using the EDHOC_Exporter interface, see <span><a href="https://rfc-editor.org/rfc/rfc9528#section-4.2.1" class="relref">Section 4.2.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Type is the value of the EAP Type field defined in <span><a href="https://rfc-editor.org/rfc/rfc3748#section-2" class="relref">Section 2</a> of [<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>. For EAP-EDHOC, Type has the value TBD1. The &lt;&lt; &gt;&gt; notation defined in Appendix G.3 of <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> means that the CBOR-encoded integer Type value is embedded in a CBOR byte string. The use of Type as context enables the reuse of exporter labels across other future EAP methods based on EDHOC.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-3.3-3">
 <pre>
 Type        =  TBD1
@@ -1934,7 +1948,7 @@ Server-Id   =  ID_CRED_R
         <h3 id="name-parameter-negotiation-and-c">
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-parameter-negotiation-and-c" class="section-name selfRef">Parameter Negotiation and Compliance Requirements</a>
         </h3>
-<p id="section-3.4-1">The EAP-EDHOC peers and EAP-EDHOC servers <span class="bcp14">MUST</span> comply with the requirements defined in Section 8 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, including mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, and extensions.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">The EAP-EDHOC peers and EAP-EDHOC servers <span class="bcp14">MUST</span> comply with the requirements defined in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-8" class="relref">Section 8</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, including mandatory-to-implement cipher suites, signature algorithms, key exchange algorithms, and extensions.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="eap-state-machines">
@@ -1945,8 +1959,8 @@ Server-Id   =  ID_CRED_R
 <p id="section-3.5-1">It is worth remembering that the EAP state machine is defined in <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span>. However, the following considerations apply to EAP-EDHOC.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 <p id="section-3.5-2">The EAP-EDHOC server sends message_4 in an EAP-Request as a protected success result indication.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 <p id="section-3.5-3">Because EDHOC error messages are unauthenticated, they <span class="bcp14">MUST NOT</span> be relied upon to determine the cause of failure; they only indicate that the exchange did not complete and are vulnerable to injection by an attacker (DoS). However, EDHOC error messages <span class="bcp14">MUST</span> be considered failure result indication, as defined in <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>. After sending or receiving an EDHOC error message, the EAP-EDHOC server may only send an EAP-Failure.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
-<p id="section-3.5-4">The keying material can be derived by the Initiator upon receiving EDHOC message_2, and by the Responder upon receiving EDHOC message_3. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can then set the eapKeyData and aaaEapKeyData variables.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
-<p id="section-3.5-5">The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (message_4) has been sent or received. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can set the eapKeyAvailable and aaaEapKeyAvailable variables.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.5-4">The keying material can be derived by the Initiator upon receiving EDHOC message_2, and by the Responder upon receiving EDHOC message_3. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can then populate the eapKeyData and aaaEapKeyData variables with the derived keying material.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.5-5">The keying material can be made available to lower layers and the EAP authenticator after the protected success indication (EDHOC message_4) has been sent or received. Implementations following <span>[<a href="#RFC4137" class="cite xref">RFC4137</a>]</span> can set the eapKeyAvailable and aaaEapKeyAvailable variables to TRUE.<a href="#section-3.5-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="Channel_Binding">
@@ -1955,7 +1969,7 @@ Server-Id   =  ID_CRED_R
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-eap-channel-binding" class="section-name selfRef">EAP Channel Binding</a>
         </h3>
 <p id="section-3.6-1">EAP-EDHOC allows the secure exchange of information between the endpoints of the authentication process (i.e., the EAP peer and the EAP server) using protected data fields. These fields can be used to exchange EAP channel binding information, as defined in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
-<p id="section-3.6-2">Section 6 in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
+<p id="section-3.6-2"><span><a href="https://rfc-editor.org/rfc/rfc6677#section-6" class="relref">Section 6</a> of [<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> outlines requirements for components implementing channel binding information, all of which are satisfied by EAP-EDHOC, including confidentiality and integrity protection. Additionally, EAP-EDHOC supports fragmentation, allowing the inclusion of additional information at the method level without issues.<a href="#section-3.6-2" class="pilcrow">¶</a></p>
 <p id="section-3.6-3">While the EAD_1 and EAD_2 fields (carried in EDHOC message_1 and EDHOC message_2, respectively) are integrity protected through the transcript hash, the channel binding protocol defined in <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> must be transported after keying material has been derived between the endpoints in the EAP communication and before the peer is exposed to potential adverse effects from joining an adversarial network. Therefore, compliance with <span>[<a href="#RFC6677" class="cite xref">RFC6677</a>]</span> requires use of the EAD_3 and EAD_4 fields, transmitted in EDHOC message_3 and EDHOC message_4, respectively.<a href="#section-3.6-3" class="pilcrow">¶</a></p>
 <p id="section-3.6-4">It is important to note that EAD fields in EDHOC are optional; consequently, the inclusion of EAP Channel Binding information in an authentication exchange is also optional.<a href="#section-3.6-4" class="pilcrow">¶</a></p>
 <p id="section-3.6-5">Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in <a href="#iana-ead" class="auto internal xref">Section 5.3</a>. This new EAD item is intended only for EAD_3 and EAD_4. Then, it <span class="bcp14">MUST</span> be ignored if included in other EAD fields. Multiple occurrences of this new EAD item in one EAD field are NOT allowed.<a href="#section-3.6-5" class="pilcrow">¶</a></p>
@@ -1976,7 +1990,7 @@ This document defines only the container for carrying EAP Channel Binding inform
       <h2 id="name-detailed-description-of-the">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-detailed-description-of-the" class="section-name selfRef">Detailed Description of the EAP-EDHOC Request and Response Protocol</a>
       </h2>
-<p id="section-4-1">The EAP-EDHOC packet format for Requests and Responses is summarized in <a href="#packet" class="auto internal xref">Figure 7</a>. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format <span>[<a href="#RFC5216" class="cite xref">RFC5216</a>]</span>. As specified in Section 4.1 of <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The EAP-EDHOC packet format for Requests and Responses is summarized in <a href="#packet" class="auto internal xref">Figure 7</a>. Fields are transmitted from left to right, following a structure inspired by the EAP-TLS packet format <span>[<a href="#RFC5216" class="cite xref">RFC5216</a>]</span>. As specified in <span><a href="https://rfc-editor.org/rfc/rfc3748#section-4.1" class="relref">Section 4.1</a> of [<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>, EAP Request and Response packets consist of Code, Identifier, Length, Type, and Type-Data fields. The functions of the Code, Identifier, Length, and Type fields are reiterated here for convenience. The EAP Type-Data field consists of the R, S, M, L, EDHOC Message Length, and EDHOC Data fields.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <span id="name-eap-edhoc-request-and-respo"></span><div id="packet">
 <figure id="figure-7">
         <div id="section-4-2.1">
@@ -2081,22 +2095,22 @@ This document defines only the container for carrying EAP Channel Binding inform
           <dd class="break"></dd>
 <dt id="section-4.1-1.9">R:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.10">
-            <p id="section-4.1-1.10.1">Implementations of this specification <span class="bcp14">MUST</span> set the R bits (reserved) to zero and <span class="bcp14">MUST</span> ignore them on reception.<a href="#section-4.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-1.10.1">Implementations of this specification <span class="bcp14">MUST</span> set the R bits (reserved) to 0 and <span class="bcp14">MUST</span> ignore them on reception.<a href="#section-4.1-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.11">S:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.12">
-            <p id="section-4.1-1.12.1">The S bit (EAP-EDHOC start) is set in an EAP-EDHOC Start message. This differentiates the EAP-EDHOC Start message from a fragment acknowledgement.<a href="#section-4.1-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-1.12.1">The S bit (EAP-EDHOC start) is set to 1 in an EAP-EDHOC Start message. This differentiates the EAP-EDHOC Start message from a fragment acknowledgement.<a href="#section-4.1-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.13">M:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.14">
-            <p id="section-4.1-1.14.1">The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.<a href="#section-4.1-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-1.14.1">The M bit (more fragments) is set to 1 in all but the last fragment. I.e., when there is no fragmentation, it is set to 0.<a href="#section-4.1-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.15">L:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-1.16">
-            <p id="section-4.1-1.16.1">The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5 to 7 are not used in this specification.<a href="#section-4.1-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-1.16.1">The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and <span class="bcp14">MUST NOT</span> be used. Receipt of such a value <span class="bcp14">MUST</span> be treated as an invalid packet.<a href="#section-4.1-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-1.17">EDHOC Message Length:</dt>
@@ -2140,22 +2154,22 @@ This document defines only the container for carrying EAP Channel Binding inform
           <dd class="break"></dd>
 <dt id="section-4.2-1.9">R:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.10">
-            <p id="section-4.2-1.10.1">Implementations of this specification <span class="bcp14">MUST</span> set the R bits (reserved) to zero and <span class="bcp14">MUST</span> ignore them on reception.<a href="#section-4.2-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.10.1">Implementations of this specification <span class="bcp14">MUST</span> set the R bits (reserved) to 0 and <span class="bcp14">MUST</span> ignore them on reception.<a href="#section-4.2-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.11">S:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.12">
-            <p id="section-4.2-1.12.1">The S bit (EAP-EDHOC start) is set to zero.<a href="#section-4.2-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.12.1">The S bit (EAP-EDHOC start) is set to 0.<a href="#section-4.2-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.13">M:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.14">
-            <p id="section-4.2-1.14.1">The M bit (more fragments) is set on all but the last fragment. I.e., when there is no fragmentation, it is set to zero.<a href="#section-4.2-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.14.1">The M bit (more fragments) is set to 1 in all but the last fragment. I.e., when there is no fragmentation, it is set to 0.<a href="#section-4.2-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.15">L:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.16">
-            <p id="section-4.2-1.16.1">The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values from 5 to 7 are not used in this specification.<a href="#section-4.2-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.16.1">The L flag bits represent the binary encoding of the size of the EDHOC Message Length, which can range from 0 to 4 bytes. When all three bits are set to 0, the EDHOC Message Length field is not present. If the first two bits of the L field are set to 0 and the last bit is set to 1, then the size of the EDHOC Message Length field is 1 byte, and so on. Values 5 to 7 are reserved and <span class="bcp14">MUST NOT</span> be used. Receipt of such a value <span class="bcp14">MUST</span> be treated as an invalid packet.<a href="#section-4.2-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.17">EDHOC Message Length:</dt>
@@ -2266,7 +2280,7 @@ RFC Editor: Remove this note.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
           <h4 id="name-eap-security-claims">
 <a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-eap-security-claims" class="section-name selfRef">EAP Security Claims</a>
           </h4>
-<p id="section-6.1.1-1">EAP security claims are defined in Section 7.2.1 of <span>[<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.
+<p id="section-6.1.1-1">EAP security claims are defined in <span><a href="https://rfc-editor.org/rfc/rfc3748#section-7.2.1" class="relref">Section 7.2.1</a> of [<a href="#RFC3748" class="cite xref">RFC3748</a>]</span>.
 EAP-EDHOC security claims are described next and summarized in <a href="#sec-claims" class="auto internal xref">Table 1</a>.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
 <span id="name-eap-edhoc-security-claims"></span><div id="sec-claims">
 <table class="center" id="table-1">
@@ -2343,7 +2357,7 @@ EAP-EDHOC security claims are described next and summarized in <a href="#sec-cla
 <ul class="normal">
 <li class="normal" id="section-6.1.1-3.1">
               <p id="section-6.1.1-3.1.1">(1) Authentication principle:
-EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>, C509 certificates, CWTs (<span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> Section 3.5.3.1), and CCSs (<span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> Section 7.1).<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
+EAP-EDHOC establishes a shared secret based on an authenticated ECDH key exchange. The key exchange is authenticated using different kinds of credentials. EAP-EDHOC supports EDHOC credential types. EDHOC supports all credential types for which COSE header parameters are defined. These include X.509 certificates <span>[<a href="#RFC9360" class="cite xref">RFC9360</a>]</span>, C509 certificates, CWTs (<span><a href="https://rfc-editor.org/rfc/rfc9528#section-3.5.3.1" class="relref">Section 3.5.3.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>), and CCSs (<span><a href="https://rfc-editor.org/rfc/rfc8392#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>).<a href="#section-6.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.1.1-3.2">
               <p id="section-6.1.1-3.2.1">(2) Cipher suite negotiation:
@@ -2408,7 +2422,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-certificate-validation">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-certificate-validation" class="section-name selfRef">Certificate Validation</a>
         </h3>
-<p id="section-6.3-1">Same considerations as in EAP-TLS 1.3 Section 5.3 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here in relation to the use of certificates.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">Same considerations as in EAP-TLS 1.3 (<span><a href="https://rfc-editor.org/rfc/rfc9190#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC9190" class="cite xref">RFC9190</a>]</span>) apply here in relation to the use of certificates.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">When other types of credentials are used such as CWT/CCS, the application needs to have a clear trust-establishment mechanism and identify the pertinent trust anchors <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2417,7 +2431,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-certificate-revocation">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-certificate-revocation" class="section-name selfRef">Certificate Revocation</a>
         </h3>
-<p id="section-6.4-1">Same considerations as in EAP-TLS 1.3 Section 5.4 <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> apply here in relation to certificates.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">Same considerations as in EAP-TLS 1.3 (<span><a href="https://rfc-editor.org/rfc/rfc9190#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC9190" class="cite xref">RFC9190</a>]</span>) apply here in relation to certificates.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">When other types of credentials are used such as CWT/CCS, the endpoints are in charge of handling revocation and confirming the validity and integrity of CWT/CCS <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2434,8 +2448,8 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-authorization">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-authorization" class="section-name selfRef">Authorization</a>
         </h3>
-<p id="section-6.6-1">Following the considerations of EDHOC in appendix D.5 Unauthenticated Operation <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
-<p id="section-6.6-2">When peer authentication is not used, EAP-EDHOC server implementations <span class="bcp14">MUST</span> take care to limit network access appropriately for authenticated peers. Authorization and accounting <span class="bcp14">MUST</span> be based on authenticated information such as information in the certificate. The requirements for Network Access Identifiers (NAIs) specified in Section 4 of <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span> apply and <span class="bcp14">MUST</span> be followed.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">Following the considerations of EDHOC in Appendix D.5 (Unauthenticated Operation) of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span>, EDHOC can be used without authentication by allowing the Initiator or Responder to communicate with any identity except its own.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-2">When peer authentication is not used, EAP-EDHOC server implementations <span class="bcp14">MUST</span> take care to limit network access appropriately for authenticated peers. Authorization and accounting <span class="bcp14">MUST</span> be based on authenticated information such as information in the certificate. The requirements for NAIs specified in <span><a href="https://rfc-editor.org/rfc/rfc7542#section-4" class="relref">Section 4</a> of [<a href="#RFC7542" class="cite xref">RFC7542</a>]</span> apply and <span class="bcp14">MUST</span> be followed.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-considerations">
@@ -2443,7 +2457,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-privacy-considerations">
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
         </h3>
-<p id="section-6.7-1">Considerations in Section 9.6 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations of Section 5.8 of <span>[<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> regarding anonymous NAIs also applies.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">Considerations in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-9.6" class="relref">Section 9.6</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> against tracking of users and eavesdropping on Identity Responses or certificates apply here. Also, the considerations in <span><a href="https://rfc-editor.org/rfc/rfc9190#section-5.8" class="relref">Section 5.8</a> of [<a href="#RFC9190" class="cite xref">RFC9190</a>]</span> regarding anonymous NAIs also apply.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="pervasive-monitoring">
@@ -2451,7 +2465,7 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <h3 id="name-pervasive-monitoring">
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-pervasive-monitoring" class="section-name selfRef">Pervasive Monitoring</a>
         </h3>
-<p id="section-6.8-1">Considerations in  Section 9.1 of <span>[<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> about pervasive monitoring apply here.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">Considerations in <span><a href="https://rfc-editor.org/rfc/rfc9528#section-9.1" class="relref">Section 9.1</a> of [<a href="#RFC9528" class="cite xref">RFC9528</a>]</span> about pervasive monitoring apply here.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cross-protocol-attacks">
@@ -2580,10 +2594,6 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC9052">[RFC9052]</dt>
-        <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC9053">[RFC9053]</dt>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Initial Algorithms"</span>, <span class="seriesInfo">RFC 9053</span>, <span class="seriesInfo">DOI 10.17487/RFC9053</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9053">https://www.rfc-editor.org/rfc/rfc9053</a>&gt;</span>. </dd>
@@ -2597,8 +2607,18 @@ EDHOC secures the Responder's credential identifier against passive attacks and 
 <span class="refAuthor">Palombini, F.</span>, <span class="refAuthor">Tiloca, M.</span>, <span class="refAuthor">Höglund, R.</span>, <span class="refAuthor">Hristozov, S.</span>, and <span class="refAuthor">G. Selander</span>, <span class="refTitle">"Using Ephemeral Diffie-Hellman Over COSE (EDHOC) with the Constrained Application Protocol (CoAP) and Object Security for Constrained RESTful Environments (OSCORE)"</span>, <span class="seriesInfo">RFC 9668</span>, <span class="seriesInfo">DOI 10.17487/RFC9668</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9668">https://www.rfc-editor.org/rfc/rfc9668</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Sec5G">[Sec5G]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">3GPP TS 33 501</span>, <span class="refTitle">"Security architecture and procedures for 5G System"</span>, <time datetime="2025-03" class="refDate">March 2025</time>, <span>&lt;<a href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169">https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3169</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="STD96">[STD96]</dt>
+      <dd>
+<div class="refInstance">Internet Standard 96, <span>&lt;<a href="https://www.rfc-editor.org/info/std96">https://www.rfc-editor.org/info/std96</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC9052">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9052">https://www.rfc-editor.org/info/rfc9052</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC9338">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Countersignatures"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9338</span>, <span class="seriesInfo">DOI 10.17487/RFC9338</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9338">https://www.rfc-editor.org/info/rfc9338</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 </dl>
 </section>
