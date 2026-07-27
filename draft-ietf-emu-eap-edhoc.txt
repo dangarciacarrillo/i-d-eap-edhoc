@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 6 December 2026                            University of Murcia
+Expires: 28 January 2027                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                             4 June 2026
+                                                            27 July 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2026.
+   This Internet-Draft will expire on 28 January 2027.
 
 Copyright Notice
 
@@ -1288,40 +1288,40 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
               Furuhed, M., and L. Liao, "CBOR Encoded X.509 Certificates
               (C509 Certificates)", Work in Progress, Internet-Draft,
-              draft-ietf-cose-cbor-encoded-cert-19, 11 May 2026,
+              draft-ietf-cose-cbor-encoded-cert-20, 30 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-19>.
+              cbor-encoded-cert-20>.
 
    [I-D.ietf-lake-app-profiles]
               Tiloca, M. and R. Höglund, "Coordinating the Use of
               Application Profiles for Ephemeral Diffie-Hellman Over
               COSE (EDHOC)", Work in Progress, Internet-Draft, draft-
-              ietf-lake-app-profiles-04, 2 March 2026,
+              ietf-lake-app-profiles-05, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              app-profiles-04>.
+              app-profiles-05>.
 
    [I-D.ietf-lake-authz]
               Selander, G., Mattsson, J. P., Vučinić, M., Fedrecheski,
               G., and M. Richardson, "Lightweight Authorization using
               Ephemeral Diffie-Hellman Over COSE (ELA)", Work in
-              Progress, Internet-Draft, draft-ietf-lake-authz-07, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lake-authz-07>.
+              Progress, Internet-Draft, draft-ietf-lake-authz-08, 6 July
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lake-authz-08>.
 
    [I-D.ietf-lake-edhoc-impl-cons]
               Tiloca, M., "Implementation Considerations for Ephemeral
               Diffie-Hellman Over COSE (EDHOC)", Work in Progress,
-              Internet-Draft, draft-ietf-lake-edhoc-impl-cons-06, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lake-edhoc-impl-cons-06>.
+              Internet-Draft, draft-ietf-lake-edhoc-impl-cons-07, 6 July
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              lake-edhoc-impl-cons-07>.
 
    [I-D.ietf-lake-edhoc-psk]
               Lopez-Perez, Selander, G., Mattsson, J. P., Marin-Lopez,
               R., and F. Lopez-Gomez, "EDHOC Authenticated with Pre-
               Shared Keys (PSK)", Work in Progress, Internet-Draft,
-              draft-ietf-lake-edhoc-psk-07, 2 March 2026,
+              draft-ietf-lake-edhoc-psk-08, 16 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lake-
-              edhoc-psk-07>.
+              edhoc-psk-08>.
 
    [IANA-EAP] Internet Assigned Numbers Authority (IANA), "Extensible
               Authentication Protocol (EAP) Registry", n.d.,
@@ -1472,9 +1472,9 @@ Acknowledgments
    This work was supported partially by Project PID2023-148104OB-C43
    (ONOFRE4-UMU) from MCIN/AEI; the Formacion del Profesorado
    Universitario predoctoral grant FPU24/03871, also from MCIN/AEI; and
-   the European Union's NextGenerationEU, as part of the Recovery,
-   Transformation, and Resilience Plan, supported by Spanish INCIBE (6G-
-   SOC project).
+   Project 101290342 (Agentic6G), funded by the European Commission
+   under the EU Partnerships Horizon – Institutionalised Partnerships
+   programme.
 
    This work was supported partially by Vinnova - the Swedish Agency for
    Innovation Systems - through the EUREKA CELTIC-NEXT project CYPRESS.
