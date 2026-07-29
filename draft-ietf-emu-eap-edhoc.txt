@@ -5,13 +5,13 @@
 EAP Method Update                                     D. Garcia-Carrillo
 Internet-Draft                                      University of Oviedo
 Intended status: Standards Track                          R. Marin-Lopez
-Expires: 28 January 2027                            University of Murcia
+Expires: 30 January 2027                            University of Murcia
                                                              G. Selander
                                                        J. Preuß Mattsson
                                                                 Ericsson
                                                           F. Lopez-Gomez
                                                     University of Murcia
-                                                            27 July 2026
+                                                            29 July 2026
 
 
    Using the Extensible Authentication Protocol (EAP) with Ephemeral
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 January 2027.
+   This Internet-Draft will expire on 30 January 2027.
 
 Copyright Notice
 
