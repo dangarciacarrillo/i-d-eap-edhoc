@@ -558,7 +558,7 @@ It is important to note that EAD fields in EDHOC are optional; consequently, the
 Accordingly, this document specifies a new EAD item, with ead_label = TBD5, to incorporate EAP channel binding information into the EAD fields of the EAP-EDHOC messages. See the definition in {{iana-ead}}. This new EAD item is intended only for EAD_3 and EAD_4. Then, it MUST be ignored if included in other EAD fields. Multiple occurrences of this new EAD item in one EAD field are NOT allowed.
 
 > **Implementation Note:**
-> This document defines only the container for carrying EAP Channel Binding information within EAP-EDHOC messages, using the `EAD_3` and `EAD_4` fields. The format and semantics of the channel binding content are application-specific and are determined by the authentication domain in which the protocol is deployed.
+> This document defines only the container for carrying EAP Channel Binding information within EAP-EDHOC messages, using the EAD_3 and EAD_4 fields. The format and semantics of the channel binding content are application-specific and are determined by the authentication domain in which the protocol is deployed.
 
 If the server detects a consistency error in the channel binding information contained in EAD_3, it MUST send an EDHOC error message, as specified in {{RFC9528}}, since the new EAD item defined to carry EAP Channel Binding information is critical. In this case, the exchange proceeds according to {{message3-reject}}.
 
